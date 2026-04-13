@@ -1,147 +1,160 @@
 ---
 name: post-engagers
 description: >
-  Extract people who engage (comment, react, repost) on any LinkedIn post,
-  enrich their emails and company data, and upload to an Extruct people table for outreach.
-  Supports multiple LinkedIn scraping providers (Anysite MCP, RapidAPI, Apify, Phantombuster, etc.).
-  Triggers on: "post engagers", "linkedin engagers", "who commented on",
+  Extract people who engage (comment, react, repost) on a LinkedIn post, enrich
+  their profile / email / company data, and land them in a local SQLite CRM
+  (content.db → crm.db) as the source of truth. Extruct people-table upload is
+  optional. Triggers on: "post engagers", "linkedin engagers", "who commented on",
   "who liked", "who reacted", "linkedin post engagers", "scrape post",
   "extract engagers", "post commenters".
 ---
 
 # LinkedIn Post Engagers
 
-Turn LinkedIn post engagement into a prospecting list. Extract commenters, reactors, and reposters from any LinkedIn post — then enrich and upload to Extruct for outreach.
+Turn LinkedIn post engagement into a prospecting list. The canonical sink is
+`content.db` (raw interactions) → `crm.db` (unified CRM). Uploading to an
+Extruct people table is an optional side output, not the default.
 
-## Related Skills
+## Assumed repo layout
+
+This skill expects the repo to follow the `revops/` convention:
 
 ```
-post-engagers → email-search → email-generation → campaign-sending
+revops/
+  content/
+    fetch_interactions.py    # scrape post → content.db
+    enrich_profiles.py       # member_id / profile_urn via AnySite
+    enrich_emails.py         # Fullenrich v2 bulk
+    enrich_companies.py      # Extruct firmographics
+  etl/
+    content_to_crm.py        # content.db → crm.db raw_content_*
+    crm_to_attio_content.py  # (optional) crm.db → Attio
+  lib/
+    classify.py              # segment classifier (owns segment taxonomy)
+    config.py                # CONTENT_DB_PATH, CRM_DB_PATH, load_env
+    fullenrich.py, extruct.py, attio.py
+  db/
+    content.db
+    crm.db
 ```
 
-This skill produces a people table. The next step (`email-search`) gets verified emails, then `email-generation` drafts personalized outreach.
+Segment classification lives in `revops/lib/classify.py` — **do not** reimplement
+or inline a regex table in this skill. `fetch_interactions.py` calls it automatically.
 
-## Extruct API Operations
+## Related skills
 
-This skill delegates all Extruct API calls to the `extruct-api` skill.
+```
+post-engagers → (crm.db lands engagers) → email-generation → campaign-sending
+```
 
-For all Extruct API operations, read and follow the instructions in `skills/extruct-api/SKILL.md`.
-
-Table creation, row uploads, and data fetching are handled by the extruct-api skill. This skill focuses on **scraping LinkedIn engagers** and **preparing the data** — the extruct-api skill handles the API execution.
+Downstream skills read from `crm.db` / `content.db`, not from an intermediate CSV.
 
 ## Inputs
 
 | Input | Source | Required |
 |-------|--------|----------|
 | LinkedIn post URL(s) | User provides | yes |
-| Engagement types to scrape | User choice: comments, reactions, reposts (default: all) | no |
-| LinkedIn scraping provider | User choice (see provider list below) | yes |
-| Existing people table ID | Extruct table to append to (or create new) | no |
-
-## LinkedIn Scraping Providers
-
-This skill does **not** mandate a specific provider. Ask the user which LinkedIn scraping tool they want to use. Below are known options — the user may have others.
-
-| Provider | Engagement types | Auth | Notes |
-|----------|-----------------|------|-------|
-| **Anysite MCP** | Comments, reactions, reposts | MCP connection | Built into Claude Code via MCP. Tools: `get_linkedin_post_comments`, `get_linkedin_post_reactions`, `get_linkedin_post_reposts` |
-| **RapidAPI (LinkedIn scrapers)** | Comments, reactions, reposts | `X-RapidAPI-Key` header | Multiple scrapers available (e.g. Fresh LinkedIn Profile Data, LinkedIn Bulk Data Scraper). Check endpoint docs per scraper |
-| **Apify** | Comments, reactions, reposts | `APIFY_API_TOKEN` | Actors: `curious_coder/linkedin-post-commentors`, `supreme_coder/linkedin-post-likers`. Run via Apify API |
-| **Phantombuster** | Comments, reactions | `PHANTOMBUSTER_API_KEY` | Phantoms: "LinkedIn Post Commenters", "LinkedIn Post Likers" |
-| **Custom / self-hosted** | Varies | Varies | User may have their own scraping setup |
-
-If the user doesn't know where to start:
-- **Anysite MCP** is the simplest if they have it connected — no extra credentials needed
-- **Apify** is a good general choice with pay-per-use pricing
-- **RapidAPI** has multiple scrapers with free tiers
+| Engagement types | comments / reactions / reposts (default: all) | no |
+| Enrichment stages to run | profiles / emails / companies (default: all) | no |
+| Push to Attio? | yes/no (default: no) | no |
+| Upload to Extruct people table? | yes/no (default: no) | no |
 
 ## Workflow
 
-### Step 1: Collect post URLs and choose provider
+### Step 1: Collect post URLs
 
-1. Get the LinkedIn post URL(s) from the user. Accept one or multiple.
-2. Ask which engagement types to scrape: **comments**, **reactions**, **reposts**, or all three.
-3. Ask which LinkedIn scraping provider they want to use (see table above).
-4. If the provider requires credentials, confirm they're available.
+Get the LinkedIn post URL(s) from the user. Accept one or multiple. Each URL
+will be passed directly to `fetch_interactions.py`, which extracts the URN.
 
-Extract the activity URN from each post URL. The numeric ID is typically after `activity-` or `ugcPost-` in the URL (e.g. `activity:7433261939285385217`).
+Check whether any of the URNs already exist in `content.db` — if so, re-running
+fetch will upsert and pick up new engagers since last run.
 
-### Step 2: Scrape engagers
-
-Use the chosen provider to fetch engagement data. The approach varies by provider:
-
-**If using Anysite MCP:**
-- Comments: `mcp__claude_ai_Anysite__get_linkedin_post_comments` with `urn: "activity:{id}"`, `count: 1500`
-- Reactions: `mcp__claude_ai_Anysite__get_linkedin_post_reactions` with `urn: "activity:{id}"`, `count: 1500`
-- Reposts: `mcp__claude_ai_Anysite__get_linkedin_post_reposts` with `urn: "activity:{id}"`, `count: 1500`
-
-**If using another provider:**
-- Read or fetch the provider's API documentation
-- Identify the endpoint, input format, and response structure
-- Implement the scraping calls accordingly
-
-For each engager, extract (field names vary by provider):
-```python
-{
-    "full_name": "...",
-    "linkedin_url": "...",        # profile URL
-    "headline": "...",            # job title / headline
-    "engagement_type": "...",     # comment / reaction / repost
-    "post_url": "...",            # which post they engaged with
-}
+```sql
+SELECT urn, author_name, comment_count, reaction_count, share_count, fetched_at
+FROM content_posts WHERE urn IN (...);
 ```
 
-If scraping multiple posts, tag each engager with the `post_url` they engaged with.
+### Step 2: Scrape engagers → content.db
 
-### Step 3: Deduplicate and classify
+Run the fetch script per post. It uses AnySite MCP (`get_linkedin_post_comments`,
+`get_linkedin_post_reactions`, `get_linkedin_post_reposts`), classifies segments
+via `lib.classify`, and writes to `content_posts` + `content_interactions`.
 
-1. **Deduplicate** by `linkedin_url` across all posts and engagement types. If someone both commented and reacted, keep both engagement types as a comma-separated value.
-2. **Apply the segment classifier** to job titles (first match wins):
-
-| Priority | Pattern | Segment |
-|----------|---------|---------|
-| 1 | `founder\|co-founder\|ceo\|owner` | Founders / CEOs |
-| 2 | `cto\|vp.*eng\|head of eng\|director.*eng` | Engineering Leadership |
-| 3 | `cmo\|vp.*market\|head of market\|director.*market` | Marketing Leadership |
-| 4 | `cro\|vp.*sales\|head of sales\|director.*sales\|head of revenue` | Sales Leadership |
-| 5 | `director\|vp\|vice president\|head of\|chief` | Directors / VPs / Heads |
-| 6 | `revops\|revenue ops\|sales ops\|growth ops\|gtm ops\|gtm eng` | RevOps / Growth Ops |
-| 7 | `product manag\|head of product\|product lead` | Product |
-| 8 | `data scien\|machine learn\|ml eng\|ai eng\|data eng` | Data / ML |
-| 9 | `account exec\|sdr\|bdr\|sales dev\|business dev\|sales rep` | Sales ICs |
-| 10 | `market\|content\|brand\|growth\|demand gen\|copywrite` | Marketing / Content |
-| 11 | `sales\|commercial\|partnerships\|revenue` | Sales (General) |
-| 12 | `ai\|automat\|gpt\|llm\|agent\|no.?code` | AI / Automation Builders |
-| 13 | `consult\|freelanc\|advisor\|coach\|mentor\|agenc` | Consultants / Agencies |
-| 14 | `engineer\|develop\|software\|fullstack\|backend\|frontend` | Engineering / Product / Data |
-| — | (no match) | Other |
-
-3. Present a **segment breakdown** to the user before proceeding:
-
-```
-Engager Summary:
-- Total unique engagers: N
-- Comments: N | Reactions: N | Reposts: N
-
-Segment Breakdown:
-  Founders / CEOs:         N (X%)
-  Sales Leadership:        N (X%)
-  Marketing Leadership:    N (X%)
-  ...
-  Other:                   N (X%)
+```bash
+python3 revops/content/fetch_interactions.py "<post_url>"
+# or scrape a single interaction type:
+python3 revops/content/fetch_interactions.py --urn <URN> --type comments
 ```
 
-4. Ask the user: "Want to filter to specific segments before uploading? (e.g. only Founders + Leadership)"
+If the user has a different scraping provider (Apify, RapidAPI, Phantombuster,
+self-hosted), adapt `fetch_interactions.py` to call that provider — do **not**
+bypass the script and write to `content.db` from a notebook. The schema, upsert
+logic, and segment classification all live there.
 
-### Step 4: Upload to Extruct people table
+### Step 3: Enrichment stages (in order)
 
-Create a new Extruct generic table or append to an existing one. Delegate to the extruct-api skill.
+Each stage is idempotent and only hits rows missing the target field. Run them
+sequentially — later stages depend on earlier fields (emails need profiles,
+companies need domain).
 
-**If creating a new table:**
+```bash
+python3 revops/content/enrich_profiles.py    # AnySite user endpoint → member_id, profile_urn
+python3 revops/content/enrich_emails.py      # Fullenrich → email, email_status, domain
+python3 revops/content/enrich_companies.py   # Extruct → firmographics by domain
+```
+
+Useful flags:
+- `--dry-run` on every stage to preview before paying for credits.
+- `--limit N` to cap batch size.
+- `enrich_emails.py --segment "Founders / CEOs" --segment "Sales Leadership"`
+  to restrict email spend to decision makers.
+
+Before running email enrichment, show the user the segment breakdown so they
+can decide which segments to include:
+
+```sql
+SELECT segment, COUNT(*) AS n
+FROM content_interactions
+WHERE post_id IN (SELECT id FROM content_posts WHERE urn IN (...))
+GROUP BY segment ORDER BY n DESC;
+```
+
+Confirm selection before calling Fullenrich — email credits cost real money.
+
+### Step 4: Sync content.db → crm.db
+
+```bash
+python3 revops/etl/content_to_crm.py --post <URN>   # single post
+python3 revops/etl/content_to_crm.py                # all
+```
+
+This populates `raw_content_posts` and `raw_content_interactions` in `crm.db`.
+The `stg_people` / `mart_people` views then merge engagers with LinkedIn
+connections, campaign contacts, and Attio records automatically — no further
+action needed for the unified view.
+
+### Step 5 (optional): Push to Attio
+
+Only if the user explicitly asks to sync to Attio:
+
+```bash
+python3 revops/etl/crm_to_attio_content.py --dry-run
+python3 revops/etl/crm_to_attio_content.py
+```
+
+### Step 6 (optional): Upload to an Extruct people table
+
+Only when the user wants engagers in an Extruct generic table — e.g. to feed a
+separate Extruct-driven campaign flow that doesn't read from `crm.db`.
+Delegate Extruct API calls to the `extruct-api` skill. Pull rows from
+`mart_people` (or `content_interactions` filtered by post URN) rather than
+re-deriving from scratch.
+
+Suggested columns:
 
 ```json
 {
-  "name": "{user-provided name or 'Post Engagers - {date}'}",
+  "name": "{user-provided name or 'Post Engagers — {post_author} — {date}'}",
   "kind": "generic",
   "column_configs": [
     {"kind": "input", "name": "Full Name", "key": "full_name"},
@@ -151,49 +164,48 @@ Create a new Extruct generic table or append to an existing one. Delegate to the
     {"kind": "input", "name": "Engagement Type", "key": "engagement_type"},
     {"kind": "input", "name": "Source Post", "key": "source_post"},
     {"kind": "input", "name": "Company", "key": "company"},
-    {"kind": "input", "name": "Domain", "key": "domain"}
+    {"kind": "input", "name": "Domain", "key": "domain"},
+    {"kind": "input", "name": "Email", "key": "email"}
   ]
 }
 ```
 
-Upload rows in batches of 50 via the extruct-api skill.
+Deduplicate by `linkedin_url` against the target table before uploading.
 
-**If appending to an existing table:**
-- Fetch existing rows to deduplicate against current `linkedin_url` values
-- Upload only new engagers
+## Verification checklist
 
-### Step 5: Review and next steps
+After the chain completes, sanity-check before declaring done:
 
-Present upload summary:
+```sql
+-- in content.db
+SELECT interaction_type, COUNT(*) FROM content_interactions
+  WHERE post_id = (SELECT id FROM content_posts WHERE urn = ?) GROUP BY 1;
+SELECT COUNT(*) filter (WHERE email IS NOT NULL AND email != '') AS with_email,
+       COUNT(*) AS total
+  FROM content_interactions WHERE post_id = ...;
 
+-- in crm.db
+SELECT COUNT(*) FROM raw_content_interactions WHERE post_id = ...;
+SELECT COUNT(*) FROM mart_people WHERE interaction_count > 0;
 ```
-Upload Complete:
-- Engagers uploaded: N
-- Table: {table_name}
-- URL: https://app.extruct.ai/tables/{table_id}
-
-Segment Breakdown (uploaded):
-  Founders / CEOs:     N
-  Sales Leadership:    N
-  ...
-```
-
-Suggest next steps:
-- **"Get emails"** → run `email-search` on the people table to enrich with verified emails
-- **"Enrich companies"** → run `list-enrichment` to add company data (industry, size, funding)
-- **"Draft outreach"** → run `email-generation` after emails are found
-- **"Monitor more posts"** → re-run with additional post URLs and deduplicate against this table
 
 ## Tips
 
-- **Multiple posts = richer list.** Scrape 3-5 recent posts from the same account to build a larger pool. Engagers across multiple posts are highly engaged — flag them.
-- **Repeat engagers are warmer leads.** If someone engaged on 2+ posts, note that in the data — they're more likely to respond to outreach.
-- **Filter aggressively.** Not all engagers are prospects. Use segment filtering to focus on decision makers and skip students, recruiters, etc.
-- **Respect rate limits.** LinkedIn scraping providers have varying rate limits. Don't hammer the API — space out requests if scraping many posts.
+- **Multiple posts = richer list.** Scrape 3–5 recent posts from the same
+  author; engagers who hit on 2+ posts are the warmest leads. `stg_engagement`
+  already aggregates per person.
+- **Filter before enriching emails.** Emails are the expensive stage — restrict
+  by segment to avoid paying for students, recruiters, bots.
+- **Re-run safely.** Every script is idempotent; fetch upserts, enrichment only
+  touches null fields, sync uses `ON CONFLICT DO UPDATE`.
+- **Don't hand-edit `content.db` or `crm.db` raw tables.** Go through the
+  scripts so the schema, classifiers, and upsert rules stay consistent.
 
 ## Output
 
-| Output | Format | Location |
-|--------|--------|----------|
-| People table | Extruct generic table | `https://app.extruct.ai/tables/{table_id}` |
-| Engagers CSV | CSV backup | `claude-code-gtm/csv/input/{campaign}/post_engagers.csv` |
+| Output | Location |
+|--------|----------|
+| Raw post + engagers | `revops/db/content.db` (`content_posts`, `content_interactions`) |
+| Unified CRM view | `revops/db/crm.db` (`raw_content_*`, `stg_people`, `mart_people`) |
+| Attio records (optional) | Pushed via `crm_to_attio_content.py` |
+| Extruct people table (optional) | `https://app.extruct.ai/tables/{table_id}` |
