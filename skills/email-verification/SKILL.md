@@ -3,7 +3,7 @@ name: email-verification
 description: >
   Validate email addresses before campaign sending. Takes a contact CSV,
   validates each email via a verification provider, removes
-  invalid/do_not_mail/abuse/unknown addresses, and optionally cleans them
+  invalid/do_not_mail/abuse/catch-all/unknown addresses, and optionally cleans them
   from sequencer campaigns. Outputs a verified CSV ready for
   campaign-sending. Fits between email-generation and campaign-sending in
   the pipeline. Triggers on: "verify emails", "validate emails", "email
@@ -74,8 +74,10 @@ General guidance (confirm against provider docs):
 
 | Action | Typical statuses |
 |--------|-----------------|
-| Keep | `valid`, `catch-all` (flag in report) |
-| Remove | `invalid`, `do_not_mail`, `abuse`, `unknown`, `spamtrap` |
+| Keep | `valid` |
+| Remove | `invalid`, `do_not_mail`, `abuse`, `catch-all`, `unknown`, `spamtrap` |
+
+**Catch-all is removed, not kept.** A catch-all domain accepts mail to any address, so the provider cannot confirm the specific mailbox exists. Those addresses bounce at a meaningful rate, and bounces damage sender reputation for the whole campaign. Never upload catch-all addresses to the sequencer.
 
 Present summary table with counts per status, then list all emails to remove with their status and sub_status.
 
@@ -84,7 +86,7 @@ Present summary table with counts per status, then list all emails to remove wit
 1. Filter the original CSV: keep only rows where email status maps to "keep"
 2. Write cleaned CSV to same directory as input, named `{original_name}_verified.csv`
 3. Save full validation results to `{original_name}_verification_results.json` for reference
-4. Report: `{kept} emails kept, {removed} removed, {catch_all} catch-all (flagged)`
+4. Report: `{kept} emails kept, {removed} removed` (with a per-status breakdown, including how many were catch-all)
 
 ### Step 6: Clean from sequencer (optional)
 
