@@ -60,6 +60,32 @@ The brain has two jobs:
 
 ---
 
+## Layer 1 → Layer 2 Handoff
+
+Layer 1 and Layer 2 are one continuous flow, not separate systems. The bridge document at `engine/l1-l2-bridge.md` maps every Layer 1 output to the exact Layer 2 phase that consumes it.
+
+```
+LAYER 1 PRODUCES:                      LAYER 2 CONSUMES AT:
+─────────────────────────────────────────────────────────────
+IDEAL-CUSTOMER-PROFILE.md ──────────→  Gate 0B (filters) + Phase 2E Dim 1+2 (scoring)
+OUTREACH-SEQUENCE.md ───────────────→  Phase 3A (persona → variant) + Phase 4C (selection)
+selll_context.md ───────────────────→  Gate 0B (DNC) + Phase 3A (personas) + Phase 4B (proof)
+hypothesis_set.md ──────────────────→  Phase 1A (queries) + Phase 1B (urgency) + Phase 2E Dim 6
+enrichment-columns.md ──────────────→  Phase 2A/2B/2C (all enrichment)
+brain/proof-library.md ─────────────→  Phase 4B (proof matching)
+brain/voc-library.md ───────────────→  Phase 4D (v_pain_statement exact phrasing)
+brain/trigger-playbooks.md ─────────→  Phase 1C + Phase 2D (compound detection)
+brain/deliverability-rules.md ──────→  Phase 3F + Phase 4F (bounce threshold + send slots)
+brain/linkedin-profile.md ──────────→  Phase 3C (warm path: post engager detection)
+engine/fatigue-suppressed.md ───────→  Gate 0B + Phase 3F (suppression)
+engine/re-engagement-queue.md ──────→  Gate 0C (warm routing before cold sequence)
+engine/state.md ────────────────────→  Phase 0.0 (validation) + Phase 4F (warmup capacity)
+```
+
+Layer 2 runs `Phase 0.0 — Context Load & Validate` before any gate, confirming all L1 files are loaded and current. See `engine/l1-l2-bridge.md` for the complete interface specification.
+
+---
+
 ## The Event Bus
 
 All 12 skills in the engine communicate through a shared signal layer. When any skill generates new information, it propagates to every other skill that needs it.

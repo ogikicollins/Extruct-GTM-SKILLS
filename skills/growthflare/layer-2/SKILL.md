@@ -23,21 +23,70 @@ The difference between a 1% reply rate and a 5% reply rate is almost never the e
 
 ---
 
-## Required Reading (load before any phase)
+## Phase 0.0 — Layer 1 Context Load & Validation
+
+**Before any phase runs, load and validate all Layer 1 files. Layer 2 is not a standalone system — it is the activation of everything Layer 1 built. Running Layer 2 without complete Layer 1 context produces fragmented, under-personalized output.**
+
+See `engine/l1-l2-bridge.md` for the complete data map showing which L1 output drives which L2 decision.
+
+### Files to Load
+
+| File | What Layer 2 Takes From It | Consumed By |
+|------|---------------------------|------------|
+| `IDEAL-CUSTOMER-PROFILE.md` | Firmographic disqualifiers, technographic fit signals, vertical ranking | Gate 0B, Phase 2E Dim 1+2 |
+| `OUTREACH-SEQUENCE.md` | 3 persona sequences, merge field list, subject line options | Phase 3A, Phase 4C, Phase 4D |
+| `context/selll_context.md` | Personas, proof library, DNC list, pricing, value proposition | Gate 0B, Phase 3A, Phase 4B, Phase 4D |
+| `context/b2b-saas/hypothesis_set.md` | Hypothesis search angles, urgency windows, confidence scores | Phase 1A, Phase 1B, Phase 1C, Phase 2E Dim 6 |
+| `context/b2b-saas/enrichment-columns.md` | Column specs for all 7 hypotheses | Phase 2A, Phase 2B, Phase 2C |
+| `brain/proof-library.md` | Situation/outcome/quote for each proof point | Phase 4B |
+| `brain/voc-library.md` | Buyer language by pain category + vertical | Phase 4D (`v_pain_statement`) |
+| `brain/competitive-battlecards.md` | Competitor weaknesses, displacement positioning | Phase 4C (displacement variant), Phase 4D (`v_competitor_name`) |
+| `brain/tone-dna.md` | Voice rules, email tone constraints | Phase 4D, `ai-personalization` validation |
+| `brain/copywriting-library.md` | Subject formulas, hook patterns, CTA variants, quality checklist | Phase 4C, Phase 4D, Phase 5B |
+| `brain/trigger-playbooks.md` | Signal playbooks, Compound Signal Detector | Phase 1C, Phase 2D |
+| `brain/deliverability-rules.md` | Warmup limits, bounce thresholds, fatigue guard rules | Phase 3F, Phase 4F |
+| `brain/linkedin-profile.md` | ICP Engagers column (Content Performance Tracker) | Phase 3C |
+| `engine/fatigue-suppressed.md` | Permanently suppressed contacts | Gate 0B, Phase 3F |
+| `engine/re-engagement-queue.md` | Warm "not now" contacts + trigger statuses | Gate 0C |
+| `engine/state.md` | Domain warmup status, active campaigns, Layer 1 completion flag | Gate 0A, Phase 4F |
+
+### Validation Checklist
+
+Run these checks before proceeding to Phase 0 Gates. If any check fails — fix the Layer 1 gap first.
 
 ```
-claude-code-gtm/context/selll_context.md                  — ICP, personas, DNC, proof library
-claude-code-gtm/context/b2b-saas/hypothesis_set.md        — 7 hypotheses, search angles, confidence scores
-claude-code-gtm/context/b2b-saas/enrichment-columns.md    — column specs per hypothesis
-IDEAL-CUSTOMER-PROFILE.md                                  — full scoring rubric + negative ICP
-OUTREACH-SEQUENCE.md                                       — 3 persona sequences + email variants
-claude-code-gtm/brain/voc-library.md                      — buyer language for personalization
-claude-code-gtm/brain/competitive-battlecards.md           — competitor intel for displacement angle
-claude-code-gtm/brain/roi-calculator.md                   — ROI math for proof point matching
-claude-code-gtm/engine/fatigue-suppressed.md               — contacts never to re-sequence
-claude-code-gtm/engine/re-engagement-queue.md              — warm "not now" contacts
-claude-code-gtm/engine/state.md                            — current engine state + domain warmup status
+LAYER 1 CONTEXT VALIDATION
+════════════════════════════════════════════════════════
+[ ] IDEAL-CUSTOMER-PROFILE.md — Firmographic table present?
+[ ] IDEAL-CUSTOMER-PROFILE.md — Technographic profile present?
+[ ] selll_context.md — All 3 persona profiles defined?
+[ ] selll_context.md — Proof library has 3+ clients with outcomes?
+[ ] selll_context.md — DNC list checked (even if empty)?
+[ ] hypothesis_set.md — Selected hypothesis has search angles filled?
+[ ] hypothesis_set.md — Confidence score current (updated from last campaign)?
+[ ] enrichment-columns.md — Column specs exist for selected hypothesis?
+[ ] brain/proof-library.md — All proof points have situation/outcome/quote?
+[ ] brain/deliverability-rules.md — Warmup status checked in engine/state.md?
+[ ] engine/fatigue-suppressed.md — File exists and has been checked?
+[ ] engine/re-engagement-queue.md — Queue reviewed for any TRIGGERED contacts?
+
+CONTEXT LOADED SUMMARY:
+  ICP: [employee range] | [ARR range] | [verticals]
+  Active Hypothesis: [H#] — [name] | Urgency window: [N] days
+  Compound hypothesis pairing: [H# + H#] or None
+  Personas: [3] defined | Sequences: [7] variants available
+  Proof points: [N] in library
+  DNC entries: [N]
+  Fatigue-suppressed: [N] contacts
+  Re-engagement TRIGGERED: [N] contacts (→ route NOW before cold list)
+  Domain warmup status: [Warming / Warmed / Not started]
+  Daily send capacity: [N] emails/day
+════════════════════════════════════════════════════════
 ```
+
+**If re-engagement TRIGGERED count > 0:** Handle those contacts through `re-engagement/SKILL.md` BEFORE running the cold campaign. Warm contacts always take priority over cold.
+
+**If domain warmup status = "Not started":** Layer 2 can still run to build the CSV. But no emails send until warmup is complete. CRITICAL urgency accounts route to LinkedIn-first via Expandi during the warmup window.
 
 ---
 
@@ -94,17 +143,22 @@ Categories to check and action for each:
 Hard disqualify ANY company matching these conditions regardless of their signals or scores.
 These companies will never buy. Do not spend credits on them.
 
-| Disqualifier | Threshold | Reason |
-|-------------|-----------|--------|
-| Too large | > 200 employees | Full RevOps team, 10+ SDR team, need enterprise vendor |
-| Too small | < 15 employees | No SDR team to run the system, can't afford setup fee |
-| ARR too high | > $50M estimated | Outgrown the ICP — has sophisticated in-house team |
-| ARR too low | < $500K estimated | Pre-product market fit, no sales team yet |
-| Consumer product | B2C SaaS | Wrong buyer entirely — no SDRs, no pipeline to fix |
-| Competitor | Belkins, CIENCE, Kalungi, any outbound agency | Competitor — never outreach |
-| No sales function | Pure PLG, no SDRs, no outbound | No problem to solve yet |
-| Geographic mismatch | Outside US/UK/CA/AU | Unless specifically requested |
-| Already on DNC | In `selll_context.md` DNC list | Permanent exclusion |
+> Source: `IDEAL-CUSTOMER-PROFILE.md` → Firmographic Criteria → Red Flag column + `selll_context.md` → DNC List.
+> If the ICP changes (e.g., employee ceiling raised to 250), update this gate to match. `engine/l1-l2-bridge.md` documents all downstream impact.
+
+| Disqualifier | Threshold | L1 Source |
+|-------------|-----------|----------|
+| Too large | > 200 employees | ICP Firmographic → "Under 15 or over 300 employees" red flag |
+| Too small | < 15 employees | ICP Firmographic → same |
+| ARR too high | > $50M estimated | ICP Firmographic → "Revenue over $50M" red flag |
+| ARR too low | < $500K estimated | ICP Firmographic → "Revenue under $1M" red flag |
+| Consumer product | B2C SaaS | ICP → "Pure B2C, ecommerce, or retail" exclusion |
+| Competitor | Belkins, CIENCE, Kalungi, any outbound agency | `selll_context.md` → Competitive Landscape |
+| No sales function | Pure PLG, no SDRs, no outbound | ICP → "0 sales hires" red flag |
+| Geographic mismatch | Outside US/UK/CA/AU | ICP Firmographic → Geography |
+| Red flag technographic | Marketo/Pardot, custom in-house prospecting tools | ICP → Technographic → Red flag tech signals |
+| Already on DNC | In `selll_context.md` DNC list | `selll_context.md` → DNC List (permanent exclusion) |
+| In fatigue-suppressed | In `engine/fatigue-suppressed.md` < 12 months | `engine/fatigue-suppressed.md` |
 
 **How to apply:** Add a `disqualified` boolean column and `disqualification_reason` text column to the raw list BEFORE uploading to Extruct. Remove all disqualified companies before the enrichment phase.
 
@@ -578,13 +632,15 @@ Run for Tier 1 (Priority + Standard) and Tier 2 companies.
 
 ### Persona Assignment:
 
-| Title Contains | Persona | Sequence to Assign |
-|---------------|---------|-------------------|
-| CRO, Chief Revenue Officer, VP Revenue | Persona 1 | `CRO_v1` |
-| CEO, Founder, President, Co-Founder | Persona 2 | `Founder_v1` |
-| VP Sales, Head of Sales, Sales Director — new role < 90 days | Persona 3 | `VPSales_v1` |
-| VP Sales, Head of Sales — tenure > 90 days | Persona 1 | `CRO_v1` |
-| RevOps, Head of Sales Operations | Persona 1 | `CRO_v1` |
+> Source: `selll_context.md` → Persona Profiles. If a new persona is added in L1, add it here and create a matching sequence variant. See `engine/l1-l2-bridge.md` → selll_context.md for impact map.
+
+| Title Contains | Persona | Sequence to Assign | L1 Source |
+|---------------|---------|-------------------|----|
+| CRO, Chief Revenue Officer, VP Revenue | Persona 1 — Established CRO/VP | `CRO_v1` | selll_context.md → Persona 1 |
+| CEO, Founder, President, Co-Founder | Persona 2 — Scaling Founder | `Founder_v1` | selll_context.md → Persona 2 |
+| VP Sales, Head of Sales, Sales Director — new role < 90 days | Persona 3 — New VP Sales | `VPSales_v1` | selll_context.md → Persona 3 |
+| VP Sales, Head of Sales — tenure > 90 days | Persona 1 — Established CRO/VP | `CRO_v1` | selll_context.md → Persona 1 |
+| RevOps, Head of Sales Operations | Persona 1 — Established CRO/VP | `CRO_v1` | selll_context.md → Persona 1 |
 
 ---
 
@@ -755,22 +811,23 @@ For any Tier 1 company where Thread A has no verified email after the waterfall:
 
 **Run 48–72 hours before Email 1 sends.**
 
-For every Tier 1 account, a pre-engagement action on LinkedIn warms the contact and ensures the email does not arrive completely cold.
+For every Tier 1 account, pre-engagement on LinkedIn warms the contact before the email arrives cold.
+
+> **Fully automated via Expandi.** See `skills/growthflare/linkedin-automation/SKILL.md` for setup.
+> Protocol rules: `brain/pre-engagement-protocol.md`. Expandi configuration: `linkedin-automation/SKILL.md`.
 
 **Pre-engagement schedule per contact:**
 
-| Day | Action | Who Does It |
-|-----|--------|------------|
-| T−3 | Follow the contact on LinkedIn if not already connected | Aaron (or SDR) |
-| T−2 | Find their most recent LinkedIn post. Like it genuinely. Do NOT comment yet. | Aaron / SDR |
-| T−1 | If the post is relevant (GTM, sales, pipeline, outbound) — leave a substantive 1-sentence comment. If not relevant — skip. Never comment generically. | Aaron only |
-| T0 | Email 1 arrives. Contact has seen Aaron's name on their notification twice before opening the email. Open rate impact: +15–25%. | Instantly |
+| Day | Action | Automated By |
+|-----|--------|-------------|
+| T−3 | Follow the contact on LinkedIn | Expandi — runs automatically at campaign start − 3 days |
+| T−2 | Like their most recent LinkedIn post | Expandi — runs automatically on Day 2 |
+| T−1 | Comment on relevant post (GTM/sales/pipeline/outbound topic only) | Claude generates comment → queued in `engine/comment-queue/[date].md` → Aaron approves batch (~5 min) → Expandi posts |
+| T0 | Email 1 sends. Contact has seen Aaron's name twice on notifications. Open rate impact: +15–25%. | Instantly |
 
-**What "substantive" means:** A comment that adds insight to what they said, references something specific in the post, or asks a genuine follow-up question. Not "Great post!" Not "So true!" Not emojis.
+**Output from this step:** Pre-engagement schedule table (contact → start date for Expandi campaign). Added to `engine/comment-queue/[campaign-date].md`.
 
-**Pre-engagement log:** Track in the account card Touch Timeline. Date, type, and contact reaction (if any).
-
-**If the contact responds to the comment:** Treat as Category 2 (WARM) in `reply-routing.md` — skip the cold email sequence and go to warm DM directly.
+**If the contact responds to the comment or DM:** Expandi fires webhook → n8n pauses Email 1 in Instantly → route to warm DM sequence in Expandi. See `linkedin-automation/SKILL.md` → Step 5 (Engagement Monitoring).
 
 ---
 
@@ -778,20 +835,23 @@ For every Tier 1 account, a pre-engagement action on LinkedIn warms the contact 
 
 Assign the single best proof point to every contact based on a multidimensional match.
 
+> Source: `brain/proof-library.md` — full situation/action/outcome/quote for each client. The matching logic below uses `proof-library.md` as its data. If a new proof point is added to L1, update this matching matrix.
+> Note: Confirm Devolon client name and Stefan Golz quote in `brain/proof-library.md` before any live send.
+
 The default (Persona → Proof) is too blunt. A Fintech CRO with 3 SDRs should get a different proof point than a DevTools founder with no SDRs.
 
-**Matching matrix:**
+**Matching matrix (pulls outcomes from `brain/proof-library.md`):**
 
-| Contact Situation | Best Proof Point | Reason |
-|------------------|-----------------|--------|
-| New VP Sales, any vertical | Holz Concepts (Stefan Golz — new CRO, 90-day mandate) | Exact persona match |
-| Founder still in deals, any vertical | Flow Meditation (founder exited day-to-day selling) | Exact persona match |
-| SDR productivity issue (3+ SDRs, high research time) | Devolon (35 → 200+ daily conversations) | Exact problem match |
-| Fintech + any persona | Devolon (if B2B SaaS, similar stage) | Closest vertical match until Fintech client won |
-| Post-raise, < 6 months | Holz Concepts OR Devolon depending on team size | Timing match |
-| DevTools, PLG trying to add enterprise | Flow Meditation (founder motion → system) | Motion match |
-| Company with Belkins/CIENCE frustration | Holz Concepts ("not another agency") | Displacement match |
-| No perfect match | Use size proxy: "a company at your exact stage with [N] SDRs" | Generic but honest |
+| Contact Situation | Best Proof Point | Proof Library Key |
+|------------------|-----------------|------------------|
+| New VP Sales, any vertical | Holz Concepts — Stefan Golz: new CRO, 90-day mandate, hit pipeline targets on time | `proof-library.md` → Holz Concepts |
+| Founder still in deals, any vertical | Flow Meditation — Ellie Nash: founder exited day-to-day selling entirely | `proof-library.md` → Flow Meditation |
+| SDR productivity issue (3+ SDRs, high research time) | Devolon — 35 → 200+ daily conversations, same headcount, 90 days | `proof-library.md` → Devolon |
+| Fintech + any persona | Devolon (closest vertical until Fintech client won) | `proof-library.md` → Devolon |
+| Post-raise, < 6 months | Holz Concepts OR Devolon depending on team size (< 5 SDRs = Holz, 5+ = Devolon) | `proof-library.md` |
+| DevTools, PLG trying to add enterprise | Flow Meditation (founder motion → system) | `proof-library.md` → Flow Meditation |
+| Company with Belkins/CIENCE frustration | Holz Concepts — displacement framing ("not another agency") | `proof-library.md` → Holz Concepts |
+| No perfect match | Use size proxy: "a company at your exact stage with [N] SDRs" | Generic — honest |
 
 **Add column:** `assigned_proof_point` — the proof point name + one-sentence context
 **Add column:** `proof_match_reason` — why this proof point was chosen (for personalization copy)
