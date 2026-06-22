@@ -56,6 +56,30 @@ Every active client gets a CHS, updated weekly. CHS determines when to expand, w
 - 40-59: RED — at risk, immediate intervention
 - < 40: CRITICAL — churn risk, escalate to Aaron personally
 
+**CHS NPS Sentiment Logging (required after every client check-in):**
+
+The NPS Sentiment dimension (20 pts) requires a human signal — n8n cannot auto-read the
+emotional tone of a call. After every scheduled client check-in call, Aaron logs in Slack:
+
+```
+Format (one line in #selllo-pipeline):
+  CHS-SENTIMENT: [Company] | [positive / neutral / concern] | [one sentence reason]
+
+Examples:
+  CHS-SENTIMENT: Luminary Health | positive | Sarah is excited about results, asked about expansion
+  CHS-SENTIMENT: FlowStack | neutral | Marcus is satisfied but distracted by internal reorg
+  CHS-SENTIMENT: DataBridge | concern | Priya mentioned they may need to pause for Q3
+
+n8n reads the CHS-SENTIMENT tag on the weekly Sunday 06:00 UTC CHS update run:
+  "positive"  → NPS dimension = 20
+  "neutral"   → NPS dimension = 10
+  "concern"   → NPS dimension = 0
+  [not logged this week] → NPS dimension = last logged value (no change)
+```
+
+If no sentiment log exists for a client in the past 14 days, n8n fires a Slack reminder:
+"⚠️ CHS sentiment not logged for [Company] in 14 days. Log post next check-in call."
+
 ---
 
 ## Phase 1: Onboarding (Day 0-7)
@@ -110,10 +134,27 @@ n8n actions on kickoff log:
 ```
   1. Extract: client goals, success metrics, key contacts at client company,
               access status (HubSpot/LinkedIn/sequencer), preferred comms
-  2. Create 90-day build plan (from template) with client-specific details
-  3. Deliver to Slack: "90-day plan for [Company] — review + share with client?"
-  4. Update clients.md: kickoff_complete = true, goals = [extracted]
-  5. Set CHS checkpoints: Day 30, Day 60, Day 90 (n8n timers armed)
+  2. Extract before-state (REQUIRED — these 4 fields gate the Day 90 proof point):
+       before_reply_rate:   current reply rate percentage (e.g., "0.4%")
+       before_meetings_pm:  current meetings booked per month (e.g., "3")
+       before_sdr_count:    number of active SDRs (e.g., "2")
+       before_sequencer:    current sequencer tool (e.g., "Salesloft")
+  3. If before-state fields are NOT found in Aaron's kickoff log:
+       → n8n fires immediate Slack alert: "⚠️ BEFORE-STATE NOT CAPTURED — [Company].
+         Ask these 4 questions on Day 3 check-in call:
+         (1) What is your current email reply rate?
+         (2) How many meetings per month is the team booking now?
+         (3) How many SDRs are actively sending outreach?
+         (4) Which sequencer are they using?
+         These numbers are required for the Day 90 proof point and case study."
+  4. Create 90-day build plan (from template) with client-specific details
+  5. Deliver to Slack: "90-day plan for [Company] — review + share with client?"
+  6. Update clients.md: kickoff_complete = true, goals = [extracted],
+                        before_state_captured = [true/false]
+  7. Set CHS checkpoints: Day 30, Day 60, Day 90 (n8n timers armed)
+  8. If before_state_captured = false: set Day 3 reminder timer
+       → Day 3 Slack: "BEFORE-STATE REMINDER — [Company]. Capture the 4 before-state numbers
+                       on today's access call. Without them, the Day 90 proof point has no 'before.'"
 ```
 
 ### Step 1C — Access + Setup (Day 3-7)
@@ -436,7 +477,19 @@ Auto-prompt from n8n on Day 45 (if CHS ≥ 75):
    Aaron reviews → approves → sends"
 
 Referral intake tracked in: engine/referrals.md
-Referred contacts skip Layers 2-3 entirely → enter Layer 4 directly
+
+Referred contacts enter Layer 2 Fast-Track before Layer 4:
+  → Skip: Phase 0 gates (already qualified by referring client), Phase 4 pre-engagement
+    (unnecessary — referral relationship substitutes for pre-engagement warm-up)
+  → Run: 7-dimension lead scoring, abbreviated ADB generation, proof + hypothesis assignment
+  → Then: enter Layer 4 Phase 1 with complete ADB data (no blank fields in discovery prep)
+  → See: skills/growthflare/layer-2/references/referral-fast-track.md for the full fast-track protocol
+
+Rationale: referrals are the highest-value deal type (close at 2-3x cold outreach rate). Aaron
+must walk into every referral discovery call with the same ADB depth as a HOT cold reply, or
+better. Sending a referral directly to Layer 4 without scoring and ADB generation produces a
+discovery call with blank proposal fields and no assigned proof point — the engine's worst possible
+version of itself on its best possible deal type.
 ```
 
 ### Step 5B — Case Study Generation

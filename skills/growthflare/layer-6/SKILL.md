@@ -80,13 +80,27 @@ Every Friday. Takes 30 minutes total for Aaron.
 ```
 n8n workflow: selllo-weekly-optimization
 
-Data pull:
+Data pull (with failure fallback — each source is independent):
   1. Instantly API: campaign metrics for all active campaigns (last 7 days)
+     → On API failure: section = "[data unavailable — Instantly unreachable]"
   2. HubSpot API: deal activity, stage changes, wins/losses
+     → On API failure: section = "[data unavailable — HubSpot unreachable]"
   3. Expandi API: LinkedIn engagement rates
-  4. clients.md: CHS updates
-  5. call-log.md: call outcomes this week
-  6. engine/referrals.md: referrals received / asks sent
+     → On API failure: section = "[data unavailable — Expandi unreachable]"
+  4. clients.md: CHS updates (local file — always available)
+  5. call-log.md: call outcomes this week (local file — always available)
+  6. engine/referrals.md: referrals received / asks sent (local file — always available)
+
+  Failure handling: if any API call returns an error or timeout > 10s:
+    → Log the failure in the report section header
+    → Continue with all other sources (never abort the full pull for one API failure)
+    → Add to report footer: "⚠️ Data gaps this week: [list of unavailable sources]"
+
+Claude API analysis prompt (system instruction when any section is unavailable):
+  "If any data section shows [data unavailable], analyze only available data.
+   Explicitly note the gap in the relevant section header.
+   Do not draw conclusions from missing sections or extrapolate from prior weeks
+   to fill gaps — report what is known and flag what is not."
 
 Claude API analysis prompt:
   SYSTEM: You are analyzing GTM performance for SELLL.io's Growthflare
@@ -224,6 +238,31 @@ n8n receives Aaron's approval:
   → Updates subject line bank
   → Queues A/B test
   → Updates engine/state.md weekly summary row
+
+STEP 4 — BRAIN FILE UPDATES (CRITICAL — this is what makes intelligence permanent):
+
+Approving in Slack is NOT sufficient. n8n implements tracking changes (scores, queues,
+test schedules) automatically, but actual brain file content — ICP criteria, hypothesis
+scoring, voc-library entries, proof points, objection counters — must be edited in the
+files themselves.
+
+After replying "Approved" in Slack, open Claude Code and execute each approved brain update:
+
+  For each "brain update" item from the report:
+    → Identify the exact file and section to change (report specifies this)
+    → Use Claude Code Edit tool to make the targeted change
+    → Changes that require brain file updates (common examples):
+         - Hypothesis window tightened (H5 Day 1-15 only) → hypothesis_set.md
+         - New buyer phrase added → voc-library.md
+         - New objection counter → objection-bank.md
+         - ICP tighter (H1 window 60d not 90d) → IDEAL-CUSTOMER-PROFILE.md
+         - Subject line promoted to spintax pool → spintax-engine.md
+         - Proof point confirmed + updated → proof-library.md
+
+  Time budget for brain file updates: included in the 10 min "Approve brain updates" slot.
+
+  After all edits complete: run `git add -A && git commit` to preserve the brain state.
+  The intelligence is only as permanent as the last commit.
 ```
 
 ---

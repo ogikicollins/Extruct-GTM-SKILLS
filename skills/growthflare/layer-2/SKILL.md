@@ -943,22 +943,40 @@ Combine company score, contact score, and outreach intelligence into a single **
 This is NOT the same as the lead score. It predicts the probability of receiving a positive reply from THIS specific contact at THIS specific company.
 
 ```
-Reply Probability = 
-  (Company Lead Score × 0.35)
-+ (Contact Intelligence Score × 0.30)
-+ (Buying Intent Score × 0.20)
-+ (Warm Path Bonus × 0.10)
-+ (Urgency Window Bonus × 0.05)
+Reply Probability =
+  (Company Lead Score [0–100] × 0.35)          → max 35 pts
++ (Contact Intelligence Score [0–50] × 2 × 0.30) → max 30 pts
++ (Buying Intent [0–10] × 10 × 0.20)             → max 20 pts
++ (Warm Path Bonus [0–100] × 0.10)               → max 10 pts
++ (Urgency Window [0–100] × 0.05)                → max  5 pts
++ (Compound Signal Bonus)                         → +0 / +8 / +12 pts
+                                                  ────────────────
+                                                  Total: 0–100+ (cap at 100)
 ```
+
+**Component definitions:**
+- **Company Lead Score:** The 7-dimension lead score from Phase 2E (0–100)
+- **Contact Intelligence Score:** Calculated in Phase 3 (0–50). Multiply by 2 to normalize to 0–100 range, then apply 0.30 weight.
+- **Buying Intent [0–10]:** Behavioral intent signals detected pre-campaign (G2 reviews, LinkedIn intent signals, website visits). Most contacts will score 0 at list-build time — BIS updates this dynamically during Layer 3. Multiply by 10 to normalize, apply 0.20 weight.
+- **Warm Path Bonus [0–100]:** 100 = mutual connection + SELLL content engagement; 50 = mutual connection only; 25 = attended same event; 0 = cold path.
+- **Urgency Window [0–100]:** 100 = CRITICAL urgency (≤ 15 days for H5); 70 = HIGH; 40 = MEDIUM; 10 = LOW; 0 = no urgency window.
+- **Compound Signal Bonus:** Flat addition for accounts matching 2+ hypotheses simultaneously.
+  - Double compound (H5+H1, H5+H2, H4+H7, etc.): **+8**
+  - Triple compound (H5+H1+H7 etc.): **+12**
+  - No compound: **+0**
+
+**Why the compound bonus matters:** A new VP Sales (H5) at a company that just raised Series A (H1) is simultaneously in a buying window AND has a budget mandate. The two signals together predict reply probability meaningfully higher than either signal alone. The +8 flat addition applies after the weighted calculation to reflect this confirmed compound advantage.
 
 **Interpretation:**
 
 | Reply Probability | Label | Action |
 |------------------|-------|--------|
-| 70–100 | 🔴 HOT PROSPECT | Manual bespoke email from Aaron. Not template. |
-| 50–69 | 🟠 HIGH PROBABILITY | Template+ with all variables filled + pre-engagement required |
-| 35–49 | 🟡 STANDARD | Standard template personalization |
-| < 35 | 🔵 LOW | Include in campaign but do not prioritize manual attention |
+| 70–100 | 🔴 TIER 1 PRIORITY | Manual bespoke email from Aaron. HeyGen video. Thread C if ACV > $30K. |
+| 50–69 | 🟠 TIER 1 STANDARD | Template+ with all variables filled + pre-engagement required |
+| 35–49 | 🟡 TIER 2 | Standard template personalization, Thread A only |
+| < 35 | 🔵 LOW | Include in campaign but deprioritize manual attention |
+
+**Note on cold-path Tier 1 accounts:** At list-build time, most accounts have Buying Intent = 0 (no prior behavioral signals) and Warm Path = 0 (cold outreach). A textbook H5 account (new VP Sales, Day 11, Series A 38 days ago, Salesloft user) will typically score 45–55 at list entry — Tier 2 — and naturally elevate to Tier 1 as BIS events fire during pre-engagement and early campaign. This is expected behavior, not a scoring failure.
 
 **Top 10% by Reply Probability = Priority Personalization List.** Present this list to Aaron separately. These are the accounts worth 20 minutes of personal attention each.
 

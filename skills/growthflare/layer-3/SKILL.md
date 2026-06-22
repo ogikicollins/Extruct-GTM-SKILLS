@@ -214,7 +214,7 @@ Triggered automatically after Instantly campaign creation:
    → For each Tier 1 contact in pre-engagement schedule:
       T−3: Follow profile (Expandi auto)
       T−2: Like most recent post (Expandi auto)
-      T−1: Comment (queued to engine/comment-queue/[date].md for Aaron approval)
+      T−1: Comment (queued to engine/comment-queue/[date].md for Aaron approval by 18:00 UTC)
 
 2. Create Expandi campaign:
    Name: "SELLL Pre-Engage — [Campaign Name]"
@@ -247,7 +247,7 @@ Webhook Route                          → Triggered By         → Action
 /webhook/expandi-engagement            Expandi connection/like  → Account card update
 /webhook/n8n-day5-thread-b             Day 5 timer             → Thread B auto-trigger
 /webhook/n8n-day8-thread-c             Day 8 timer             → Thread C auto-trigger (Tier 1 Priority, ACV > $30K)
-/webhook/n8n-comment-deadline          6 PM daily timer        → T-1 comment fallback skip
+/webhook/n8n-comment-deadline          18:00 UTC daily timer   → T-1 comment fallback skip
 /webhook/hubspot-sync                  Any lead status change   → HubSpot property update
 ```
 
@@ -317,7 +317,7 @@ Thread B timer: Armed (Day 5 from Email 1)
 All webhooks: Active
 HubSpot: Synced
 
-Next Aaron action: Comment queue approval daily by 6 PM
+Next Aaron action: Comment queue approval daily by 18:00 UTC (deadline is UTC — configure n8n timer as UTC)
 Next automated check: 6h after first Email 1 sends
 ```
 
@@ -922,12 +922,52 @@ Domain health score       < 70               🚨 CRITICAL    PAUSE + deliverabi
 
 > **Superpower #9.** If a target company posts about competitor frustration WHILE the campaign is running, Layer 3 detects it and injects a displacement email as the contact's next sequence step — replacing whatever was scheduled.
 
-**Detection:** signal-monitor runs every 72h. Checks LinkedIn posts of all active campaign contacts.
+**Detection mechanism — two-tier approach:**
+
+**Tier 1 (automated, ~80% of detections): LinkedIn Sales Navigator "New Mentions" alerts**
+
+Set up Sales Navigator alerts for competitor names before each campaign:
+```
+Setup (one-time, 30 minutes, requires LinkedIn Sales Navigator license):
+  For each competitor in brain/competitive-battlecards.md:
+    → Sales Navigator → "Alerts" → "New Mentions" → search competitor name
+    → Filter: "people at my saved accounts" (saves Active Campaign account list)
+    → Notification: Daily email digest + in-app notification
+
+  Competitors to monitor:
+    Belkins, CIENCE, Apollo.io, Outreach, Salesloft, Lemlist, Instantly,
+    Kalungi, Sales Xceleration, Gong, Revenue.io, Refine Labs
+    (update from brain/competitive-battlecards.md quarterly)
+
+  When Sales Navigator alert fires:
+    → Aaron reviews in morning routine (part of 7 AM Slack + feed check)
+    → If account is in active campaign: manually triggers injection (Step 4C-2)
+    → If not in campaign: log in signal-queue.md for next campaign
+```
+
+**Tier 2 (manual, catches the rest): Aaron's daily LinkedIn feed scan**
+
+During the daily 5-minute morning routine, Aaron reviews his LinkedIn feed for any posts from target account contacts. The signal-monitor n8n job also scans publicly visible post text every 72h where API access allows.
 
 ```
-On signal detected: [Contact] at [Company] posted about competitor frustration
-  (keywords: "frustrated with", "switching from", "disappointed by", "after trying X",
-   competitor names from brain/competitive-battlecards.md)
+signal-monitor (n8n, runs every 72h):
+  For each contact in active campaign with a LinkedIn URL:
+    → Pull recent post activity via Expandi API (where accessible)
+    → Scan post text for competitor frustration keywords:
+      "frustrated with", "switching from", "disappointed by", "after trying",
+      "moving away from", "cancelled our [competitor] contract",
+      + all competitor names from brain/competitive-battlecards.md
+    → If keyword match: flag in signal-queue.md + Slack alert to Aaron for review
+    → Aaron confirms (1 click) → triggers displacement (Step 4C-2)
+
+  Note: Not all LinkedIn posts are accessible via API without the contact being
+  a direct connection. Sales Navigator alerts cover the rest. Both run together.
+```
+
+**Step 4C-2 — Displacement Injection (triggered by Aaron confirmation OR direct from signal-monitor):**
+
+```
+On signal confirmed: [Contact] at [Company] posted about competitor frustration
 
   IF contact is in active Layer 3 campaign:
     1. Pause next scheduled sequence email for this contact
@@ -942,7 +982,7 @@ On signal detected: [Contact] at [Company] posted about competitor frustration
                      Displacement email queued: [tomorrow date]
                      Sequence paused 24h then resumes."
     6. BIS += 15 (competitor frustration = active evaluation signal)
-    7. Account card updated: "Competitor displacement signal detected + email injected"
+    7. Account card updated: "Competitor displacement signal detected [date] + email injected"
 ```
 
 ---

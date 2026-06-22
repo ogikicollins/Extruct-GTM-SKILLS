@@ -89,16 +89,23 @@ On HOT_reply:
   → Create deal record in HubSpot (see HubSpot fields below)
   → Create entry in engine/deals.md
   → Set deal stage: Stage 0 (HOT)
-  → DHS initial: 65 (HOT reply = strong baseline)
+  → DHS initial: 50 (formula output at Stage 0 — Recency 25 + Velocity 20 + Competitive 5;
+                     DM/Budget/Champion dimensions are all 0 until confirmed post-discovery)
   → Arm cold call for Day 3 (if Tier 1, phone number available)
 
 On MEETING_REQUEST (calendar link already sent):
   → Read: account card, ADB
   → Create deal record in HubSpot
   → Set deal stage: Stage 1 (Meeting Set)
-  → DHS initial: 70 (meeting booked = stronger baseline)
+  → DHS initial: 50 (same formula output — meeting confirms intent but DM/Budget/Champion
+                     dimensions require discovery call to score above 0)
   → Arm cold call for Day 3 post-meeting (if no-show protocol fires)
   → Calendar webhook armed for meeting confirmation
+
+DHS Stage 0–1 note: All new deals will naturally score 45–55 at entry because Decision Maker
+(15 pts), Budget Signal (15 pts), and Champion Engaged (10 pts) cannot be confirmed until after
+the discovery call. This is expected and correct — do NOT treat a DHS of 50 on Day 1 as a stall
+signal. Stall alerts only fire after Day 7 of no touch, not based on entry DHS alone.
 ```
 
 ### Step 1B — HubSpot Deal Creation
@@ -116,7 +123,7 @@ Fields created:
   Custom properties:
   reply_probability:    [from Layer 2 score]
   bis_score:            [from Layer 3 — frozen at HOT]
-  dhs_score:            65 or 70
+  dhs_score:            50 (formula output at Stage 0 — see Step 1A note)
   hypothesis:           [H1–H7 + compound]
   sequence_variant:     [from Layer 2]
   warm_path:            [from Layer 2]
@@ -141,7 +148,7 @@ n8n writes new row to engine/deals.md:
 Contact: [Name], [Title] | Stage: [HOT / Meeting Set]
 ACV Estimate: $[N] | Hypothesis: [H-code]
 BIS at Entry: [score] | Reply Probability: [score]
-DHS: [score]
+DHS: [score] (new deals start at 50 — rises after discovery confirms DM/Budget/Champion)
 
 ADB: [link to Slack message from Layer 3]
 Account card: engine/accounts/[slug].md
