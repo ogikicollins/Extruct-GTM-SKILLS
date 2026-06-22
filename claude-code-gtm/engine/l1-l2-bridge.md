@@ -421,9 +421,104 @@ Layer 3 is not a terminal layer — it feeds intelligence back into Layer 1 and 
 
 ---
 
+## Section 3: Layer 3 → Layer 4 Bridge
+
+What Layer 3 produces that Layer 4 depends on.
+
+| Layer 3 Output | Layer 4 Consumer | How It's Used |
+|---------------|-----------------|--------------|
+| HOT reply classified | `selllo-deal-intake` n8n | Creates deal in HubSpot + deals.md. Initial DHS = 65 |
+| MEETING_REQUEST classified | `selllo-deal-intake` n8n | Creates deal with Stage 1. Initial DHS = 70 |
+| ADB (Auto-Discovery Brief) | Layer 4 Phase 2A discovery intake | Aaron's call prep — feeds post-call scoring |
+| BIS score at HOT | Layer 4 DHS Dimension 1 (baseline) | Sets baseline engagement recency |
+| Account card (with CED history) | Layer 4 Phase 2C multi-stakeholder | Champion list for multi-stakeholder nurture |
+| Reply text verbatim | Layer 4 Phase 2A discovery notes | Claude extracts pain for nurture personalization |
+| Hypothesis code + urgency | Layer 4 Phase 3B proposal generation | Shapes proposal Section 1 (situation framing) |
+| warm_path_type | Layer 4 Phase 4B close assist | Informs executive pull-through approach |
+| Proof assigned | Layer 4 Phase 3B proposal generation | Auto-populates proposal Section 3 proof |
+| Discovery score (from meeting-automation) | Layer 4 Phase 2A routing | Routes to Proposal (≥18), Nurture (12-17), Lost (<12) |
+
+---
+
+## Section 4: Layer 4 → Layer 5 Bridge
+
+What Layer 4 produces that Layer 5 depends on.
+
+| Layer 4 Output | Layer 5 Consumer | How It's Used |
+|---------------|-----------------|--------------|
+| Contract signed (DocuSign webhook) | `selllo-client-onboarding` n8n | Triggers Layer 5 activation, creates clients.md entry |
+| Final ACV (contract value) | Layer 5 clients.md | Sets baseline MRR + total contract value |
+| Discovery notes (what they said) | Layer 5 Phase 1B kickoff | Informs 90-day plan (we already know their exact pain) |
+| DHS history | Layer 5 Phase 1A clients.md | Context for onboarding relationship (was deal long/hard?) |
+| Champion identified (from CED) | Layer 5 Phase 1B kickoff | Who else to include in onboarding communications |
+| Competitor named (from close) | Layer 5 Phase 2A context file | Added to client-specific competitive-battlecards section |
+| Proof point used to close | Layer 5 Phase 3C proof library update | Confirms which proof point was most effective for this deal |
+
+---
+
+## Section 5: Layer 5 → Layer 1/2/6 Bridge
+
+What Layer 5 produces that all prior layers depend on.
+
+| Layer 5 Output | Consumer Layer | How It's Used |
+|---------------|--------------|--------------|
+| Client results (before/after numbers) | Layer 1 proof-library.md | New proof point with confirmed numbers + quote |
+| Client's ICP profile (what they look like) | Layer 1 IDEAL-CUSTOMER-PROFILE.md | Tightens ICP from proven-buyer attributes |
+| New proof point entry | Layer 3 sequences (Email 2/3) | Proof point in active sequences updated |
+| Churn analysis (if applicable) | Layer 1 Gate 0B | If churn reveals structural anti-ICP pattern → add to filter |
+| Referral contacts | Layer 2 pipeline | Referrals skip Layers 2-3 → enter Layer 4 directly |
+| Case study published | Layer 3 ai-personalization | Bespoke openers reference published case study |
+| CHS history | Layer 6 ICP refinement | What predicts healthy vs. risky clients → ICP adjustment |
+| NRR data | Layer 6 quarterly strategy | Shapes expansion priorities and pricing decisions |
+| VOC from client calls | Layer 1 voc-library.md | Client language about results → sequence copy |
+
+---
+
+## Section 6: Full 6-Layer Data Architecture
+
+```
+FULL GROWTHFLARE REVENUE ENGINE — DATA FLOW
+
+LAYER 1: Intelligence
+  Files: IDEAL-CUSTOMER-PROFILE.md, hypothesis_set.md, brain/* (25 files)
+  Produces: Targeting criteria, buying signals, proof points, voice, objection counters
+     │
+     ↓
+LAYER 2: Activation
+  Receives: All Layer 1 intelligence
+  Produces: 62-column campaign CSV, scored contacts (Tier 1/2), reply probabilities
+     │
+     ↓
+LAYER 3: Campaign Execution
+  Receives: Campaign CSV + all Layer 1 context
+  Produces: HOT/MEETING_REQUEST signals, BIS data, reply text, account cards (updated)
+     │
+     ↓
+LAYER 4: Pipeline Intelligence
+  Receives: HOT/MEETING_REQUEST + ADB + account card from Layer 3
+  Produces: DHS-scored deals, proposals, discovery notes, won/lost outcomes
+     │
+     ↓
+LAYER 5: Close + Expand
+  Receives: Signed contract + deal data from Layer 4
+  Produces: Client results, proof points, referrals, CHS data, NRR data
+     │
+     ↓
+LAYER 6: Optimize
+  Receives: Data from ALL layers (weekly pull)
+  Produces: ICP updates, brain updates, sequence improvements, hypothesis scores
+     │
+     ↑
+     └──────────── Feeds back to ALL prior layers (continuous flywheel) ──────────────┘
+```
+
+---
+
 ## Bridge Maintenance Rules
 
 1. **Any Layer 1 file change** → check Section 1 of this bridge for downstream Layer 2 impact
 2. **Any Layer 2 output change** → check Section 2 of this bridge for downstream Layer 3 impact
 3. **Any new Layer 3 superpower added** → document what Layer 2 data it consumes in Section 2
-4. **Bridge version** must be updated when any consuming relationship changes: `Updated: [date]`
+4. **Any new Layer 4/5/6 field** → check Sections 3-5 for upstream dependencies
+5. **Bridge version** must be updated when any consuming relationship changes: `Updated: 2026-06-22`
+6. **Layer 6 optimization actions** that change Layer 1 files must be logged in `engine/reports/intelligence-log.md`

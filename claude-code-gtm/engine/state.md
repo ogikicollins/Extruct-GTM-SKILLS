@@ -11,7 +11,8 @@
 | Client | SELLL.io |
 | Founder | Aaron Shepard |
 | Engine launched | 2026-06-21 |
-| Current phase | Layer 2 test run complete ✅ — awaiting domain warmup (start NOW) + API key confirmation |
+| All 6 layers built | 2026-06-22 |
+| Current phase | ALL LAYERS COMPLETE ✅ — awaiting domain warmup (start NOW) + API key confirmation before first live run |
 | Active campaigns | 0 |
 | Context file | `claude-code-gtm/context/selll_context.md` |
 | Brain | `claude-code-gtm/brain/BRAIN.md` |
@@ -267,48 +268,203 @@
 
 ---
 
-## Layer 4: Pipeline ⏳ NOT STARTED
+## Layer 4: Pipeline Intelligence ✅ BUILT v1.0
 
-| Metric | This Week | Last Week | 30-Day Avg |
-|--------|-----------|-----------|------------|
-| Emails sent | 0 | — | — |
-| Open rate | — | — | — |
-| Reply rate | — | — | — |
-| Meetings booked | 0 | — | — |
-| Active deals | 0 | — | — |
+> Master skill: `skills/growthflare/layer-4/SKILL.md`
+> Deal tracker: `engine/deals.md`
+> Status: Built — awaiting first live campaign for live deal data
+
+### Layer 4 Architecture
+
+5-phase pipeline management from HOT reply → signed contract.
+
+| Phase | Purpose | Automation |
+|-------|---------|-----------|
+| Phase 1: Deal Intake | Receives HOT/MEETING_REQUEST from Layer 3, creates deal | Fully automated |
+| Phase 2: Post-Discovery Nurture | Multi-stage nurture sequences, multi-stakeholder | 85% automated |
+| Phase 3: Proposal Intelligence | Auto-generates proposals, tracks opens/views | 90% automated |
+| Phase 4: Close Assist | Contract execution, executive pull-through, competitive | 80% automated |
+| Phase 5: Pipeline Health | Daily DHS dashboard, stall detection, forecast | Fully automated |
+
+### Deal Health Score (DHS)
+
+7-dimension deal health score (0-100). Updated daily by n8n `selllo-dhs-update`.
+Reference: `skills/growthflare/layer-4/references/deal-health-scoring.md`
+
+| Threshold | Status | Auto-Action |
+|-----------|--------|-------------|
+| 80-100 | 🟢 GREEN | Weekly touch only |
+| 60-79 | 🟡 AMBER | Slack alert, accelerate nurture |
+| 40-59 | 🔴 RED | Stall alert, call queued |
+| < 40 | 💀 CRITICAL | Emergency escalation |
+
+### Layer 4 Files
+
+| Item | Status | File |
+|------|--------|------|
+| Master orchestration skill | ✅ Built | `skills/growthflare/layer-4/SKILL.md` |
+| Deal Health Scoring reference | ✅ Built | `skills/growthflare/layer-4/references/deal-health-scoring.md` |
+| Live deal tracker | ✅ Built | `engine/deals.md` |
+| Call log | ✅ Built | `engine/call-log.md` |
+| Cold Call amplifier | ✅ Wired in | `skills/growthflare/cold-call/SKILL.md` — Day 3/8 + DHS escalation |
+
+### Layer 4 n8n Workflows
+
+| Workflow | Trigger |
+|----------|---------|
+| `selllo-deal-intake` | HOT/MEETING_REQUEST from Layer 3 |
+| `selllo-dhs-update` | Daily 05:30 UTC |
+| `selllo-stall-detector` | Daily 05:30 UTC |
+| `selllo-proposal-tracking` | DocuSign/PandaDoc webhook |
+| `selllo-contract-signed` | DocuSign signed → Layer 5 |
+| `selllo-pipeline-forecast` | Every Friday 06:00 UTC |
+
+### Pipeline Metrics (Live)
+
+| Metric | This Week | Last Week | 30-Day Avg | Target |
+|--------|-----------|-----------|------------|--------|
+| Active deals | 0 | — | — | — |
+| Deals won | 0 | — | — | — |
+| Pipeline value (weighted) | $0 | — | — | — |
+| Avg DHS | — | — | — | 70+ |
+| Stalled deals | 0 | — | — | 0 |
 
 ---
 
-## Layer 5: Close ⏳ NOT STARTED
+## Layer 5: Close + Expand ✅ BUILT v1.0
 
-| Company | Contact | Stage | Next Action | Deal Value | Days in Stage |
-|---------|---------|-------|-------------|------------|---------------|
-| (no active deals) | — | — | — | — | — |
+> Master skill: `skills/growthflare/layer-5/SKILL.md`
+> Client tracker: `engine/clients.md`
+> Status: Built — awaiting first deal close for activation
+
+### Layer 5 Architecture
+
+5-phase client journey from contract signed → long-term revenue + referral machine.
+
+| Phase | Days | Purpose | Automation |
+|-------|------|---------|-----------|
+| Phase 1: Onboarding | Day 0-7 | Welcome, kickoff, access sharing | 75% automated |
+| Phase 2: Activation | Day 8-30 | System build, ICP workshop, campaign launch | 60% automated |
+| Phase 3: Results Harvest | Day 31-90 | Campaign live, proof library, referral arm | 80% automated |
+| Phase 4: Expand Revenue | Day 91+ | Renewal, upsell, multi-seat, new vertical | 70% automated |
+| Phase 5: Advocacy | Ongoing | Referrals, case study, testimonial | 75% automated |
+
+### Client Health Score (CHS)
+
+5-dimension client health score (0-100). Updated weekly by n8n `selllo-client-chs-update`.
+
+| Threshold | Status | Aaron Action |
+|-----------|--------|-------------|
+| 80-100 | 🟢 GREEN | Schedule referral ask |
+| 60-79 | 🟡 AMBER | Proactive check-in |
+| 40-59 | 🔴 RED | Immediate intervention |
+| < 40 | 💀 CRITICAL | Emergency protocol |
+
+### Layer 5 Files
+
+| Item | Status | File |
+|------|--------|------|
+| Master orchestration skill | ✅ Built | `skills/growthflare/layer-5/SKILL.md` |
+| Client activation reference | ✅ Built | `skills/growthflare/layer-5/references/client-activation.md` |
+| Expand protocol reference | ✅ Built | `skills/growthflare/layer-5/references/expand-protocol.md` |
+| Active client tracker | ✅ Built | `engine/clients.md` |
+| Referral engine (wired in) | ✅ Wired in | `skills/growthflare/referral-engine/SKILL.md` — Day 45 arm |
+| Deal nurture (wired in) | ✅ Wired in | `skills/growthflare/deal-nurture/SKILL.md` — all stages |
+
+### Layer 5 n8n Workflows
+
+| Workflow | Trigger |
+|----------|---------|
+| `selllo-client-onboarding` | Contract signed (from Layer 4) |
+| `selllo-client-chs-update` | Weekly Sunday 06:00 UTC |
+| `selllo-client-milestone` | Day 30/45/60/90 timers |
+| `selllo-referral-arm` | Day 45 + CHS ≥ 75 |
+| `selllo-renewal-arm` | 60 days before contract end |
+| `selllo-expansion-check` | Monthly + CHS event |
+| `selllo-case-study-arm` | Day 90 + results ≥ 70% of promised |
+
+### Client Metrics (Live)
+
+| Metric | Value | Target |
+|--------|-------|--------|
+| Active clients | 0 | — |
+| Average CHS | — | 75+ |
+| Total MRR | $0 | — |
+| NRR (net revenue retention) | — | 110%+ |
+| Referrals generated | 0 | 30-50% of clients |
 
 ---
 
-## Layer 6: Optimize ⏳ NOT STARTED
+## Layer 6: Optimize — Intelligence Flywheel ✅ BUILT v1.0
 
-| Metric | Target | Actual | Status |
-|--------|--------|--------|--------|
-| Email reply rate | 3–5% | — | — |
-| Reply → meeting | 40–60% | — | — |
-| Time reply → meeting sent | < 2h | — | — |
-| Daily personalized conversations | 200+ | — | — |
-| Weekly meetings booked | 5–10 | — | — |
+> Master skill: `skills/growthflare/layer-6/SKILL.md`
+> Status: Built — flywheel starts running with first campaign data
+
+### Layer 6 Architecture
+
+Weekly optimization + monthly deep review + quarterly strategy + continuous flywheel.
+
+| Cadence | Protocol | Output |
+|---------|---------|--------|
+| Weekly (Friday) | Pull all data → Claude analysis → optimization report | MUST DO / TEST / STOP / SCALE actions |
+| Monthly (1st Friday) | Deep review → brain update → ICP refinement → copy winners | Brain version bump |
+| Quarterly (1st Monday) | Vertical expansion decision → new hypothesis → strategy | Vertical playbook / new H |
+| Continuous | 8 intelligence feedback loops (L1→L2→L3→L4→L5→L6) | Compounding performance |
+
+### The 8 Intelligence Feedback Loops
+
+| Loop | From | To | What Flows |
+|------|------|----|-----------|
+| 1. ICP Improvement | L3/L4 HOT data | L1 ICP | Attributes of actual buyers → scoring adjustments |
+| 2. Sequence Optimization | L3 email data | L2/L3 sequences | Subject line winners, copy improvements |
+| 3. Discovery → Proof | L4 discovery notes | L1 proof library | Confirmed pain → verified proof points |
+| 4. Objection Learning | L4 call data | L1 objection bank | New objections → new counters |
+| 5. Reply Language → VOC | L3 HOT replies | L1 voc-library | Buyer phrases → sequence copy |
+| 6. Win → Lookalike | L5 client data | L2 list building | Closed client profile → next list |
+| 7. Call Timing | L4 call log | L4 cold-call | Best connect windows → call queue order |
+| 8. Hypothesis Performance | All layers | L1 hypothesis set | HPS scores → retire/promote/generate |
+
+### Layer 6 Files
+
+| Item | Status | File |
+|------|--------|------|
+| Master orchestration skill | ✅ Built | `skills/growthflare/layer-6/SKILL.md` |
+| Hypothesis optimizer reference | ✅ Built | `skills/growthflare/layer-6/references/hypothesis-optimizer.md` |
+| Engine flywheel reference | ✅ Built | `skills/growthflare/layer-6/references/engine-flywheel.md` |
+
+### Layer 6 n8n Workflows
+
+| Workflow | Trigger |
+|----------|---------|
+| `selllo-weekly-optimization` | Every Friday 06:00 UTC |
+| `selllo-monthly-review` | First Friday each month |
+| `selllo-quarterly-strategy` | First Monday each quarter |
+| `selllo-ab-test-result` | 7 days after test starts |
+| `selllo-flywheel-loop` | On each HOT reply, win, loss, discovery |
+| `selllo-brain-version` | On major brain update |
+
+### Optimization Metrics (Live)
+
+| Metric | Month 1 Actual | Month 3 Target | Month 6 Target | Month 12 Target |
+|--------|---------------|----------------|----------------|----------------|
+| Email reply rate | — | 3-5% | 4-6% | 5-8% |
+| HOT conversion rate | — | 30-40% | 35-45% | 40-50% |
+| Reply → meeting | — | 40-50% | 45-55% | 50-60% |
+| Days cold → close | — | 75-90d | 60-75d | 45-60d |
+| Brain version | v2.0 | v2.2 | v2.4 | v3.0 |
 
 ---
 
 ## Amplifier Status
 
-| Amplifier | Status | Notes |
-|-----------|--------|-------|
-| Cold Call | ⏳ Not started | Needs call queue from Layer 2 |
-| LinkedIn Content Machine | ⏳ Not started | First post should publish Week 1 of Layer 3 |
-| Video Outreach (Loom) | ⏳ Not started | Activates Day 7 of first campaign |
-| Referral Engine | ⏳ Not started | Activates at Day 30 of first client engagement |
-| Multi-Thread | ⏳ Not started | Activates with first Tier 1 list |
-| Re-Engagement | ⏳ Not started | Activates after first suppressed list builds |
+| Amplifier | Status | Wired To | Activates When |
+|-----------|--------|---------|---------------|
+| Cold Call | ✅ Built + Wired | Layer 4 (Day 3/8 + DHS escalation) | First campaign launch |
+| LinkedIn Content Machine | ✅ Built + Wired | Layer 3 LEM (post engager routing) | Week 1 of first campaign |
+| Video Outreach (HeyGen) | ✅ Built + Wired | Layer 3 (reply_prob ≥ 70 + Ghost Positive) | Aaron avatar recorded |
+| Referral Engine | ✅ Built + Wired | Layer 5 (Day 45 + CHS ≥ 75) | First client Day 45 |
+| Multi-Thread | ✅ Built + Wired | Layer 3 (Thread B Day 5, Thread C Day 8) | First Tier 1 list |
+| Re-Engagement | ✅ Built + Wired | Layer 3 (NOT_NOW → queue → trigger) | First NOT_NOW reply |
 
 ---
 
@@ -343,14 +499,18 @@ Each skill updates only its designated section:
 | Skill | Owns These Fields |
 |-------|------------------|
 | `list-building` | Layer 2 status, Active Campaigns |
-| `lead-scoring` | Layer 4 pipeline metrics |
-| `signal-monitor` | Signal Events table |
-| `meeting-automation` | Layer 5 Close table |
-| `deal-nurture` | Layer 5 Close — stage updates only |
-| `revenue-reporting` | Layer 6 Optimize metrics, Weekly Reporting |
+| `lead-scoring` | Layer 2 Phase 2E scoring |
+| `signal-monitor` | Signal Events table, signal-watchlist.md |
+| `meeting-automation` | Layer 3 HOT reply + meeting booking |
+| `deal-nurture` | Layer 4 — nurture sequence per stage |
+| `layer-4` | engine/deals.md — DHS, stage, pipeline forecast |
+| `layer-5` | engine/clients.md — CHS, milestones, expand |
+| `revenue-reporting` | engine/reports — weekly/monthly reports |
+| `layer-6` | Weekly optimization, brain versions |
 | `multi-thread` | Amplifier Status — Multi-Thread |
-| `referral-engine` | Amplifier Status — Referral Engine |
-| `re-engagement` | Amplifier Status — Re-Engagement |
-| `video-outreach` | Amplifier Status — Video Outreach |
+| `referral-engine` | engine/referrals.md — Layer 5 referral pipeline |
+| `re-engagement` | engine/re-engagement-queue.md |
+| `video-outreach` | engine/video-log.md |
+| `cold-call` | engine/call-log.md, engine/call-queue.md |
 
 **Rule:** No skill overwrites another skill's rows. Append, don't replace.
