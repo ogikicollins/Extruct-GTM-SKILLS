@@ -279,3 +279,151 @@ If any Layer 1 file changes, update these Layer 2 decisions:
 | New competitor | Phase 2C enrichment + Phase 4C displacement | Add to `competitor_client` labels + displacement variant |
 | DNC list updated | Gate 0B | Applied automatically at next run |
 | Warmup capacity increases | Phase 4F slot allocation | Increase daily send ceiling |
+
+---
+
+# Layer 2 → Layer 3 Data Bridge
+
+> "Layer 2 builds the machine. Layer 3 runs it."
+
+This section documents what Layer 2 produces and exactly where Layer 3 consumes it. No gap between these layers. Every Layer 2 output has a named Layer 3 consumer.
+
+---
+
+## Layer 2 → Layer 3 Flow in One View
+
+```
+LAYER 2 — Activation (build the target list + prepare campaign)
+    │
+    ├── Verified campaign CSV (62 cols) ──────────────→ Layer 3 Phase 1B (Instantly import)
+    ├── Priority Personalization List ─────────────────→ Layer 3 Phase 1C (ai-personalization trigger)
+    ├── Pre-engagement schedule (T-3/T-2/T-1) ─────────→ Layer 3 Phase 1D (Expandi start)
+    ├── Account cards (engine/accounts/[slug].md) ──────→ Layer 3 Phase 3B (ADB generation)
+    ├── Call queue (engine/call-queue.md) ──────────────→ Layer 3 Phase 2 (cold-call track)
+    ├── HeyGen video status (v_loom_url in CSV) ────────→ Layer 3 Phase 1C (video batch check)
+    └── Layer 2 Run Log ─────────────────────────────→ Layer 3 Phase 1A (pre-launch verification)
+         │
+         ▼
+    LAYER 3 — Execution (run the campaign, convert HOT leads, harvest intelligence)
+```
+
+---
+
+## Layer 2 Outputs → Layer 3 Consumers (Full Map)
+
+### From Layer 2 Phase 5A — Verified Campaign CSV
+
+Every column in the CSV has a Layer 3 consumer:
+
+| CSV Column | Layer 3 Consumer | How Used |
+|-----------|----------------|---------|
+| `email` | Phase 1B | Instantly lead import |
+| `first_name`, `last_name` | Phase 1B | Instantly lead fields |
+| `reply_probability` | BIS tracker (Step 2B) | Starting BIS score — updated in real time |
+| `tier` | Thread engine (Step 2D) | Tier 1 Priority → Thread C eligible |
+| `sequence_variant` | SAE (Step 2H) | Starting variant — may be swapped mid-campaign |
+| `thread` | Thread engine (Step 2D) | A/B/C assignment |
+| `thread_b_contact` | Thread engine (Step 2D) | Thread B auto-trigger target |
+| `thread_c_contact` | Thread engine (Step 2D) | Thread C auto-trigger target |
+| `v_loom_url` | Phase 1C + Email 3 | HeyGen video check; Instantly merge field |
+| `v_bespoke_opener` | Phase 1C | Instantly merge field for Email 1 (Priority list) |
+| `assigned_proof_point` | ADB (Phase 3B) | Proof matching in Auto-Discovery Brief |
+| `hypothesis` | CED (Step 2E) + ADB | Account grouping + brief context |
+| `compound_signal` | CED (Step 2E) | Pre-flagged compound accounts — CED watches these first |
+| `warm_path_type` | LEM (Step 2G) | Warm contacts get LinkedIn Engagement Mirror priority |
+| `hq_timezone` | Phase 2A | optimal_send_time_utc send scheduling |
+| `optimal_send_time_utc` | Phase 1B | Instantly per-contact send time |
+| `sending_domain` | Phase 1A verification | Must = team.selll.io on every row |
+| `arr_estimate` | Thread C check (Step 2D) + ADB ROI | ACV > $30K → Thread C eligible; ROI calculation |
+| `exec_linkedin_signal` | LEM (Step 2G) + T-1 comment queue | Comment generation context |
+| `v_signal_detail` | ADB (Phase 3B) | Brief situation context |
+| `urgency_band` | ADB (Phase 3B) + SAE (Step 2H) | Call framing + variant selection |
+
+### From Layer 2 Phase 5B — Priority Personalization List
+
+| Output | Layer 3 Consumer | How Used |
+|--------|----------------|---------|
+| Contacts with reply_prob ≥ 70 | Phase 1C (ai-personalization) | HeyGen bespoke video + bespoke opener |
+| Contacts with reply_prob 35–69 Tier 1 | Phase 1C (video-outreach) | HeyGen standard template video |
+| v_bespoke_opener (generated) | Phase 1B Instantly import | Instantly merge field Email 1 |
+| v_loom_url (generated) | Phase 1B Instantly import | Instantly merge field Email 3 |
+
+### From Layer 2 Phase 5C — Pre-Engagement Schedule
+
+| Output | Layer 3 Consumer | How Used |
+|--------|----------------|---------|
+| T-3 date per contact | Phase 1D (Expandi) | Follow on this date |
+| T-2 date per contact | Phase 1D (Expandi) | Like most recent post on this date |
+| T-1 date per contact | Phase 1D (Expandi) | Queue comment for Aaron approval |
+| Email 1 send date | Phase 1B (Instantly timing) | Sequence start per contact |
+
+### From Layer 2 Phase 5D — Account Cards
+
+| Output | Layer 3 Consumer | How Used |
+|--------|----------------|---------|
+| `engine/accounts/[slug].md` | ADB (Phase 3B) | Full account intelligence for brief generation |
+| Company context section | ADB (Phase 3B) | Situation summary input |
+| Contact intelligence section | ADB (Phase 3B) | Contact BIS history + LinkedIn activity |
+| Touch timeline | Phase 2 event log | CED cross-reference |
+
+### From Layer 2 Phase 5E — Call Queue
+
+| Output | Layer 3 Consumer | How Used |
+|--------|----------------|---------|
+| `engine/call-queue.md` | Layer 3 Phase 2 (parallel cold-call track) | Contacts with phone numbers — cold-call skill runs in parallel |
+
+---
+
+## Layer 3 → Layer 1/2 Feedback (What Layer 3 Feeds Back)
+
+Layer 3 is not a terminal layer — it feeds intelligence back into Layer 1 and Layer 2 to make the next campaign sharper:
+
+| Layer 3 Output | Destination | What It Updates |
+|---------------|-------------|----------------|
+| Buyer language (HOT/WARM replies) | `brain/voc-library.md` (Layer 1) | VOC library — exact phrases for next campaign |
+| Hypothesis performance | `hypothesis_set.md` (Layer 1) | Confidence score ± based on reply rate |
+| Subject line winners/losers | `sequences/spintax-engine.md` (Layer 1) | Spintax pool promotion/removal |
+| Winning proof point | `brain/proof-library.md` (Layer 1) | Proof point effectiveness tracking |
+| Competitor intel from calls | `brain/competitive-battlecards.md` (Layer 1) | Battlecard updates from discovery |
+| Not-now contacts + triggers | `engine/re-engagement-queue.md` (Layer 2 Gate 0C) | Pre-loaded for next campaign's Gate 0C check |
+| Responder seed list | Layer 2 Phase 1A (next run) | Lookalike seed for next list-build |
+| Updated ICP profile signals | `IDEAL-CUSTOMER-PROFILE.md` (Layer 1) | Refined ICP from actual close data |
+
+---
+
+## The Complete Engine Data Flow — Layers 1 → 2 → 3
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ LAYER 1: Intelligence                                                │
+│ ICP → Personas → Hypotheses → Sequences → Proof Library → Brain     │
+└─────────────────────────────┬────────────────────────────────────────┘
+                              │ l1-l2-bridge.md (this document, Section 1)
+                              ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│ LAYER 2: Activation                                                  │
+│ Gates → Signal → Account → Contact → Outreach → CSV Output          │
+└─────────────────────────────┬────────────────────────────────────────┘
+                              │ l1-l2-bridge.md (this document, Section 2)
+                              ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│ LAYER 3: Campaign Execution + Intelligence                           │
+│ Launch → BIS → CED → SAE → LEM → HOT Conversion → Close + Harvest  │
+└─────────────────────────────┬────────────────────────────────────────┘
+                              │ Learning loops + intelligence harvest
+                              ▼
+        ┌────────────────┬────────────────┬──────────────────┐
+        ▼                ▼                ▼                  ▼
+   Layer 1 (VOC,    Layer 2 (seed    Layer 4           engine/campaigns/
+  hypotheses,       list, re-engage  Pipeline)         [slug]-active.md
+  battlecards)      queue, ICP)
+```
+
+---
+
+## Bridge Maintenance Rules
+
+1. **Any Layer 1 file change** → check Section 1 of this bridge for downstream Layer 2 impact
+2. **Any Layer 2 output change** → check Section 2 of this bridge for downstream Layer 3 impact
+3. **Any new Layer 3 superpower added** → document what Layer 2 data it consumes in Section 2
+4. **Bridge version** must be updated when any consuming relationship changes: `Updated: [date]`

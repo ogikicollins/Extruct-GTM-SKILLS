@@ -192,11 +192,78 @@
 
 ---
 
-## Layer 3: Outreach ⏳ NOT STARTED
+## Layer 3: Campaign Execution + Intelligence ✅ BUILT v1.0
 
-| Campaign | Persona | # Contacts | Launch Date | Status |
-|----------|---------|------------|-------------|--------|
-| (awaiting Layer 2) | — | — | — | — |
+> Master skill: `skills/growthflare/layer-3/SKILL.md`
+> Status: Built — awaiting API keys + domain warmup before first live run
+> Aaron's daily time while running: 10 minutes
+
+### Layer 3 Architecture
+
+5-phase self-managing campaign execution system.
+
+| Phase | Steps | Purpose | Automation |
+|-------|-------|---------|-----------|
+| Phase 1: Campaign Launch | 1A–1H | Pre-launch verification, Instantly setup, HeyGen batch, Expandi start, webhook activation | 95% automated — Aaron approves Go/No-Go |
+| Phase 2: Active Execution | 2A–2I | Email cadence, BIS real-time scoring, reply routing, thread escalation, superpowers | 98% automated — Aaron: 5-min comment queue |
+| Phase 3: HOT Conversion | 3A–3E | Speed-to-book, ADB, discovery call, post-call extraction, auto-proposal | HOT: 2-hour Aaron SLA. MEETING_REQUEST: 60s auto |
+| Phase 4: Health Intelligence | 4A–4E | Real-time dashboard, threshold alerts, deliverability, SAE, weekly signal scan | 100% automated — alerts fire only on breach |
+| Phase 5: Close + Harvest | 5A–5D | Debrief, hypothesis update, buyer language, re-engagement, responder seed | 80% automated — learning loops: 30 min Aaron |
+
+### Layer 3 Superpowers (9 — not available in any off-the-shelf tool)
+
+| # | Superpower | File |
+|---|-----------|------|
+| 1 | Behavioral Intent Score (BIS) — reply_prob updates in real time | `layer-3/references/behavioral-intent-tracker.md` |
+| 2 | Compound Engagement Detector (CED) — account-level buying signal | `layer-3/references/compound-engagement-detector.md` |
+| 3 | Sequence Adaptation Engine (SAE) — Email 3/4/5 variant from engagement data | `layer-3/SKILL.md` → Step 2H |
+| 4 | LinkedIn Engagement Mirror (LEM) — post engagement → warm DM convergence | `layer-3/SKILL.md` → Step 2G |
+| 5 | Auto-Discovery Brief (ADB) — HOT reply → 1-page brief in Slack (0 prep time) | `layer-3/references/hot-reply-protocol.md` |
+| 6 | Speed-to-Book Auto-Assist — holding email if 1h SLA not met | `layer-3/references/hot-reply-protocol.md` |
+| 7 | Ghost Positive Video Re-activation — 5+ opens, no reply → new HeyGen video | `layer-3/SKILL.md` → Step 2F |
+| 8 | Competitor Displacement Injection — mid-campaign signal → sequence override | `layer-3/SKILL.md` → Step 4C |
+| 9 | Auto-Proposal Pre-generation — discovery score ≥ 18 → draft proposal ready | `layer-3/SKILL.md` → Step 3E |
+
+### Layer 3 Skills + Files
+
+| Item | Status | File |
+|------|--------|------|
+| Master orchestration skill | ✅ Built | `skills/growthflare/layer-3/SKILL.md` |
+| BIS technical reference | ✅ Built | `skills/growthflare/layer-3/references/behavioral-intent-tracker.md` |
+| CED technical reference | ✅ Built | `skills/growthflare/layer-3/references/compound-engagement-detector.md` |
+| HOT Reply Protocol reference | ✅ Built | `skills/growthflare/layer-3/references/hot-reply-protocol.md` |
+| Campaign coordination directory | ✅ Built | `engine/campaigns/README.md` |
+| inbox-reply skill (webhook) | ✅ Built | `skills/inbox-reply/SKILL.md` |
+| multi-thread skill | ✅ Built | `skills/growthflare/multi-thread/SKILL.md` |
+| meeting-automation skill | ✅ Built | `skills/growthflare/meeting-automation/SKILL.md` |
+| signal-monitor skill | ✅ Built | `skills/growthflare/signal-monitor/SKILL.md` |
+| deal-nurture skill | ✅ Built | `skills/growthflare/deal-nurture/SKILL.md` |
+| revenue-reporting skill | ✅ Built | `skills/growthflare/revenue-reporting/SKILL.md` |
+| re-engagement skill | ✅ Built | `skills/growthflare/re-engagement/SKILL.md` |
+| ai-personalization skill | ✅ Built | `skills/growthflare/ai-personalization/SKILL.md` |
+| video-outreach skill | ✅ Built | `skills/growthflare/video-outreach/SKILL.md` |
+| linkedin-automation skill | ✅ Built | `skills/growthflare/linkedin-automation/SKILL.md` |
+
+### Layer 3 Blockers (same as Layer 2 — resolved together)
+
+| Blocker | Status |
+|---------|--------|
+| INSTANTLY_API_KEY | ⚠️ Pending |
+| EXPANDI_API_KEY | ⚠️ Pending |
+| HEYGEN_API_KEY + AARON_AVATAR_ID + AARON_VOICE_ID | ⚠️ Pending |
+| ANTHROPIC_API_KEY | ⚠️ Pending |
+| HUBSPOT_API_KEY | ⚠️ Pending |
+| N8N_INSTANCE (self-hosted or cloud) | ⚠️ Pending |
+| SLACK_WEBHOOK_URL | ⚠️ Pending |
+| team.selll.io warmup (21 days minimum — START NOW) | ⚠️ Not started |
+| Aaron's Devolon VP Sales name confirmation | ⚠️ Unconfirmed — blocks Devolon sequences |
+| Stefan Golz quote confirmation | ⚠️ Unconfirmed — paraphrase only until confirmed |
+
+### Active Campaigns
+
+| Campaign File | Hypothesis | Launch | Phase | Status |
+|--------------|-----------|--------|-------|--------|
+| (awaiting domain warmup + API keys) | — | — | — | — |
 
 ---
 
