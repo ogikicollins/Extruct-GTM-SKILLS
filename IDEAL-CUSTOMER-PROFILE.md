@@ -229,6 +229,10 @@ The firmographic sweet spot is 25–150 employees, B2B SaaS or tech-enabled serv
 
 ## ICP Scoring Rubric
 
+> **Scoring authority note:** This rubric is a quick-reference guide for human qualification decisions. The authoritative machine scoring model for automated campaign runs is in `skills/growthflare/layer-2/SKILL.md` → Phase 2E, which uses a 7-dimension model with different weights optimised for conversion. When the two conflict, Layer 2 Phase 2E wins. Use this rubric for manual prospecting, SDR training, and quick qualification calls.
+>
+> **Employee threshold:** Layer 2 Gate 0B hard-disqualifies companies with > 200 employees (tighter than the 300-employee red flag below) to stay firmly in the conversion sweet spot. Companies with 200–300 employees may technically pass the ICP but are excluded from automated campaigns.
+
 **Total: 100 points**
 
 ### Firmographic Fit (25 points)

@@ -1146,6 +1146,57 @@ Plan this before the campaign launches so it happens automatically:
 
 ---
 
+## Step 5H — Campaign Handoff: Layer 2 → Email Generation → Instantly
+
+This is the final step of Layer 2. It documents how the verified campaign CSV flows from Layer 2 output through to live Instantly campaign.
+
+```
+Layer 2 output (this skill)
+       │
+       ▼
+[hypothesis]-[YYYY-MM-DD]-verified.csv
+       │
+       ├──→ ai-personalization skill (reply_prob ≥ 70 contacts)
+       │         Generates: v_bespoke_opener, v_subject_bespoke, v_loom_url (HeyGen)
+       │         Writes back to CSV columns before upload
+       │
+       ├──→ video-outreach skill (Tier 1, reply_prob 35–69)
+       │         Generates: v_loom_url (HeyGen standard template script)
+       │         Writes back to CSV columns before upload
+       │
+       ▼
+CSV is now fully populated (all 62 columns filled)
+       │
+       ▼
+Instantly Campaign Setup:
+  1. Create new campaign: "SELLL — [Hypothesis] [Persona] — [YYYY-MM-DD]"
+  2. Sending domain: team.selll.io (NEVER selll.io)
+  3. Upload verified CSV (import contacts)
+  4. Set Campaign Variables (not per-row): {{sender_name}}, {{sender_title}}, {{calendar_link}}
+  5. Select sequence template matching sequence_variant column in CSV
+  6. Set sending schedule: Mon–Thu, 7:30–11:00 AM per contact's local timezone (use optimal_send_time_utc column)
+  7. Enable reply detection: webhook to n8n (inbox-reply skill auto-fires on every reply)
+  8. Enable open tracking: webhook to n8n (ghost-positive detection)
+  9. Daily send limit: 40 emails per sending domain during warmup; 100+ at full warmup
+ 10. Set sequence step delays matching sequence timing (Email 1 = Day 1, Email 2 = Day 4, etc.)
+
+Pre-launch checklist:
+  ☐ All 62 CSV columns populated (no blanks in required fields)
+  ☐ v_loom_url populated for all Tier 1 contacts (or text fallback confirmed armed)
+  ☐ v_bespoke_opener populated for reply_prob ≥ 70 contacts
+  ☐ proof_person confirmed (Devolon name must be verified before first send — see proof-library.md)
+  ☐ sending_domain column = team.selll.io (verify no row has selll.io)
+  ☐ Campaign variables set in Instantly: sender_name, sender_title, calendar_link
+  ☐ Webhook configured: Instantly → n8n → inbox-reply skill
+  ☐ Pre-engagement Expandi campaign loaded and started (T−3 must start 3 days before Email 1)
+  ☐ HubSpot campaign created and linked to this Instantly campaign (for CRM sync)
+
+Once live: hand off to signal-monitor (passive monitoring) + inbox-reply (webhook-driven).
+Layer 2 is complete. The campaign is live and self-managing.
+```
+
+---
+
 ## Layer 2 Run Log
 
 | Date | Hypothesis | Raw List | After Gates | Tier 1 | Tier 2 | Hit Rate | Bounce Est. | Bespoke List | CSV | Status |

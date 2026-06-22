@@ -132,9 +132,11 @@ Comments cannot be purely automated without losing quality. The system handles t
 
 **How it works:**
 1. For each contact requiring a T−1 comment, Claude generates a substantive 1-sentence comment based on `exec_linkedin_signal` (the post summary from enrichment)
-2. All generated comments are queued in a single review file
+2. All generated comments are queued in a single review file: `engine/comment-queue/[YYYY-MM-DD].md`
 3. Aaron reviews the full queue in **5 minutes** (approve/skip/edit per row)
 4. Approved comments are pushed to Expandi via webhook/API
+
+**Fallback rule (A1):** If the daily comment queue is not reviewed and approved by **6 PM local time**, all pending T−1 comments for that day are automatically skipped. Expandi proceeds to Email 1 on Day 0 without the comment. The campaign send date does NOT move. A missed T−1 comment is acceptable — a delayed Email 1 send is not. The fallback is set in n8n: `comment_approved_by_deadline = false → skip_t1_comment → proceed_to_email_1`.
 
 **Comment generation logic:**
 ```

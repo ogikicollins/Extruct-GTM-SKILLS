@@ -253,12 +253,23 @@ Total videos to record: N | Estimated time: ~N minutes
 
 ### Step 4: Generate Videos via HeyGen API (Primary — Automated)
 
-For each contact in the batch, the system automatically:
+**Video path by reply probability (Tier 1 contacts):**
 
-1. Calls HeyGen API with the personalized script (see `ai-personalization/SKILL.md` Step 5 for full API spec)
-2. HeyGen renders the video using Aaron's avatar + voice: ~2–4 minutes per video, processed in parallel
+| Reply Probability | Path | Script Type | Who Handles |
+|-----------------|------|------------|------------|
+| ≥ 70 | HeyGen API (bespoke) | Claude-generated 3-sentence opener + personalized script | `ai-personalization` skill |
+| 35–69 | HeyGen API (standard) | Standard template script (name, company, proof point only) | This skill (`video-outreach`) |
+| < 35 (Tier 2) | No video | Text-only Email 3 | n/a |
+| > 85 (HOT, replied) | Optional manual Loom | Aaron records personally if contact is actively engaged | Aaron (optional) |
+
+For reply_prob 35–69 contacts, the system automatically:
+
+1. Calls HeyGen API with the standard template script (personalized with name, company, proof point — not a bespoke opener)
+2. HeyGen renders using Aaron's avatar + voice: ~2–4 minutes per video, processed in parallel
 3. Webhook fires on completion: `POST /webhooks/heygen-complete` → n8n writes `v_loom_url` to campaign CSV
-4. Email 3 template in Instantly uses `{{v_loom_url}}` — fires on schedule automatically via Instantly
+4. Email 3 template in Instantly uses `{{v_loom_url}}` — fires on schedule automatically
+
+For reply_prob ≥ 70 contacts: the `ai-personalization` skill has already called HeyGen with a Claude-generated bespoke script. No action needed from this skill — `v_loom_url` is already populated.
 
 **HOT prospect exception (reply_prob > 85):** For these contacts, Aaron records a manual Loom (full screen-share, 90 seconds using templates above) if they haven't replied by Day 7. The HeyGen video serves as a fallback if Loom isn't recorded in time.
 

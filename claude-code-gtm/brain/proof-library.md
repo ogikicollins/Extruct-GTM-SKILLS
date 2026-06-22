@@ -26,6 +26,9 @@ The merge variables in the email sequences map directly to fields in each proof 
 
 ## Proof Point 1: Devolon
 
+> ⚠️ **AARON ACTION REQUIRED — BEFORE ANY LIVE SEND:**
+> `{{proof_person}}` (Devolon VP Sales name) is unconfirmed. Do NOT send any email that uses this proof point until you have confirmed the name. Check with your Devolon contact directly. Update the `{{proof_person}}` variable in this file and in the campaign CSV before first send. Using a wrong name destroys credibility instantly.
+
 ### The Story
 Devolon is a B2B SaaS company, ~60 employees at time of engagement, Series A. Product analytics for mid-market companies. 4-person SDR team running Apollo sequences with a generic ICP that hadn't been updated in 14 months. Outbound was producing 35 conversations per day across the team — far below what the revenue target required.
 
@@ -78,7 +81,7 @@ Holz Concepts is a B2B SaaS company, ~45 employees, 3 months post-Series A. Ente
 | `{{proof_company}}` | Holz Concepts |
 | `{{proof_situation}}` | walked into 3 SDRs on a generic Apollo stack, ICP 18 months outdated, 0.6% reply rate, 90-day board mandate |
 | `{{proof_outcome}}` | 31 qualified meetings in month 2, 4.2% reply rate, hit 90-day board targets |
-| `{{proof_person_quote}}` | "I thought it was going to be another agency telling me my messaging needed work. It wasn't." [paraphrase — confirm with Stefan before using as direct quote] |
+| `{{proof_person_quote}}` | "I thought it was going to be another agency telling me my messaging needed work. It wasn't." [⚠️ PARAPHRASE — Aaron must confirm exact wording with Stefan Golz before using this as a direct quote in any email. A paraphrase must not be presented in quotation marks. If unconfirmed, remove quotes and write: Stefan described it as "not just another agency" — see objection-bank for the framing.] |
 | `{{proof_months_post_raise}}` | 2 (raised Series A 2 months before Stefan joined) |
 
 ### Best For

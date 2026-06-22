@@ -103,7 +103,7 @@ Contact: {{first_name}} {{last_name}}, {{title}} at {{company_name}}
 Hypothesis: {{hypothesis}}
 Company Signal: {{company_trigger}} | Detail: {{v_signal_detail}}
 Their LinkedIn Activity: {{exec_linkedin_signal}}
-Company Stage: {{v_company_stage}} | Headcount: {{employee_count}}
+Company Stage: {{v_company_stage}} | Headcount: {{v_company_size}} (e.g. "65-person")
 Competitor Signal: {{v_competitor_name}} (if any)
 Warm Path: {{warm_path_type}}
 Compound Hypotheses: {{compound_hypotheses}} (if any)

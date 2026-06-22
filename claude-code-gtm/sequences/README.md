@@ -82,14 +82,14 @@ Variables marked ⚠️ require human review before sending — they cannot be a
 | `{{proof_months_post_raise}}` | 2 | proof-library.md (H1 compound only) |
 | `{{proof_person_quote}}` | "I thought it was another agency. It's not." | proof-library.md ⚠️ |
 
-### Loom Variables (must be recorded before launch)
-| Variable | What It Is | Status |
-|----------|-----------|--------|
-| `{{loom_url_company_specific}}` | 4-min Loom personalized to this company | ⚠️ Record before Email 3 sends |
-| `{{loom_url_general}}` | 6-min general system overview | ⚠️ Record once |
-| `{{loom_url_founder}}` | Founder-to-founder Loom | ⚠️ Record once |
+### Video Variables (auto-populated by `ai-personalization` + `video-outreach` skills)
+| Variable | What It Is | How It Gets Filled |
+|----------|-----------|-------------------|
+| `{{v_loom_url}}` | HeyGen AI video URL, personalized per contact | Auto: `ai-personalization` (reply_prob ≥ 70) or `video-outreach` (all Tier 1). Manual Loom override for reply_prob > 85 |
+| `{{loom_url_general}}` | General system overview video | Aaron records once; used for Thread B and Tier 2 contacts |
+| `{{loom_url_founder}}` | Founder-to-founder video | Aaron records once; used in `Founder_v1` sequence |
 
-**Loom rule:** If `{{loom_url_company_specific}}` is not recorded before Day 8 of the sequence, delay Email 3 by 3 days. Never send a Loom email with a blank URL.
+**Video rule:** `{{v_loom_url}}` is auto-populated before Email 3 sends via HeyGen API. If the HeyGen video is not ready by Day 8 send time, Instantly automatically uses the text-only fallback Email 3. Never delay a campaign for a missing video URL — the fallback is always armed.
 
 ---
 

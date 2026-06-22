@@ -1,4 +1,4 @@
-# H5 Campaign Variants — New VP Sales
+﻿# H5 Campaign Variants â€” New VP Sales
 > Hypothesis: H5 | Three distinct angles | Run simultaneously, kill bottom 2 at week 2
 > Framework: See `brain/copywriting-library.md` for psychological basis of each variant
 
@@ -7,24 +7,24 @@
 ## Variant Testing Protocol
 
 Run all three variants simultaneously in Instantly as separate campaigns:
-- `SELLL — H5 — Variant A — Pain-Led — [Date]`
-- `SELLL — H5 — Variant B — Proof-Led — [Date]`
-- `SELLL — H5 — Variant C — Curiosity-Led — [Date]`
+- `SELLL â€” H5 â€” Variant A â€” Pain-Led â€” [Date]`
+- `SELLL â€” H5 â€” Variant B â€” Proof-Led â€” [Date]`
+- `SELLL â€” H5 â€” Variant C â€” Curiosity-Led â€” [Date]`
 
 Split your prospect list evenly: 33% to each variant.
 
 **Kill threshold (2-week review):**
-- Open rate < 25% → subject line problem — rewrite subject, keep body
-- Reply rate < 1.5% → body or CTA problem — test new body against current subject
-- Reply rate > 5% → scale: increase sending volume for this variant
+- Open rate < 25% â†’ subject line problem â€” rewrite subject, keep body
+- Reply rate < 1.5% â†’ body or CTA problem â€” test new body against current subject
+- Reply rate > 5% â†’ scale: increase sending volume for this variant
 
 **Winner protocol:** After week 2, identify winner. Run winner at full volume. Keep one alternative variant running at 20% for ongoing testing.
 
 ---
 
-## Variant A — Pain-Led (PAS Framework)
+## Variant A â€” Pain-Led (PAS Framework)
 
-**Angle:** Lead with the uncomfortable reality. Make the problem vivid before anything else. PAS: Problem → Agitate → Solution-exists.
+**Angle:** Lead with the uncomfortable reality. Make the problem vivid before anything else. PAS: Problem â†’ Agitate â†’ Solution-exists.
 
 **Psychological basis:** People are more motivated by avoiding loss than achieving gain. Name the cost of inaction first.
 
@@ -32,7 +32,7 @@ Split your prospect list evenly: 33% to each variant.
 
 ---
 
-### Variant A — Email 1
+### Variant A â€” Email 1
 
 **Subject:** `The infrastructure {{company_name}} inherited`
 
@@ -41,11 +41,11 @@ Split your prospect list evenly: 33% to each variant.
 
 The ICP your team is working from was probably defined for a company at a different stage.
 
-The sequences were built by the previous team for a different buyer. The {{sdr_count}} SDRs are executing accurately — on targeting logic that was accurate 18 months ago.
+The sequences were built by the previous team for a different buyer. The {{sdr_count}} SDRs are executing accurately â€” on targeting logic that was accurate 18 months ago.
 
 At Day {{days_in_role}}, that gap is invisible in the activity numbers. It becomes visible in month three when the pipeline question comes.
 
-The teams that found it at Day {{days_in_role}} — not month three — almost always hit their 90-day targets.
+The teams that found it at Day {{days_in_role}} â€” not month three â€” almost always hit their 90-day targets.
 
 Is the targeting logic one of the things on your list to revisit?
 
@@ -57,7 +57,7 @@ Is the targeting logic one of the things on your list to revisit?
 
 ---
 
-### Variant A — Email 2
+### Variant A â€” Email 2
 
 **Subject:** `What month three looks like if this isn't fixed`
 
@@ -66,7 +66,7 @@ Is the targeting logic one of the things on your list to revisit?
 
 Here's the quiet risk at {{company_name}} right now.
 
-If the targeting logic hasn't been rebuilt for the current stage, the team will produce activity through month two — opens, connects, some replies. The pipeline number in month one will look like it's building.
+If the targeting logic hasn't been rebuilt for the current stage, the team will produce activity through month two â€” opens, connects, some replies. The pipeline number in month one will look like it's building.
 
 Month three is when the gap shows up as a number, not a feeling. And month three is a harder time to have the infrastructure conversation than month one.
 
@@ -81,23 +81,23 @@ The earlier version of that conversation is easier. Worth 20 minutes to have it 
 
 ---
 
-### Variant A — Emails 3–5
+### Variant A â€” Emails 3â€“5
 
 Use VPSales_v1 Email 3 (Loom), Email 4 (Challenger audit), Email 5 (Exit) with the spintax versions from `spintax-engine.md`.
 
 ---
 
-## Variant B — Proof-Led (Social Proof First)
+## Variant B â€” Proof-Led (Social Proof First)
 
 **Angle:** Lead with the proof point. The most credible thing in the email comes first, not last. Reverse the typical sequence.
 
-**Psychological basis:** Authority and social proof are most powerful when introduced before any claim — not as supporting evidence for a claim. Proof first means the reader evaluates everything through a "this person knows what they're talking about" lens.
+**Psychological basis:** Authority and social proof are most powerful when introduced before any claim â€” not as supporting evidence for a claim. Proof first means the reader evaluates everything through a "this person knows what they're talking about" lens.
 
-**Best for:** Prospects with high contact scores (active LinkedIn, post about the pain) or buying journey stage "Active Evaluation" — they're already comparing options and respond to proof over curiosity.
+**Best for:** Prospects with high contact scores (active LinkedIn, post about the pain) or buying journey stage "Active Evaluation" â€” they're already comparing options and respond to proof over curiosity.
 
 ---
 
-### Variant B — Email 1
+### Variant B â€” Email 1
 
 **Subject:** `31 meetings. Month 2. {{company_size}} company.`
 
@@ -108,23 +108,23 @@ Use VPSales_v1 Email 3 (Loom), Email 4 (Challenger audit), Email 5 (Exit) with t
 
 Setup: {{proof_situation}}.
 
-He didn't add headcount. He didn't change the sequencer. He rebuilt the intelligence layer — what fed the team, not the team itself.
+He didn't add headcount. He didn't change the sequencer. He rebuilt the intelligence layer â€” what fed the team, not the team itself.
 
 {{proof_outcome}}.
 
 I work specifically with VP Sales at {{company_size}} companies in the same window you're in right now. The thing that moved {{proof_company}}'s number is usually the same thing worth looking at first.
 
-What does your current ICP definition look like — is it specific to this stage, or inherited?
+What does your current ICP definition look like â€” is it specific to this stage, or inherited?
 
 {{sender_name}}
 {{sender_title}} | SELLL.io
 ```
 
-**Why this works:** Proof in the first line. Specific setup mirroring their situation. The question at the end is diagnostic — the answer tells us exactly how to follow up.
+**Why this works:** Proof in the first line. Specific setup mirroring their situation. The question at the end is diagnostic â€” the answer tells us exactly how to follow up.
 
 ---
 
-### Variant B — Email 2
+### Variant B â€” Email 2
 
 **Subject:** `The specific thing that moved {{proof_company}}'s number`
 
@@ -133,9 +133,9 @@ What does your current ICP definition look like — is it specific to this stage
 
 The rebuild at {{proof_company}} had three phases. In order of impact:
 
-1. ICP redefinition — rebuilt around the specific trigger signal that predicted a ready-to-buy conversation, not around company type or size
-2. Signal selection — instead of broad outreach, every email went to a company at the specific moment the signal was freshest
-3. Sequence architecture — message addressed the implication of the signal directly, not a generic pain point
+1. ICP redefinition â€” rebuilt around the specific trigger signal that predicted a ready-to-buy conversation, not around company type or size
+2. Signal selection â€” instead of broad outreach, every email went to a company at the specific moment the signal was freshest
+3. Sequence architecture â€” message addressed the implication of the signal directly, not a generic pain point
 
 Same {{sdr_count}}-person team. Same {{sequencer_name}}. {{proof_outcome}}.
 
@@ -148,27 +148,27 @@ I can show you what that looks like for {{company_name}} specifically. 20 minute
 {{calendar_link}}
 ```
 
-**Why this works:** The numbered list is a rare structure in cold email — it signals expertise and specificity. The list names the exact mechanism (not "we improved things") which builds credibility. The fact that it took 3 weeks before any email went out is a differentiator.
+**Why this works:** The numbered list is a rare structure in cold email â€” it signals expertise and specificity. The list names the exact mechanism (not "we improved things") which builds credibility. The fact that it took 3 weeks before any email went out is a differentiator.
 
 ---
 
-### Variant B — Emails 3–5
+### Variant B â€” Emails 3â€“5
 
 Use VPSales_v1 Email 3 (Loom), Email 4 (Challenger), Email 5 (Exit).
 
 ---
 
-## Variant C — Curiosity-Led (Information Gap)
+## Variant C â€” Curiosity-Led (Information Gap)
 
 **Angle:** Never state the insight directly. Create the gap and let the reader close it. Every email leaves something unsaid that compels the next read.
 
-**Psychological basis:** Loewenstein's Information Gap Theory — people experience genuine discomfort when they're aware of a gap in their knowledge. The only way to resolve it is to keep reading or engage with the sender.
+**Psychological basis:** Loewenstein's Information Gap Theory â€” people experience genuine discomfort when they're aware of a gap in their knowledge. The only way to resolve it is to keep reading or engage with the sender.
 
-**Best for:** High-activity LinkedIn contacts, prospects with recent posts, warm path (post engager, 2nd degree connection) — these contacts are curious by nature and respond to intellectual curiosity triggers over pain or proof.
+**Best for:** High-activity LinkedIn contacts, prospects with recent posts, warm path (post engager, 2nd degree connection) â€” these contacts are curious by nature and respond to intellectual curiosity triggers over pain or proof.
 
 ---
 
-### Variant C — Email 1
+### Variant C â€” Email 1
 
 **Subject:** `Something about day {{days_in_role}} at {{company_name}}`
 
@@ -179,21 +179,21 @@ There's one thing about the first 45 days of a new VP Sales role that nobody men
 
 It's not the team. It's not the pipeline. It's not even the product.
 
-It's that the intelligence feeding the motion — who to reach, when to reach them, what to say — was built by someone who was optimising for a different version of the company.
+It's that the intelligence feeding the motion â€” who to reach, when to reach them, what to say â€” was built by someone who was optimising for a different version of the company.
 
 Not wrong. Just not current.
 
-What's your current read on whether the ICP is built for where {{company_name}} is now — or where it was 18 months ago?
+What's your current read on whether the ICP is built for where {{company_name}} is now â€” or where it was 18 months ago?
 
 {{sender_name}}
 {{sender_title}} | SELLL.io
 ```
 
-**Why this works:** "There's one thing nobody mentions" opens a gap immediately. "Not the team. Not the pipeline. Not even the product." — each "not" increases the gap. The reveal ("the intelligence feeding the motion") is specific enough to be credible but abstract enough to prompt a clarifying conversation.
+**Why this works:** "There's one thing nobody mentions" opens a gap immediately. "Not the team. Not the pipeline. Not even the product." â€” each "not" increases the gap. The reveal ("the intelligence feeding the motion") is specific enough to be credible but abstract enough to prompt a clarifying conversation.
 
 ---
 
-### Variant C — Email 2
+### Variant C â€” Email 2
 
 **Subject:** `The thing that almost always explains the gap`
 
@@ -206,7 +206,7 @@ They look at reply rates. At open rates. At the sequences. At what the team is s
 
 The thing that explains the gap almost never lives there.
 
-{{proof_person}} found it in week three. Not in the sequences. Not in the team. In what the sequences were aimed at — and when.
+{{proof_person}} found it in week three. Not in the sequences. Not in the team. In what the sequences were aimed at â€” and when.
 
 {{proof_outcome}}.
 
@@ -217,32 +217,32 @@ I can show you where to look first. 20 minutes?
 {{calendar_link}}
 ```
 
-**Why this works:** The mystery structure — "the thing that almost never lives there" — forces the reader to wonder where it does live. The proof person "found it" builds on the mystery. The meeting ask is framed as showing where to look — not as a sales call.
+**Why this works:** The mystery structure â€” "the thing that almost never lives there" â€” forces the reader to wonder where it does live. The proof person "found it" builds on the mystery. The meeting ask is framed as showing where to look â€” not as a sales call.
 
 ---
 
-### Variant C — Email 3 (Loom — curiosity framing)
+### Variant C â€” Email 3 (Loom â€” curiosity framing)
 
-**Subject:** `I made something for {{company_name}} — the thing I'd look at first`
+**Subject:** `I made something for {{company_name}} â€” the thing I'd look at first`
 
 ```
 {{first_name}},
 
-I put together a 4-minute walkthrough for {{company_name}} — specifically on the one thing I'd audit first at a {{company_size}} company with {{sdr_count}} SDRs in month one.
+I put together a 4-minute walkthrough for {{company_name}} â€” specifically on the one thing I'd audit first at a {{company_size}} company with {{sdr_count}} SDRs in month one.
 
-I'm not going to describe it here — it's easier to show.
+I'm not going to describe it here â€” it's easier to show.
 
-{{loom_url_company_specific}}
+{{v_loom_url}}
 
 {{sender_name}}
 {{sender_title}} | SELLL.io
 ```
 
-**Why this works:** "I'm not going to describe it here" is a powerful curiosity trigger — it's the only email in the entire system that explicitly withholds information and says so. The Loom becomes the reveal.
+**Why this works:** "I'm not going to describe it here" is a powerful curiosity trigger â€” it's the only email in the entire system that explicitly withholds information and says so. The Loom becomes the reveal.
 
 ---
 
-### Variant C — Email 4
+### Variant C â€” Email 4
 
 **Subject:** `The pattern I keep seeing at {{company_size}} companies`
 
@@ -267,9 +267,9 @@ One slot available this week: {{calendar_link}}
 
 ---
 
-### Variant C — Email 5 (Exit — curiosity sustained)
+### Variant C â€” Email 5 (Exit â€” curiosity sustained)
 
-**Subject:** `One last thing — {{company_name}}`
+**Subject:** `One last thing â€” {{company_name}}`
 
 ```
 {{first_name}},
@@ -278,7 +278,7 @@ Last one.
 
 I'll leave you with the question that's behind everything I've sent:
 
-If the ICP at {{company_name}} was rebuilt from scratch tomorrow — based on who's actually converting, at what stage, with what signal — would it look the same as the one the team is working from now?
+If the ICP at {{company_name}} was rebuilt from scratch tomorrow â€” based on who's actually converting, at what stage, with what signal â€” would it look the same as the one the team is working from now?
 
 If the answer is yes: you're in good shape and you don't need us.
 
@@ -289,7 +289,7 @@ If the answer is "I'm not sure": that's the conversation worth having.
 {{calendar_link}}
 ```
 
-**Why this works:** The exit email ends with a diagnostic question instead of a proof point. For the curiosity persona, a question lands harder than a statement. The "if yes, you don't need us" is a permission-structure line that increases trust — it shows confidence and removes pressure simultaneously.
+**Why this works:** The exit email ends with a diagnostic question instead of a proof point. For the curiosity persona, a question lands harder than a statement. The "if yes, you don't need us" is a permission-structure line that increases trust â€” it shows confidence and removes pressure simultaneously.
 
 ---
 

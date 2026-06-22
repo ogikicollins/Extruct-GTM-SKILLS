@@ -22,6 +22,10 @@ Every email reply falls into one of 12 categories. The category determines the e
 | 10. REFERRAL — Sent elsewhere | "you should talk to my colleague [Name] at [Company]" | HIGH: same day | referral intake → account-research → same-day outreach to new contact |
 | 11. FORWARDED — Internal pass | "forwarding to [Name] who handles this" | HIGH: same day | immediate warm follow-up to new contact, reference the forward |
 | 12. GHOST POSITIVE — No text, click only | email opened 3+ times, link clicked, no reply | MEDIUM: 24h | follow-up email referencing action |
+| 13. BOUNCE — Email delivery failure | "mailbox not found", "user unknown", "550 5.1.1" | IMMEDIATE | re-search email via waterfall (Prospeo → FullEnrich) + update CSV |
+| 14. MEETING REQUEST — Direct booking | "can we schedule", "send me a time", "I'll grab a slot", direct Calendly/Cal link click | CRITICAL: <60s | auto-sends calendar link via n8n within 60 seconds (webhook-triggered) |
+
+> **Inbox-reply SKILL.md mapping:** The `inbox-reply` skill (webhook-driven) uses 10 event codes — HOT, WARM, OOO, HARD_NO, NOT_NOW, BOUNCE, REFERRAL, MEETING_REQUEST, OBJECTION, QUESTION. Cross-reference: CONDITIONAL (cat 3) → WARM in inbox-reply; REDIRECT (cat 5) → REFERRAL in inbox-reply; FORWARDED (cat 11) → REFERRAL in inbox-reply. GHOST POSITIVE is detected via separate email-open webhook, not reply classification.
 
 ---
 

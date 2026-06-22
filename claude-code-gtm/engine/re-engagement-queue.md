@@ -116,7 +116,9 @@ SELLL.io
 
 ## Re-Engagement Rules
 
-1. **One email maximum** — if no reply within 14 days, move to `fatigue-suppressed.md` (LinkedIn-only)
+1. **Email volume by trigger type:**
+   - **Template A (trigger condition met) + Template C (signal detected):** 3-email sequence over 10 days — same as `re-engagement/SKILL.md` structure. They know who you are; the trigger earns a full short sequence.
+   - **Template B (date-based, no specific trigger):** 1 email maximum. If no reply within 14 days, move to `fatigue-suppressed.md` (LinkedIn-only). A date alone is not a compelling reason to send 3 emails.
 2. **LinkedIn DM first for ⚡ TRIGGER MET** — Expandi auto-DMs referencing the prior conversation and the new trigger (see `linkedin-automation/SKILL.md` warm path sequence). Email follows 48 hours later via Instantly if no DM reply
 3. **Quote their exact words** — use `{{their_exact_words}}` verbatim. Do not paraphrase. Shows the conversation was remembered
 4. **Dedicated Instantly campaign per trigger type** — re-engagement contacts go into their own isolated Instantly campaign, never mixed with cold sequence contacts. Campaign naming: `SELLL — Re-Engage — [Trigger Type] — [Date]`
