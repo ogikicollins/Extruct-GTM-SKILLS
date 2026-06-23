@@ -1,0 +1,83 @@
+{
+  "name": "selllo-daily-pipeline",
+  "n8n_workflow_id": "kLC4iteOIuvrgo8X",
+  "description": "Weekday morning pipeline brief (06:30 UTC / ~1:30am ET). Pulls all open HubSpot deals, groups by stage, flags deals with no activity >7 days, sends formatted summary to Slack.",
+  "schedule": "06:30 UTC, Monday–Friday",
+  "flow": [
+    "Schedule Trigger (cron: 30 6 * * 1-5)",
+    "HubSpot POST /crm/v3/objects/deals/search (active deals only)",
+    "Code node: group by stage, calculate total value, flag at-risk deals",
+    "Slack: post daily brief with pipeline snapshot and at-risk list"
+  ],
+  "nodes": [
+    {
+      "id": "dp-001",
+      "name": "Daily 0630 UTC",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "30 6 * * 1-5" }]
+        }
+      }
+    },
+    {
+      "id": "dp-002",
+      "name": "HubSpot Get Active Deals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [340, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/deals/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ HUBSPOT_ACCESS_TOKEN }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"dealstage\", \"operator\": \"NEQ\", \"value\": \"closedwon\"}, {\"propertyName\": \"dealstage\", \"operator\": \"NEQ\", \"value\": \"closedlost\"}]}], \"properties\": [\"dealname\", \"amount\", \"dealstage\", \"closedate\", \"hs_lastmodifieddate\", \"hubspot_owner_id\"], \"limit\": 50}"
+      }
+    },
+    {
+      "id": "dp-003",
+      "name": "Build Dashboard Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [580, 300],
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst results = items[0]?.json?.results || [];\n\nconst now = new Date();\nconst today = now.toISOString().split('T')[0];\n\nconst stages = {};\nlet totalValue = 0;\nconst atRisk = [];\n\nfor (const deal of results) {\n  const props = deal.properties;\n  const stage = props.dealstage || 'unknown';\n  const amount = parseFloat(props.amount) || 0;\n  totalValue += amount;\n  \n  if (!stages[stage]) stages[stage] = { count: 0, value: 0 };\n  stages[stage].count++;\n  stages[stage].value += amount;\n  \n  const lastMod = new Date(props.hs_lastmodifieddate);\n  const daysSince = Math.floor((now - lastMod) / (1000 * 60 * 60 * 24));\n  if (daysSince > 7) {\n    atRisk.push(`• ${props.dealname || 'Unnamed'} (${daysSince}d stale)`);\n  }\n}\n\nconst stageLines = Object.entries(stages)\n  .map(([s, d]) => `• ${s}: ${d.count} deal${d.count !== 1 ? 's' : ''} — $${d.value.toLocaleString()}`)\n  .join('\\n');\n\nreturn [{\n  json: {\n    total_deals: results.length,\n    total_value: totalValue.toLocaleString(),\n    at_risk_count: atRisk.length,\n    stage_summary: stageLines || '• No active deals',\n    at_risk_summary: atRisk.slice(0, 5).join('\\n') || '• None — all deals active',\n    date: today\n  }\n}];"
+      }
+    },
+    {
+      "id": "dp-004",
+      "name": "Slack Daily Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [820, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "{{ SLACK_WEBHOOK_URL }}",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\"text\": \":bar_chart: *SELLL Daily Pipeline Brief \\u2014 {{ $json.date }}*\\n\\n*Active Pipeline:* {{ $json.total_deals }} deals \\u2014 ${{ $json.total_value }}\\n\\n*By Stage:*\\n{{ $json.stage_summary }}\\n\\n*At-Risk (>7 days no activity):*\\n{{ $json.at_risk_summary }}\\n\\n_Full pipeline: https://app.hubspot.com/contacts/43603832/deals_\"}"
+      }
+    }
+  ],
+  "connections": {
+    "Daily 0630 UTC": {
+      "main": [[{ "node": "HubSpot Get Active Deals", "type": "main", "index": 0 }]]
+    },
+    "HubSpot Get Active Deals": {
+      "main": [[{ "node": "Build Dashboard Data", "type": "main", "index": 0 }]]
+    },
+    "Build Dashboard Data": {
+      "main": [[{ "node": "Slack Daily Brief", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

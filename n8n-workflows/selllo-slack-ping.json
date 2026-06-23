@@ -1,0 +1,39 @@
+{
+  "name": "selllo-slack-ping",
+  "n8n_workflow_id": "6CY0wJT13YQnZsCT",
+  "description": "Connectivity test — run manually to confirm all engine systems are online. Sends a Slack message to #selll-engine.",
+  "nodes": [
+    {
+      "id": "ping-001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {}
+    },
+    {
+      "id": "ping-002",
+      "name": "Slack Engine Online",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [480, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "{{ SLACK_WEBHOOK_URL }}",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "{\"text\": \":white_check_mark: *SELLL Revenue Engine \\u2014 ONLINE*\\n\\nAll systems go:\\n\\u2022 Apollo.io enrichment: ready\\n\\u2022 Hunter.io verification: ready\\n\\u2022 HubSpot CRM (portal 43603832): ready\\n\\u2022 n8n orchestrator: *this message*\\n\\u2022 Claude API (ADB generation): ready\\n\\u2022 Slack notifications: ready\\n\\n_Awaiting first campaign launch._\"}"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          { "node": "Slack Engine Online", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

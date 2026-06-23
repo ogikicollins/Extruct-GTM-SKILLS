@@ -253,7 +253,7 @@
 | Blocker | Status | Note |
 |---------|--------|------|
 | APOLLO_API_KEY | ✅ Configured | Set in .env — 2026-06-23 |
-| WAALAXY_WEBHOOK_URL | ⚠️ Pending | Replaces Expandi — 80 invites/month free |
+| WAALAXY_WEBHOOK_URL | ⏭️ Skipped for launch | LinkedIn pre-engagement added Week 3 once email campaign is live |
 | LOOM_API_KEY | ⚠️ Pending | Replaces HeyGen — Ghost Positive videos (manual record) |
 | ANTHROPIC_API_KEY | ✅ Configured | sk-ant-api03-* set in .env — 2026-06-23 |
 | HUBSPOT_ACCESS_TOKEN | ✅ Configured | pat-na1-* set in .env |

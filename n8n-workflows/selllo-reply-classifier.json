@@ -1,0 +1,185 @@
+{
+  "name": "selllo-reply-classifier",
+  "n8n_workflow_id": "64rYfLvWsUXJ1j68",
+  "description": "Polls Apollo every 15 min for new replies. Sends reply text to Claude for HOT/WARM/NOT_NOW/NO classification. HOT and WARM replies trigger Slack alerts with summary and next action.",
+  "schedule": "Every 15 minutes",
+  "flow": [
+    "Schedule Trigger (15 min)",
+    "Apollo POST /v1/emailer_messages/search (status=replied)",
+    "Filter: skip if no results",
+    "Split into individual reply items",
+    "Claude claude-sonnet-4-6: classify as HOT/WARM/NOT_NOW/NO",
+    "Parse JSON classification from Claude response",
+    "Switch on classification: HOT → Slack fire alert | WARM → Slack warm alert | others: no action"
+  ],
+  "nodes": [
+    {
+      "id": "rc-001",
+      "name": "Schedule Every 15 Min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "minutes", "minutesInterval": 15 }]
+        }
+      }
+    },
+    {
+      "id": "rc-002",
+      "name": "Apollo Get Replies",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [340, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apollo.io/v1/emailer_messages/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Cache-Control", "value": "no-cache" },
+            { "name": "X-Api-Key", "value": "{{ APOLLO_API_KEY }}" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "{\"status\": [\"replied\"], \"sort_by_field\": \"emailer_message_sent_at\", \"sort_ascending\": false, \"per_page\": 25}"
+      }
+    },
+    {
+      "id": "rc-003",
+      "name": "Filter New Replies Only",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [580, 300],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.emailer_messages && $json.emailer_messages.length > 0 ? 'yes' : 'no' }}",
+              "operation": "equals",
+              "value2": "yes"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "rc-004",
+      "name": "Split Into Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [820, 300],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      }
+    },
+    {
+      "id": "rc-005",
+      "name": "Claude — Classify Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1060, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "{{ ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\"model\": \"claude-sonnet-4-6\", \"max_tokens\": 1024, \"messages\": [{\"role\": \"user\", \"content\": \"You are the SELLL Revenue Engine reply classifier. Analyze this reply and return a JSON object with exactly these fields:\\n\\n{\\n  \\\"classification\\\": \\\"HOT|WARM|NOT_NOW|NO\\\",\\n  \\\"confidence\\\": 0-100,\\n  \\\"summary\\\": \\\"one sentence\\\",\\n  \\\"next_action\\\": \\\"specific recommended action\\\",\\n  \\\"adb_needed\\\": true|false\\n}\\n\\nClassification rules:\\n- HOT: expressed interest, asked questions, requested demo/call, gave positive signals\\n- WARM: soft positive, not ready but open, asked to follow up later\\n- NOT_NOW: timing objection, budget freeze, try again in X weeks/months\\n- NO: hard no, unsubscribe, not relevant, aggressive rejection\\n\\nReply from {{ $json.to_email }} at {{ $json.account_name }}:\\n\\\"{{ $json.body }}\\\"\\n\\nReturn ONLY the JSON object, no other text.\"}]}"
+      }
+    },
+    {
+      "id": "rc-006",
+      "name": "Parse Classification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1300, 300],
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  try {\n    const content = item.json.content[0].text;\n    const parsed = JSON.parse(content);\n    results.push({\n      json: {\n        ...parsed,\n        raw_reply: item.json\n      }\n    });\n  } catch(e) {\n    results.push({\n      json: {\n        classification: 'PARSE_ERROR',\n        confidence: 0,\n        summary: 'Could not parse Claude response',\n        next_action: 'Manual review required',\n        adb_needed: false,\n        error: e.message\n      }\n    });\n  }\n}\n\nreturn results;"
+      }
+    },
+    {
+      "id": "rc-007",
+      "name": "Route by Classification",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [1540, 300],
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ $json.classification }}",
+        "rules": {
+          "values": [
+            { "outputKey": "HOT", "value": "HOT" },
+            { "outputKey": "WARM", "value": "WARM" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "rc-008",
+      "name": "Slack HOT Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1780, 180],
+      "parameters": {
+        "method": "POST",
+        "url": "{{ SLACK_WEBHOOK_URL }}",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\"text\": \":fire: *HOT REPLY DETECTED* :fire:\\n\\n*Contact:* {{ $json.raw_reply.to_email }}\\n*Company:* {{ $json.raw_reply.account_name }}\\n*Confidence:* {{ $json.confidence }}%\\n\\n*Summary:* {{ $json.summary }}\\n*Next action:* {{ $json.next_action }}\\n\\n_Auto-Discovery Brief generating..._\"}"
+      }
+    },
+    {
+      "id": "rc-009",
+      "name": "Slack WARM Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1780, 420],
+      "parameters": {
+        "method": "POST",
+        "url": "{{ SLACK_WEBHOOK_URL }}",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\"text\": \":sunny: *WARM REPLY* \\u2014 nurture required\\n\\n*Contact:* {{ $json.raw_reply.to_email }}\\n*Company:* {{ $json.raw_reply.account_name }}\\n*Confidence:* {{ $json.confidence }}%\\n\\n*Summary:* {{ $json.summary }}\\n*Next action:* {{ $json.next_action }}\"}"
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Every 15 Min": {
+      "main": [[{ "node": "Apollo Get Replies", "type": "main", "index": 0 }]]
+    },
+    "Apollo Get Replies": {
+      "main": [[{ "node": "Filter New Replies Only", "type": "main", "index": 0 }]]
+    },
+    "Filter New Replies Only": {
+      "main": [[{ "node": "Split Into Items", "type": "main", "index": 0 }]]
+    },
+    "Split Into Items": {
+      "main": [[{ "node": "Claude — Classify Reply", "type": "main", "index": 0 }]]
+    },
+    "Claude — Classify Reply": {
+      "main": [[{ "node": "Parse Classification", "type": "main", "index": 0 }]]
+    },
+    "Parse Classification": {
+      "main": [[{ "node": "Route by Classification", "type": "main", "index": 0 }]]
+    },
+    "Route by Classification": {
+      "main": [
+        [{ "node": "Slack HOT Alert", "type": "main", "index": 0 }],
+        [{ "node": "Slack WARM Alert", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
