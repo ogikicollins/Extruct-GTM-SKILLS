@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48" role="img" aria-label="SELLL.io">
+  <defs>
+    <linearGradient id="bar1grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#93C5FD"/>
+    </linearGradient>
+    <linearGradient id="bar2grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="bar3grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: Three ascending revenue bars -->
+  <!-- Bar 1 — short, light -->
+  <rect x="0" y="30" width="9" height="16" rx="2.5" fill="url(#bar1grad)"/>
+  <!-- Bar 2 — medium -->
+  <rect x="13" y="18" width="9" height="28" rx="2.5" fill="url(#bar2grad)"/>
+  <!-- Bar 3 — tall, full blue -->
+  <rect x="26" y="6" width="9" height="40" rx="2.5" fill="url(#bar3grad)"/>
+  <!-- Arrow cap on bar 3 -->
+  <polygon points="26,6 35,6 30.5,0" fill="#1E40AF"/>
+
+  <!-- Thin separator line -->
+  <line x1="48" y1="6" x2="48" y2="44" stroke="#E5E7EB" stroke-width="1.5"/>
+
+  <!-- SELLL wordmark -->
+  <text
+    x="58"
+    y="38"
+    font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif"
+    font-weight="900"
+    font-size="30"
+    fill="#0D0D0D"
+    letter-spacing="-1">SELLL</text>
+
+  <!-- .io — electric blue, lighter weight -->
+  <text
+    x="162"
+    y="38"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-weight="300"
+    font-size="26"
+    fill="#2563EB">.io</text>
+</svg>
