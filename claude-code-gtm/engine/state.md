@@ -175,19 +175,20 @@
 **First list to build:** H5 (New VP Sales Window) — highest urgency, highest meeting conversion rate.
 **Run command:** Ask Claude to run `growthflare-layer-2` skill.
 
-**Blockers before first run:**
-| Blocker | Status |
-|---------|--------|
-| EXTRUCT_API_TOKEN | ⚠️ Pending |
-| PROSPEO_API_KEY | ⚠️ Pending |
-| FULLENRICH_API_KEY | ⚠️ Pending |
-| Sending domain warmup (start NOW — needs 3 weeks) | ⚠️ Not started |
-| INSTANTLY_API_KEY | ⚠️ Pending (needed for Layer 3, but start warmup now) |
-| EXPANDI_API_KEY | ⚠️ Pending — $99/month LinkedIn automation seat for pre-engagement + Thread B |
-| HEYGEN_API_KEY + AARON_AVATAR_ID | ⚠️ Pending — one-time avatar recording required before AI video goes live |
-| ANTHROPIC_API_KEY | ⚠️ Pending — for Claude API (bespoke openers + reply classification) |
-| N8N_INSTANCE | ⚠️ Pending — webhook orchestrator (self-hosted or cloud) for all automation triggers |
-| Backup sending domain | ⚠️ Recommended — start warming a second domain (e.g., mail.selll.io) alongside team.selll.io so CRITICAL urgency accounts have an active send path during the warmup window |
+**Stack confirmed: Free Stack v1.0 (2026-06-23)**
+| Blocker | Status | Tool |
+|---------|--------|------|
+| Sending domain warmup | ✅ In progress | team.selll.io — 21-day minimum |
+| APOLLO_API_KEY | ⚠️ Pending | Apollo.io → Settings → Integrations → API Keys |
+| HUNTER_API_KEY | ⚠️ Pending | hunter.io → Dashboard → API |
+| HUBSPOT_ACCESS_TOKEN | ⚠️ Pending | HubSpot → Settings → Integrations → Private Apps |
+| HUBSPOT_PORTAL_ID | ⚠️ Pending | Visible in any HubSpot URL (app.hubspot.com/contacts/XXXXXXX/) |
+| ANTHROPIC_API_KEY | ⚠️ Pending | console.anthropic.com → API Keys |
+| N8N_INSTANCE_URL | ⚠️ Pending | Deploy n8n on railway.app (free tier) |
+| SLACK_WEBHOOK_URL | ⚠️ Pending | api.slack.com → Apps → Incoming Webhooks |
+| WAALAXY_WEBHOOK_URL | ⚠️ Pending | Waalaxy Chrome extension setup (LinkedIn automation) |
+| PANDADOC_API_KEY | ⚠️ Pending | pandadoc.com → Settings → Integrations → API |
+| DOCUSIGN_INTEGRATION_KEY | ⚠️ Pending | developers.docusign.com → Apps and Keys |
 
 **CRITICAL account path during warmup:** While team.selll.io warms up (3 weeks), CRITICAL urgency accounts (ClearPath-style, <10 days) route to LinkedIn-first via Expandi (DM + connection request) instead of email. This is handled automatically by linkedin-automation skill when sequence_status = "Email Warmup In Progress".
 
@@ -245,20 +246,20 @@
 | video-outreach skill | ✅ Built | `skills/growthflare/video-outreach/SKILL.md` |
 | linkedin-automation skill | ✅ Built | `skills/growthflare/linkedin-automation/SKILL.md` |
 
-### Layer 3 Blockers (same as Layer 2 — resolved together)
+### Layer 3 Blockers (Free Stack v1.0 — 2026-06-23)
 
-| Blocker | Status |
-|---------|--------|
-| INSTANTLY_API_KEY | ⚠️ Pending |
-| EXPANDI_API_KEY | ⚠️ Pending |
-| HEYGEN_API_KEY + AARON_AVATAR_ID + AARON_VOICE_ID | ⚠️ Pending |
-| ANTHROPIC_API_KEY | ⚠️ Pending |
-| HUBSPOT_API_KEY | ⚠️ Pending |
-| N8N_INSTANCE (self-hosted or cloud) | ⚠️ Pending |
-| SLACK_WEBHOOK_URL | ⚠️ Pending |
-| team.selll.io warmup (21 days minimum — START NOW) | ⚠️ Not started |
-| Aaron's Devolon VP Sales name confirmation | ⚠️ Unconfirmed — blocks Devolon sequences |
-| Stefan Golz quote confirmation | ⚠️ Unconfirmed — paraphrase only until confirmed |
+| Blocker | Status | Note |
+|---------|--------|------|
+| APOLLO_API_KEY | ⚠️ Pending | Replaces Instantly — handles sequences + sending |
+| WAALAXY_WEBHOOK_URL | ⚠️ Pending | Replaces Expandi — 80 invites/month free |
+| LOOM_API_KEY | ⚠️ Pending | Replaces HeyGen — Ghost Positive videos (manual record) |
+| ANTHROPIC_API_KEY | ⚠️ Pending | ADB + reply classification |
+| HUBSPOT_ACCESS_TOKEN | ⚠️ Pending | CRM sync (Private App token, not legacy key) |
+| N8N_INSTANCE_URL | ⚠️ Pending | Self-hosted on Railway (free) |
+| SLACK_WEBHOOK_URL | ⚠️ Pending | All engine alerts |
+| team.selll.io warmup | ✅ In progress | 21-day minimum — already running |
+| Aaron's Devolon VP Sales name confirmation | ⚠️ Unconfirmed | Blocks Devolon sequences |
+| Stefan Golz quote confirmation | ⚠️ Unconfirmed | Paraphrase only until confirmed |
 
 ### Active Campaigns
 
