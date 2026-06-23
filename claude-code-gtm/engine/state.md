@@ -185,7 +185,8 @@
 | HUBSPOT_PORTAL_ID | ✅ Configured | 43603832 — set in .env — 2026-06-23 |
 | HUBSPOT_PORTAL_ID | ⚠️ Pending | Visible in any HubSpot URL (app.hubspot.com/contacts/XXXXXXX/) |
 | ANTHROPIC_API_KEY | ⚠️ Pending | console.anthropic.com → API Keys |
-| N8N_INSTANCE_URL | ⚠️ Pending | Deploy n8n on railway.app (free tier) |
+| N8N_INSTANCE_URL | ✅ Configured | https://n8n-production-6b270.up.railway.app — 2026-06-23 |
+| N8N_API_KEY | ✅ Configured | JWT set in .env — expires 2026-09-22 |
 | SLACK_WEBHOOK_URL | ⚠️ Pending | api.slack.com → Apps → Incoming Webhooks |
 | WAALAXY_WEBHOOK_URL | ⚠️ Pending | Waalaxy Chrome extension setup (LinkedIn automation) |
 | PANDADOC_API_KEY | ⚠️ Pending | pandadoc.com → Settings → Integrations → API |
@@ -257,7 +258,8 @@
 | ANTHROPIC_API_KEY | ⚠️ Pending | ADB + reply classification |
 | HUBSPOT_ACCESS_TOKEN | ✅ Configured | pat-na1-* set in .env |
 | HUBSPOT_PORTAL_ID | ✅ Configured | 43603832 — set in .env — 2026-06-23 |
-| N8N_INSTANCE_URL | ⚠️ Pending | Self-hosted on Railway (free) |
+| N8N_INSTANCE_URL | ✅ Configured | https://n8n-production-6b270.up.railway.app — 2026-06-23 |
+| N8N_API_KEY | ✅ Configured | JWT set in .env — expires 2026-09-22, regenerate before then |
 | SLACK_WEBHOOK_URL | ⚠️ Pending | All engine alerts |
 | team.selll.io warmup | ✅ In progress | 21-day minimum — already running |
 | Aaron's Devolon VP Sales name confirmation | ⚠️ Unconfirmed | Blocks Devolon sequences |
