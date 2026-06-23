@@ -179,9 +179,9 @@
 | Blocker | Status | Tool |
 |---------|--------|------|
 | Sending domain warmup | ✅ In progress | team.selll.io — 21-day minimum |
-| APOLLO_API_KEY | ⚠️ Pending | Apollo.io → Settings → Integrations → API Keys |
-| HUNTER_API_KEY | ⚠️ Pending | hunter.io → Dashboard → API |
-| HUBSPOT_ACCESS_TOKEN | ⚠️ Pending | HubSpot → Settings → Integrations → Private Apps |
+| APOLLO_API_KEY | ✅ Configured | Set in .env — 2026-06-23 |
+| HUNTER_API_KEY | ✅ Configured | Set in .env — 2026-06-23 |
+| HUBSPOT_ACCESS_TOKEN | ✅ Configured | pat-na1-* token set in .env — Portal ID still needed |
 | HUBSPOT_PORTAL_ID | ⚠️ Pending | Visible in any HubSpot URL (app.hubspot.com/contacts/XXXXXXX/) |
 | ANTHROPIC_API_KEY | ⚠️ Pending | console.anthropic.com → API Keys |
 | N8N_INSTANCE_URL | ⚠️ Pending | Deploy n8n on railway.app (free tier) |
@@ -250,11 +250,11 @@
 
 | Blocker | Status | Note |
 |---------|--------|------|
-| APOLLO_API_KEY | ⚠️ Pending | Replaces Instantly — handles sequences + sending |
+| APOLLO_API_KEY | ✅ Configured | Set in .env — 2026-06-23 |
 | WAALAXY_WEBHOOK_URL | ⚠️ Pending | Replaces Expandi — 80 invites/month free |
 | LOOM_API_KEY | ⚠️ Pending | Replaces HeyGen — Ghost Positive videos (manual record) |
 | ANTHROPIC_API_KEY | ⚠️ Pending | ADB + reply classification |
-| HUBSPOT_ACCESS_TOKEN | ⚠️ Pending | CRM sync (Private App token, not legacy key) |
+| HUBSPOT_ACCESS_TOKEN | ✅ Configured | pat-na1-* set in .env — Portal ID still needed |
 | N8N_INSTANCE_URL | ⚠️ Pending | Self-hosted on Railway (free) |
 | SLACK_WEBHOOK_URL | ⚠️ Pending | All engine alerts |
 | team.selll.io warmup | ✅ In progress | 21-day minimum — already running |
