@@ -1,6 +1,6 @@
 # Call Queue — SELLL.io
 > Engine Layer: Activation | Updated: 2026-06-21
-> Populated by: `growthflare-layer-2` Phase 5E
+> Populated by: `SELLL-layer-2` Phase 5E
 > Worked by: Aaron (Tier 1 Priority) / SDR (Tier 1 Standard + Tier 2)
 > Rule: Sort by reply probability, highest first. Call within 24h of Email 1 send.
 
@@ -25,7 +25,7 @@ Reply probability determines the call order. The hottest prospects get called fi
 
 ## Call Script Assignment
 
-Scripts are pre-generated in Phase 5E of `growthflare-layer-2` using `skills/growthflare/cold-call/SKILL.md`.
+Scripts are pre-generated in Phase 5E of `SELLL-layer-2` using `skills/selll/cold-call/SKILL.md`.
 
 | Sequence Variant | Day 3 Script Variant |
 |-----------------|---------------------|

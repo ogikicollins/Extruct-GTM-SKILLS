@@ -1,20 +1,20 @@
 ---
 name: revenue-engine
 description: >
-  The Growthflare Revenue Engine — a 100% automated B2B outbound system that
+  The SELLL Revenue Engine — a 100% automated B2B outbound system that
   books and closes deals on autopilot. Orchestrates all GTM skills into a
   single end-to-end pipeline: intelligence → activation → outreach → pipeline
   → close → optimize. Run this when the user wants to launch or run their
   full revenue machine, automate their outbound from scratch, or get a
   step-by-step build plan. Triggers on: "revenue engine", "outbound engine",
-  "build the engine", "automate outbound", "revenue machine", "growthflare",
+  "build the engine", "automate outbound", "revenue machine", "SELLL",
   "full pipeline", "book deals on autopilot", "run the engine", "end to end
   outbound", "launch outbound".
 ---
 
-# Growthflare Revenue Engine
+# SELLL Revenue Engine
 
-> Built by Aaron Shepard, Growthflare — "The machine that sells while you sleep."
+> Built by Aaron Shepard, SELLL — "The machine that sells while you sleep."
 
 The Revenue Engine is the master orchestrator. It does not replace any individual skill — it sequences them, passes outputs between them, tracks state across runs, and ensures nothing falls through the cracks. One command. Six layers. Fully automated.
 
@@ -248,7 +248,7 @@ Every time the user invokes the revenue engine:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                  GROWTHFLARE REVENUE ENGINE             │
+│                  SELLL Revenue Engine             │
 │                        (revenue-engine)                 │
 ├─────────────────────────────────────────────────────────┤
 │  L1: INTELLIGENCE                                       │
@@ -286,7 +286,7 @@ Every time the user invokes the revenue engine:
 
 **Signal-triggered, not schedule-triggered.** Every outreach action is triggered by a real buying signal (job post, funding, leadership change, content engagement). Not a calendar reminder.
 
-**Everything is owned by the client.** After 90 days, the client owns every list, every email template, every campaign, and every system. The engine runs without dependency on Growthflare.
+**Everything is owned by the client.** After 90 days, the client owns every list, every email template, every campaign, and every system. The engine runs without dependency on SELLL.
 
 **Compound results.** Each campaign feeds the next. Hypotheses improve. Lists get tighter. Reply rates compound. Month 3 outperforms Month 1 by design.
 
@@ -361,4 +361,4 @@ Missing any of these? The engine will ask for them during Layer 1 setup.
 
 ---
 
-*Growthflare Revenue Engine — Built to compound. Designed to run without you.*
+*SELLL Revenue Engine — Built to compound. Designed to run without you.*

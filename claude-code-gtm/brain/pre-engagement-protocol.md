@@ -14,7 +14,7 @@ The highest-performing outbound teams don't send cold emails. They send *warm* e
 
 **Effect:** Pre-engaged contacts who receive Email 1 open at ~42–55% vs. ~22–28% cold. Reply rate lift: +15–25%.
 
-**Time investment:** T−3 and T−2 are fully automated via Expandi (zero time). T−1 comments are semi-automated: Claude generates substantive comments queued in `engine/comment-queue/[date].md` — Aaron reviews and approves the full batch in ~5 minutes once per day. See `skills/growthflare/linkedin-automation/SKILL.md` for full Expandi setup.
+**Time investment:** T−3 and T−2 are fully automated via Expandi (zero time). T−1 comments are semi-automated: Claude generates substantive comments queued in `engine/comment-queue/[date].md` — Aaron reviews and approves the full batch in ~5 minutes once per day. See `skills/selll/linkedin-automation/SKILL.md` for full Expandi setup.
 
 ---
 
@@ -125,7 +125,7 @@ Every pre-engagement action is also an intelligence signal:
 
 ## Volume Management
 
-Pre-engagement is handled automatically by Expandi (see `skills/growthflare/linkedin-automation/SKILL.md`). Expandi enforces LinkedIn-safe volume limits and runs the T−3/T−2 steps without any manual action. The system automatically staggers follow and like actions across the campaign window.
+Pre-engagement is handled automatically by Expandi (see `skills/selll/linkedin-automation/SKILL.md`). Expandi enforces LinkedIn-safe volume limits and runs the T−3/T−2 steps without any manual action. The system automatically staggers follow and like actions across the campaign window.
 
 **Only Aaron action required:** Approve the daily comment queue (`engine/comment-queue/[date].md`) — ~5 minutes once per day. This is the only remaining human touch in the pre-engagement flow.
 

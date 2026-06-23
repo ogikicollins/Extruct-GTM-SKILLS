@@ -1,5 +1,5 @@
 # Engine State — SELLL.io
-> Growthflare Revenue Engine | Last updated: 2026-06-21
+> SELLL Revenue Engine | Last updated: 2026-06-21
 > Read this file before any skill run. Update only the sections your skill owns.
 
 ---
@@ -101,14 +101,14 @@
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Master orchestration skill | ✅ Built v2.0 | `skills/growthflare/layer-2/SKILL.md` — 5 phases, 18 steps |
-| LinkedIn automation skill | ✅ Built | `skills/growthflare/linkedin-automation/SKILL.md` — Expandi, T−3/T−2/T−1 automated, warm path DM, Thread B outreach |
-| AI personalization skill | ✅ Built | `skills/growthflare/ai-personalization/SKILL.md` — Claude API bespoke openers + HeyGen AI video for reply_prob ≥ 70 |
+| Master orchestration skill | ✅ Built v2.0 | `skills/selll/layer-2/SKILL.md` — 5 phases, 18 steps |
+| LinkedIn automation skill | ✅ Built | `skills/selll/linkedin-automation/SKILL.md` — Expandi, T−3/T−2/T−1 automated, warm path DM, Thread B outreach |
+| AI personalization skill | ✅ Built | `skills/selll/ai-personalization/SKILL.md` — Claude API bespoke openers + HeyGen AI video for reply_prob ≥ 70 |
 | Enrichment column specs | ✅ Built v2.0 | `context/b2b-saas/enrichment-columns.md` — 11 base + 6 intelligence + hypothesis-specific |
 | Campaign CSV schema | ✅ Built v2.0 | `csv/campaigns/README.md` — 52-column schema (6 contact/company/intelligence/outreach/personalization/metadata groups) |
 | List building skill | ✅ Ready | `skills/list-building/SKILL.md` |
 | List enrichment skill | ✅ Ready | `skills/list-enrichment/SKILL.md` |
-| Lead scoring skill | ✅ Ready | `skills/growthflare/lead-scoring/SKILL.md` — now 7-dimension |
+| Lead scoring skill | ✅ Ready | `skills/selll/lead-scoring/SKILL.md` — now 7-dimension |
 | People search skill | ✅ Ready | `skills/people-search/SKILL.md` |
 | Email search skill | ✅ Ready | `skills/email-search/SKILL.md` — Prospeo → FullEnrich waterfall |
 | Email verification | ✅ Ready | `skills/email-verification/SKILL.md` — catch-all removal, < 1.5% bounce target |
@@ -173,7 +173,7 @@
 | `engine/re-engagement-queue.md` | Updated: full protocol with 3 re-engagement templates + Prism Analytics seeded |
 
 **First list to build:** H5 (New VP Sales Window) — highest urgency, highest meeting conversion rate.
-**Run command:** Ask Claude to run `growthflare-layer-2` skill.
+**Run command:** Ask Claude to run `SELLL-layer-2` skill.
 
 **Stack confirmed: Free Stack v1.0 (2026-06-23)**
 | Blocker | Status | Tool |
@@ -196,7 +196,7 @@
 
 ## Layer 3: Campaign Execution + Intelligence ✅ BUILT v1.0
 
-> Master skill: `skills/growthflare/layer-3/SKILL.md`
+> Master skill: `skills/selll/layer-3/SKILL.md`
 > Status: Built — awaiting API keys + domain warmup before first live run
 > Aaron's daily time while running: 10 minutes
 
@@ -230,21 +230,21 @@
 
 | Item | Status | File |
 |------|--------|------|
-| Master orchestration skill | ✅ Built | `skills/growthflare/layer-3/SKILL.md` |
-| BIS technical reference | ✅ Built | `skills/growthflare/layer-3/references/behavioral-intent-tracker.md` |
-| CED technical reference | ✅ Built | `skills/growthflare/layer-3/references/compound-engagement-detector.md` |
-| HOT Reply Protocol reference | ✅ Built | `skills/growthflare/layer-3/references/hot-reply-protocol.md` |
+| Master orchestration skill | ✅ Built | `skills/selll/layer-3/SKILL.md` |
+| BIS technical reference | ✅ Built | `skills/selll/layer-3/references/behavioral-intent-tracker.md` |
+| CED technical reference | ✅ Built | `skills/selll/layer-3/references/compound-engagement-detector.md` |
+| HOT Reply Protocol reference | ✅ Built | `skills/selll/layer-3/references/hot-reply-protocol.md` |
 | Campaign coordination directory | ✅ Built | `engine/campaigns/README.md` |
 | inbox-reply skill (webhook) | ✅ Built | `skills/inbox-reply/SKILL.md` |
-| multi-thread skill | ✅ Built | `skills/growthflare/multi-thread/SKILL.md` |
-| meeting-automation skill | ✅ Built | `skills/growthflare/meeting-automation/SKILL.md` |
-| signal-monitor skill | ✅ Built | `skills/growthflare/signal-monitor/SKILL.md` |
-| deal-nurture skill | ✅ Built | `skills/growthflare/deal-nurture/SKILL.md` |
-| revenue-reporting skill | ✅ Built | `skills/growthflare/revenue-reporting/SKILL.md` |
-| re-engagement skill | ✅ Built | `skills/growthflare/re-engagement/SKILL.md` |
-| ai-personalization skill | ✅ Built | `skills/growthflare/ai-personalization/SKILL.md` |
-| video-outreach skill | ✅ Built | `skills/growthflare/video-outreach/SKILL.md` |
-| linkedin-automation skill | ✅ Built | `skills/growthflare/linkedin-automation/SKILL.md` |
+| multi-thread skill | ✅ Built | `skills/selll/multi-thread/SKILL.md` |
+| meeting-automation skill | ✅ Built | `skills/selll/meeting-automation/SKILL.md` |
+| signal-monitor skill | ✅ Built | `skills/selll/signal-monitor/SKILL.md` |
+| deal-nurture skill | ✅ Built | `skills/selll/deal-nurture/SKILL.md` |
+| revenue-reporting skill | ✅ Built | `skills/selll/revenue-reporting/SKILL.md` |
+| re-engagement skill | ✅ Built | `skills/selll/re-engagement/SKILL.md` |
+| ai-personalization skill | ✅ Built | `skills/selll/ai-personalization/SKILL.md` |
+| video-outreach skill | ✅ Built | `skills/selll/video-outreach/SKILL.md` |
+| linkedin-automation skill | ✅ Built | `skills/selll/linkedin-automation/SKILL.md` |
 
 ### Layer 3 Blockers (Free Stack v1.0 — 2026-06-23)
 
@@ -271,7 +271,7 @@
 
 ## Layer 4: Pipeline Intelligence ✅ BUILT v1.0
 
-> Master skill: `skills/growthflare/layer-4/SKILL.md`
+> Master skill: `skills/selll/layer-4/SKILL.md`
 > Deal tracker: `engine/deals.md`
 > Status: Built — awaiting first live campaign for live deal data
 
@@ -290,7 +290,7 @@
 ### Deal Health Score (DHS)
 
 7-dimension deal health score (0-100). Updated daily by n8n `selllo-dhs-update`.
-Reference: `skills/growthflare/layer-4/references/deal-health-scoring.md`
+Reference: `skills/selll/layer-4/references/deal-health-scoring.md`
 
 | Threshold | Status | Auto-Action |
 |-----------|--------|-------------|
@@ -303,11 +303,11 @@ Reference: `skills/growthflare/layer-4/references/deal-health-scoring.md`
 
 | Item | Status | File |
 |------|--------|------|
-| Master orchestration skill | ✅ Built | `skills/growthflare/layer-4/SKILL.md` |
-| Deal Health Scoring reference | ✅ Built | `skills/growthflare/layer-4/references/deal-health-scoring.md` |
+| Master orchestration skill | ✅ Built | `skills/selll/layer-4/SKILL.md` |
+| Deal Health Scoring reference | ✅ Built | `skills/selll/layer-4/references/deal-health-scoring.md` |
 | Live deal tracker | ✅ Built | `engine/deals.md` |
 | Call log | ✅ Built | `engine/call-log.md` |
-| Cold Call amplifier | ✅ Wired in | `skills/growthflare/cold-call/SKILL.md` — Day 3/8 + DHS escalation |
+| Cold Call amplifier | ✅ Wired in | `skills/selll/cold-call/SKILL.md` — Day 3/8 + DHS escalation |
 
 ### Layer 4 n8n Workflows
 
@@ -334,7 +334,7 @@ Reference: `skills/growthflare/layer-4/references/deal-health-scoring.md`
 
 ## Layer 5: Close + Expand ✅ BUILT v1.0
 
-> Master skill: `skills/growthflare/layer-5/SKILL.md`
+> Master skill: `skills/selll/layer-5/SKILL.md`
 > Client tracker: `engine/clients.md`
 > Status: Built — awaiting first deal close for activation
 
@@ -365,12 +365,12 @@ Reference: `skills/growthflare/layer-4/references/deal-health-scoring.md`
 
 | Item | Status | File |
 |------|--------|------|
-| Master orchestration skill | ✅ Built | `skills/growthflare/layer-5/SKILL.md` |
-| Client activation reference | ✅ Built | `skills/growthflare/layer-5/references/client-activation.md` |
-| Expand protocol reference | ✅ Built | `skills/growthflare/layer-5/references/expand-protocol.md` |
+| Master orchestration skill | ✅ Built | `skills/selll/layer-5/SKILL.md` |
+| Client activation reference | ✅ Built | `skills/selll/layer-5/references/client-activation.md` |
+| Expand protocol reference | ✅ Built | `skills/selll/layer-5/references/expand-protocol.md` |
 | Active client tracker | ✅ Built | `engine/clients.md` |
-| Referral engine (wired in) | ✅ Wired in | `skills/growthflare/referral-engine/SKILL.md` — Day 45 arm |
-| Deal nurture (wired in) | ✅ Wired in | `skills/growthflare/deal-nurture/SKILL.md` — all stages |
+| Referral engine (wired in) | ✅ Wired in | `skills/selll/referral-engine/SKILL.md` — Day 45 arm |
+| Deal nurture (wired in) | ✅ Wired in | `skills/selll/deal-nurture/SKILL.md` — all stages |
 
 ### Layer 5 n8n Workflows
 
@@ -398,7 +398,7 @@ Reference: `skills/growthflare/layer-4/references/deal-health-scoring.md`
 
 ## Layer 6: Optimize — Intelligence Flywheel ✅ BUILT v1.0
 
-> Master skill: `skills/growthflare/layer-6/SKILL.md`
+> Master skill: `skills/selll/layer-6/SKILL.md`
 > Status: Built — flywheel starts running with first campaign data
 
 ### Layer 6 Architecture
@@ -429,9 +429,9 @@ Weekly optimization + monthly deep review + quarterly strategy + continuous flyw
 
 | Item | Status | File |
 |------|--------|------|
-| Master orchestration skill | ✅ Built | `skills/growthflare/layer-6/SKILL.md` |
-| Hypothesis optimizer reference | ✅ Built | `skills/growthflare/layer-6/references/hypothesis-optimizer.md` |
-| Engine flywheel reference | ✅ Built | `skills/growthflare/layer-6/references/engine-flywheel.md` |
+| Master orchestration skill | ✅ Built | `skills/selll/layer-6/SKILL.md` |
+| Hypothesis optimizer reference | ✅ Built | `skills/selll/layer-6/references/hypothesis-optimizer.md` |
+| Engine flywheel reference | ✅ Built | `skills/selll/layer-6/references/engine-flywheel.md` |
 
 ### Layer 6 n8n Workflows
 

@@ -477,7 +477,7 @@ What Layer 5 produces that all prior layers depend on.
 ## Section 6: Full 6-Layer Data Architecture
 
 ```
-FULL GROWTHFLARE REVENUE ENGINE — DATA FLOW
+FULL SELLL Revenue Engine — DATA FLOW
 
 LAYER 1: Intelligence
   Files: IDEAL-CUSTOMER-PROFILE.md, hypothesis_set.md, brain/* (25 files)

@@ -3,7 +3,7 @@
 > Template: `brain/account-card-template.md`
 
 One file per active Tier 1 account.
-Created by `growthflare-layer-2` in Step 8 for every Tier 1 account.
+Created by `SELLL-layer-2` in Step 8 for every Tier 1 account.
 Updated by all skills after every touch.
 
 ---

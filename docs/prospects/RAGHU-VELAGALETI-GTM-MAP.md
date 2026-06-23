@@ -1,5 +1,5 @@
 # GTM Revenue Map — Raghu Velagaleti / LocalFeast
-### Discovery Call Brief | Built: 2026-06-23 | Analyst: Growthflare Engine
+### Discovery Call Brief | Built: 2026-06-23 | Analyst: SELLL Engine
 
 > **READ THIS BEFORE THE CALL.**
 > This is not a standard ICP fit. Raghu is a sophisticated technical founder with a
@@ -235,7 +235,7 @@ Tier 1 Priority: generate a full ADB, prep a custom proof pairing, have ROI math
 
 | Item | Value |
 |------|-------|
-| Engagement type | Full Growthflare Revenue Engine build |
+| Engagement type | Full SELLL Revenue Engine build |
 | Setup | $15,000 |
 | Monthly retainer | $3,000/month |
 | Year 1 total | $51,000 |
@@ -307,4 +307,4 @@ Raghu Velagaleti is a Harvard-educated technical founder building LocalFeast as 
 ---
 
 *Research sources: localfeast.co, linkedin.com/in/velagaleti, ZoomInfo (CapSpecialty), Zippia (CapSpecialty revenue/employees), Crunchbase (Raghu Velagaleti), Tracxn (INCEND co-founder record)*
-*Built: 2026-06-23 | Growthflare Revenue Engine — Layer 4 Pre-Call Intelligence*
+*Built: 2026-06-23 | SELLL Revenue Engine — Layer 4 Pre-Call Intelligence*

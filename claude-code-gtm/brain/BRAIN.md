@@ -1,5 +1,5 @@
 # SELLL.io GTM Brain
-> Version 1.0 | Initialized: 2026-06-21 | Architecture: Growthflare × Anfloy
+> Version 1.0 | Initialized: 2026-06-21 | Architecture: SELLL × Anfloy
 
 This is the living intelligence layer of SELLL.io's revenue engine. It is not a static document — it is a thinking, learning, evolving system that gets smarter with every campaign run, every call recorded, every deal won or lost.
 
@@ -222,7 +222,7 @@ The brain is maintained through four regular operations:
 | `brain/verticals/martech.md` | Intelligence | MarTech/SalesTech-specific playbook | Manual |
 | `brain/verticals/devtools.md` | Intelligence | DevTools-specific playbook | Manual |
 | `brain/verticals/data-analytics.md` | Intelligence | Data & Analytics-specific playbook | Manual |
-| `brain/pre-engagement-protocol.md` | Execution | LinkedIn warm-up 48–72h before Email 1 — +15–25% reply rate | growthflare-layer-2 |
+| `brain/pre-engagement-protocol.md` | Execution | LinkedIn warm-up 48–72h before Email 1 — +15–25% reply rate | SELLL-layer-2 |
 | `brain/proof-library.md` | Knowledge | 3 deep proof points with full situation/action/outcome/quote + Loom scripts | deal-nurture, sequences |
 | `brain/sdr-onboarding.md` | Execution | Complete SDR onboarding guide — every SDR operates the engine independently | New SDR hires |
 | `brain/linkedin-content-calendar.md` | Execution | 12 drafted posts for 4-week launch calendar — pre-engagement credibility layer | Aaron (manual publish) |
@@ -239,12 +239,12 @@ The brain is maintained through four regular operations:
 
 | File | Purpose | Created By |
 |------|---------|-----------|
-| `engine/fatigue-suppressed.md` | Contacts never re-sequenced (2+ campaigns, 0 engagement) | growthflare-layer-2 |
+| `engine/fatigue-suppressed.md` | Contacts never re-sequenced (2+ campaigns, 0 engagement) | SELLL-layer-2 |
 | `engine/re-engagement-queue.md` | Warm "not now" contacts with trigger conditions — auto-campaigned via Instantly | signal-monitor → auto |
-| `engine/call-queue.md` | Phone contacts from Prospeo — sorted by reply probability | growthflare-layer-2 Phase 5E |
-| `engine/accounts/` | Per-account cards for every Tier 1 company | growthflare-layer-2 Phase 5D |
+| `engine/call-queue.md` | Phone contacts from Prospeo — sorted by reply probability | SELLL-layer-2 Phase 5E |
+| `engine/accounts/` | Per-account cards for every Tier 1 company | SELLL-layer-2 Phase 5D |
 | `engine/comment-queue/` | Daily LinkedIn comment approval queue (Claude-generated, 5-min Aaron review) | linkedin-automation |
-| `csv/campaigns/` | Verified 52-column CSVs ready for Instantly import | growthflare-layer-2 Phase 5A |
+| `csv/campaigns/` | Verified 52-column CSVs ready for Instantly import | SELLL-layer-2 Phase 5A |
 
 ## Automation Layer (Requires API Keys + Tools)
 

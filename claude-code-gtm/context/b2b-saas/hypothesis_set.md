@@ -72,7 +72,7 @@ These are the specific hypotheses the engine tests in every campaign. Each hypot
 
 **Signal to find:** LinkedIn "Changed Jobs" filter — VP Sales / Head of Sales / VP Revenue started new role < 60 days ago
 **Enrichment column:** `new_vp_hire_days_ago` (target: 15–60 days — enough time to see the mess, not enough time to have a plan)
-**Score modifier:** +15 for hire 1–15 days ago | +12 for 16–30 days | +8 for 31–45 days | +4 for 46–90 days (see `growthflare-layer-2` Phase 2E Dimension 6 for full scoring rubric)
+**Score modifier:** +15 for hire 1–15 days ago | +12 for 16–30 days | +8 for 31–45 days | +4 for 46–90 days (see `SELLL-layer-2` Phase 2E Dimension 6 for full scoring rubric)
 **Urgency threshold:** Contacts ≤ 45 days into role = HIGH/CRITICAL urgency. Contacts 46–90 days still qualify (score +4) but receive MEDIUM urgency treatment. For 46–90 day contacts: do NOT use the `Day {{days_in_role}}` subject line — shift the angle to "the audit most new VPs skip" (Email 4 framing). They've had time to form a plan; the hook changes from urgency to insight.
 **List query:** "VP Sales or Head of Sales LinkedIn profiles that show a new role start date in the last 60 days, at B2B SaaS companies with 25–150 employees"
 **Email hook:** "The first 60 days as a new VP of Sales usually reveals the same things: fragmented tools, sequences nobody's touched in months, an ICP that hasn't been validated, and a team that's lost confidence in outbound."

@@ -62,7 +62,7 @@ Pull from sequencer API. Build a table per active campaign:
 **Industry benchmarks (for context):**
 - Average cold email open rate: 25–35%
 - Average cold email reply rate: 0.5–2%
-- Growthflare target: 3–5% reply rate, ≥ 30% positive reply rate
+- SELLL target: 3–5% reply rate, ≥ 30% positive reply rate
 ```
 
 **Hypothesis Performance Table:**
@@ -238,7 +238,7 @@ Load:
 ### Step 3: Compute all metrics
 
 Run calculations for each section. Flag any metric that:
-- Is more than 50% below the Growthflare benchmark
+- Is more than 50% below the SELLL benchmark
 - Changed by more than 30% week-over-week (positive or negative)
 - Indicates a data quality issue (e.g., 0% open rate = deliverability problem)
 
@@ -266,7 +266,7 @@ Based on the Optimization Actions section:
 
 ## Key Metrics Reference
 
-| Metric | Growthflare Target | Industry Average |
+| Metric | SELLL Target | Industry Average |
 |--------|-------------------|-----------------|
 | Email open rate | 35–55% | 20–30% |
 | Email reply rate | 3–5% | 0.5–1% |

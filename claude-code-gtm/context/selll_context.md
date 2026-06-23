@@ -1,5 +1,5 @@
 # SELLL.io — Master Context File
-> Layer 1: Intelligence | Last updated: 2026-06-21 | Engine: Growthflare × Anfloy Brain Architecture
+> Layer 1: Intelligence | Last updated: 2026-06-21 | Engine: SELLL × Anfloy Brain Architecture
 
 This file is the ICP and company foundation layer. It is read by every skill in the engine. For live execution intelligence — objection counters, discovery questions, reply routing, ROI calculations, competitor positioning, call analysis, tone rules, and learning loops — see the **GTM Brain** at `claude-code-gtm/brain/BRAIN.md`.
 

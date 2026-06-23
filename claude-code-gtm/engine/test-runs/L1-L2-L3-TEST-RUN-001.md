@@ -3,7 +3,7 @@
 > Date: 2026-06-22
 > Hypothesis: H5 (primary) + H1, H4, H7 (compounds detected)
 > Status: SIMULATION — mock data, no live API calls
-> Conducted by: Claude Code (Growthflare Engine)
+> Conducted by: Claude Code (SELLL Engine)
 
 ---
 
@@ -321,7 +321,7 @@ COBALT AI
 
 ### Step 2E — Lead Scoring (7-Dimension Model)
 
-Scoring each company against the exact rubric from `skills/growthflare/layer-2/SKILL.md` → Phase 2E.
+Scoring each company against the exact rubric from `skills/selll/layer-2/SKILL.md` → Phase 2E.
 
 ```
 LEAD SCORING BREAKDOWN

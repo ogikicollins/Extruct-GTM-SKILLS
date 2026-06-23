@@ -1,6 +1,6 @@
 # Enrichment Column Specifications — SELLL.io
 > Layer 2: Activation | Updated: 2026-06-21
-> Used by: `growthflare-layer-2` skill → `list-enrichment` skill → Extruct `research_pro` agent
+> Used by: `SELLL-layer-2` skill → `list-enrichment` skill → Extruct `research_pro` agent
 
 These are the exact column configurations to pass to the `list-enrichment` skill for each hypothesis.
 Always run the BASE COLUMNS first, then add the hypothesis-specific columns on top.

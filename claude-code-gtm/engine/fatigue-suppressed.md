@@ -1,7 +1,7 @@
 # Fatigue-Suppressed Contacts — SELLL.io
 > Engine Layer: Deliverability | Updated: 2026-06-21
 > Managed by: `deliverability-rules.md` → Sequence Fatigue Guard
-> Checked by: `growthflare-layer-2` → Step 6 (before every Instantly import)
+> Checked by: `SELLL-layer-2` → Step 6 (before every Instantly import)
 
 Contacts who have appeared in 2+ SELLL campaigns with zero engagement.
 Never add to cold outreach. LinkedIn-only approach only.

@@ -1,4 +1,4 @@
-# GROWTHFLARE REVENUE ENGINE — DEEP AUDIT REPORT v2.0
+# SELLL Revenue Engine — DEEP AUDIT REPORT v2.0
 > Independent Technical Review | Date: 2026-06-22 | Scope: All 6 Layers + 3 Live Scenario Tests
 > Files read: IDEAL-CUSTOMER-PROFILE.md, hypothesis_set.md, layer-2 through layer-6 SKILL.md files,
 >             l1-l2-bridge.md, engine-flywheel.md, expand-protocol.md, client-activation.md,
@@ -27,7 +27,7 @@ The reduction is not a contradiction — deeper reading surfaces what surface re
 
 ### FINDING 1 — CRITICAL GAP: Referral Path Enters Layer 4 Without ADB Data
 
-**Location:** `skills/growthflare/layer-5/SKILL.md`, Phase 5, Step 5A
+**Location:** `skills/selll/layer-5/SKILL.md`, Phase 5, Step 5A
 
 **Exact text:** "Referred contacts skip Layers 2-3 entirely → enter Layer 4 directly"
 
@@ -82,7 +82,7 @@ within the day. 30 minutes of setup, requires Sales Navigator license.
 
 ### FINDING 3 — PRECISION RISK: CHS NPS Dimension Is Unspecified
 
-**Location:** `skills/growthflare/layer-5/SKILL.md`, CHS scoring table
+**Location:** `skills/selll/layer-5/SKILL.md`, CHS scoring table
 
 **The problem:** "NPS sentiment" is 20/100 points on the CHS. Defined as: "Positive check-in
 language = 20, neutral = 10, concern raised = 0." The `selllo-client-chs-update` n8n workflow
@@ -117,7 +117,7 @@ documentation should be updated everywhere it says "Board Pressure."
 
 ### FINDING 5 — BEFORE-STATE CAPTURE IS NOT ENFORCED AT KICKOFF
 
-**Location:** `skills/growthflare/layer-5/SKILL.md`, Phase 1 Step 1B
+**Location:** `skills/selll/layer-5/SKILL.md`, Phase 1 Step 1B
 
 **The problem:** n8n extracts "client goals, success metrics, key contacts, access status,
 preferred comms" from Aaron's kickoff Slack log. But the before-state data — "current reply rate,
@@ -136,7 +136,7 @@ n8n fires a follow-up: "Before-state not captured for [Company]. Ask in Day 3 ch
 
 ### FINDING 6 — DHS BASELINE IS DISCONNECTED FROM THE SCORING MODEL
 
-**Location:** `skills/growthflare/layer-4/SKILL.md`, Phase 1 Step 1A
+**Location:** `skills/selll/layer-4/SKILL.md`, Phase 1 Step 1A
 
 **The problem:** HOT reply sets DHS to 65. MEETING_REQUEST sets DHS to 70. But running the
 actual 7-dimension formula at deal entry:
@@ -160,7 +160,7 @@ DM/Budget/Champion data is unknown. This is expected. Stall alerts should not fi
 
 ### FINDING 7 — WEEKLY PULL API RISK (CORRECTED)
 
-**Location:** `skills/growthflare/layer-6/SKILL.md`, Phase 1 Step 1A
+**Location:** `skills/selll/layer-6/SKILL.md`, Phase 1 Step 1A
 
 **The problem:** Weekly optimization pull hits 3 live APIs simultaneously (Instantly, HubSpot,
 Expandi) + reads 4 local files. If any single API fails, the report is generated with incomplete

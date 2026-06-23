@@ -1,5 +1,5 @@
 # Re-Engagement Queue — SELLL.io
-> Updated: 2026-06-21 | Checked by: `growthflare-layer-2` Phase 0 Gate 0C
+> Updated: 2026-06-21 | Checked by: `SELLL-layer-2` Phase 0 Gate 0C
 > Actioned by: re-engagement skill | Reviewed: Every Monday
 > Rule: Contacts here are NEVER added to cold sequences. Re-engagement protocol only.
 
