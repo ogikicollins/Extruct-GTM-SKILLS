@@ -255,7 +255,7 @@
 | APOLLO_API_KEY | ✅ Configured | Set in .env — 2026-06-23 |
 | WAALAXY_WEBHOOK_URL | ⚠️ Pending | Replaces Expandi — 80 invites/month free |
 | LOOM_API_KEY | ⚠️ Pending | Replaces HeyGen — Ghost Positive videos (manual record) |
-| ANTHROPIC_API_KEY | ⚠️ Pending | ADB + reply classification |
+| ANTHROPIC_API_KEY | ✅ Configured | sk-ant-api03-* set in .env — 2026-06-23 |
 | HUBSPOT_ACCESS_TOKEN | ✅ Configured | pat-na1-* set in .env |
 | HUBSPOT_PORTAL_ID | ✅ Configured | 43603832 — set in .env — 2026-06-23 |
 | N8N_INSTANCE_URL | ✅ Configured | https://n8n-production-6b270.up.railway.app — 2026-06-23 |
