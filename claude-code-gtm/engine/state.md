@@ -260,7 +260,7 @@
 | HUBSPOT_PORTAL_ID | ✅ Configured | 43603832 — set in .env — 2026-06-23 |
 | N8N_INSTANCE_URL | ✅ Configured | https://n8n-production-6b270.up.railway.app — 2026-06-23 |
 | N8N_API_KEY | ✅ Configured | JWT set in .env — expires 2026-09-22, regenerate before then |
-| SLACK_WEBHOOK_URL | ⚠️ Pending | All engine alerts |
+| SLACK_WEBHOOK_URL | ✅ Configured | hooks.slack.com/services/T08DG5* — set in .env — 2026-06-23 |
 | team.selll.io warmup | ✅ In progress | 21-day minimum — already running |
 | Aaron's Devolon VP Sales name confirmation | ⚠️ Unconfirmed | Blocks Devolon sequences |
 | Stefan Golz quote confirmation | ⚠️ Unconfirmed | Paraphrase only until confirmed |
