@@ -1,0 +1,81 @@
+SUBJECT: what we build for MagmaLabs (based on today)
+TO: carlos@magmalabs.io
+FROM: [Your Name] | SELLL.io
+ATTACH: MagmaLabs-Disco-Deck.pptx
+
+---
+
+Carlos,
+
+Three things you said today that I keep coming back to:
+
+1. "Inbound is arriving but it's not converting."
+2. "We're on LinkedIn but we're not really using it."
+3. "Everything is fragmented -- Instagram, some campaigns, but nothing cohesive."
+
+That's not three problems. It's one: you have no signal-triggered system connecting
+what's happening in your buyers' world to a conversation with MagmaLabs.
+
+Here's what that means in practice right now -- today, this week:
+
+-- A Series A founder just closed a round and is posting on LinkedIn
+   about needing to ship faster than his team can staff.
+   No MagmaLabs sequence is firing at him.
+
+-- A new CTO just joined a 40-person SaaS company in their first 30 days.
+   They're auditing vendors, mapping team gaps, looking for a build partner.
+   The 60-day window to be a "day one" relationship is open.
+   Nobody from MagmaLabs is in that conversation.
+
+-- A Rails founder posted this week asking who can help them integrate AI
+   into their codebase. You have the exact service for that --
+   the AI Code Cleanup, the Prototype Studio.
+   There is no sequence pointing at that signal.
+
+These aren't hypotheticals. They happen every single week across your ICP.
+You're on LinkedIn. You're just not reading it.
+
+---
+
+I've updated the deck to reflect exactly what you told me today.
+The most important slides are 3 and 4 -- the diagnosis and the channel mismatch.
+
+Slide 4 is the one I'd start with when you share it internally.
+It shows why Instagram spend is reaching the wrong room entirely,
+and where your buyers actually make vendor decisions.
+
+---
+
+What I'd suggest as a next step:
+
+I can have a one-page build plan specific to MagmaLabs in your inbox
+by [DATE -- tomorrow / end of week].
+
+It will show you:
+-- The exact 4 sequences we'd build for your two ICPs
+   (staff augmentation + AI services -- these need different signals and different copy)
+-- The inbound conversion layer we'd put on magmalabs.io
+-- The LinkedIn signal setup so Carlos gets a daily alert
+   of every trigger event that fired in your ICP overnight
+-- Month 1-3 pipeline projections at conservative and realistic
+
+One question that would make it more specific:
+
+What does a good month look like for MagmaLabs right now in terms of
+new client conversations -- and how far off is that from where you want to be?
+
+That number shapes everything we build.
+
+Reply here or grab 20 minutes:
+selll.io/audit
+
+[Your Name]
+SELLL.io | Signal-Intelligent Revenue Engine
+hello@selll.io | selll.io/audit
+
+---
+P.S. -- The $499 AI Audit I mentioned on the call.
+That's not just a service. It's a door-opener for cold outreach.
+A CTO who doesn't know MagmaLabs will say yes to a $499 audit
+that they'd never say yes to a $20K/month engagement cold.
+We run that sequence as a dedicated channel. It earns the relationship first.
