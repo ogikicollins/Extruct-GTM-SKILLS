@@ -270,7 +270,7 @@ Recommended starting point for you: the {plan.get('tier','')} plan at {plan.get(
 
 Talk soon,
 Aaron
-SELLL.io | cal.com/collins-collins-h1q7yn/30min | hello@selll.io
+SELLL.io | cal.com/collins-ogiki-x4fokk/30min | hello@selll.io
 """
     path = folder / "follow-up-email.txt"
     path.write_text(email.strip(), encoding="utf-8")
@@ -471,7 +471,7 @@ def build_personalized_deck(folder: Path, intel: dict):
             R(sl, x, 3.6, 3.9, 0.98, MID); R(sl, x, 3.6, 3.9, 0.05, GOLD)
             T(sl, icon, x+0.2, 3.72, 3.5, 0.42, 24, bold=True, col=GOLD)
             T(sl, lbl,  x+0.2, 4.14, 3.5, 0.34, 9,  col=LGREY)
-        T(sl, "SELLL.io  |  Signal-Intelligent Revenue Engine  |  cal.com/collins-collins-h1q7yn/30min",
+        T(sl, "SELLL.io  |  Signal-Intelligent Revenue Engine  |  cal.com/collins-ogiki-x4fokk/30min",
           0.55, 7.0, 12.2, 0.38, 9, col=GREY, al=PP_ALIGN.CENTER)
         snum(sl, 1)
 
@@ -560,7 +560,7 @@ def build_personalized_deck(folder: Path, intel: dict):
             T(sl, step, 2.58, y+0.04, 8.2, 0.38, 13, bold=True, col=WHITE)
             T(sl, body, 2.58, y+0.46, 8.2, 0.7,  9,  col=LGREY)
         R(sl, 2.8, 7.0, 7.7, 0.46, GOLD)
-        T(sl, "Ready to start?  Reply to this email or visit  cal.com/collins-collins-h1q7yn/30min",
+        T(sl, "Ready to start?  Reply to this email or visit  cal.com/collins-ogiki-x4fokk/30min",
           2.92, 7.06, 7.46, 0.32, 12, bold=True, col=DARK, al=PP_ALIGN.CENTER)
         snum(sl, 4)
 

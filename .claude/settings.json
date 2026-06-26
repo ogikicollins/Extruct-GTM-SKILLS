@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" -m pip install svglib reportlab -q)",
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" \"C:\\\\Users\\\\COLLIN~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-COLLINS-OGIKI-Desktop-Extruct-GTM-SKILLS\\\\d65f70c4-aefc-4b79-923f-049ab953d08e\\\\scratchpad\\\\convert_icon.py\" 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" -m pip install rlPyCairo -q 2>&1; echo \"exit: $LASTEXITCODE\")",
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" -m pip install rlPyCairo 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" \"C:\\\\Users\\\\COLLIN~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-COLLINS-OGIKI-Desktop-Extruct-GTM-SKILLS\\\\d65f70c4-aefc-4b79-923f-049ab953d08e\\\\scratchpad\\\\convert_icon2.py\" 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" -m pip install numpy -q)",
+      "PowerShell(& \"C:\\\\Users\\\\COLLINS OGIKI\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe\" \"C:\\\\Users\\\\COLLIN~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-COLLINS-OGIKI-Desktop-Extruct-GTM-SKILLS\\\\d65f70c4-aefc-4b79-923f-049ab953d08e\\\\scratchpad\\\\convert_icon3.py\" 2>&1)",
+      "Bash(git commit -m ' *)",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\COLLINS OGIKI\\\\Desktop\\\\Extruct-GTM-SKILLS\\\\SELLL-Engine\\\\magmalabs-gtm-audit.md\" \"C:\\\\Users\\\\COLLINS OGIKI\\\\Desktop\\\\Magma\\\\\")",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\COLLINS OGIKI\\\\Desktop\\\\Extruct-GTM-SKILLS\\\\SELLL-Engine\\\\MagmaLabs-FollowUp-Email.txt\" \"C:\\\\Users\\\\COLLINS OGIKI\\\\Desktop\\\\Magma\\\\\")",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\COLLINS OGIKI\\\\Desktop\\\\Extruct-GTM-SKILLS\\\\SELLL-Engine\\\\MagmaLabs-Disco-Deck.pptx\" \"C:\\\\Users\\\\COLLINS OGIKI\\\\Desktop\\\\Magma\\\\\")",
+      "Bash(sed -i 's|cal.com/collins-collins-h1q7yn/30min|cal.com/collins-ogiki-x4fokk/30min|g' SELLL-Engine/brand/selll-signature-full.jpg)",
+      "Bash(grep -rl \"collins-collins-h1q7yn\" \"C:/Users/COLLIN~1/AppData/Local/Temp/claude/c--Users-COLLINS-OGIKI-Desktop-Extruct-GTM-SKILLS/d65f70c4-aefc-4b79-923f-049ab953d08e/scratchpad/\")",
+      "PowerShell($SCRATCH = \"C:\\\\Users\\\\COLLIN~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-COLLINS-OGIKI-Desktop-Extruct-GTM-SKILLS\\\\d65f70c4-aefc-4b79-923f-049ab953d08e\\\\scratchpad\"; python \"$SCRATCH\\\\convert_icon3.py\")",
+      "Bash(ls /c/Python*)",
+      "Read(//c/Users/COLLIN~1/AppData/Local/Programs/**)",
+      "Read(//c/Users/**)",
+      "Bash(\"/c/Users/COLLINS OGIKI/AppData/Local/Microsoft/WindowsApps/python\" --version)",
+      "Bash(py --version)",
+      "Bash(py3 --version)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\COLLINS OGIKI\\Desktop"
+    ]
+  }
+}
