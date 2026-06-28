@@ -1,0 +1,318 @@
+{
+  "name": "ALIF — Proposal Flow (Calendly → Brief → Proposal)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "alif-proposal-flow",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "c1b2c3d4-0001",
+      "name": "Calendly Booking Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 400],
+      "webhookId": "alif-proposal-flow"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize Calendly webhook payload\nconst event = $json.payload || $json;\nconst invitee = event.invitee || {};\nconst tracking = invitee.tracking || {};\nconst questions = invitee.questions_and_answers || [];\n\n// Extract custom answers from Calendly form\nconst getAnswer = (q) => questions.find(qa => qa.question?.toLowerCase().includes(q.toLowerCase()))?.answer || '';\n\nreturn [{\n  json: {\n    event_type: event.event_type?.name || 'Discovery Call',\n    meeting_time: event.start_time || event.scheduled_event?.start_time || '',\n    meeting_time_formatted: new Date(event.start_time || '').toLocaleString('en-GB', { timeZone: 'Asia/Dubai', weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),\n    prospect_name: invitee.name || '',\n    prospect_first_name: (invitee.name || '').split(' ')[0],\n    prospect_email: invitee.email || '',\n    calendly_uuid: event.uuid || '',\n    company_name: getAnswer('company') || tracking.utm_content || '',\n    role: getAnswer('role') || getAnswer('title') || '',\n    biggest_challenge: getAnswer('challenge') || getAnswer('problem') || '',\n    utm_source: tracking.utm_source || '',\n    utm_medium: tracking.utm_medium || '',\n    utm_campaign: tracking.utm_campaign || '',\n    sequence_id: tracking.utm_campaign || 'unknown',\n    booked_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "c1b2c3d4-0002",
+      "name": "Normalize Calendly Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nubela.co/proxycurl/api/linkedin/company/lookup",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.PROXYCURL_API_KEY }}" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "form",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "company_domain", "value": "={{ $json.prospect_email.split('@')[1] }}" },
+            { "name": "enrich_profiles", "value": "enrich" }
+          ]
+        }
+      },
+      "id": "c1b2c3d4-0003",
+      "name": "Proxycurl — Enrich Company",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 260]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/find?email={{ $json.prospect_email }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+          ]
+        }
+      },
+      "id": "c1b2c3d4-0004",
+      "name": "KommoCRM — Pull Deal Context",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 540]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Merge Calendly + Proxycurl + KommoCRM context\nconst calendly = $('Normalize Calendly Payload').all()[0].json;\nconst company = $('Proxycurl — Enrich Company').all()[0].json || {};\nconst crm = $('KommoCRM — Pull Deal Context').all()[0].json || {};\n\nreturn [{\n  json: {\n    ...calendly,\n    company_description: company.description || '',\n    employee_count: company.company_size || crm.employee_count || '',\n    industry: company.industry || crm.industry || '',\n    tech_stack: crm.tech_stack || '',\n    fb_ads_running: crm.fb_ads_running || false,\n    avg_engagement_rate: crm.avg_engagement_rate || '',\n    icp_segment: crm.icp_segment || '',\n    icp_score: crm.icp_score || '',\n    region: crm.region || 'MENA',\n    signal_type: crm.signal_type || '',\n    signal_date: crm.signal_date || '',\n    decision_maker_linkedin: crm.decision_maker_linkedin || '',\n    kommo_deal_id: crm.deal_id || ''\n  }\n}];"
+      },
+      "id": "c1b2c3d4-0005",
+      "name": "Merge Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 900, system: 'You generate discovery call briefs for Kaya Geha at ALIF Agency Dubai. ALIF is a boutique creative + performance agency. Format in exactly 6 sections with bold headers: 1) Company Snapshot (2 sentences), 2) Why They Booked (signal context + what they said), 3) Likely Pain Points (based on ICP segment and industry), 4) Tech Stack & Ads (what they are running and gaps), 5) Best ALIF Proof Point (most relevant case study: Devolon for tech/D2C, Holz Concepts for retail, Flow Meditation for wellness/lifestyle), 6) Suggested Opening Line (one sentence Kaya can say to open the call). Keep the whole brief under 350 words. Concrete and specific.', messages: [{ role: 'user', content: JSON.stringify({ company_name: $json.company_name, prospect: $json.prospect_name + ', ' + $json.role, region: $json.region, icp_segment: $json.icp_segment, signal_type: $json.signal_type, signal_date: $json.signal_date, industry: $json.industry, employee_count: $json.employee_count, fb_ads_running: $json.fb_ads_running, engagement_rate: $json.avg_engagement_rate, tech_stack: $json.tech_stack, they_said: $json.biggest_challenge, meeting_time: $json.meeting_time_formatted }) }] }) }}"
+      },
+      "id": "c1b2c3d4-0006",
+      "name": "Claude API — Generate Pre-Call Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `📅 *DISCOVERY BOOKED — ${$json.meeting_time_formatted}*\\n\\n*Who:* ${$json.prospect_name} — ${$json.role} @ ${$json.company_name}\\n*Region:* ${$json.region} | *ICP:* ${$json.icp_segment || 'check CRM'} | *Score:* ${$json.icp_score || 'N/A'}\\n\\n*PRE-CALL BRIEF:*\\n${$('Claude API — Generate Pre-Call Brief').all()[0].json.content?.[0]?.text || 'Brief generation failed — check Claude API'}\\n\\n📎 Their Calendly answer: _${$json.biggest_challenge || 'none provided'}_\\n🔗 LinkedIn: ${$json.decision_maker_linkedin || 'not found'}`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "c1b2c3d4-0007",
+      "name": "Slack — Pre-Call Brief to Kaya",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ action: 'update_deal', deal_id: $json.kommo_deal_id, email: $json.prospect_email, fields: { stage: 'discovery_scheduled', discovery_date: $json.meeting_time, calendly_uuid: $json.calendly_uuid } }) }}"
+      },
+      "id": "c1b2c3d4-0008",
+      "name": "KommoCRM — Move to Discovery Scheduled",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 500]
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "hours"
+      },
+      "id": "c1b2c3d4-0009",
+      "name": "Wait 2 Hours (Post-Call Buffer)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1560, 400],
+      "webhookId": "post-call-wait"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `⏰ *POST-CALL CHECK-IN*\\n\\nYour call with *${$json.prospect_name}* @ *${$json.company_name}* was ~2 hours ago.\\n\\nQuick actions:\\n1️⃣ Log discovery score in KommoCRM (Stages → Discovery Held)\\n2️⃣ If qualified (≥4.0): I'll auto-generate the proposal in 30 mins\\n3️⃣ If not qualified: Move to Lost or Nurture\\n\\n📋 Deal: ${$json.kommo_deal_id || 'find in CRM by email'}`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "c1b2c3d4-0010",
+      "name": "Slack — Post-Call Prompt to Kaya",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/deal/{{ $json.kommo_deal_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+          ]
+        }
+      },
+      "id": "c1b2c3d4-0011",
+      "name": "KommoCRM — Check Discovery Score",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1780, 500]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            { "leftValue": "={{ $json.discovery_score }}", "rightValue": 4, "operator": { "type": "number", "operation": "gte" } },
+            { "leftValue": "={{ $json.stage }}", "rightValue": "discovery_held", "operator": { "type": "string", "operation": "equals" } }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "c1b2c3d4-0012",
+      "name": "Qualified? (Score ≥ 4.0)",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [2000, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Select proposal tier and currency based on CRM data\nconst crm = $json;\nconst region = crm.region || 'MENA';\nconst score = crm.icp_score || 60;\nconst segment = crm.icp_segment || 'secondary';\n\nconst currency = region === 'EU' ? 'GBP' : region === 'US' ? 'USD' : 'AED';\nconst currencySymbol = region === 'EU' ? '£' : region === 'US' ? '$' : 'AED';\n\n// Tier recommendation based on ICP score\nconst tier = score >= 85 ? 'Full Partner' : score >= 70 ? 'Growth Retainer' : 'Brand Sprint';\n\n// Pricing in local currency\nconst pricing = {\n  AED: { brand_sprint: 'AED 18,500', growth_retainer: 'AED 12,000/mo', full_partner: 'AED 22,000/mo' },\n  GBP: { brand_sprint: '£4,000', growth_retainer: '£2,500/mo', full_partner: '£4,500/mo' },\n  USD: { brand_sprint: '$5,000', growth_retainer: '$3,000/mo', full_partner: '$5,500/mo' }\n};\n\nconst prices = pricing[currency];\n\n// Match case study to vertical\nconst industry = (crm.industry || '').toLowerCase();\nconst caseStudy = industry.includes('tech') || industry.includes('software') || industry.includes('saas') \n  ? { name: 'Devolon', result: '3x qualified pipeline in 60 days', industry: 'B2B Tech' }\n  : industry.includes('retail') || industry.includes('furniture') || industry.includes('home')\n  ? { name: 'Holz Concepts', result: '40% increase in average order value', industry: 'Premium Retail' }\n  : { name: 'Flow Meditation', result: '2.8x ROAS on Meta within 45 days', industry: 'Wellness / D2C' };\n\nreturn [{\n  json: {\n    ...crm,\n    currency,\n    currency_symbol: currencySymbol,\n    recommended_tier: tier,\n    tier_1_price: prices.brand_sprint,\n    tier_2_price: prices.growth_retainer,\n    tier_3_price: prices.full_partner,\n    case_study_name: caseStudy.name,\n    case_study_result: caseStudy.result,\n    case_study_industry: caseStudy.industry,\n    proposal_date: new Date().toLocaleDateString('en-GB'),\n    expiry_date: new Date(Date.now() + 7 * 86400000).toLocaleDateString('en-GB')\n  }\n}];"
+      },
+      "id": "c1b2c3d4-0013",
+      "name": "Build Proposal Variables",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2220, 500]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pandadoc.com/public/v1/documents",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "API-Key {{ $env.PANDADOC_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ name: 'ALIF Agency — ' + $json.company_name + ' Proposal — ' + $json.proposal_date, template_uuid: $json.currency === 'AED' ? $env.PANDADOC_TEMPLATE_AED : $json.currency === 'GBP' ? $env.PANDADOC_TEMPLATE_GBP : $env.PANDADOC_TEMPLATE_USD, recipients: [{ email: $json.prospect_email, first_name: $json.prospect_first_name, last_name: ($json.prospect_name || '').split(' ').slice(1).join(' '), role: 'Client' }], tokens: [ { name: 'prospect_name', value: $json.prospect_name }, { name: 'company_name', value: $json.company_name }, { name: 'audit_finding_1', value: 'Creative fatigue — current ads have been running 60+ days without refresh' }, { name: 'audit_finding_2', value: 'Website mobile score below 60 — losing paid traffic on mobile checkout' }, { name: 'audit_finding_3', value: 'No consistent brand identity across Instagram + paid channels' }, { name: 'recommended_tier', value: $json.recommended_tier }, { name: 'tier_1_price', value: $json.tier_1_price }, { name: 'tier_2_price', value: $json.tier_2_price }, { name: 'tier_3_price', value: $json.tier_3_price }, { name: 'case_study_industry', value: $json.case_study_industry }, { name: 'case_study_result', value: $json.case_study_result }, { name: 'currency_symbol', value: $json.currency_symbol }, { name: 'proposal_date', value: $json.proposal_date }, { name: 'expiry_date', value: $json.expiry_date } ] }) }}"
+      },
+      "id": "c1b2c3d4-0014",
+      "name": "PandaDoc — Generate Proposal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2440, 500]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `✅ *PROPOSAL GENERATED — Send Now*\\n\\n*To:* ${$json.prospect_name} @ ${$json.company_name}\\n*Recommended Tier:* ${$json.recommended_tier}\\n*Currency:* ${$json.currency}\\n*Prices:* ${$json.tier_1_price} / ${$json.tier_2_price} / ${$json.tier_3_price}\\n*Expires:* ${$json.expiry_date}\\n\\n📄 PandaDoc link sent to your email. Review, personalise if needed, then send from PandaDoc.\\n\\nFollow-up sequence starts automatically 24h after send.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "c1b2c3d4-0015",
+      "name": "Slack — Proposal Ready Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2660, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"ok\", \"message\": \"Calendly booking processed\"}"
+      },
+      "id": "c1b2c3d4-0016",
+      "name": "Respond 200 to Calendly",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [460, 600]
+    }
+  ],
+  "connections": {
+    "Calendly Booking Webhook": {
+      "main": [
+        [
+          { "node": "Normalize Calendly Payload", "type": "main", "index": 0 },
+          { "node": "Respond 200 to Calendly", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Normalize Calendly Payload": {
+      "main": [
+        [
+          { "node": "Proxycurl — Enrich Company", "type": "main", "index": 0 },
+          { "node": "KommoCRM — Pull Deal Context", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Proxycurl — Enrich Company": {
+      "main": [[{ "node": "Merge Context", "type": "main", "index": 0 }]]
+    },
+    "KommoCRM — Pull Deal Context": {
+      "main": [[{ "node": "Merge Context", "type": "main", "index": 0 }]]
+    },
+    "Merge Context": {
+      "main": [[{ "node": "Claude API — Generate Pre-Call Brief", "type": "main", "index": 0 }]]
+    },
+    "Claude API — Generate Pre-Call Brief": {
+      "main": [
+        [
+          { "node": "Slack — Pre-Call Brief to Kaya", "type": "main", "index": 0 },
+          { "node": "KommoCRM — Move to Discovery Scheduled", "type": "main", "index": 0 },
+          { "node": "Wait 2 Hours (Post-Call Buffer)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Wait 2 Hours (Post-Call Buffer)": {
+      "main": [
+        [
+          { "node": "Slack — Post-Call Prompt to Kaya", "type": "main", "index": 0 },
+          { "node": "KommoCRM — Check Discovery Score", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "KommoCRM — Check Discovery Score": {
+      "main": [[{ "node": "Qualified? (Score ≥ 4.0)", "type": "main", "index": 0 }]]
+    },
+    "Qualified? (Score ≥ 4.0)": {
+      "main": [[{ "node": "Build Proposal Variables", "type": "main", "index": 0 }]]
+    },
+    "Build Proposal Variables": {
+      "main": [[{ "node": "PandaDoc — Generate Proposal", "type": "main", "index": 0 }]]
+    },
+    "PandaDoc — Generate Proposal": {
+      "main": [[{ "node": "Slack — Proposal Ready Alert", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "1",
+  "meta": { "instanceId": "alif-revenue-engine" },
+  "id": "alif-proposal-flow",
+  "tags": [{ "name": "ALIF Agency" }, { "name": "Conversion Layer" }]
+}

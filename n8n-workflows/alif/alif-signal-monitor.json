@@ -1,0 +1,214 @@
+{
+  "name": "ALIF — Signal Monitor (Daily 6AM GST)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-0001",
+      "name": "Daily 6AM GST (2AM UTC)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.crunchbase.com/api/v4/searches/organizations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "X-cb-user-key", "value": "={{ $env.CRUNCHBASE_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "{\n  \"field_ids\": [\"identifier\", \"short_description\", \"website_url\", \"employee_count\", \"total_funding_usd\", \"last_funding_type\", \"last_funding_at\", \"location_identifiers\"],\n  \"query\": [\n    { \"type\": \"predicate\", \"field_id\": \"last_funding_at\", \"operator_id\": \"gte\", \"values\": [\"{{ new Date(Date.now() - 86400000).toISOString().split('T')[0] }}\"] },\n    { \"type\": \"predicate\", \"field_id\": \"last_funding_type\", \"operator_id\": \"includes\", \"values\": [\"seed\", \"series_a\", \"series_b\", \"angel\"] },\n    { \"type\": \"predicate\", \"field_id\": \"employee_count\", \"operator_id\": \"between\", \"values\": [\"10\", \"200\"] }\n  ],\n  \"limit\": 25,\n  \"order\": [{ \"field_id\": \"last_funding_at\", \"sort\": \"desc\", \"nulls\": \"last\" }]\n}"
+      },
+      "id": "a1b2c3d4-0002",
+      "name": "Crunchbase — New Funding (Global)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.magnitt.com/v2/startups?sort=funding_date&order=desc&days=1&limit=20",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.MAGNITT_API_KEY }}" }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-0003",
+      "name": "Magnitt — MENA Funding",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 340]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://nubela.co/proxycurl/api/linkedin/company/job",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.PROXYCURL_API_KEY }}" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "{\n  \"keyword\": \"Chief Marketing Officer OR Head of Marketing OR CMO OR VP Marketing\",\n  \"geo_id\": \"104305776,90009706,101282230,90009706\",\n  \"type\": \"changed_jobs\",\n  \"date_posted\": \"past-24h\"\n}"
+      },
+      "id": "a1b2c3d4-0004",
+      "name": "Proxycurl — New CMO Hires (MENA+EU+US)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 480]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.dealroom.co/api/v1/companies?tag=funded&updated_after={{ new Date(Date.now() - 86400000).toISOString().split('T')[0] }}&country_code=GBR,DEU,NLD,SWE&limit=20",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.DEALROOM_API_KEY }}" }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-0005",
+      "name": "Dealroom — EU Funding",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 620]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize and merge all signal sources into a unified company list\nconst crunchbaseItems = $('Crunchbase — New Funding (Global)').all();\nconst magnittItems = $('Magnitt — MENA Funding').all();\nconst proxycurlItems = $('Proxycurl — New CMO Hires (MENA+EU+US)').all();\nconst dealroomItems = $('Dealroom — EU Funding').all();\n\nconst normalized = [];\n\n// Process Crunchbase\nfor (const item of crunchbaseItems) {\n  const entities = item.json?.entities || [];\n  for (const entity of entities) {\n    const props = entity.properties || {};\n    const location = props.location_identifiers?.[0]?.value || '';\n    const region = /UAE|Saudi|Egypt|Qatar|Bahrain|Kuwait|Jordan|Lebanon/.test(location) ? 'MENA' :\n                   /UK|Germany|Netherlands|Sweden|France|Spain|Italy/.test(location) ? 'EU' : 'US';\n    normalized.push({\n      company_name: props.identifier?.value || '',\n      domain: props.website_url?.replace(/https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '') || '',\n      signal_type: 'funding',\n      signal_source: 'Crunchbase',\n      signal_date: props.last_funding_at || new Date().toISOString().split('T')[0],\n      funding_stage: props.last_funding_type || '',\n      employee_count: props.employee_count || '',\n      region: region,\n      description: props.short_description || ''\n    });\n  }\n}\n\n// Process Magnitt (MENA)\nconst magnittData = magnittItems[0]?.json?.data || [];\nfor (const startup of magnittData) {\n  normalized.push({\n    company_name: startup.name || '',\n    domain: startup.website || '',\n    signal_type: 'funding',\n    signal_source: 'Magnitt',\n    signal_date: startup.funding_date || new Date().toISOString().split('T')[0],\n    funding_stage: startup.funding_stage || '',\n    employee_count: startup.team_size || '',\n    region: 'MENA',\n    description: startup.tagline || ''\n  });\n}\n\n// Process Proxycurl CMO hires\nconst cmoPeople = proxycurlItems[0]?.json?.results || [];\nfor (const person of cmoPeople) {\n  normalized.push({\n    company_name: person.company || '',\n    domain: '',\n    signal_type: 'new_cmo',\n    signal_source: 'LinkedIn/Proxycurl',\n    signal_date: new Date().toISOString().split('T')[0],\n    decision_maker_name: person.full_name || '',\n    decision_maker_title: person.job_title || '',\n    decision_maker_linkedin: person.linkedin_url || '',\n    employee_count: '',\n    region: person.location?.includes('UAE') || person.location?.includes('Saudi') ? 'MENA' :\n             person.location?.includes('UK') || person.location?.includes('Germany') ? 'EU' : 'US',\n    description: `${person.full_name} just became ${person.job_title} at ${person.company}`\n  });\n}\n\n// Process Dealroom EU\nconst euCompanies = dealroomItems[0]?.json?.items || [];\nfor (const company of euCompanies) {\n  normalized.push({\n    company_name: company.name || '',\n    domain: company.website || '',\n    signal_type: 'funding',\n    signal_source: 'Dealroom',\n    signal_date: company.updated_at?.split('T')[0] || new Date().toISOString().split('T')[0],\n    funding_stage: company.last_round?.type || '',\n    employee_count: company.employee_count || '',\n    region: 'EU',\n    description: company.tagline || ''\n  });\n}\n\n// Deduplicate by company_name + signal_type\nconst seen = new Set();\nconst deduped = normalized.filter(item => {\n  const key = `${item.company_name.toLowerCase()}_${item.signal_type}`;\n  if (seen.has(key)) return false;\n  seen.add(key);\n  return item.company_name !== '';\n});\n\nconsole.log(`Signal monitor: ${deduped.length} unique signals detected`);\nreturn deduped.map(item => ({ json: item }));"
+      },
+      "id": "a1b2c3d4-0006",
+      "name": "Normalize + Deduplicate Signals",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true },
+          "conditions": [
+            {
+              "id": "filter-domain",
+              "leftValue": "={{ $json.domain }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEmpty" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "a1b2c3d4-0007",
+      "name": "Filter — Domain Required",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [920, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.clay.com/v1/tables/{{ $env.CLAY_TABLE_ID }}/rows",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.CLAY_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ company_name: $json.company_name, domain: $json.domain, signal_type: $json.signal_type, signal_source: $json.signal_source, signal_date: $json.signal_date, region: $json.region, funding_stage: $json.funding_stage, decision_maker_name: $json.decision_maker_name, decision_maker_title: $json.decision_maker_title, decision_maker_linkedin: $json.decision_maker_linkedin, description: $json.description }) }}"
+      },
+      "id": "a1b2c3d4-0008",
+      "name": "Add to Clay Enrichment Queue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1140, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `🔔 *Signal Monitor — ${new Date().toLocaleDateString('en-GB', {day:'2-digit',month:'short'})}*\n${$('Normalize + Deduplicate Signals').all().length} new signals detected:\n• Funding: ${$('Normalize + Deduplicate Signals').all().filter(i => i.json.signal_type === 'funding').length}\n• New CMO: ${$('Normalize + Deduplicate Signals').all().filter(i => i.json.signal_type === 'new_cmo').length}\n• MENA: ${$('Normalize + Deduplicate Signals').all().filter(i => i.json.region === 'MENA').length} | EU: ${$('Normalize + Deduplicate Signals').all().filter(i => i.json.region === 'EU').length} | US: ${$('Normalize + Deduplicate Signals').all().filter(i => i.json.region === 'US').length}\nAll added to Clay enrichment queue. Enriched leads will auto-enter sequences within 2 hours.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "a1b2c3d4-0009",
+      "name": "Slack — Daily Signal Digest to Kaya",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1140, 520]
+    }
+  ],
+  "connections": {
+    "Daily 6AM GST (2AM UTC)": {
+      "main": [
+        [
+          { "node": "Crunchbase — New Funding (Global)", "type": "main", "index": 0 },
+          { "node": "Magnitt — MENA Funding", "type": "main", "index": 0 },
+          { "node": "Proxycurl — New CMO Hires (MENA+EU+US)", "type": "main", "index": 0 },
+          { "node": "Dealroom — EU Funding", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Crunchbase — New Funding (Global)": {
+      "main": [[{ "node": "Normalize + Deduplicate Signals", "type": "main", "index": 0 }]]
+    },
+    "Magnitt — MENA Funding": {
+      "main": [[{ "node": "Normalize + Deduplicate Signals", "type": "main", "index": 0 }]]
+    },
+    "Proxycurl — New CMO Hires (MENA+EU+US)": {
+      "main": [[{ "node": "Normalize + Deduplicate Signals", "type": "main", "index": 0 }]]
+    },
+    "Dealroom — EU Funding": {
+      "main": [[{ "node": "Normalize + Deduplicate Signals", "type": "main", "index": 0 }]]
+    },
+    "Normalize + Deduplicate Signals": {
+      "main": [[{ "node": "Filter — Domain Required", "type": "main", "index": 0 }]]
+    },
+    "Filter — Domain Required": {
+      "main": [
+        [
+          { "node": "Add to Clay Enrichment Queue", "type": "main", "index": 0 },
+          { "node": "Slack — Daily Signal Digest to Kaya", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "1",
+  "meta": { "instanceId": "alif-revenue-engine" },
+  "id": "alif-signal-monitor",
+  "tags": [{ "name": "ALIF Agency" }, { "name": "Signal Layer" }]
+}

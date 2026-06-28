@@ -1,0 +1,269 @@
+{
+  "name": "ALIF — Referral Engine (Day-30 Client Trigger)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * *"
+            }
+          ]
+        }
+      },
+      "id": "d1b2c3d4-0001",
+      "name": "Daily 8AM GST Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 400]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/deals?stage=won_active_client&referral_ask_sent=false&min_deal_age_days=28&max_deal_age_days=32",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+          ]
+        }
+      },
+      "id": "d1b2c3d4-0002",
+      "name": "KommoCRM — Find Day-28-32 Clients",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Split results into individual client records\nconst deals = $json.deals || $json || [];\nif (!Array.isArray(deals) || deals.length === 0) {\n  console.log('No clients in referral window today.');\n  return [];\n}\nconsole.log(`Found ${deals.length} client(s) in referral window.`);\nreturn deals.map(deal => ({\n  json: {\n    deal_id: deal.id || deal.deal_id,\n    client_name: deal.contact_name || deal.client_name || '',\n    client_first_name: (deal.contact_name || deal.client_name || '').split(' ')[0],\n    client_email: deal.contact_email || deal.client_email || '',\n    client_phone: deal.contact_phone || '',\n    company_name: deal.company_name || '',\n    region: deal.region || 'MENA',\n    deal_age_days: deal.deal_age_days || 30,\n    monthly_retainer: deal.monthly_retainer_value || '',\n    client_health: deal.client_health_score || 'Green',\n    icp_segment: deal.icp_segment || ''\n  }\n}));"
+      },
+      "id": "d1b2c3d4-0003",
+      "name": "Split Into Client Items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.client_health }}",
+              "rightValue": "Red",
+              "operator": { "type": "string", "operation": "notEquals" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "d1b2c3d4-0004",
+      "name": "Filter — Skip Unhappy Clients",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "fromEmail": "kaya@alifagency.ai",
+        "toEmail": "={{ $json.client_email }}",
+        "subject": "Quick question, {{ $json.client_first_name }}",
+        "emailType": "text",
+        "message": "Hey {{ $json.client_first_name }},\n\nWe're about a month in — hope the work has been delivering for {{ $json.company_name }}.\n\nI don't do this often, but when I do, I'm direct about it: is there anyone in your network who's dealing with the same challenges you were before we started?\n\nWe're selective about who we take on, so if there's someone you rate, I'm happy to prioritise them.\n\nNo pressure if not — just thought I'd ask.\n\nKaya"
+      },
+      "id": "d1b2c3d4-0005",
+      "name": "Send Referral Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1120, 260]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            { "leftValue": "={{ $json.region }}", "rightValue": "MENA", "operator": { "type": "string", "operation": "equals" } }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "d1b2c3d4-0006",
+      "name": "Is MENA? (WhatsApp Follow)",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [1120, 460]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://live-server-{{ $env.WATI_INSTANCE }}.wati.io/api/v1/sendTemplateMessage",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.WATI_API_TOKEN }}" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ whatsappNumber: $json.client_phone, template_name: 'alif_referral_ask', broadcast_name: 'ALIF_Referral_Month1', parameters: [ { name: '1', value: $json.client_first_name }, { name: '2', value: $json.company_name } ] }) }}"
+      },
+      "id": "d1b2c3d4-0007",
+      "name": "WATI — WhatsApp Referral Ask (MENA)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 460]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ action: 'update_deal', deal_id: $json.deal_id, fields: { referral_ask_sent: true, referral_asks_count: 1 } }) }}"
+      },
+      "id": "d1b2c3d4-0008",
+      "name": "KommoCRM — Mark Referral Ask Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 640]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": "={{ $env.GSHEETS_REFERRAL_TRACKER_ID }}",
+        "sheetName": "Referral Asks",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "values": {
+            "Date": "={{ new Date().toLocaleDateString('en-GB') }}",
+            "Client Name": "={{ $json.client_name }}",
+            "Company": "={{ $json.company_name }}",
+            "Region": "={{ $json.region }}",
+            "Email Sent": "Yes",
+            "WhatsApp Sent": "={{ $json.region === 'MENA' ? 'Yes' : 'No' }}",
+            "Status": "Pending",
+            "Referral Name": "",
+            "Referral Company": "",
+            "Referral Email": "",
+            "Outcome": ""
+          }
+        }
+      },
+      "id": "d1b2c3d4-0009",
+      "name": "Google Sheets — Log Referral Ask",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1340, 640]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `🎯 *REFERRAL ASK SENT — Day ${$json.deal_age_days}*\\n\\n*Client:* ${$json.client_name} @ ${$json.company_name} (${$json.region})\\n*Health:* ${$json.client_health}\\n\\nEmail sent ✅${$json.region === 'MENA' ? ' | WhatsApp sent ✅' : ''}\\nLogged in Google Sheets.\\n\\nIf they introduce someone: add the referral to Instantly Campaign D (Referral Warm) and log in Sheets.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "d1b2c3d4-0010",
+      "name": "Slack — Referral Ask Logged to Kaya",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1560, 400]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 0"
+            }
+          ]
+        }
+      },
+      "id": "d1b2c3d4-0011",
+      "name": "Weekly Sunday 8AM — Referral Status Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 700]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/deals?stage=won_active_client&referral_ask_sent=true&referrals_generated=0&referral_ask_age_days_min=7",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+          ]
+        }
+      },
+      "id": "d1b2c3d4-0012",
+      "name": "KommoCRM — No-Response Referrals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 700]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `📊 *WEEKLY REFERRAL STATUS*\\n\\nClients with no referral response after 7+ days:\\n${($json.deals || []).map(d => `• ${d.client_name} @ ${d.company_name} (asked ${d.referral_ask_age_days}d ago)`).join('\\n') || 'All clients responded or no pending asks.'}\\n\\nConsider a personal WhatsApp follow-up to any MENA clients in this list.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "d1b2c3d4-0013",
+      "name": "Slack — Weekly Referral Digest",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 700]
+    }
+  ],
+  "connections": {
+    "Daily 8AM GST Check": {
+      "main": [[{ "node": "KommoCRM — Find Day-28-32 Clients", "type": "main", "index": 0 }]]
+    },
+    "KommoCRM — Find Day-28-32 Clients": {
+      "main": [[{ "node": "Split Into Client Items", "type": "main", "index": 0 }]]
+    },
+    "Split Into Client Items": {
+      "main": [[{ "node": "Filter — Skip Unhappy Clients", "type": "main", "index": 0 }]]
+    },
+    "Filter — Skip Unhappy Clients": {
+      "main": [
+        [
+          { "node": "Send Referral Email", "type": "main", "index": 0 },
+          { "node": "Is MENA? (WhatsApp Follow)", "type": "main", "index": 0 },
+          { "node": "KommoCRM — Mark Referral Ask Sent", "type": "main", "index": 0 },
+          { "node": "Google Sheets — Log Referral Ask", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Is MENA? (WhatsApp Follow)": {
+      "main": [[{ "node": "WATI — WhatsApp Referral Ask (MENA)", "type": "main", "index": 0 }]]
+    },
+    "Send Referral Email": {
+      "main": [[{ "node": "Slack — Referral Ask Logged to Kaya", "type": "main", "index": 0 }]]
+    },
+    "WATI — WhatsApp Referral Ask (MENA)": {
+      "main": [[{ "node": "Slack — Referral Ask Logged to Kaya", "type": "main", "index": 0 }]]
+    },
+    "Weekly Sunday 8AM — Referral Status Check": {
+      "main": [[{ "node": "KommoCRM — No-Response Referrals", "type": "main", "index": 0 }]]
+    },
+    "KommoCRM — No-Response Referrals": {
+      "main": [[{ "node": "Slack — Weekly Referral Digest", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "1",
+  "meta": { "instanceId": "alif-revenue-engine" },
+  "id": "alif-referral-engine",
+  "tags": [{ "name": "ALIF Agency" }, { "name": "Referral Layer" }]
+}

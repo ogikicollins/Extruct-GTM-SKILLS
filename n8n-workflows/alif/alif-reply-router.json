@@ -1,0 +1,324 @@
+{
+  "name": "ALIF — Reply Router (Real-Time Instantly Webhook)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "alif-reply-router",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "b1b2c3d4-0001",
+      "name": "Instantly Reply Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 400],
+      "webhookId": "alif-reply-router"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract and normalize Instantly reply payload\nconst body = $json;\nreturn [{\n  json: {\n    reply_body: body.email_body || body.reply_text || '',\n    from_email: body.from_email || body.contact_email || '',\n    from_name: body.from_name || '',\n    campaign_id: body.campaign_id || '',\n    sequence_step: body.sequence_step || 1,\n    company_name: body.custom_variables?.company_name || '',\n    decision_maker_title: body.custom_variables?.decision_maker_title || '',\n    region: body.custom_variables?.region || 'US',\n    instagram_handle: body.custom_variables?.instagram_handle || '',\n    signal_type: body.custom_variables?.signal_type || '',\n    instantly_lead_id: body.lead_id || '',\n    received_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "b1b2c3d4-0002",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 100, system: 'You classify email replies into exactly one of four categories: POSITIVE (wants to meet or learn more or asks a genuine question), OBJECTION (pushback or concern but still engaged), NOT_NOW (politely deferring or says busy/later), UNSUBSCRIBE (wants to stop, remove, or unsubscribe). Reply with ONLY the single category word — nothing else.', messages: [{ role: 'user', content: 'Email reply to classify:\\n\\n' + $json.reply_body }] }) }}"
+      },
+      "id": "b1b2c3d4-0003",
+      "name": "Claude API — Classify Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const classification = $json.content?.[0]?.text?.trim().toUpperCase() || 'NOT_NOW';\nconst validCategories = ['POSITIVE', 'OBJECTION', 'NOT_NOW', 'UNSUBSCRIBE'];\nconst cleanClass = validCategories.find(c => classification.includes(c)) || 'NOT_NOW';\n\nreturn [{\n  json: {\n    ...$('Normalize Payload').all()[0].json,\n    reply_classification: cleanClass\n  }\n}];"
+      },
+      "id": "b1b2c3d4-0004",
+      "name": "Extract Classification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "outputKey": "positive",
+              "conditions": {
+                "conditions": [{ "leftValue": "={{ $json.reply_classification }}", "rightValue": "POSITIVE", "operator": { "type": "string", "operation": "equals" } }],
+                "combinator": "and"
+              }
+            },
+            {
+              "outputKey": "objection",
+              "conditions": {
+                "conditions": [{ "leftValue": "={{ $json.reply_classification }}", "rightValue": "OBJECTION", "operator": { "type": "string", "operation": "equals" } }],
+                "combinator": "and"
+              }
+            },
+            {
+              "outputKey": "not_now",
+              "conditions": {
+                "conditions": [{ "leftValue": "={{ $json.reply_classification }}", "rightValue": "NOT_NOW", "operator": { "type": "string", "operation": "equals" } }],
+                "combinator": "and"
+              }
+            },
+            {
+              "outputKey": "unsubscribe",
+              "conditions": {
+                "conditions": [{ "leftValue": "={{ $json.reply_classification }}", "rightValue": "UNSUBSCRIBE", "operator": { "type": "string", "operation": "equals" } }],
+                "combinator": "and"
+              }
+            }
+          ]
+        }
+      },
+      "id": "b1b2c3d4-0005",
+      "name": "Route by Classification",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [1120, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `🟢 *POSITIVE REPLY — ACTION REQUIRED*\\n\\n*From:* ${$json.from_name} (${$json.from_email})\\n*Company:* ${$json.company_name}\\n*Region:* ${$json.region}\\n\\n*Their reply:*\\n_${$json.reply_body.substring(0, 400)}_\\n\\n*Calendly:* ${$env.CALENDLY_LINK}\\n\\n👉 Pause LinkedIn in Expandi for this contact.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "b1b2c3d4-0006",
+      "name": "Slack — Hot Alert to Kaya (Positive)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 140]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.instantly.ai/api/v1/campaign/pause",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.INSTANTLY_API_KEY }}" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ lead_id: $json.instantly_lead_id, campaign_id: $json.campaign_id }) }}"
+      },
+      "id": "b1b2c3d4-0007",
+      "name": "Instantly — Pause Sequence",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 260]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            { "leftValue": "={{ $json.region }}", "rightValue": "MENA", "operator": { "type": "string", "operation": "equals" } }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "b1b2c3d4-0008",
+      "name": "Is MENA?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [1340, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://live-server-{{ $env.WATI_INSTANCE }}.wati.io/api/v1/sendTemplateMessage",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{ $env.WATI_API_TOKEN }}" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ whatsappNumber: $json.from_phone, template_name: 'alif_positive_reply_follow', broadcast_name: 'ALIF_Positive_MENA', parameters: [ { name: '1', value: $json.from_name.split(' ')[0] }, { name: '2', value: $env.CALENDLY_LINK } ] }) }}"
+      },
+      "id": "b1b2c3d4-0009",
+      "name": "WATI — WhatsApp Calendly Link (MENA)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1560, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 350, system: 'You are Kaya Geha, Strategy & Creative Director at ALIF Agency in Dubai. You write short, direct, confident email replies to sales objections. Tone: peer-to-peer, specific, never generic. Max 4 sentences. No subject line — this is a reply body only. No sign-off needed.', messages: [{ role: 'user', content: 'Objection received: ' + $json.reply_body + '\\nProspect company: ' + $json.company_name + '\\nProspect role: ' + $json.decision_maker_title + '\\nWrite a short counter that acknowledges their concern and re-anchors on the specific value ALIF delivers.' }] }) }}"
+      },
+      "id": "b1b2c3d4-0010",
+      "name": "Claude API — Draft Objection Counter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `🟡 *OBJECTION — Draft Counter Ready*\\n\\n*From:* ${$json.from_name} @ ${$json.company_name} (${$json.region})\\n*Their objection:*\\n_${$json.reply_body.substring(0, 300)}_\\n\\n*Suggested counter:*\\n${$('Claude API — Draft Objection Counter').all()[0].json.content?.[0]?.text || 'N/A'}\\n\\n✏️ Edit and send from your inbox.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "b1b2c3d4-0011",
+      "name": "Slack — Objection Counter to Kaya",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1560, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ text: `⏰ *NOT NOW — Moved to Nurture*\\n\\n*From:* ${$json.from_name} @ ${$json.company_name} (${$json.region})\\n*Their reply:*\\n_${$json.reply_body.substring(0, 300)}_\\n\\n📋 KommoCRM updated → Nurture stage. Re-engage timer set +90 days.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+      },
+      "id": "b1b2c3d4-0012",
+      "name": "Slack — Not Now Logged",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 660]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.instantly.ai/api/v1/lead/delete",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": [
+          { "name": "Authorization", "value": "Bearer {{ $env.INSTANTLY_API_KEY }}" }
+        ],
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ lead_email: $json.from_email }) }}"
+      },
+      "id": "b1b2c3d4-0013",
+      "name": "Instantly — Global Suppress",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 800]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.KOMMO_WEBHOOK_URL }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify({ action: 'update_deal_field', email: $json.from_email, fields: { reply_type: $json.reply_classification, reply_date: $json.received_at, stage: $json.reply_classification === 'POSITIVE' ? 'conversation_live' : $json.reply_classification === 'OBJECTION' ? 'conversation_live' : $json.reply_classification === 'NOT_NOW' ? 'nurture' : 'dnc' } }) }}"
+      },
+      "id": "b1b2c3d4-0014",
+      "name": "KommoCRM — Update Stage + Reply Type",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 600]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'ok', classification: $('Extract Classification').all()[0].json.reply_classification }) }}"
+      },
+      "id": "b1b2c3d4-0015",
+      "name": "Respond 200 to Instantly",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1120, 200]
+    }
+  ],
+  "connections": {
+    "Instantly Reply Webhook": {
+      "main": [[{ "node": "Normalize Payload", "type": "main", "index": 0 }]]
+    },
+    "Normalize Payload": {
+      "main": [[{ "node": "Claude API — Classify Reply", "type": "main", "index": 0 }]]
+    },
+    "Claude API — Classify Reply": {
+      "main": [[{ "node": "Extract Classification", "type": "main", "index": 0 }]]
+    },
+    "Extract Classification": {
+      "main": [
+        [
+          { "node": "Route by Classification", "type": "main", "index": 0 },
+          { "node": "KommoCRM — Update Stage + Reply Type", "type": "main", "index": 0 },
+          { "node": "Respond 200 to Instantly", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Route by Classification": {
+      "main": [
+        [
+          { "node": "Slack — Hot Alert to Kaya (Positive)", "type": "main", "index": 0 },
+          { "node": "Instantly — Pause Sequence", "type": "main", "index": 0 },
+          { "node": "Is MENA?", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Claude API — Draft Objection Counter", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Slack — Not Now Logged", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Instantly — Global Suppress", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Is MENA?": {
+      "main": [[{ "node": "WATI — WhatsApp Calendly Link (MENA)", "type": "main", "index": 0 }]]
+    },
+    "Claude API — Draft Objection Counter": {
+      "main": [[{ "node": "Slack — Objection Counter to Kaya", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "1",
+  "meta": { "instanceId": "alif-revenue-engine" },
+  "id": "alif-reply-router",
+  "tags": [{ "name": "ALIF Agency" }, { "name": "Reply Layer" }]
+}
