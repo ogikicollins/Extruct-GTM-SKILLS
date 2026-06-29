@@ -1,4 +1,4 @@
-# ALIF Agency — Revenue Engine Stack
+﻿# ALIF Agency — Revenue Engine Stack
 > SELLL.io GTM Engineering | 2026-06-28
 > Every tool, its role, config spec, API access, and estimated cost
 
@@ -22,7 +22,7 @@
 | Outreach | WATI | WhatsApp Business API (MENA) | $49 |
 | Conversion | Calendly | Meeting scheduling | $12 (Essentials) |
 | Conversion | PandaDoc | Proposal generation + e-sign | $49 (Essentials) |
-| CRM | KommoCRM | Pipeline + deal tracking | Already in use |
+| CRM | Clarify | Pipeline + deal tracking | Already in use |
 | Orchestration | n8n | Webhook orchestrator — all automation | $20 (Cloud Starter) or $0 self-hosted |
 | AI | Anthropic Claude API | Reply classification + content drafts | ~$30–60/month at volume |
 | Reporting | Google Sheets | Pipeline dashboard + case study tracker | $0 |
@@ -241,13 +241,13 @@ GET /api/v1/getMessages → pull conversation history for CRM log
 alif-signal-monitor.json      → Runs 6:00 AM GST daily
 alif-reply-router.json        → Triggered by Instantly webhook (real-time)
 alif-proposal-flow.json       → Triggered by Calendly webhook (real-time)
-alif-referral-engine.json     → Triggered by KommoCRM deal age (daily check)
+alif-referral-engine.json     → Triggered by Clarify deal age (daily check)
 alif-weekly-report.json       → Runs Sunday 8:00 AM GST
 ```
 
 ---
 
-### 6. KommoCRM — Pipeline + Deal Intelligence
+### 6. Clarify — Pipeline + Deal Intelligence
 
 **Role:** Single source of truth for all deals. Already in use by ALIF — configure it as the revenue engine's tracking layer.
 
@@ -301,7 +301,7 @@ alif-weekly-report.json       → Runs Sunday 8:00 AM GST
 
 **Role:** Auto-generates branded proposals from n8n trigger. Three templates (AED, GBP, USD). E-signature capability for fast close.
 
-**Template variables (populated by n8n from KommoCRM):**
+**Template variables (populated by n8n from Clarify):**
 ```
 {{prospect_name}}           → Decision maker name
 {{company_name}}            → Company name
@@ -331,14 +331,14 @@ alif-weekly-report.json       → Runs Sunday 8:00 AM GST
 | Clay | WATI (MENA) | Score ≥ 60 + region = MENA | Phone, WhatsApp template vars |
 | Instantly | n8n | Reply received | reply_body, contact_email, campaign_id |
 | n8n | Claude API | Reply received | reply_body, company context |
-| n8n | KommoCRM | Every stage change | deal_id, stage, contact fields |
+| n8n | Clarify | Every stage change | deal_id, stage, contact fields |
 | n8n | Expandi | Positive reply | Pause campaign for contact |
 | n8n | WATI | Positive reply (MENA) | Calendly link + prospect name |
 | Calendly | n8n | Meeting booked | prospect_email, meeting_time, event_type |
 | n8n | Claude API | Meeting booked | All enrichment fields → pre-call brief |
 | n8n | Slack | Every key event | Brief notification with context |
 | n8n | PandaDoc | Meeting held + 2h | All proposal template vars |
-| KommoCRM | n8n | Deal age = 30 days | deal_id, client_name, client_email |
+| Clarify | n8n | Deal age = 30 days | deal_id, client_name, client_email |
 | n8n | Google Sheets | Weekly | Pipeline metrics, close rates, referrals |
 
 ---
@@ -358,3 +358,4 @@ alif-weekly-report.json       → Runs Sunday 8:00 AM GST
 ---
 
 *Engine Stack — SELLL.io GTM Engineering | ALIF Agency | 2026-06-28*
+

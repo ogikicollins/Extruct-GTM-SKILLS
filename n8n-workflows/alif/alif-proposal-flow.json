@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "ALIF — Proposal Flow (Calendly → Brief → Proposal)",
   "nodes": [
     {
@@ -55,25 +55,25 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/find?email={{ $json.prospect_email }}",
+        "url": "={{ $env.CLARIFY_API_URL }}/find?email={{ $json.prospect_email }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+            { "name": "Authorization", "value": "Bearer {{ $env.CLARIFY_API_KEY }}" }
           ]
         }
       },
       "id": "c1b2c3d4-0004",
-      "name": "KommoCRM — Pull Deal Context",
+      "name": "Clarify — Pull Deal Context",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [680, 540]
     },
     {
       "parameters": {
-        "jsCode": "// Merge Calendly + Proxycurl + KommoCRM context\nconst calendly = $('Normalize Calendly Payload').all()[0].json;\nconst company = $('Proxycurl — Enrich Company').all()[0].json || {};\nconst crm = $('KommoCRM — Pull Deal Context').all()[0].json || {};\n\nreturn [{\n  json: {\n    ...calendly,\n    company_description: company.description || '',\n    employee_count: company.company_size || crm.employee_count || '',\n    industry: company.industry || crm.industry || '',\n    tech_stack: crm.tech_stack || '',\n    fb_ads_running: crm.fb_ads_running || false,\n    avg_engagement_rate: crm.avg_engagement_rate || '',\n    icp_segment: crm.icp_segment || '',\n    icp_score: crm.icp_score || '',\n    region: crm.region || 'MENA',\n    signal_type: crm.signal_type || '',\n    signal_date: crm.signal_date || '',\n    decision_maker_linkedin: crm.decision_maker_linkedin || '',\n    kommo_deal_id: crm.deal_id || ''\n  }\n}];"
+        "jsCode": "// Merge Calendly + Proxycurl + Clarify context\nconst calendly = $('Normalize Calendly Payload').all()[0].json;\nconst company = $('Proxycurl — Enrich Company').all()[0].json || {};\nconst crm = $('Clarify — Pull Deal Context').all()[0].json || {};\n\nreturn [{\n  json: {\n    ...calendly,\n    company_description: company.description || '',\n    employee_count: company.company_size || crm.employee_count || '',\n    industry: company.industry || crm.industry || '',\n    tech_stack: crm.tech_stack || '',\n    fb_ads_running: crm.fb_ads_running || false,\n    avg_engagement_rate: crm.avg_engagement_rate || '',\n    icp_segment: crm.icp_segment || '',\n    icp_score: crm.icp_score || '',\n    region: crm.region || 'MENA',\n    signal_type: crm.signal_type || '',\n    signal_date: crm.signal_date || '',\n    decision_maker_linkedin: crm.decision_maker_linkedin || '',\n    clarify_deal_id: crm.deal_id || ''\n  }\n}];"
       },
       "id": "c1b2c3d4-0005",
       "name": "Merge Context",
@@ -122,13 +122,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}",
+        "url": "={{ $env.CLARIFY_API_URL }}",
         "sendBody": true,
         "bodyContentType": "json",
-        "jsonBody": "={{ JSON.stringify({ action: 'update_deal', deal_id: $json.kommo_deal_id, email: $json.prospect_email, fields: { stage: 'discovery_scheduled', discovery_date: $json.meeting_time, calendly_uuid: $json.calendly_uuid } }) }}"
+        "jsonBody": "={{ JSON.stringify({ action: 'update_deal', deal_id: $json.clarify_deal_id, email: $json.prospect_email, fields: { stage: 'discovery_scheduled', discovery_date: $json.meeting_time, calendly_uuid: $json.calendly_uuid } }) }}"
       },
       "id": "c1b2c3d4-0008",
-      "name": "KommoCRM — Move to Discovery Scheduled",
+      "name": "Clarify — Move to Discovery Scheduled",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [1340, 500]
@@ -151,7 +151,7 @@
         "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
         "sendBody": true,
         "bodyContentType": "json",
-        "jsonBody": "={{ JSON.stringify({ text: `⏰ *POST-CALL CHECK-IN*\\n\\nYour call with *${$json.prospect_name}* @ *${$json.company_name}* was ~2 hours ago.\\n\\nQuick actions:\\n1️⃣ Log discovery score in KommoCRM (Stages → Discovery Held)\\n2️⃣ If qualified (≥4.0): I'll auto-generate the proposal in 30 mins\\n3️⃣ If not qualified: Move to Lost or Nurture\\n\\n📋 Deal: ${$json.kommo_deal_id || 'find in CRM by email'}`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+        "jsonBody": "={{ JSON.stringify({ text: `⏰ *POST-CALL CHECK-IN*\\n\\nYour call with *${$json.prospect_name}* @ *${$json.company_name}* was ~2 hours ago.\\n\\nQuick actions:\\n1️⃣ Log discovery score in Clarify (Stages → Discovery Held)\\n2️⃣ If qualified (≥4.0): I'll auto-generate the proposal in 30 mins\\n3️⃣ If not qualified: Move to Lost or Nurture\\n\\n📋 Deal: ${$json.clarify_deal_id || 'find in CRM by email'}`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
       },
       "id": "c1b2c3d4-0010",
       "name": "Slack — Post-Call Prompt to Kaya",
@@ -162,18 +162,18 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/deal/{{ $json.kommo_deal_id }}",
+        "url": "={{ $env.CLARIFY_API_URL }}/deal/{{ $json.clarify_deal_id }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+            { "name": "Authorization", "value": "Bearer {{ $env.CLARIFY_API_KEY }}" }
           ]
         }
       },
       "id": "c1b2c3d4-0011",
-      "name": "KommoCRM — Check Discovery Score",
+      "name": "Clarify — Check Discovery Score",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [1780, 500]
@@ -266,14 +266,14 @@
       "main": [
         [
           { "node": "Proxycurl — Enrich Company", "type": "main", "index": 0 },
-          { "node": "KommoCRM — Pull Deal Context", "type": "main", "index": 0 }
+          { "node": "Clarify — Pull Deal Context", "type": "main", "index": 0 }
         ]
       ]
     },
     "Proxycurl — Enrich Company": {
       "main": [[{ "node": "Merge Context", "type": "main", "index": 0 }]]
     },
-    "KommoCRM — Pull Deal Context": {
+    "Clarify — Pull Deal Context": {
       "main": [[{ "node": "Merge Context", "type": "main", "index": 0 }]]
     },
     "Merge Context": {
@@ -283,7 +283,7 @@
       "main": [
         [
           { "node": "Slack — Pre-Call Brief to Kaya", "type": "main", "index": 0 },
-          { "node": "KommoCRM — Move to Discovery Scheduled", "type": "main", "index": 0 },
+          { "node": "Clarify — Move to Discovery Scheduled", "type": "main", "index": 0 },
           { "node": "Wait 2 Hours (Post-Call Buffer)", "type": "main", "index": 0 }
         ]
       ]
@@ -292,11 +292,11 @@
       "main": [
         [
           { "node": "Slack — Post-Call Prompt to Kaya", "type": "main", "index": 0 },
-          { "node": "KommoCRM — Check Discovery Score", "type": "main", "index": 0 }
+          { "node": "Clarify — Check Discovery Score", "type": "main", "index": 0 }
         ]
       ]
     },
-    "KommoCRM — Check Discovery Score": {
+    "Clarify — Check Discovery Score": {
       "main": [[{ "node": "Qualified? (Score ≥ 4.0)", "type": "main", "index": 0 }]]
     },
     "Qualified? (Score ≥ 4.0)": {
@@ -316,3 +316,4 @@
   "id": "alif-proposal-flow",
   "tags": [{ "name": "ALIF Agency" }, { "name": "Conversion Layer" }]
 }
+

@@ -1,4 +1,4 @@
-# ALIF Agency — KommoCRM Schema
+# ALIF Agency — Clarify CRM Schema
 > SELLL.io GTM Engineering | 2026-06-28
 > Full pipeline configuration, custom fields, deal scoring, and automation triggers
 
@@ -6,7 +6,7 @@
 
 ## Pipeline Configuration
 
-KommoCRM uses a Kanban-style pipeline. Configure ONE pipeline for ALIF Agency outbound: **"Revenue Engine — Outbound"**
+Clarify uses a Kanban-style pipeline. Configure ONE pipeline for ALIF Agency outbound: **"Revenue Engine — Outbound"**
 
 ### Stage Definitions
 
@@ -138,9 +138,9 @@ Meeting booked                   +30 pts (resets behavioral score — now in dis
 
 ---
 
-## Automation Triggers (KommoCRM → n8n)
+## Automation Triggers (Clarify → n8n)
 
-KommoCRM supports webhook triggers on field changes and stage moves. Configure these in KommoCRM's "Automation" section:
+Clarify supports webhook triggers on field changes and stage moves. Configure these in Clarify's "Automation" section:
 
 ```
 TRIGGER 1: Stage → "Discovery Scheduled"
@@ -164,7 +164,7 @@ TRIGGER 5: Deal Age = 30 days AND Stage = "WON — Active Client"
 
 TRIGGER 6: Stage → "LOST"
   → Webhook to n8n:
-      a) Loss reason required before stage confirms (KommoCRM validation)
+      a) Loss reason required before stage confirms (Clarify validation)
       b) If loss_reason = "Not Now": re_engage_date auto-set (+90 days)
       c) Learning loop: loss pattern logged to Google Sheets
       d) If contact email = suppressed: add to Instantly global suppress
@@ -181,7 +181,7 @@ TRIGGER 8: email_opens ≥ 3 AND reply_type = null AND email_clicks = 0
 
 ---
 
-## Pipeline Views (Configure in KommoCRM)
+## Pipeline Views (Configure in Clarify)
 
 ### View 1: Daily Active Pipeline
 Deals in Stages 1–6, sorted by behavioral_score descending
@@ -234,5 +234,5 @@ Every Sunday at 8:00 AM GST, n8n runs the weekly CRM clean:
 
 ---
 
-*KommoCRM Schema — SELLL.io GTM Engineering | ALIF Agency | 2026-06-28*
+*Clarify CRM Schema — SELLL.io GTM Engineering | ALIF Agency | 2026-06-28*
 *Update whenever a new pipeline stage, field, or automation trigger is added.*

@@ -1,4 +1,4 @@
-# ALIF Agency — Discovery Call Framework
+﻿# ALIF Agency — Discovery Call Framework
 > Built by SELLL.io | 2026-06-28
 > Used by: Kaya Geha (primary closer) on all discovery calls
 > Goal: Qualify the prospect, expose the gap, and set up the proposal — target 35%+ close rate
@@ -159,7 +159,7 @@ Before every call, spend 10 minutes on this:
 
 ## Live Qualification Score
 
-Score during the call. Update in KommoCRM immediately after.
+Score during the call. Update in Clarify immediately after.
 
 | Dimension | Weight | Score (1–5) | Notes |
 |-----------|--------|-------------|-------|
@@ -172,7 +172,7 @@ Score during the call. Update in KommoCRM immediately after.
 **Score interpretation:**
 - 4.0–5.0 → **QUALIFIED** — Send proposal within 24 hours. WhatsApp same day.
 - 3.0–3.9 → **CONDITIONAL** — Identify the one blocker. Address in follow-up within 48 hours. Offer Brand Sprint.
-- 2.0–2.9 → **NURTURE** — Not ready. Add to 60-day signal watch in KommoCRM. Re-engage with content.
+- 2.0–2.9 → **NURTURE** — Not ready. Add to 60-day signal watch in Clarify. Re-engage with content.
 - Below 2.0 → **DISQUALIFY** — Log the reason. Remove from active pipeline.
 
 ---
@@ -228,7 +228,7 @@ After questions 1–7, present the audit findings. This is the turning point in 
 
 ## Post-Call Protocol (2 Hours)
 
-**Step 1 (0–15 min):** Log qualification score and key notes in KommoCRM. Flag the lead stage.
+**Step 1 (0–15 min):** Log qualification score and key notes in Clarify. Flag the lead stage.
 
 **Step 2 (within 1 hour):** Send the post-call WhatsApp:
 > "Great talking [First Name] — sending the proposal tomorrow morning. One thing I'll make sure to include: [specific thing they mentioned matters most]. Anything else to add before I build it?"
@@ -262,7 +262,7 @@ Every proposal from ALIF follows this structure. Mobile-friendly. One page per t
 
 ## Call Intelligence — What to Log After Every Call
 
-After every discovery call, log these in KommoCRM and update the institutional memory:
+After every discovery call, log these in Clarify and update the institutional memory:
 
 1. **Which audit finding resonated most?** (Use this to refine future audit templates)
 2. **What objection came up that isn't in the playbook?** (Add to objection bank)
@@ -274,3 +274,4 @@ After every discovery call, log these in KommoCRM and update the institutional m
 ---
 
 *Discovery framework owned by ALIF Agency. Built by SELLL.io. Calibrate every 30 days based on close rate data — if conversion drops below 30%, review audit presentation and Q14 blocker question.*
+

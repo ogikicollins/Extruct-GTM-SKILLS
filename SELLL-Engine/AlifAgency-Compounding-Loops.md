@@ -1,4 +1,4 @@
-# ALIF Agency — Compounding Intelligence Loops
+﻿# ALIF Agency — Compounding Intelligence Loops
 > SELLL.io GTM Engineering | 2026-06-28
 > How the engine gets smarter every week and compounds pipeline without adding headcount
 
@@ -126,7 +126,7 @@ If LOST deals have proposal_tier = "Full Partner" most often:
 
 ## Loop 5: Content → Pipeline Attribution (Monthly)
 
-**What happens:** Kaya posts LinkedIn content (3×/week) as designed in the GTM strategy. Every new lead captured from LinkedIn (inbound DM, profile view → connection → demo request) is tagged `lead_source = Inbound LinkedIn` in KommoCRM.
+**What happens:** Kaya posts LinkedIn content (3×/week) as designed in the GTM strategy. Every new lead captured from LinkedIn (inbound DM, profile view → connection → demo request) is tagged `lead_source = Inbound LinkedIn` in Clarify.
 
 **The analysis:**
 ```
@@ -280,7 +280,7 @@ The goal is ruthless time allocation. ALIF is a 6-person team. Kaya should not b
 - Approve or override ICP grade before sequence enrollment (30 seconds per lead)
 - Review and send objection counters from Slack queue (5 minutes per reply)
 - Run discovery calls (60 minutes per meeting)
-- Log discovery score in KommoCRM after call (5 minutes)
+- Log discovery score in Clarify after call (5 minutes)
 - Review and send PandaDoc proposals (10 minutes — personalise 1–2 lines)
 - Monthly: Kill/scale sequences based on Sunday digest (30 minutes)
 - Monthly: ICP score calibration review (20 minutes)
@@ -293,3 +293,4 @@ The goal is ruthless time allocation. ALIF is a 6-person team. Kaya should not b
 
 *Compounding Loops — SELLL.io GTM Engineering | ALIF Agency | 2026-06-28*
 *Review monthly. Update loops when close rate crosses threshold in either direction.*
+

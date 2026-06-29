@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "ALIF — Reply Router (Real-Time Instantly Webhook)",
   "nodes": [
     {
@@ -217,7 +217,7 @@
         "url": "https://hooks.slack.com/services/{{ $env.SLACK_WEBHOOK_PATH }}",
         "sendBody": true,
         "bodyContentType": "json",
-        "jsonBody": "={{ JSON.stringify({ text: `⏰ *NOT NOW — Moved to Nurture*\\n\\n*From:* ${$json.from_name} @ ${$json.company_name} (${$json.region})\\n*Their reply:*\\n_${$json.reply_body.substring(0, 300)}_\\n\\n📋 KommoCRM updated → Nurture stage. Re-engage timer set +90 days.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
+        "jsonBody": "={{ JSON.stringify({ text: `⏰ *NOT NOW — Moved to Nurture*\\n\\n*From:* ${$json.from_name} @ ${$json.company_name} (${$json.region})\\n*Their reply:*\\n_${$json.reply_body.substring(0, 300)}_\\n\\n📋 Clarify updated → Nurture stage. Re-engage timer set +90 days.`, channel: $env.SLACK_CHANNEL_KAYA }) }}"
       },
       "id": "b1b2c3d4-0012",
       "name": "Slack — Not Now Logged",
@@ -248,13 +248,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}",
+        "url": "={{ $env.CLARIFY_API_URL }}",
         "sendBody": true,
         "bodyContentType": "json",
         "jsonBody": "={{ JSON.stringify({ action: 'update_deal_field', email: $json.from_email, fields: { reply_type: $json.reply_classification, reply_date: $json.received_at, stage: $json.reply_classification === 'POSITIVE' ? 'conversation_live' : $json.reply_classification === 'OBJECTION' ? 'conversation_live' : $json.reply_classification === 'NOT_NOW' ? 'nurture' : 'dnc' } }) }}"
       },
       "id": "b1b2c3d4-0014",
-      "name": "KommoCRM — Update Stage + Reply Type",
+      "name": "Clarify — Update Stage + Reply Type",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [1120, 600]
@@ -285,7 +285,7 @@
       "main": [
         [
           { "node": "Route by Classification", "type": "main", "index": 0 },
-          { "node": "KommoCRM — Update Stage + Reply Type", "type": "main", "index": 0 },
+          { "node": "Clarify — Update Stage + Reply Type", "type": "main", "index": 0 },
           { "node": "Respond 200 to Instantly", "type": "main", "index": 0 }
         ]
       ]
@@ -322,3 +322,4 @@
   "id": "alif-reply-router",
   "tags": [{ "name": "ALIF Agency" }, { "name": "Reply Layer" }]
 }
+

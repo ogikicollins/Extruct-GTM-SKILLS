@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "ALIF — Referral Engine (Day-30 Client Trigger)",
   "nodes": [
     {
@@ -21,18 +21,18 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/deals?stage=won_active_client&referral_ask_sent=false&min_deal_age_days=28&max_deal_age_days=32",
+        "url": "={{ $env.CLARIFY_API_URL }}/deals?stage=won_active_client&referral_ask_sent=false&min_deal_age_days=28&max_deal_age_days=32",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+            { "name": "Authorization", "value": "Bearer {{ $env.CLARIFY_API_KEY }}" }
           ]
         }
       },
       "id": "d1b2c3d4-0002",
-      "name": "KommoCRM — Find Day-28-32 Clients",
+      "name": "Clarify — Find Day-28-32 Clients",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [460, 400]
@@ -120,13 +120,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}",
+        "url": "={{ $env.CLARIFY_API_URL }}",
         "sendBody": true,
         "bodyContentType": "json",
         "jsonBody": "={{ JSON.stringify({ action: 'update_deal', deal_id: $json.deal_id, fields: { referral_ask_sent: true, referral_asks_count: 1 } }) }}"
       },
       "id": "d1b2c3d4-0008",
-      "name": "KommoCRM — Mark Referral Ask Sent",
+      "name": "Clarify — Mark Referral Ask Sent",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [1120, 640]
@@ -193,18 +193,18 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "={{ $env.KOMMO_WEBHOOK_URL }}/deals?stage=won_active_client&referral_ask_sent=true&referrals_generated=0&referral_ask_age_days_min=7",
+        "url": "={{ $env.CLARIFY_API_URL }}/deals?stage=won_active_client&referral_ask_sent=true&referrals_generated=0&referral_ask_age_days_min=7",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Authorization", "value": "Bearer {{ $env.KOMMO_API_TOKEN }}" }
+            { "name": "Authorization", "value": "Bearer {{ $env.CLARIFY_API_KEY }}" }
           ]
         }
       },
       "id": "d1b2c3d4-0012",
-      "name": "KommoCRM — No-Response Referrals",
+      "name": "Clarify — No-Response Referrals",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [460, 700]
@@ -226,9 +226,9 @@
   ],
   "connections": {
     "Daily 8AM GST Check": {
-      "main": [[{ "node": "KommoCRM — Find Day-28-32 Clients", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Clarify — Find Day-28-32 Clients", "type": "main", "index": 0 }]]
     },
-    "KommoCRM — Find Day-28-32 Clients": {
+    "Clarify — Find Day-28-32 Clients": {
       "main": [[{ "node": "Split Into Client Items", "type": "main", "index": 0 }]]
     },
     "Split Into Client Items": {
@@ -239,7 +239,7 @@
         [
           { "node": "Send Referral Email", "type": "main", "index": 0 },
           { "node": "Is MENA? (WhatsApp Follow)", "type": "main", "index": 0 },
-          { "node": "KommoCRM — Mark Referral Ask Sent", "type": "main", "index": 0 },
+          { "node": "Clarify — Mark Referral Ask Sent", "type": "main", "index": 0 },
           { "node": "Google Sheets — Log Referral Ask", "type": "main", "index": 0 }
         ]
       ]
@@ -254,9 +254,9 @@
       "main": [[{ "node": "Slack — Referral Ask Logged to Kaya", "type": "main", "index": 0 }]]
     },
     "Weekly Sunday 8AM — Referral Status Check": {
-      "main": [[{ "node": "KommoCRM — No-Response Referrals", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Clarify — No-Response Referrals", "type": "main", "index": 0 }]]
     },
-    "KommoCRM — No-Response Referrals": {
+    "Clarify — No-Response Referrals": {
       "main": [[{ "node": "Slack — Weekly Referral Digest", "type": "main", "index": 0 }]]
     }
   },
@@ -267,3 +267,4 @@
   "id": "alif-referral-engine",
   "tags": [{ "name": "ALIF Agency" }, { "name": "Referral Layer" }]
 }
+

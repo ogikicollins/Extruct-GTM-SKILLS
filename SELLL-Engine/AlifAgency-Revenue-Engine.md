@@ -1,8 +1,8 @@
-# ALIF Agency — Automated Revenue Engine
+﻿# ALIF Agency — Automated Revenue Engine
 > Architect: SELLL.io GTM Engineering | Built: 2026-06-28
 > Classification: 0-to-1 Compounding Outbound Motion | Fully Automated | Multi-Region
 > Regions: MENA · Europe · United States
-> Stack: Clay · Instantly · Expandi · WATI · KommoCRM · n8n · Claude API · Calendly
+> Stack: Clay · Instantly · Expandi · WATI · Clarify · n8n · Claude API · Calendly
 
 ---
 
@@ -91,7 +91,7 @@ The engine runs on three principles:
 │  │   • Calendly link sent (personalized email within 15 min)                       │
 │  │   • WhatsApp message sent (MENA): "Happy to jump on a call — [link]"           │
 │  │   • Expandi: LinkedIn thread paused                                              │
-│  │   • KommoCRM: Stage → "Discovery Scheduled"                                    │
+│  │   • Clarify: Stage → "Discovery Scheduled"                                    │
 │  │   • n8n: Pre-call brief auto-generated (company summary, pain hypothesis,       │
 │  │            tech stack, relevant case study, suggested opening line)             │
 │  │   • Slack: Kaya notified instantly                                               │
@@ -99,23 +99,23 @@ The engine runs on three principles:
 │  ├─ OBJECTION:                                                                      │
 │  │   • Claude API: Draft counter from objection bank                               │
 │  │   • Kaya review queue: Slack with 1-click approve/edit                          │
-│  │   • KommoCRM: Log objection type                                                │
+│  │   • Clarify: Log objection type                                                │
 │  │   • If approved → Instantly sends reply within 2h                               │
 │  │                                                                                  │
 │  ├─ NOT NOW:                                                                        │
-│  │   • KommoCRM: Stage → "Nurture" | Set 60-day signal re-engage trigger          │
+│  │   • Clarify: Stage → "Nurture" | Set 60-day signal re-engage trigger          │
 │  │   • Instantly: Remove from active sequence                                       │
 │  │   • n8n: Add to LinkedIn warm content list (Expandi)                           │
 │  │                                                                                  │
 │  └─ UNSUBSCRIBE:                                                                    │
 │      • Instantly: Unsubscribe + global suppress                                     │
-│      • KommoCRM: Mark DNC                                                           │
+│      • Clarify: Mark DNC                                                           │
 │      • Expandi: Remove from all queues                                              │
 │                                                                                     │
 │  Meeting Held (Calendly webhook → n8n):                                             │
 │  • 2h after scheduled end: Post-call email sent (personalized to call notes)       │
 │  • Proposal auto-generated: 3-tier structure, correct currency per region          │
-│  • KommoCRM: Stage → "Proposal Sent"                                               │
+│  • Clarify: Stage → "Proposal Sent"                                               │
 │  • MENA: WhatsApp follow-up fires 2h after proposal email                          │
 │  • EU: LinkedIn follow-up fires 48h after proposal email                           │
 │  • US: Email follow-up fires 4h after proposal email                               │
@@ -126,15 +126,15 @@ The engine runs on three principles:
 │  LAYER 5: REFERRAL ENGINE                                                           │
 │  What: Converts happy clients into a systematic introduction machine                │
 │                                                                                     │
-│  Day 30 trigger (KommoCRM deal age → n8n):                                         │
+│  Day 30 trigger (Clarify deal age → n8n):                                         │
 │  • Auto-email to client: "Who in your network should know about this?"             │
 │  • MENA: WhatsApp version sent same day                                             │
-│  • Tracking: Each introduction logged in KommoCRM + Google Sheets                  │
+│  • Tracking: Each introduction logged in Clarify + Google Sheets                  │
 │                                                                                     │
 │  Referral → Pipeline:                                                               │
 │  • Introduction contact auto-added to Clay enrichment queue                        │
 │  • Warm email sequence (3 emails, not cold — references the introducer)            │
-│  • KommoCRM: New deal created with source = "Referral" + referrer name            │
+│  • Clarify: New deal created with source = "Referral" + referrer name            │
 │  • Target: 55–70% close rate on referral leads (vs. 35% cold)                     │
 └───────────────────────────────┬─────────────────────────────────────────────────────┘
                                 │
@@ -175,18 +175,18 @@ SIGNAL FIRES
 ├──► Lead score calculated (auto)
 ├──► Region tagged (MENA / EU / US)
 ├──► Sequence selected (A / B / C + region variant)
-└──► KommoCRM deal created (Stage: "Signal Detected")
+└──► Clarify deal created (Stage: "Signal Detected")
 
 EMAIL SENT (Instantly)
 │
 ├──► Expandi: LinkedIn view queued for same contact (pre-engagement)
 ├──► WATI: WhatsApp message queued (MENA only)
-├──► KommoCRM: Activity logged per contact
+├──► Clarify: Activity logged per contact
 └──► Deliverability tracker updated (bounce rate watch — >2% pauses campaign)
 
 EMAIL OPENED (Instantly engagement webhook)
 │
-├──► KommoCRM: Stage → "Engaged — Email Opened"
+├──► Clarify: Stage → "Engaged — Email Opened"
 ├──► Lead score: +5 behavioral points
 └──► If opened 3x without reply → trigger LinkedIn DM immediately
 
@@ -194,14 +194,14 @@ REPLY RECEIVED
 │
 ├──► n8n: alif-reply-router.json fires (within 30 seconds)
 ├──► Claude API: Classifies intent
-├──► KommoCRM: Stage update per classification
+├──► Clarify: Stage update per classification
 ├──► Expandi: LinkedIn thread paused (if positive)
 └──► WATI: WhatsApp action triggered (MENA positive only)
 
 MEETING BOOKED (Calendly webhook)
 │
 ├──► n8n: Pre-call brief generated + sent to Kaya (Slack + email)
-├──► KommoCRM: Stage → "Discovery Scheduled"
+├──► Clarify: Stage → "Discovery Scheduled"
 ├──► Expandi: ALL parallel threads for this account paused
 ├──► Instantly: Sequence paused for this contact
 └──► Calendar event: Kaya + prospect + video link auto-confirmed
@@ -210,11 +210,11 @@ CALL ENDS (Calendly estimated end + 2h buffer)
 │
 ├──► n8n: Post-call email fired (personalized template)
 ├──► n8n: Proposal generated (3-tier, correct currency)
-├──► KommoCRM: Stage → "Proposal Sent"
+├──► Clarify: Stage → "Proposal Sent"
 ├──► WATI: WhatsApp follow-up (MENA, 2h after proposal email)
 └──► Slack: Kaya notified — "Proposal sent to [Name] — watch for reply"
 
-DEAL WON (KommoCRM stage = Won)
+DEAL WON (Clarify stage = Won)
 │
 ├──► Slack: 🎉 Team celebration alert
 ├──► Google Sheets: Client added to case study tracker
@@ -223,12 +223,12 @@ DEAL WON (KommoCRM stage = Won)
 ├──► Learning loop: Win pattern logged (signal → sequence → objection → close)
 └──► ICP score recalibrated: winning company's attributes weighted higher
 
-DEAL LOST (KommoCRM stage = Lost)
+DEAL LOST (Clarify stage = Lost)
 │
 ├──► Slack: Loss reason required (Kaya must log before stage confirms)
 ├──► Learning loop: Loss pattern logged (which objection wasn't handled)
 ├──► Objection bank: Updated with new failure data
-├──► If "not now": 90-day re-engage trigger set in KommoCRM
+├──► If "not now": 90-day re-engage trigger set in Clarify
 └──► ICP score: Losing company's attributes weighted lower
 ```
 
@@ -270,7 +270,7 @@ THE FLYWHEEL:
 
 ---
 
-## Pipeline Architecture (KommoCRM Stages)
+## Pipeline Architecture (Clarify Stages)
 
 ```
 STAGE 0: Signal Detected
@@ -350,7 +350,7 @@ n8n ─────────────────────────�
 n8n ───────────────────────────────► Expandi API (LinkedIn sequence control)
 n8n ───────────────────────────────► WATI API (WhatsApp send + template)
 n8n ───────────────────────────────► Claude API (reply classification + draft)
-n8n ───────────────────────────────► KommoCRM API (stage updates, deal creation)
+n8n ───────────────────────────────► Clarify API (stage updates, deal creation)
 n8n ───────────────────────────────► Calendly API (meeting detection)
 n8n ───────────────────────────────► Google Sheets API (reporting + case studies)
 n8n ───────────────────────────────► Slack API (Kaya notifications)
@@ -392,10 +392,10 @@ WATI_INSTANCE_URL=
 WATI_KAYA_PHONE=
 
 # CRM
-KOMMO_CLIENT_ID=
-KOMMO_CLIENT_SECRET=
-KOMMO_REDIRECT_URI=
-KOMMO_SUBDOMAIN=
+CLARIFY_CLIENT_ID=
+CLARIFY_CLIENT_SECRET=
+CLARIFY_REDIRECT_URI=
+CLARIFY_WORKSPACE_ID=
 
 # AI
 ANTHROPIC_API_KEY=
@@ -430,7 +430,7 @@ DAY 1-2: Foundation
   □ Start email warmup (14-day warmup minimum before first send)
   □ Set up n8n instance (self-hosted on VPS or n8n Cloud)
   □ Create .env file with all API keys
-  □ Set up KommoCRM pipeline (see CRM Schema file)
+  □ Set up Clarify pipeline (see CRM Schema file)
 
 DAY 3-5: Clay Workspace
   □ Build Clay enrichment table (52 columns per AlifAgency-Engine-Stack.md)
@@ -459,7 +459,7 @@ DAY 12-14: Reply Router
   □ Deploy alif-reply-router.json to n8n
   □ Configure Instantly webhook → n8n endpoint
   □ Test Claude API classification with 20 sample replies (positive, objection, not now)
-  □ Verify KommoCRM stage updates on each classification
+  □ Verify Clarify stage updates on each classification
   □ Verify Slack notifications fire to Kaya's channel
   □ Test Calendly link delivery on positive classification
 
@@ -473,12 +473,12 @@ DAY 15-17: Proposal Flow
 
 DAY 18-19: Referral Engine
   □ Deploy alif-referral-engine.json to n8n
-  □ Configure KommoCRM "Deal Age = 30 days" trigger → n8n
+  □ Configure Clarify "Deal Age = 30 days" trigger → n8n
   □ Build Google Sheets referral tracker (auto-populated by n8n)
   □ Test: Create a test deal → fast-forward to Day 30 → verify referral ask fires
 
 DAY 20-21: Reporting + Compounding Layer
-  □ Build Google Sheets master dashboard (auto-populated from KommoCRM + Instantly)
+  □ Build Google Sheets master dashboard (auto-populated from Clarify + Instantly)
   □ Deploy weekly report n8n job (Sunday 8:00 AM GST)
   □ Configure Slack weekly digest (reply rate, close rate, pipeline by region)
   □ Final system test: End-to-end run with 5 real companies
@@ -493,3 +493,4 @@ DAY 22: GO LIVE
 
 *Master architecture owned by SELLL.io GTM Engineering | ALIF Agency deployment | 2026-06-28*
 *Review monthly. Update when new signal sources, tools, or regions are added.*
+

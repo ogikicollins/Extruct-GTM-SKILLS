@@ -1,4 +1,4 @@
-# ALIF Agency — Outreach Sequences
+﻿# ALIF Agency — Outreach Sequences
 > Built by SELLL.io | 2026-06-28
 > Three personas | 5 emails + LinkedIn DM + WhatsApp per sequence
 > Voice: Direct, creative-aware, specific. Never generic. Always reference something real about their brand.
@@ -442,7 +442,7 @@ For each sequence, rotate these subject line variants to avoid deliverability pa
 |------------|---------------|
 | Positive ("yes, let's talk") | Book discovery call within 24h. Send calendar link. WhatsApp confirm. |
 | Audit request ("send me the audit") | Send within 2 hours. Follow up via WhatsApp 48h later. |
-| "Not now / maybe later" | Log in KommoCRM. Set signal alert for 60 days. Send to re-engagement queue. |
+| "Not now / maybe later" | Log in Clarify. Set signal alert for 60 days. Send to re-engagement queue. |
 | Objection ("we work with someone else") | Deploy objection counter. Stay in sequence — don't give up. |
 | Negative / unsubscribe | Remove immediately. Log. Do not re-sequence. |
 | No reply (5 emails sent) | Add to LinkedIn DM queue. Try WhatsApp once. Then close. |
@@ -450,3 +450,4 @@ For each sequence, rotate these subject line variants to avoid deliverability pa
 ---
 
 *Sequences owned by ALIF Agency. Built by SELLL.io. Review and refresh every 45 days based on reply rate data.*
+
