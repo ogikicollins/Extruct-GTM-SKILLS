@@ -892,7 +892,105 @@ Mid-market companies (100–500 employees) have been burned by ticket queues and
 
 ---
 
-## PART 15: QUICK WINS — START THIS WEEK
+## PART 15: ATLASSIAN ECOSYSTEM PROSPECTING — FINDING BUYERS FOR FREE
+
+The Atlassian Marketplace itself is where Occam lists its services. But the ecosystem *around* it is one of the most under-used free prospect research tools available. Every source below is full of confirmed Atlassian users with active, named problems — the warmest cold prospects that exist.
+
+---
+
+### Source 1: Atlassian Community (community.atlassian.com) — Highest Value
+
+This is the goldmine. People post here when they are stuck, frustrated, or planning a migration they don't fully understand. That is your exact buyer at the exact moment of maximum pain.
+
+**How to use it:**
+
+1. Go to community.atlassian.com
+2. Search for any of these terms:
+   - "Server to Cloud migration"
+   - "Jira migration help"
+   - "Confluence migration problem"
+   - "Jira Server end of life"
+   - "Jira admin overwhelmed"
+   - "Data Center setup"
+3. Filter to recent posts (last 30–90 days)
+4. Look at the **people asking questions** — not the ones answering
+5. Click on their profile → note their name, company, role
+6. Search for them on LinkedIn → connect with this message:
+
+> "Hi [Name] — I saw your post in the Atlassian Community about [specific problem they mentioned]. We handle exactly that for companies at your scale. Would a quick call be useful while you're figuring it out?"
+
+**Why this converts:** You're not cold. You have a provably relevant reason to reach out. They already told the internet they have this problem and need help. Response rates run 3–5x higher than standard cold outreach.
+
+**Do this daily:** Spend 15 minutes/morning scanning new posts. Pull 3–5 names per day → find on LinkedIn → outreach same day. The faster you reach out after their post, the higher the conversion.
+
+---
+
+### Source 2: Atlassian Marketplace App Reviews
+
+Go to marketplace.atlassian.com and find the most popular migration and admin apps:
+- "Jira Cloud Migration Assistant" (Atlassian's own)
+- "Configuration Manager for Jira"
+- "Elements Copy & Sync"
+- "Botron — Configuration Manager"
+- "Backbone Issue Sync"
+
+Click into reviews. Reviewers frequently include their company name and role. These are confirmed Atlassian users who:
+- Have the product installed (active user, not evaluating)
+- Had a strong enough opinion to write a review (highly engaged)
+- Often leave clues about their pain in the review text itself
+
+**Extract:** Name, company, role → find on LinkedIn → outreach referencing the tool they use.
+
+---
+
+### Source 3: LinkedIn Keyword Search (Scales to Thousands)
+
+Search LinkedIn for profiles containing these keywords in their experience or skills:
+- `"Jira Server"` + `"migration"` in their profile
+- `"Jira Administrator"` as a current or past title
+- `"Atlassian"` in skills + IT/DevOps/Engineering function
+- `"Confluence"` + `"IT Manager"` or `"DevOps"`
+
+Filter by: Company size 100–1,000 employees + United States + Posted on LinkedIn recently
+
+People who list "Jira migration" in their work history or skills are self-identified Atlassian specialists — either they are the buyer or they sit next to the buyer.
+
+---
+
+### Source 4: G2 Reviews of Jira and Confluence
+
+Go to g2.com, search for "Jira" and "Confluence." Filter reviews by:
+- Company size: 101–1,000 employees
+- Industry: Software, Professional Services, Healthcare, Finance
+
+Reviewers often include their role and company. Read the review text — people who complain about migration complexity, admin overhead, or support gaps are describing Occam's value proposition in their own words.
+
+**Use the review text in outreach:**
+> "Saw a review of Jira from someone at [Company] mentioning [specific frustration]. We solve exactly that — worth a quick call?"
+
+---
+
+### Source 5: Atlassian User Groups
+
+atlassian.com/community/connect lists virtual and in-person Atlassian user groups. Join 2–3 active groups. The members are Jira admins and IT leads who voluntarily gather to talk about Atlassian problems.
+
+This is not a spam opportunity — engage genuinely, answer questions, share expertise. After 2–3 sessions where you've added real value, direct outreach to any member lands as warm, not cold.
+
+---
+
+### The Prospecting Priority Stack
+
+| Source | Warmth | Weekly Effort | Expected Yield |
+|--------|--------|--------------|----------------|
+| Atlassian Community posts | Hottest | 15 min/day | 3–5 warm prospects/day |
+| Marketplace app reviews | Warm | 30 min/week | 10–20 prospects/week |
+| G2 reviews | Warm | 30 min/week | 10–15 prospects/week |
+| LinkedIn keyword search | Cold-warm | 30 min/week | 50–100 prospects/week |
+| Atlassian User Groups | Warm (builds over time) | 1 hr/week | 5–10 prospects/month |
+
+---
+
+## PART 16: QUICK WINS — START THIS WEEK
 
 1. **Update LinkedIn headline today** — "Atlassian Cloud Migration & Managed IT | Occam Technical Solutions" — this alone changes how inbound finds you while outbound runs.
 2. **Buy the sending domain today** — occamtech.io or similar. Start warmup immediately. You can't send cold email at volume until this is done.
