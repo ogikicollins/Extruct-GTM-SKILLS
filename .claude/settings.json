@@ -20,7 +20,11 @@
       "Read(//c/Users/**)",
       "Bash(\"/c/Users/COLLINS OGIKI/AppData/Local/Microsoft/WindowsApps/python\" --version)",
       "Bash(py --version)",
-      "Bash(py3 --version)"
+      "Bash(py3 --version)",
+      "WebFetch(domain:blog.crosslike.club)",
+      "WebFetch(domain:www.alifagency.ai)",
+      "WebFetch(domain:occamtechnicalsolutions.com)",
+      "Bash(gh auth *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\COLLINS OGIKI\\Desktop"

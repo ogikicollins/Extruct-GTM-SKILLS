@@ -192,6 +192,24 @@ That is the only proof that matters.
 
 ---
 
+Before the call, a few things worth having ready:
+
+  — Your Apollo sequence stats if you can pull them: send volume,
+    reply rate, and how many demos those replies turned into.
+    Even a rough number helps. If you don't have them, we'll pull
+    it together on the call.
+
+  — Your current demo-to-close rate. How many demos does it
+    typically take to sign a new store? That number shapes how
+    we set the pipeline targets for Month 1.
+
+  — What a good month looks like for QR Floor Genie right now —
+    demos booked, stores in pipeline, and where the ceiling feels.
+    This tells us what we're building toward, not just building.
+
+If your partner can join the call, even better. The build plan
+will make more sense with both of you in the room.
+
 Ready to move when you are, James.
 
 Collins
