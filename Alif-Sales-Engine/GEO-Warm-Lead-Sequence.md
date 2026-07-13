@@ -1,12 +1,16 @@
-# Alif GEO — Warm Lead Sequence ("Requested More Info")
+# Alif GEO — Warm Lead Sequence (Post "Yes" to More Info)
 
-**Context:** These leads already opted in / asked for more info on Alif's GEO
-(Generative Engine Optimization) service. This is NOT cold outreach — touch 1
-must deliver on the ask before it does anything else. Trigger across the
-whole sequence: a **named competitor is showing up in ChatGPT answers and the
-prospect isn't** — a loss-aversion trigger that reads identically whether the
-prospect is e-commerce, SaaS, professional services, or a local/regional
-brand.
+**Context:** Lead already said "yes" to the asset/more info. This sequence
+*is* the asset delivery — touch 1 is not a teaser, it's the real educational
+content, written at the level of an expert GEO consultant. Motion:
+
+1. **Educate** — deliver genuine expert insight on GEO mechanics (earns trust, no pitch).
+2. **Prove** — show the exact problem solved and outcome produced for a real client.
+3. **Convert** — low-resistance CTA straight into a call, framed as an audit, not a sales call.
+
+Trigger woven throughout: a **named competitor is showing up in ChatGPT
+answers and the prospect isn't**. Generic enough to hold across e-commerce,
+SaaS, professional services, and local/regional brands.
 
 **Fill in before sending:**
 - `{{First Name}}`
@@ -17,53 +21,52 @@ brand.
 
 ---
 
-## Touch 1 — Day 0 (same day as the info request)
-**Subject:** Here's what you asked for + one thing you should see
+## Touch 1 — Day 0 (delivers the asset they said yes to)
+**Subject:** The 3 things that decide whether ChatGPT cites you
 
-{{First Name}}, as promised — here's the quick rundown on GEO (Generative Engine Optimization): getting your business surfaced when buyers ask ChatGPT for a recommendation instead of Googling.
+{{First Name}}, here's the real mechanics behind GEO — no fluff, straight from what we see in the data.
 
-Before the full breakdown — I ran your category through ChatGPT this morning. {{Competitor}} showed up. You didn't.
+ChatGPT doesn't rank pages, it cites sources. Three things decide who gets cited: entity clarity (does the model know exactly what you do), answer-first structured content it can lift directly, and third-party authority reinforcing you're the trusted source.
 
-That's not a ranking problem. It's a training-data and citation problem, and it compounds daily.
+That's exactly why {{Competitor}} shows up and you don't.
 
-Want the 3-minute version of why? Reply "yes" and I'll send it over.
+Next: how we fixed this for {{Company A}}.
 
-*(73 words)*
-
----
-
-## Touch 2 — Day 2–3 (proof)
-**Subject:** How {{Company A}} went from invisible to the top ChatGPT answer
-
-{{First Name}}, following up with proof, not theory.
-
-{{Company A}} had the same problem — strong SEO, zero AI presence. We rebuilt their content for citation (entity clarity, structured data, answer-first formatting) and strengthened the authority signals ChatGPT pulls from.
-
-60 days later: {{Company A}} became the top-cited answer in their category — {{X}}% of new pipeline now traces back to AI-referred traffic.
-
-Want the same audit run on you? I've got {{Time 1}} or {{Time 2}} open — reply with either and it's booked.
-
-*(78 words)*
+*(71 words)*
 
 ---
 
-## Touch 3 — Day 5–6 (urgency close)
-**Subject:** Last note — the window's closing
+## Touch 2 — Day 2–3 (problem solved + outcome)
+**Subject:** How {{Company A}} solved this exact problem
 
-{{First Name}}, quick close-out.
+{{First Name}}, {{Company A}} had strong SEO and still didn't exist in ChatGPT answers — no entity clarity, no answer-first structure, no third-party citations backing them up.
 
-Every week {{Competitor}} holds the answer slot in ChatGPT, they become the default recommendation in your category — and that habit is hard to break once buyers trust it.
+We rebuilt all three in 60 days.
 
-You reached out because you already sensed this shift. I'd rather show you the gap than keep emailing about it.
+Result: {{Company A}} became the top-cited answer in their category — {{X}}% of new pipeline now traces to AI-referred traffic.
 
-I've got {{Time 1}} or {{Time 2}} open this week for 15 minutes — reply with one and you're booked.
+Want the same audit run on you? {{Time 1}} or {{Time 2}}?
 
-*(68 words)*
+*(59 words)*
 
 ---
 
-## Why this holds across ICPs
-- The pain (invisible in AI answers) and the trigger (a named competitor occupying the slot instead) don't depend on industry — every business with a category and a competitor qualifies.
-- Touch 1 respects the opt-in: delivers value first, pitches second — no meeting ask yet.
-- Touch 2 is the only ICP-flexible slot — "strong SEO, zero AI presence" framing applies whether Company A is B2B SaaS or a local services brand; swap the metric, keep the mechanism.
-- Touches 2 and 3 use a **pick-a-slot CTA** (two named times, reply to book) instead of a booking link — removes the click-through step, turns the ask into a one-word reply, and forces a real commitment instead of "let me know a good time."
+## Touch 3 — Day 5–6 (low-resistance conversion)
+**Subject:** 15 minutes, that's it
+
+{{First Name}}, I'll keep this short.
+
+You've seen the mechanics and the proof. The only thing left is running your business through the same audit we ran for {{Company A}} — where you stand today, what it'd take to close the gap.
+
+No pitch, no deck, just the audit.
+
+{{Time 1}} or {{Time 2}} — pick one, I'll send the invite.
+
+*(56 words)*
+
+---
+
+## Why this converts
+- **Touch 1 earns the right to sell by not selling.** Real mechanics (entity clarity, answer-first structure, third-party authority) signal expertise a generic "book a demo" email can't — and it's the actual asset they opted in for, not a stall tactic.
+- **Touch 2 mirrors the exact framework from touch 1** onto a real company, so the case study reads as proof of the same three levers, not a separate pitch.
+- **Touch 3 reframes the ask as an audit, not a sales call** — lower resistance than "let's chat about your GTM" — and uses a pick-a-slot CTA (two named times, reply to book) instead of a booking link, turning the ask into a one-word reply.
