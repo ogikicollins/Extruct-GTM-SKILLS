@@ -57,15 +57,42 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 
 ---
 
+### Conversion Diagnostic — Opened 2026-07-16
+
+**Client-reported metric:** 78 conversations → 2 meetings booked = **2.6% conversion**. Internal target referenced by client: **12%**.
+
+**Client questions (weekly review agenda, meeting scheduled 2026-07-17):**
+1. What's working / not working — any data on patterns?
+2. Of non-converting conversations: recurring objection, targeting problem, or something else?
+3. Can we review call transcripts/recordings?
+4. No emails visible yet in the analytics dashboard — expected at this stage or a gap?
+
+**Status of each, as of 2026-07-16 (pre-review):**
+| Question | Status |
+|---|---|
+| Targeting fit | HYPOTHESIS, partially supported — see Risk Flag above (one booked meeting, off-ICP company type). Needs full list audit to quantify. |
+| Objection pattern | UNKNOWN — no transcript access yet. Requesting call transcripts/recordings to categorize systematically. |
+| Email sequence status | UNKNOWN — need to confirm with whoever owns email setup whether zero sends is by design (phone-first sequencing, domain warmup, copy approval pending) or a gap. Must have a real answer before the review, not "checking." |
+
+**New stakeholder:** Client is adding their own sales hire to future meetings, starting with the 2026-07-17 weekly review. Read: elevated attention on this account's numbers — come with real data, not reassurance.
+
+**Pre-review action items (owner: internal team):**
+- [ ] Export current contact list(s) for ICP audit against Tier 1 criteria (`STRUCTURAL-TAM-GTM-STRATEGY.md`)
+- [ ] Pull 15-20 recent call transcripts/recordings for objection-pattern categorization
+- [ ] Confirm email sequence launch status/timeline with owner
+- [ ] If data isn't ready by review time: present the diagnostic plan itself + honest "here's what we're checking, here's when you'll have real numbers" rather than a guess
+
+---
+
 ### Current Status
 
 | Field | Value |
 |-------|-------|
-| Stage | Active launch sprint — SDR calling live sequences |
-| Next Action | Get the missing client message (referenced but not pasted) + audit current lists against Tier 1 ICP criteria |
-| Next Action Date | 2026-07-16 |
+| Stage | Active launch sprint — SDR calling live sequences; conversion below client's expected target |
+| Next Action | Complete conversion diagnostic (list audit + transcript review + email status) ahead of 2026-07-17 weekly review |
+| Next Action Date | 2026-07-17 |
 | Days in Current Stage | ~7 (since Jul 9 launch) |
-| Risk Flag | List quality / ICP alignment — unverified, see above |
+| Risk Flag | Conversion rate 2.6% vs 12% target; list quality / ICP alignment unverified; email channel status unclear |
 | Deal Value | Unknown — invoicing confirmed but no amount visible in Slack summary |
 
 ---
@@ -76,6 +103,7 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 |------|-------|-------|
 | 2026-07-15 | TAM/GTM strategy built | `STRUCTURAL-TAM-GTM-STRATEGY.md` — TAM/SAM/SOM, market map, tiered ICP, GTM motion. Written without knowledge this was already a live, invoiced client with SDR calls in progress since Jul 9. |
 | 2026-07-16 | Account card opened | Reconstructed from internal activity summary. Launch sprint underway. First meeting booked (Cafe Services Inc, Jul 17) — fit vs. ICP unverified. |
+| 2026-07-16 | Client raised conversion concern | 78 conversations → 2 meetings (2.6%) vs 12% target. Client requesting objection data, targeting review, transcript access, and email-status clarification ahead of 2026-07-17 weekly review. New client-side sales stakeholder joining going forward. |
 
 ---
 
