@@ -1,6 +1,7 @@
 # Structural Chat — Outbound Email Copy (v2)
 OSP email campaigns  ·  CSM: Pete Montalbano  ·  Client: Paul Chiusano (Structural Chat / Unison Computing)
 Revised 2026-07-16 — rewritten against the account's live conversion data (78 conversations -> 2 meetings, 2.6%)
+Revised 2026-07-16 (v2) — Campaign 1 and 2 bodies trimmed to 80-120 words each
 
 ---
 
@@ -34,22 +35,22 @@ The new workhorse. Leads with the repetition + cost stat, not a rhetorical quest
 - tickets that write themselves
 - the part of support that never changes
 
-**BODY**
+**BODY** (~105 words)
 
 Hi {{FIRST_NAME}},
 
-Most support teams spend 60 to 80 percent of their time on the same handful of requests. Order status, billing, and account changes make up most of it.
+Most support teams spend 60 to 80 percent of their time on the same handful of requests. Order status, billing, account changes.
 
-Each one still costs $8 to $20 to close by phone or chat, even though the answer never changes.
+Each ticket still costs $8 to $20 to close, even though the answer never changes.
 
-We build support automation that finishes the request inside the conversation, not a link to a help article. It runs on fixed rules instead of a language model, so it cannot invent an answer or a policy that does not exist.
+We build support automation that finishes the request inside the conversation, not a help article link. It runs on fixed rules, not a language model. It cannot invent an answer that does not exist.
 
-Anything outside its scope goes straight to your team, with the full thread attached.
+Anything outside its scope goes straight to your team, with full context.
 
 [Optional social proof — Paul to add a pilot result here once one exists. Remove if none.]
 
 Send us 5 real tickets from last week.
-We will show you exactly how each one resolves, and what still needs a person.
+We will show you exactly how each one resolves.
 
 Best,
 {{SENDER_FULL_NAME}}
@@ -66,24 +67,24 @@ Healthcare/telehealth, online pharmacy, dermatology, fintech/neobanks, mortgage 
 - support that can't invent a policy
 - {{COMPANY_NAME}}: the compliance question nobody's asked yet
 
-**BODY**
+**BODY** (~120 words)
 
 Hi {{FIRST_NAME}},
 
-In February 2024, a Canadian tribunal ruled against Air Canada. Its own support chatbot had invented a bereavement fare policy that did not exist.
+In February 2024, a tribunal ruled against Air Canada. Its chatbot had invented a bereavement fare policy that did not exist.
 
-The airline argued the bot was responsible for its own words. The tribunal rejected that and ordered Air Canada to pay.
+The airline still had to pay.
 
 That is the risk in any support tool that generates its own answers. For healthcare, lending, or financial accounts, one invented policy is not a bad review. It is a compliance incident.
 
-We build support automation that runs on fixed rules, not a language model. It cannot improvise a refill status, an escrow figure, or a coverage answer.
+We build support automation on fixed rules, not a language model. It cannot improvise a refill status, an escrow figure, or a coverage answer.
 
-It can also run entirely on your own infrastructure, so customer data never reaches a third party.
+It can run on your own infrastructure, so customer data never reaches a third party.
 
 [Optional social proof — Paul to add a pilot result here once one exists. Remove if none.]
 
 Send us 5 of your most sensitive routine requests.
-We will show you exactly how each one resolves, with nothing left to guess.
+We will show you exactly how each one resolves.
 
 Best,
 {{SENDER_FULL_NAME}}
