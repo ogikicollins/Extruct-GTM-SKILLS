@@ -1,7 +1,7 @@
 # Account Card — Structural (structural.chat)
 
 **Created:** 2026-07-16
-**Last Updated:** 2026-07-16
+**Last Updated:** 2026-07-16 (corrected against Slack Canvas ground truth)
 **Lead Score:** N/A — active client, not a prospect
 **Tier:** 1 (Active Client — Launch Sprint)
 **Stage:** In Sequence / SDR Calling Live
@@ -18,8 +18,12 @@
 | Industry / Vertical | LLM-free / deterministic AI customer support bots |
 | Billing contact | Paul Chiusano (Unison Computing) — confirmed invoiced; contact email on file internally, not repeated here |
 | Slack channel | `#structural-chat` (renamed from `unison-computing` → `unison-cloud` → `structural-chat`) |
-| Account ownership | CSM: Peter Montalbano. Launch sprint lead: internal team. Billing confirmed internally. |
-| SDR team | Internal SDR pair assigned to launch sprint |
+| Account ownership | **CSM: Collins Ogiki** (corrected 2026-07-16 — earlier note attributing CSM to Peter Montalbano was wrong, sourced from an incomplete Slack summary). Call operations: Fernanda. Billing confirmed internally. |
+| SDR team | Jennifer Ruiz, Patrick A |
+| Onboarding Date | 2026-06-29 |
+| Calls Start Date | 2026-07-09 |
+| Renewal Date | **2026-08-29 (5-day notice required — effective decision point ~2026-08-24)** |
+| Outreach channels | Cold calls only (live). Email campaigns planned to launch the week of 2026-07-20 — confirmed intentional, not a gap. |
 | Funding Stage | Unknown / likely bootstrapped via Unison Computing — no funding announcements found in research |
 | ICP Rubric Score | N/A (this is Structural as the *client whose GTM we run*, not a prospect we're scoring) |
 
@@ -38,6 +42,21 @@ We are running **outbound GTM as a service for Structural** — i.e. Structural 
 | Jul 17 | First meeting booked — Cafe Services Inc (prospect contact on file internally) |
 
 **Scope confirmed:** 3–5 sequences, 300+ contacts each.
+
+---
+
+### Goals & Deadlines (from Slack Canvas, 2026-07-16)
+
+| Metric | Target |
+|---|---|
+| Qualified meetings by 2026-07-29 | Minimum 5 (flagged priority) |
+| Overall goal | Set: 10 / Held: 5 |
+| July goal | Set: 7 / Held: 4 |
+| Actuals as of 2026-07-16 | 78 conversations -> 2 meetings booked (2.6%) — behind both overall and July pace |
+| Internal deadline | **Wednesday, 2026-07-22** |
+| Canvas-stated problem | "Meetings have not been booked or held yet" |
+| Canvas-stated solution | High call volume with constant SDR feedback; pull call data daily to evaluate (explicitly with Claude); iterate lead lists until traction; tight SDR-CSM and CSM-client feedback loops |
+| Client sentiment | Not yet recorded — open field, needs to be filled in |
 
 ---
 
@@ -72,7 +91,7 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 |---|---|
 | Targeting fit | HYPOTHESIS, partially supported — see Risk Flag above (one booked meeting, off-ICP company type). Needs full list audit to quantify. |
 | Objection pattern | UNKNOWN — no transcript access yet. Requesting call transcripts/recordings to categorize systematically. |
-| Email sequence status | UNKNOWN — need to confirm with whoever owns email setup whether zero sends is by design (phone-first sequencing, domain warmup, copy approval pending) or a gap. Must have a real answer before the review, not "checking." |
+| Email sequence status | **RESOLVED 2026-07-16** — confirmed intentional. Cold calls are the only live channel; email campaigns are planned to launch the week of 2026-07-20 (`STRUCTURAL-OUTBOUND-EMAIL-COPY.md` and `STRUCTURAL-OUTBOUND-SEQUENCE.md` are the copy/cadence built for that launch). |
 
 **New stakeholder:** Client is adding their own sales hire to future meetings, starting with the 2026-07-17 weekly review. Read: elevated attention on this account's numbers — come with real data, not reassurance.
 
@@ -108,6 +127,7 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 | 2026-07-15 | TAM/GTM strategy built | `STRUCTURAL-TAM-GTM-STRATEGY.md` — TAM/SAM/SOM, market map, tiered ICP, GTM motion. Written without knowledge this was already a live, invoiced client with SDR calls in progress since Jul 9. |
 | 2026-07-16 | Account card opened | Reconstructed from internal activity summary. Launch sprint underway. First meeting booked (Cafe Services Inc, Jul 17) — fit vs. ICP unverified. |
 | 2026-07-16 | Client raised conversion concern | 78 conversations → 2 meetings (2.6%) vs 12% target. Client requesting objection data, targeting review, transcript access, and email-status clarification ahead of 2026-07-17 weekly review. New client-side sales stakeholder joining going forward. |
+| 2026-07-16 | Ground-truth Canvas received | Slack Canvas provided full account facts: CSM corrected to Collins Ogiki, onboarding 6/29, calls start 7/9, renewal 8/29 (5-day notice), goals (5 qualified meetings by 7/29, July Set 7/Held 4), internal deadline Wed 7/22, and confirmation email is planned not missing. Battle card, scripts, full Slack history, and lists to follow before next full diagnosis. |
 
 ---
 
