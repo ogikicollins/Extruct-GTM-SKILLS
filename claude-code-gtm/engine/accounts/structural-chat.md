@@ -14,11 +14,19 @@
 
 30 days from 2026-06-29 = **2026-07-29.** This is not a soft internal goal, it is a contractual right the client can exercise. It is the reason the Canvas flagged "5 qualified meetings by 7/29" with a fire emoji, and it is why the internal deadline is Wed 2026-07-22 — roughly a week of buffer to course-correct before the contractual date.
 
-**Status as of 2026-07-17: 2 of 5 required meetings booked — Cafe Services Inc (VP Ops Support, confirmed Tue 8am) and Parspec (HR & Ops Lead, confirmed Fri 7/17).**
+**Status as of 2026-07-17: 2-3 of 5 required meetings booked, count needs reconciling:**
 
-**URGENT open question — do these 2 actually count?** The 7/16 sync explicitly flags both as "not perfect ICP fits" to be "framed as intro calls." The contract requires 5 *qualified* meetings, and the handoff doc's ICP section is literally titled "Template Meeting Qualifications (ICP)" — meaning ICP fit may be the contractual definition of "qualified," not just an internal quality note. **If these 2 don't hold up as qualified, the real gap could still be 5 meetings, not 3, with the same ~12 days left.** Get an explicit answer from Paul or whoever owns contract interpretation on what "qualified" means before treating these 2 as locked in. This is the single highest-priority open question on the account right now.
+| Meeting | Contact | Booked by | Date/time | ICP fit |
+|---|---|---|---|---|
+| Cafe Services Inc | Michael Lewis (VP Ops Support) | Jennifer Ruiz | **2026-07-17, 8:00 AM EST** (corrected — earlier note said "Tuesday," Slack citation confirms it's actually today) | Flagged as "not a perfect ICP fit" per 7/16 sync |
+| Parspec | Sameer Kulkarni (HR & Ops Lead) | Jennifer Ruiz | Confirmed, exact date/time not yet reconciled (sync said "Fri 7/17") | Flagged as "not a perfect ICP fit" per 7/16 sync |
+| Off the Hook Restaurants | Mark McDonald | Patrick A | 2026-07-23, 4:00 PM EST | **Not on the approved vertical list** (not e-commerce, but not property mgmt/mortgage/healthcare/pharmacy/utilities/travel/fintech/subscription-commerce either) |
 
-**Conversation-count discrepancy to reconcile:** client's earlier message cited 78 conversations -> 2 meetings (2.6%). The 7/16 sync cites 111 live conversations, same 2 meetings named. If 111 is the current cumulative total, the 33 conversations added since 78 produced zero new meetings — worse pace than the already-below-target 2.6%, not flat. Confirm whether 111 is cumulative or a different measurement window before reading trend direction either way.
+**URGENT open question 1 — is the count 2 or 3?** The 7/16 sync only mentioned Cafe Services and Parspec ("2 meetings booked"). Off the Hook Restaurants surfaced separately via Slack history and was never mentioned in that sync. Need to confirm whether it's a third, additional booking (good news: only 2 more needed, not 3) or whether it was simply omitted from the sync's summary. Either way it needs to be added to whatever official tracker determines the 5-meeting count.
+
+**URGENT open question 2 — do ANY of these 3 actually count as "qualified"?** All three now have an ICP-fit question mark. The contract requires 5 *qualified* meetings, and the handoff doc's ICP section is literally titled "Template Meeting Qualifications (ICP)" — meaning ICP fit may be the contractual definition of "qualified," not just an internal quality note. **Worst case: if none of these 3 hold up, the real gap is still 5 meetings, not 2-3, with the same ~12 days left.** Get an explicit answer from Paul or whoever owns contract interpretation on what "qualified" means, urgently — this is the single highest-priority open question on the account.
+
+**Conversation-count discrepancy to reconcile:** client's earlier message cited 78 conversations -> 2 meetings (2.6%). The 7/16 sync cites 111 live conversations, same 2 meetings named. If 111 is the current cumulative total, the 33 conversations added since 78 produced zero new *named* meetings (though Off the Hook Restaurants may account for some of that gap) — confirm whether 111 is cumulative or a different measurement window before reading trend direction either way.
 
 Everything else in this account (list audit, email launch, call volume) should be prioritized against this number first. A general conversion-rate improvement is good but secondary; the binary pass/fail on 5-by-7/29 is what determines whether Structural can walk away with a full refund.
 
@@ -74,6 +82,16 @@ Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08
 **Proof-point conversation — Max Retail VP of CX:** their current AI tool covers tier-1 requests fine, but tier-2/3 requests against their internal API are the real pain, a clean match for Structural's transactional (not just informational) differentiation. Follow-up scheduled. **Worth a quick ICP check:** "Retail" in the name is close enough to the pure-e-commerce exclusion to be worth confirming this isn't an excluded account before investing more time in it.
 
 **Warm pipeline (not yet booked meetings):** MDS (Thu 7/23 follow-up), Max Retail (~30 days), Evo Security/Barracuda (~30 days, post-acquisition support restructuring), plus referrals to correct support owners from mis-targeted calls.
+
+---
+
+### Team & Infrastructure (from Slack history, received 2026-07-17)
+
+- **Launch process:** Fernanda maintains a reusable "Launch_Client" workflow used for this and other client launches.
+- **Email infrastructure:** Kyle had Sarah and Pamela build a 15-mailbox email infrastructure. **Sending domain given was `structuralchat.co`** — note this is a different domain from the real site `structural.chat`. Very likely intentional: standard cold-email practice is a dedicated sending domain separate from the primary brand domain, to protect the main domain's reputation/deliverability. Not flagging as an error, but worth a one-line confirmation it's deliberate before the first send, since it's the first time this domain has appeared in any doc for this account.
+- **Domain warm-up:** confirmed warming since 2026-06-30 (one day after onboarding), tracked directly by the CSM (Collins) in Slack. Consistent with the planned email launch the week of 2026-07-20.
+- **List uploads:** Loyd is the person uploading contact lists, prioritizing mobile numbers first, then direct dials, split into 3 lists per Kyle's instruction. Worth looping in when auditing list quality or requesting the current active lists.
+- **Sequence scheduling:** David Goodman Silver instructed at least 3 follow-up call blocks per launch, 3-5 sequences at 300+ contacts each (matches scope already on file). Spacing (daily vs weekly) was left unspecified — worth clarifying given the deadline pressure, since ambiguous cadence is exactly the kind of thing that quietly slips.
 
 **Week 2 adjustments already in motion:** new lists restricted to core verticals with support/CX/ops titles only; a phone-data verification pass to cut wasted dials (directly addresses the wrong-number complaint flagged earlier); sharpened talk track on differentiators (addresses the "already have a tool" objection above). All three map directly onto risks already flagged in this account card, good convergence even without every note having been seen by the field team.
 
