@@ -177,3 +177,38 @@ These are real, public, sourced incidents — not Structural Chat claims — but
 - Air Canada bereavement fare ruling: *Moffatt v. Air Canada*, 2024 BCCRT 149 (BC Civil Resolution Tribunal, Feb 2024). Covered by Forbes, AI Incident Database (Incident 639).
 - Chevrolet of Watsonville $1 Tahoe prompt injection: Dec 2023, widely reported (AI Incident Database, Incident 622). OWASP subsequently ranked prompt injection as the top security risk for generative AI systems.
 - 60-80% repetitive ticket stat and $8-20 blended cost-per-ticket range: aggregated industry benchmarks (contact center / customer support cost studies, 2026). Treat as directional industry framing, not a Structural Chat-specific claim.
+
+---
+
+## Post-Call Follow-Up (Demo Booking)
+Sent after a live call where the prospect asked for more info and a demo time. Uses the merge-field convention from the source template (`{first_name}`, `{company_name}`, `{sig}`) rather than the `{{FIELD}}` convention used elsewhere in this doc — kept as-is since this template lives in a different sending tool.
+
+**Revised 2026-07-16** — original draft made two claims that read as invented Structural Chat results ("reducing... volume by up to 80%" stated as an outcome, and "zero wrong answers" as a broader guarantee than the hallucination claim supports) and ran several ideas into one long sentence. Fixed below: the 60-80% figure is reframed as the industry pattern the bot addresses, not a claimed Structural result; the guarantee is narrowed to what deterministic code actually supports (can't invent an answer that doesn't exist); and the run-on is split into short paragraphs.
+
+**BODY**
+
+```
+Hi {first_name},
+
+Thanks for taking our call today. Here's a bit more on Structural Chat, as requested.
+
+Most support teams find that 60 to 80 percent of their tickets are the same handful of repetitive requests. Structural bots complete those right in the conversation, billing questions, scheduling, account changes, and more, instead of just pointing customers to a help page.
+
+The bots run on deterministic code, not a language model, so they can't invent an answer that doesn't exist. Anything outside their scope hands off cleanly to your team.
+
+Most go live in a week or two, built to your own vocabulary and branding. For privacy-sensitive industries, they can also run fully on your own infrastructure, so no data ever reaches a third party.
+
+Paul would be happy to show you a free demo, built specifically for {company_name}.
+
+Here are a few times that work on our end:
+1.
+2.
+3.
+
+Let me know if any of these fit your schedule.
+
+If I don't hear back, I'll follow up with a call in a few days.
+
+Best,
+{sig}
+```
