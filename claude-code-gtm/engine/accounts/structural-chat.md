@@ -22,6 +22,34 @@ Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08
 
 ---
 
+### OFFICIAL ICP — read this second (received 2026-07-16, supersedes prior tiering)
+
+**This is the authoritative targeting criteria from the official handoff doc.** It supersedes the Tier 1-3 framework in `STRUCTURAL-TAM-GTM-STRATEGY.md`, which was built from independent market research on 2026-07-15 *before* this handoff doc existed and incorrectly led with e-commerce/DTC — a vertical that is **not** on the official target list. Any list audit must use the criteria below, not the strategy doc's Tier 1-3 table. The strategy doc's market-sizing (TAM/SAM/SOM) and competitive-map sections are still directionally useful context; only the tactical targeting tiers are superseded.
+
+| Criteria | Official spec |
+|---|---|
+| Industries | Property management & residential real estate, mortgage & loan servicing, healthcare & telehealth, online pharmacy, online dermatology & specialty telehealth, utilities & telecom, broadband & cable ISPs, travel & hospitality, fintech / neobanks, subscription commerce & streaming |
+| Revenue / stage | Primarily <$50M ARR / Series A-B. Larger companies OK if actively evaluating support bots or unhappy with an existing bot deployment (active-evaluation or displacement signal) |
+| Location | United States (primary) |
+| Titles | Chief Customer Officer, COO, CEO, Head of Product, Chief Product Officer, Chief Experience Officer, Sr. Director of Support Operations, Director of Client Services, Director of Customer Success, Member Experience Lead, Manager of Customer Support & Success; co-founder titles at Series A/B startups |
+
+**Good news:** the vertical-hook table already built in `STRUCTURAL-OUTBOUND-EMAIL-COPY.md` (property management, mortgage, healthcare, pharmacy, utilities/telecom, travel, fintech, subscription commerce) already matches this official list closely — that copy doesn't need rework. The email/sequence work is fine; the strategy doc's lead-vertical recommendation is what needs correcting.
+
+**URGENT — suppression list not yet finalized:** an Uncork Capital / Uncork Fintech Portfolio exclusion list is **pending final confirmation from Paul.** Meetings must not be booked with domains on that list once confirmed. Since calling is already live and the list isn't locked, there is real risk of booking a meeting now that later has to be discounted or unwound for landing on a suppressed domain — costly given the 5-by-7/29 deadline has no room for a wasted meeting. Get this list locked and cross-referenced against active call/email lists immediately, don't wait for it to surface as a problem after a meeting is booked.
+
+**Compliance / positioning guardrail (from handoff notes):** Structural Chat is **not SOC 2 certified.** If a prospect raises SOC 2 / HIPAA, the correct answer is that the bot can deploy fully on the client's own infrastructure with no data sent to Structural Chat or any AI/model provider — not a claim of certification. Flag any compliance question that comes up on a call in the handoff note. Also confirmed again here: no live clients yet, never reference case studies; never say "AI chatbot" or "powered by AI" anywhere client- or prospect-facing.
+
+---
+
+### Handoff Process (from official handoff doc)
+
+- **Client contact:** Paul Chiusano — solo founder, the only person on Structural's sales team. All booked meetings route directly to him.
+- **Meeting-booked handoff email:** routes to Paul, CC's the CSM (Collins) and Kyle, BCC's an internal ops alias. Subject format: `***MEETING BOOKED - {Company Name}`. Body includes lead details (name, position, company, phone, email, LinkedIn) and meeting date/time, plus a link to the live lead handoff sheet (pending Book of Business dashboard setup for this account).
+- **Meeting logistics:** booked via Paul's Calendly (on file). Confirmation reminders come from a dedicated confirmation-sender address. Paul is based in Boston through July 2026 (normally New Orleans) — Eastern time throughout, so no timezone-conversion errors on booking.
+- **Template note:** if a prospect requests a time the calendar can't fit exactly, flag the discrepancy explicitly in the handoff note (e.g. "prospect asked for 4:00pm ET, calendar open at 4:15pm ET — bump if possible") rather than silently booking the mismatch.
+
+---
+
 ### Company Profile
 
 | Field | Value |

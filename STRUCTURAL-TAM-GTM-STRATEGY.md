@@ -1,6 +1,8 @@
 # Structural (structural.chat) — TAM Analysis, Market Mapping & GTM Strategy
 ### Built by Extruct GTM Engine | July 2026 | Outbound-Led, Vertical-Wedge Motion
 
+> **CORRECTION (2026-07-16):** This document was built from independent market research on 2026-07-15, before the account's official handoff doc and ICP were available. Its Tier 1 recommendation (e-commerce/DTC as the lead vertical) is **not part of Structural's actual target market** and should not be used for list-building or targeting. The authoritative ICP — property management, mortgage/loan servicing, healthcare/telehealth, online pharmacy, dermatology telehealth, utilities/telecom/broadband, travel/hospitality, fintech/neobanks, and subscription commerce, <$50M ARR/Series A-B, US, with a specific title list — is recorded in `claude-code-gtm/engine/accounts/structural-chat.md` under "OFFICIAL ICP." The TAM/SAM/SOM market-sizing and competitive-map sections below are still directionally useful; only the tactical Tier 1-3 targeting table is superseded.
+
 ---
 
 ## EXECUTIVE SUMMARY
