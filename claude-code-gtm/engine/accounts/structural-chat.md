@@ -14,7 +14,11 @@
 
 30 days from 2026-06-29 = **2026-07-29.** This is not a soft internal goal, it is a contractual right the client can exercise. It is the reason the Canvas flagged "5 qualified meetings by 7/29" with a fire emoji, and it is why the internal deadline is Wed 2026-07-22 — roughly a week of buffer to course-correct before the contractual date.
 
-**Status as of 2026-07-16: 2 of 5 required meetings booked. 3 more needed within ~12-13 days.**
+**Status as of 2026-07-17: 2 of 5 required meetings booked — Cafe Services Inc (VP Ops Support, confirmed Tue 8am) and Parspec (HR & Ops Lead, confirmed Fri 7/17).**
+
+**URGENT open question — do these 2 actually count?** The 7/16 sync explicitly flags both as "not perfect ICP fits" to be "framed as intro calls." The contract requires 5 *qualified* meetings, and the handoff doc's ICP section is literally titled "Template Meeting Qualifications (ICP)" — meaning ICP fit may be the contractual definition of "qualified," not just an internal quality note. **If these 2 don't hold up as qualified, the real gap could still be 5 meetings, not 3, with the same ~12 days left.** Get an explicit answer from Paul or whoever owns contract interpretation on what "qualified" means before treating these 2 as locked in. This is the single highest-priority open question on the account right now.
+
+**Conversation-count discrepancy to reconcile:** client's earlier message cited 78 conversations -> 2 meetings (2.6%). The 7/16 sync cites 111 live conversations, same 2 meetings named. If 111 is the current cumulative total, the 33 conversations added since 78 produced zero new meetings — worse pace than the already-below-target 2.6%, not flat. Confirm whether 111 is cumulative or a different measurement window before reading trend direction either way.
 
 Everything else in this account (list audit, email launch, call volume) should be prioritized against this number first. A general conversion-rate improvement is good but secondary; the binary pass/fail on 5-by-7/29 is what determines whether Structural can walk away with a full refund.
 
@@ -56,6 +60,22 @@ Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08
 - **Meeting-booked handoff email:** routes to Paul, CC's the CSM (Collins) and Kyle, BCC's an internal ops alias. Subject format: `***MEETING BOOKED - {Company Name}`. Body includes lead details (name, position, company, phone, email, LinkedIn) and meeting date/time, plus a link to the live lead handoff sheet (pending Book of Business dashboard setup for this account).
 - **Meeting logistics:** booked via Paul's Calendly (on file). Confirmation reminders come from a dedicated confirmation-sender address. Paul is based in Boston through July 2026 (normally New Orleans) — Eastern time throughout, so no timezone-conversion errors on booking.
 - **Template note:** if a prospect requests a time the calendar can't fit exactly, flag the discrepancy explicitly in the handoff note (e.g. "prospect asked for 4:00pm ET, calendar open at 4:15pm ET — bump if possible") rather than silently booking the mismatch.
+
+---
+
+### Week 1 Sync Findings (2026-07-16, received 2026-07-17)
+
+**Vertical performance validates the official ICP:** early lists skewed B2B SaaS/tech (never part of the approved ICP) and drew predictable "we built it ourselves" / "no volume" responses, exactly the failure mode of an off-ICP list. The 7/14 list (utilities, telecom, hospitality, broadband, pharmacy) immediately performed better. Week 2 plan: all-in on core approved verticals plus property management and mortgage. Good sign, real conversion data now agrees with the documented ICP rather than requiring a separate argument for it.
+
+**Best lead of the week — Municipal District Services (MDS):** AVP of Enterprise Support Services actively evaluating a competing solution right now. This is a textbook match for the "currently evaluating/running an unreliable competing bot" displacement signal from the onboarding doc. Follow-up call scheduled Thursday (7/23), with a direct line to their VP. Not yet a booked/counted meeting, treat as the strongest near-term shot at meeting #3.
+
+**Top objection pattern: "we already have a tool."** Prospects hear "support automation" and assume it means a chatbot they already own. Fix identified in the field: lead with transactional + deterministic framing (the bot does the thing, and is never wrong) instead of the generic "support automation" category label, which invites the assumption. Worth folding into `STRUCTURAL-BATTLE-CARD.md`'s objection section and checking whether current email/call openers already avoid the generic framing (they mostly do, but the opener line in the battle card's cold call script — "we build custom support that handles..." — could be sharpened further given this real-world data point).
+
+**Proof-point conversation — Max Retail VP of CX:** their current AI tool covers tier-1 requests fine, but tier-2/3 requests against their internal API are the real pain, a clean match for Structural's transactional (not just informational) differentiation. Follow-up scheduled. **Worth a quick ICP check:** "Retail" in the name is close enough to the pure-e-commerce exclusion to be worth confirming this isn't an excluded account before investing more time in it.
+
+**Warm pipeline (not yet booked meetings):** MDS (Thu 7/23 follow-up), Max Retail (~30 days), Evo Security/Barracuda (~30 days, post-acquisition support restructuring), plus referrals to correct support owners from mis-targeted calls.
+
+**Week 2 adjustments already in motion:** new lists restricted to core verticals with support/CX/ops titles only; a phone-data verification pass to cut wasted dials (directly addresses the wrong-number complaint flagged earlier); sharpened talk track on differentiators (addresses the "already have a tool" objection above). All three map directly onto risks already flagged in this account card, good convergence even without every note having been seen by the field team.
 
 ---
 
@@ -142,8 +162,8 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 **Status of each, as of 2026-07-16 (pre-review):**
 | Question | Status |
 |---|---|
-| Targeting fit | HYPOTHESIS, partially supported — see Risk Flag above (one booked meeting, off-ICP company type). Needs full list audit to quantify. |
-| Objection pattern | UNKNOWN — no transcript access yet. Requesting call transcripts/recordings to categorize systematically. |
+| Targeting fit | **CONFIRMED 2026-07-17** — see Week 1 Sync Findings above. Off-ICP B2B SaaS/tech lists drew "built it ourselves"/"no volume"; the 7/14 correct-vertical list immediately performed better. Week 2 is correctly narrowed to approved verticals. |
+| Objection pattern | **PARTIALLY ANSWERED 2026-07-17** — top objection is "we already have a tool" (prospects hear "support automation" and assume an owned chatbot). Fix: lead with transactional/deterministic framing, not the generic category label. Full transcript review still not done. |
 | Email sequence status | **RESOLVED 2026-07-16** — confirmed intentional. Cold calls are the only live channel; email campaigns are planned to launch the week of 2026-07-20 (`STRUCTURAL-OUTBOUND-EMAIL-COPY.md` and `STRUCTURAL-OUTBOUND-SEQUENCE.md` are the copy/cadence built for that launch). |
 
 **New stakeholder:** Client is adding their own sales hire to future meetings, starting with the 2026-07-17 weekly review. Read: elevated attention on this account's numbers — come with real data, not reassurance.
