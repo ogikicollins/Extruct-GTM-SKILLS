@@ -81,6 +81,10 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 - [ ] Pull 15-20 recent call transcripts/recordings for objection-pattern categorization
 - [ ] Confirm email sequence launch status/timeline with owner
 - [ ] If data isn't ready by review time: present the diagnostic plan itself + honest "here's what we're checking, here's when you'll have real numbers" rather than a guess
+- [ ] **NEW (2026-07-16):** Audit the newly-uploaded list(s) against Tier 1 ICP criteria BEFORE they go live in calls — do not let "new list" stand in for "verified list" a second time
+- [ ] Confirm next week's call blocks actually land on the calendar, not just "planned"
+
+**List-refresh update (2026-07-16):** Internal update flagged that call launches have been slow due to list quality, a couple of meetings booked, and new lists were just uploaded "hoping to crack the code." No further call blocks scheduled for the remainder of this week; more planned for next week. This independently confirms the targeting/ICP-alignment risk flagged above, which is a good sign the team caught it. Not yet confirmed whether the new lists were built against the Tier 1 criteria or just swapped for a different unaudited pull — needs verification before being presented to the client as a fix.
 
 ---
 
