@@ -41,7 +41,9 @@ Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08
 
 **Suppression list status (updated 2026-07-16): PARTIAL.** Uncork Capital fintech portfolio list has been provided. Still pending from Paul: "active client domains" (likely other OSP/Parakeet client conflicts, not Structural's own customers — Structural has none yet). Meetings must not be booked against the Uncork list now that it's in hand; the remaining pending piece should still be treated as a live risk until confirmed, especially given fintech is the prioritized segment and therefore the segment most likely to intersect the Uncork exclusion list.
 
-**Compliance / positioning guardrail (from handoff notes):** Structural Chat is **not SOC 2 certified.** If a prospect raises SOC 2 / HIPAA, the correct answer is that the bot can deploy fully on the client's own infrastructure with no data sent to Structural Chat or any AI/model provider — not a claim of certification. Flag any compliance question that comes up on a call in the handoff note. Also confirmed again here: no live clients yet, never reference case studies; never say "AI chatbot" or "powered by AI" anywhere client- or prospect-facing.
+**Compliance / positioning guardrail (from handoff notes):** Structural Chat is **not SOC 2 certified.** If a prospect raises SOC 2 / HIPAA, the correct answer is that the bot can deploy fully on the client's own infrastructure with no data sent to Structural Chat or any AI/model provider — not a claim of certification. Flag any compliance question that comes up on a call in the handoff note. No live clients yet, never reference case studies.
+
+**CORRECTED 2026-07-16 — AI-framing is a live A/B test, not a fixed ban:** the battle card (`STRUCTURAL-BATTLE-CARD.md`) reveals the "never say AI" rule is one of *two* framings being tested, not a hard rule: (1) "no LLM / no AI" — what all prior copy for this account committed to, and (2) "a new, lightweight, 100% reliable type of AI that isn't LLMs" — which does use the word "AI," qualified. The battle card's own Level 2 call script uses framing (2) directly. **Everything built so far for this account (`STRUCTURAL-OUTBOUND-EMAIL-COPY.md`, `STRUCTURAL-OUTBOUND-SEQUENCE.md`) used framing (1) only, treating it as the sole option.** Need to confirm with the team which framing is currently performing better before assuming more copy should stay locked to "no AI at all" — may be worth building a framing-(2) variant to test in parallel rather than picking one unilaterally.
 
 ---
 
@@ -60,9 +62,11 @@ Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08
 |-------|-------|
 | Company | Structural (structural.chat) |
 | Website | structural.chat |
-| Parent org | Unison Computing (public benefit corp) — Unison programming language team (Paul Chiusano, Rúnar Bjarnason, Arya Irani) |
+| Parent org | Unison Computing (unison.cloud, public benefit corp) — a 4-person company. Structural Chat is the new product, ~2 months old as of 2026-07-16. |
 | Industry / Vertical | LLM-free / deterministic AI customer support bots |
 | Billing contact | Paul Chiusano (Unison Computing) — confirmed invoiced; contact email on file internally, not repeated here |
+| Dialer / CRM | Nooks (SDR calling tool) |
+| Structural's own product pricing | ~$3,000-$5,000/month, open to creative terms for early adopters. Distinct from the still-unknown OSP/Parakeet subscription fee — do not conflate the two. |
 | Slack channel | `#structural-chat` (renamed from `unison-computing` → `unison-cloud` → `structural-chat`) |
 | Account ownership | **CSM: Collins Ogiki** (corrected 2026-07-16 — earlier note attributing CSM to Peter Montalbano was wrong, sourced from an incomplete Slack summary). Call operations: Fernanda. Billing confirmed internally. |
 | SDR team | Jennifer Ruiz, Patrick A |
@@ -118,7 +122,7 @@ Call activity underway on live sequences. Reported issue: a share of dialed cont
 
 The reported problems (wrong numbers, incorrect contacts, urgent need for new lists) are classic symptoms of lists pulled before a disciplined ICP was locked. **Cafe Services Inc** — the one booked meeting so far — reads like a contract foodservice/vending company, which does not obviously match any of the Tier 1–3 segments in `STRUCTURAL-TAM-GTM-STRATEGY.md` (e-commerce/DTC, fintech/insurtech, travel/OTA, logistics). This needs a direct check against the actual list, not an assumption — flagging so it isn't lost.
 
-**If confirmed misaligned:** the fix is to re-pull the next list batch strictly against the Tier 1 e-commerce/DTC criteria in the strategy doc (50–500 employees, $10M–$300M GMV, Shopify Plus/BigCommerce Enterprise, 1,000+ tickets/month, active helpdesk tooling, trigger-event filtered) rather than a broad/generic B2B list — that should directly fix the "wrong numbers / bad contacts" complaint, since precision targeting also means better-verified contact data.
+**SUPERSEDED 2026-07-16:** the fix described here originally pointed at the strategy doc's e-commerce/DTC Tier 1 criteria — wrong, since e-commerce is explicitly excluded from Structural's ICP. **Use the OFFICIAL ICP section above instead**: 10-1,000 employees, <$50M ARR/Series A-B, the 10 approved verticals, and the official title list. Battle card (`STRUCTURAL-BATTLE-CARD.md`) adds a useful refinement: prioritize domains with real support volume that's a little bespoke (property management is the card's example) over commoditized domains — that's also *why* e-commerce is excluded, off-the-shelf bots already serve it well.
 
 ---
 
