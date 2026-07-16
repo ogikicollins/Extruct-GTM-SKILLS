@@ -1,10 +1,24 @@
 # Account Card — Structural (structural.chat)
 
 **Created:** 2026-07-16
-**Last Updated:** 2026-07-16 (corrected against Slack Canvas ground truth)
+**Last Updated:** 2026-07-16 (contract terms received)
 **Lead Score:** N/A — active client, not a prospect
 **Tier:** 1 (Active Client — Launch Sprint)
-**Stage:** In Sequence / SDR Calling Live
+**Stage:** In Sequence / SDR Calling Live — **CONTRACT REFUND-TRIGGER DEADLINE ACTIVE**
+
+---
+
+### CONTRACT RISK — read this first
+
+**Clause C of the OSP Subscription Agreement (contracting entity: Parakeet LLC):** if 5 qualified meetings are not scheduled within 30 days of the contract execution date (2026-06-29), the client may terminate the agreement **and receive a full refund of all fees paid.**
+
+30 days from 2026-06-29 = **2026-07-29.** This is not a soft internal goal, it is a contractual right the client can exercise. It is the reason the Canvas flagged "5 qualified meetings by 7/29" with a fire emoji, and it is why the internal deadline is Wed 2026-07-22 — roughly a week of buffer to course-correct before the contractual date.
+
+**Status as of 2026-07-16: 2 of 5 required meetings booked. 3 more needed within ~12-13 days.**
+
+Everything else in this account (list audit, email launch, call volume) should be prioritized against this number first. A general conversion-rate improvement is good but secondary; the binary pass/fail on 5-by-7/29 is what determines whether Structural can walk away with a full refund.
+
+Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08-28, consistent with the Canvas's 8/29 renewal note), then auto-renews in 90-day cycles unless 5-day written notice is given before the next billing cycle. Standard performance clause (E) states OSP does not guarantee outcomes and fees are earned on an activity basis — the 5-meetings-in-30-days provision is a specific, quantified carve-out to that general rule, not overridden by it.
 
 ---
 
@@ -111,12 +125,12 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 
 | Field | Value |
 |-------|-------|
-| Stage | Active launch sprint — SDR calling live sequences; conversion below client's expected target |
-| Next Action | Complete conversion diagnostic (list audit + transcript review + email status) ahead of 2026-07-17 weekly review |
-| Next Action Date | 2026-07-17 |
-| Days in Current Stage | ~7 (since Jul 9 launch) |
-| Risk Flag | Conversion rate 2.6% vs 12% target; list quality / ICP alignment unverified; email channel status unclear |
-| Deal Value | Unknown — invoicing confirmed but no amount visible in Slack summary |
+| Stage | Active launch sprint — SDR calling live sequences; conversion below target; **contractual refund-trigger deadline 2026-07-29** |
+| Next Action | Get 3 more qualified meetings booked before 2026-07-29 — this now supersedes the general conversion-rate diagnostic as the top priority. List audit, email launch, and transcript review are all in service of this number. |
+| Next Action Date | 2026-07-22 (internal checkpoint) / 2026-07-29 (contractual deadline) |
+| Days in Current Stage | ~7 (since Jul 9 launch); ~12-13 days remaining to the contractual deadline |
+| Risk Flag | **HIGH — full-refund termination right activates 2026-07-29 if meetings 3-5 aren't booked.** Conversion rate 2.6% vs 12% target; list quality / ICP alignment unverified. |
+| Deal Value | Dollar amount unknown, but full-refund exposure is real and time-bound (see Contract Risk section above) |
 
 ---
 
@@ -128,6 +142,7 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 | 2026-07-16 | Account card opened | Reconstructed from internal activity summary. Launch sprint underway. First meeting booked (Cafe Services Inc, Jul 17) — fit vs. ICP unverified. |
 | 2026-07-16 | Client raised conversion concern | 78 conversations → 2 meetings (2.6%) vs 12% target. Client requesting objection data, targeting review, transcript access, and email-status clarification ahead of 2026-07-17 weekly review. New client-side sales stakeholder joining going forward. |
 | 2026-07-16 | Ground-truth Canvas received | Slack Canvas provided full account facts: CSM corrected to Collins Ogiki, onboarding 6/29, calls start 7/9, renewal 8/29 (5-day notice), goals (5 qualified meetings by 7/29, July Set 7/Held 4), internal deadline Wed 7/22, and confirmation email is planned not missing. Battle card, scripts, full Slack history, and lists to follow before next full diagnosis. |
+| 2026-07-16 | **Contract terms received — refund-trigger deadline confirmed** | OSP Subscription Agreement (Parakeet LLC) clause C: 5 qualified meetings required within 30 days of 6/29 execution date (= 7/29) or client can terminate for full refund. This is the real deadline behind the Canvas's fire-emoji flag. 2 of 5 booked as of 7/16; 3 more needed in ~12-13 days. Reprioritized: getting to 5 meetings by 7/29 now outranks the general conversion-rate diagnostic. |
 
 ---
 
