@@ -16,6 +16,13 @@ Sales, Account Executive, Engineer, Engineering, Human Resources, Recruiter, Tal
 ```
 *(If a title contains both an included term and an excluded term — e.g. "VP of Sales Support" — exclude it. Sales/Engineering/HR/Finance/Marketing as the lead word loses, Customer/Support/Service as the lead word wins.)*
 
+**Department (Seamless "Department" filter):**
+```
+Include: Support, Operations
+Exclude: Sales, Engineering, Human Resources, Finance, Marketing
+```
+Leave "IT" out of the Department filter entirely — in the last pull it was the 2nd-largest department (125/390) but a mixed bag of genuine support-adjacent hybrid roles and pure infrastructure/engineering leaders. The title include/exclude list above already catches the legitimate hybrid titles; trusting Seamless's IT bucket wholesale would let the engineering-heavy half back in.
+
 **Seniority Level:**
 ```
 VP, SVP, EVP, C-Suite/Chief, Head
