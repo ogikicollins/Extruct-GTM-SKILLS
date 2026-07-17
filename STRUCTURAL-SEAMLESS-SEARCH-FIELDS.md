@@ -86,6 +86,23 @@ Tag the export (add a column, e.g. "Segment: Greenfield" / "Segment: Displacemen
 
 ---
 
+## How to build this in Seamless.ai, step by step
+
+*Note: exact field labels can shift with Seamless's UI updates — I don't have live access to confirm the current interface, so treat these as the general workflow and adjust to whatever you actually see on screen.*
+
+1. **Open Search / Build a List** in Seamless.ai (usually the main "Search for Leads" or "Prospect" screen).
+2. **Set the universal filters first, once** — these stay identical across all 9 runs: Job Title include list, Job Title exclude list, Department (Support, Operations), Seniority (VP/SVP/EVP/Chief/Head), Employee Count (11–1,000), Revenue ($1M–$75M), Location (United States).
+3. **Save this as a base search/template** if Seamless supports saved searches — most plans do. Naming it something like "Structural Chat — Base ICP Filter" means you only touch the Industry + Keyword fields for each of the 9 vertical runs instead of rebuilding the whole thing each time.
+4. **For vertical #1 (Fintech):** add the Industry filter (Financial Services, Banking, Fintech) and Keyword filter (neobank, payments, fintech, digital bank) on top of the base search. Run it.
+5. **Cap the pull at the target row count** (200 for fintech) — either by setting a result limit before reveal, or by sorting/selecting the top 200 results manually before exporting. Seamless usually charges credits per contact revealed, so don't reveal more than the target unless you want overage.
+6. **Export to CSV**, name the file clearly (e.g. `structural-fintech-200.csv`), then go back to the saved base search and swap only the Industry + Keyword fields for vertical #2. Repeat through all 9 verticals (and the optional greenfield/displacement Technologies split, if you're running that too).
+7. **Combine all 9 exports into one master CSV** (same column structure as the last pull, e.g. via the same node/Excel dedupe approach used to build the clean 105-row Structural Chat call list) — total should land near 1,500 rows before de-dupe.
+8. **De-dupe on company + email**, cap at 2 contacts per company, drop any row matching a domain in `STRUCTURAL-SUPPRESSION-LIST.md`, and drop any row matching a company already in `STRUCTURAL-CHAT-CALLS-CLEAN.csv`.
+9. **Spot-check the largest 20 companies by employee/revenue** by hand before finalizing — this is where the last pull's bad data (Walmart Investment Co. tagged as 350 employees) would have been caught.
+10. **Hand the final merged, de-duped, suppressed file to Loyd** for the actual Nooks/HubSpot list upload, following the existing "Structural Chat - CS People" naming convention (e.g. `Structural Chat - CS People v2` or dated).
+
+If Seamless's plan limits how many searches or credit reveals can run in one session, do the fintech batch first as a test — pull it, sanity-check the output against this spec, confirm it looks right, then scale to the remaining 8 verticals rather than running all 1,500 blind.
+
 ## Before this goes to Nooks
 
 1. De-dupe: max 2 contacts per company.
