@@ -92,6 +92,18 @@ Chief Customer Officer / Chief Experience Officer, COO / CEO, Head of Product / 
 
 ## Objections & How to Handle
 
+**"We already have a bot / support automation."** This is the top objection surfaced in the field (7/16 sync), and Paul flagged the exact same risk in writing back on day one, with a full framework that hadn't made it into this card until now. Use his own approach:
+
+*The split that matters:* a prospect with an existing bot is either **displacement-ready** (unhappy with it, cases still slipping through) or **defended** (happy with it, proud of the rollout). The first is a real opportunity. The second is a hard sell right now, don't force it, log it as a later re-engagement candidate instead.
+
+*Diagnostic questions (Paul's exact language):* "Are all of your support cases getting handled automatically by the chatbot you've rolled out?" If no: "What are some that are slipping through?" Then: "Would you be interested in learning more about a next-gen support bot which can handle many more support cases, with perfect reliability?"
+
+*The reframe, once you know it's displacement-ready:* "We can replicate the capabilities of any bot you already have deployed, and we build custom bots very quickly, often in as little as a week or two." Not a like-for-like swap pitch, an upgrade pitch.
+
+*Why this objection exists at all (useful context, not a script line):* most support automation fails because customers don't trust the bot, it made a mistake once or has limited capabilities, so people learn to skip straight to "representative." Structural's answer is reliability plus instant feedback plus a smooth, in-context escalation to a human for anything outside its vocabulary, so trust never breaks down in the first place.
+
+*Operational note:* there's no way to pre-screen for "has a competing bot already" during list-building (confirmed limitation, not a tooling gap to chase), so this lives entirely in call-time talk track discipline. Tight objection handling here matters more than list filtering for this specific risk.
+
 **SOC 2 / HIPAA / compliance:** Not SOC 2 certified yet. For sensitive use cases, the bot deploys on the client's own infrastructure, no data is sent to Structural Chat or any AI/model provider, which usually neutralizes HIPAA and data-privacy concerns. **Don't promise certification.** If compliance is the only blocker, flag it and route specifics to Paul.
 
 **"No LLMs, how does it actually work?"** It uses a fast, deterministic natural-language technique (NLDs, natural language disambiguators) to match what a user types to a defined set of commands, then runs ordinary, reliable code to complete the task. No model "guessing," so no hallucinations. Turn deep technical questions into a meeting with Paul.
