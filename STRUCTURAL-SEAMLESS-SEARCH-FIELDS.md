@@ -86,22 +86,60 @@ Tag the export (add a column, e.g. "Segment: Greenfield" / "Segment: Displacemen
 
 ---
 
-## How to build this in Seamless.ai, step by step
+## How to build this in Seamless.ai, full step-by-step walkthrough
 
 *Note: exact field labels can shift with Seamless's UI updates — I don't have live access to confirm the current interface, so treat these as the general workflow and adjust to whatever you actually see on screen.*
 
-1. **Open Search / Build a List** in Seamless.ai (usually the main "Search for Leads" or "Prospect" screen).
-2. **Set the universal filters first, once** — these stay identical across all 9 runs: Job Title include list, Job Title exclude list, Department (Support, Operations), Seniority (VP/SVP/EVP/Chief/Head), Employee Count (11–1,000), Revenue ($1M–$75M), Location (United States).
-3. **Save this as a base search/template** if Seamless supports saved searches — most plans do. Naming it something like "Structural Chat — Base ICP Filter" means you only touch the Industry + Keyword fields for each of the 9 vertical runs instead of rebuilding the whole thing each time.
-4. **For vertical #1 (Fintech):** add the Industry filter (Financial Services, Banking, Fintech) and Keyword filter (neobank, payments, fintech, digital bank) on top of the base search. Run it.
-5. **Cap the pull at the target row count** (200 for fintech) — either by setting a result limit before reveal, or by sorting/selecting the top 200 results manually before exporting. Seamless usually charges credits per contact revealed, so don't reveal more than the target unless you want overage.
-6. **Export to CSV**, name the file clearly (e.g. `structural-fintech-200.csv`), then go back to the saved base search and swap only the Industry + Keyword fields for vertical #2. Repeat through all 9 verticals (and the optional greenfield/displacement Technologies split, if you're running that too).
-7. **Combine all 9 exports into one master CSV** (same column structure as the last pull, e.g. via the same node/Excel dedupe approach used to build the clean 105-row Structural Chat call list) — total should land near 1,500 rows before de-dupe.
-8. **De-dupe on company + email**, cap at 2 contacts per company, drop any row matching a domain in `STRUCTURAL-SUPPRESSION-LIST.md`, and drop any row matching a company already in `STRUCTURAL-CHAT-CALLS-CLEAN.csv`.
-9. **Spot-check the largest 20 companies by employee/revenue** by hand before finalizing — this is where the last pull's bad data (Walmart Investment Co. tagged as 350 employees) would have been caught.
-10. **Hand the final merged, de-duped, suppressed file to Loyd** for the actual Nooks/HubSpot list upload, following the existing "Structural Chat - CS People" naming convention (e.g. `Structural Chat - CS People v2` or dated).
+### Phase 1 — Before you touch a filter
+1. Log into Seamless.ai.
+2. Check your credit/reveal balance (Settings → Billing or Plan). 1,500 revealed contacts is a real credit spend — confirm the balance covers it, or plan to pull in batches across billing cycles.
+3. Open the search/prospecting tool (commonly labeled "Search for Leads," "Prospector," or "Build a List").
 
-If Seamless's plan limits how many searches or credit reveals can run in one session, do the fintech batch first as a test — pull it, sanity-check the output against this spec, confirm it looks right, then scale to the remaining 8 verticals rather than running all 1,500 blind.
+### Phase 2 — Build the base filter once
+4. Set **Location** → United States.
+5. Set **Job Title → Include**, paste the include list from above.
+6. Set **Job Title → Exclude** (or "NOT" / "Exclude keywords," depending on your plan's UI), paste the exclude list.
+7. Set **Department → Include**: Support, Operations. Set **Exclude** if the field allows it: Sales, Engineering, Human Resources, Finance, Marketing. (If Seamless only allows include, not exclude, on Department, skip Exclude here — the title exclude list is already doing that job.)
+8. Set **Seniority Level** → VP, SVP, EVP, C-Suite/Chief, Head.
+9. Set **Company Employee Count** → check the 11-50, 51-200, 201-500, and 501-1,000 bands. Leave 1,000+ unchecked.
+10. Set **Company Revenue** → check $1M-$10M, $10M-$50M, $50M-$75M. Leave $300M+ and $1B+ unchecked.
+11. **Save this as a template/saved search** if your plan has that option — name it "Structural Chat — Base ICP Filter." If saved searches aren't available, keep this doc open and re-enter these 7 fields identically for each of the 9 runs below; don't rely on memory for consistency.
+
+### Phase 3 — Run each vertical, one at a time
+
+For each row, add only the Industry + Keyword filters on top of the base filter, run the search, review the result count against the target, and export before moving to the next.
+
+12. **Vertical 1 — Fintech / neobanks (target 200):** Industry = Financial Services, Banking, Fintech. Keyword = neobank, payments, fintech, digital bank. Run → review results (spot-check 5-10 for real support/CX titles and plausible company size) → cap/select up to 200 → reveal → export as `structural-fintech-200.csv`.
+13. **Vertical 2 — Property management & residential real estate (target 175):** Industry = Real Estate, Real Estate Management. Keyword = property management, residential, multifamily, HOA. Add Seniority → Director for this one, since Director is often the functional ceiling at smaller property management firms. Run → review → export as `structural-propmgmt-175.csv`.
+14. **Vertical 3 — Mortgage & loan servicing (target 150):** Industry = Financial Services, Banking, Real Estate. Keyword = mortgage, loan servicing, loan origination. Run → review → export as `structural-mortgage-150.csv`.
+15. **Vertical 4 — Utilities & telecom (target 200):** Industry = Utilities, Telecommunications. No extra keyword needed. Run → review — this vertical over-delivered last time (31% of the old list), so double-check you're not pulling far past 200 before exporting. Export as `structural-utilities-200.csv`.
+16. **Vertical 5 — Broadband & cable ISPs (target 100):** Industry = Telecommunications, Internet. Keyword = broadband, fiber, cable, ISP. Run → review → export as `structural-broadband-100.csv`.
+17. **Vertical 6 — Healthcare & telehealth / online pharmacy / dermatology (target 200):** Industry = Hospital & Health Care, Pharmaceuticals, Medical Practice. Keyword = telehealth, telemedicine, online pharmacy, dermatology, specialty pharmacy. Keyword match matters most here — Industry alone caught mostly drug manufacturers last time, not telehealth companies. Run → review closely → export as `structural-healthtech-200.csv`.
+18. **Vertical 7 — Travel & hospitality (target 175):** Industry = Leisure/Travel & Tourism, Hospitality. Keyword optional (OTA, booking, budget airline, car rental, cruise) — Industry alone performed fine last time. Run → review → export as `structural-travel-175.csv`.
+19. **Vertical 8 — Subscription commerce & streaming (target 150):** Industry = Entertainment, Internet, Computer Software. Keyword = subscription, streaming, membership box. Add Seniority → Director here too, subscription-commerce companies skew smaller. Run → review → export as `structural-subscription-150.csv`.
+20. **Vertical 9 — Secondary/comparison batch (target 150):** Industry = Retail, Computer Software. For Retail, add an exclude keyword for e-commerce, online store, DTC, Shopify to avoid the excluded pure-e-commerce category. For Software, keyword = customer support platform, helpdesk. Run → review → export as `structural-secondary-150.csv`.
+
+### Phase 4 — Optional: greenfield vs. displacement split
+21. For any vertical you have capacity to run twice, re-run it with the same filters plus **Technologies excludes** Intercom/Zendesk/Drift/Ada/Forethought/LiveChat/Freshchat → export as the greenfield sub-segment.
+22. Re-run once more with **Technologies includes** any of those same tools → export as the displacement sub-segment.
+23. Add a "Segment" column to each of these exports (Greenfield / Displacement) before merging, so Loyd can route them into separate Nooks sequences with the matching talk track.
+
+### Phase 5 — Merge, clean, and verify
+24. Combine all 9 (or more) CSV exports into one master file with identical columns.
+25. De-dupe by company + email, capping at 2 contacts per company.
+26. Remove any row whose domain matches `STRUCTURAL-SUPPRESSION-LIST.md`.
+27. Remove any row whose company already appears in `STRUCTURAL-CHAT-CALLS-CLEAN.csv` (already dialed this week).
+28. Sort by employee count and revenue, descending, and hand-check the top 20 rows for data-quality errors — this is exactly where the last pull's bad data (Walmart Investment Co. tagged as a 350-employee company) would have been caught before it ever reached a dialer.
+29. Confirm the final row count lands near 1,500 after de-dupe/suppression; if it falls noticeably short, go back and widen the keyword filters on whichever vertical(s) under-delivered rather than loosening the revenue/employee/title filters.
+
+### Phase 6 — Handoff
+30. Rename the final file following the existing convention, e.g. `Structural Chat - CS People v2` (dated).
+31. Hand it to Loyd for the Nooks/HubSpot upload, split into lists per his existing process (mobile numbers first, then direct dials).
+32. Log the new list version, row count, and vertical breakdown into the account card so it's part of the record for the next diagnostic pass.
+
+**If your Seamless plan limits searches or credit reveals per session:** run vertical 1 (fintech) first as a test batch, sanity-check the output against this spec, confirm it looks right, then scale to the remaining 8 rather than pulling all 1,500 blind.
+
+**Offer:** once you've exported the 9 CSVs from Seamless, share them here and I can merge, de-dupe, cross-check against the suppression list and already-dialed companies, and hand back one clean final file — the same way I built the clean 105-row call list earlier.
 
 ## Before this goes to Nooks
 
