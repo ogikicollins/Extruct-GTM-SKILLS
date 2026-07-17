@@ -14,15 +14,23 @@
 
 30 days from 2026-06-29 = **2026-07-29.** This is not a soft internal goal, it is a contractual right the client can exercise. It is the reason the Canvas flagged "5 qualified meetings by 7/29" with a fire emoji, and it is why the internal deadline is Wed 2026-07-22 — roughly a week of buffer to course-correct before the contractual date.
 
-**Status as of 2026-07-17: 2-3 of 5 required meetings booked, count needs reconciling:**
+**Status as of 2026-07-17: possibly 5 of 5 meetings booked, count urgently needs reconciling against the live calendar/tracker.** Real call transcripts (received 2026-07-17) surfaced 5 distinct booked meetings, 2 of which were not previously known to this account card:
 
-| Meeting | Contact | Booked by | Date/time | ICP fit |
+| Meeting | Contact | Booked by | Date/time (per transcript) | ICP fit |
 |---|---|---|---|---|
-| Cafe Services Inc | Michael Lewis (VP Ops Support) | Jennifer Ruiz | **2026-07-17, 8:00 AM EST** (corrected — earlier note said "Tuesday," Slack citation confirms it's actually today) | Flagged as "not a perfect ICP fit" per 7/16 sync |
-| Parspec | Sameer Kulkarni (HR & Ops Lead) | Jennifer Ruiz | Confirmed, exact date/time not yet reconciled (sync said "Fri 7/17") | Flagged as "not a perfect ICP fit" per 7/16 sync |
-| Off the Hook Restaurants | Mark McDonald | Patrick A | 2026-07-23, 4:00 PM EST | **Not on the approved vertical list** (not e-commerce, but not property mgmt/mortgage/healthcare/pharmacy/utilities/travel/fintech/subscription-commerce either) |
+| Cafe Services Inc | Michael Lewis (VP Safety & Ops Support) | Jennifer Ruiz | "Tuesday, 8am Eastern" — **date conflict**: transcript implies 7/21 (same batch as Bobby/Teresa calls, which explicitly say "Tuesday, July 21st"), but the earlier Slack citation said 7/17 explicitly. Unresolved, needs calendar verification. | Flagged as "not a perfect ICP fit" per 7/16 sync |
+| Parspec | Sameer ("Samir") Kulkarni | David | Friday 7/17, 9am Pacific (re-engagement call, following up a prior email) | Flagged as "not a perfect ICP fit" per 7/16 sync |
+| Off the Hook Restaurants | Mark McDonald (Director of Admin/Operations) | Patrick A | Thursday 7/23, 3pm Central | **Disqualifying answers on record, see below** |
+| BMR Group *(new, not previously tracked)* | Bobby | Jennifer Ruiz | Tuesday 7/21, ~9-10am (mentioned an existing outsourced support team in Toronto) | Unknown — company not seen in either source list, needs a quick lookup |
+| Mallory *(new, not previously tracked)* | Teresa Crimi | Jennifer Ruiz | Tuesday 7/21, 7am Pacific | Unknown — company not seen in either source list, needs a quick lookup |
 
-**URGENT open question 1 — is the count 2 or 3?** The 7/16 sync only mentioned Cafe Services and Parspec ("2 meetings booked"). Off the Hook Restaurants surfaced separately via Slack history and was never mentioned in that sync. Need to confirm whether it's a third, additional booking (good news: only 2 more needed, not 3) or whether it was simply omitted from the sync's summary. Either way it needs to be added to whatever official tracker determines the 5-meeting count.
+**URGENT — reconcile against the live tracker today.** If all 5 are still on the calendar, the account may already be at the 5-meeting raw count, which would be a major change to the urgency calculus. Confirm with whoever owns the official count (and confirm none have since been cancelled/no-showed).
+
+**Concrete evidence for the "qualified" question — Off the Hook Restaurants:** Patrick asked the actual battle-card qualifying questions on this call and got clear disqualifying answers: "Are you hiring for customer support roles?" → "No." "How much of your support volume is repetitive?" → "We don't really have a lot of requests... maybe a handful a week." Mark himself, unprompted: "I just don't see it as like a big workload right now... maybe in the future." The meeting was booked anyway. This is the clearest concrete data point yet for whatever the contract's "qualified" definition turns out to require.
+
+**New process gap found in the same transcripts — booking discipline, not list quality:** Patrick asked the qualifying questions correctly on the Off the Hook call and overrode a clear "no." Jennifer's three calls (Cafe Services, BMR Group, Mallory) didn't ask the qualifying questions at all before booking. Different failure mode (override vs. skip), same result: slots are being committed without the qualifying answer changing the outcome. Worth a direct coaching conversation with both reps, separate from anything about the list itself.
+
+**Still unanswered — why calls that don't book fail.** All 5 transcripts received are booking successes. There is currently zero visibility into non-converting calls. Need a sample of those specifically to answer this for Paul, not more wins.
 
 **URGENT open question 2 — do ANY of these 3 actually count as "qualified"?** All three now have an ICP-fit question mark. The contract requires 5 *qualified* meetings, and the handoff doc's ICP section is literally titled "Template Meeting Qualifications (ICP)" — meaning ICP fit may be the contractual definition of "qualified," not just an internal quality note. **Worst case: if none of these 3 hold up, the real gap is still 5 meetings, not 2-3, with the same ~12 days left.** Get an explicit answer from Paul or whoever owns contract interpretation on what "qualified" means, urgently — this is the single highest-priority open question on the account.
 
@@ -203,10 +211,10 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 | Field | Value |
 |-------|-------|
 | Stage | Active launch sprint — SDR calling live sequences; conversion below target; **contractual refund-trigger deadline 2026-07-29** |
-| Next Action | Get 3 more qualified meetings booked before 2026-07-29 — this now supersedes the general conversion-rate diagnostic as the top priority. List audit, email launch, and transcript review are all in service of this number. |
+| Next Action | **Reconcile the real meeting count against the live tracker (may already be 5, not 2-3) and get an explicit contract answer on what "qualified" means.** Both now outrank the conversion-rate diagnostic and the list-audit work as the top priority. |
 | Next Action Date | 2026-07-22 (internal checkpoint) / 2026-07-29 (contractual deadline) |
 | Days in Current Stage | ~7 (since Jul 9 launch); ~12-13 days remaining to the contractual deadline |
-| Risk Flag | **HIGH — full-refund termination right activates 2026-07-29 if meetings 3-5 aren't booked.** Conversion rate 2.6% vs 12% target; list quality / ICP alignment unverified. |
+| Risk Flag | **HIGH — full-refund termination right activates 2026-07-29.** Raw meeting count may already be at 5, but at least one (Off the Hook Restaurants) has explicit disqualifying answers on record from the prospect himself. The "qualified" definition question is now the single most load-bearing open item on this account. |
 | Deal Value | Dollar amount unknown, but full-refund exposure is real and time-bound (see Contract Risk section above) |
 
 ---
