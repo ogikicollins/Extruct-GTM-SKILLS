@@ -35,19 +35,21 @@ The new workhorse. Leads with the repetition + cost stat, not a rhetorical quest
 - tickets that write themselves
 - the part of support that never changes
 
-**BODY** (~105 words)
+**BODY** (~120 words) — **revised 2026-07-17 for email launch**, opening trigger upgraded from the generic repetitive-ticket stat to the Bot A/Bot B worst-case-behavior comparison from Paul's LinkedIn article ("The 3 Reasons Support Bot Rollouts Fail," 2026-07-14). Sharper because it's counterintuitive and argues reliability over raw coverage directly, which is Structural's actual differentiation, not just an industry stat. Source, not an invented claim.
 
 Hi {{FIRST_NAME}},
 
-Most support teams spend 60 to 80 percent of their time on the same handful of requests. Order status, billing, account changes.
+Picture two support bots. One handles 60% of requests perfectly and escalates the rest cleanly.
 
-Each ticket still costs $8 to $20 to close, even though the answer never changes.
+The other handles 70%, but occasionally gets one wrong. The first one wins.
 
-We build support automation that finishes the request inside the conversation, not a help article link. It runs on fixed rules, not a language model. It cannot invent an answer that does not exist.
+One bad answer costs trust in everything else the bot could have handled flawlessly.
 
-Anything outside its scope goes straight to your team, with full context.
+Most support teams spend 60 to 80 percent of their time on the same handful of requests: order status, billing, account changes.
 
-[Optional social proof — Paul to add a pilot result here once one exists. Remove if none.]
+Structural bots finish those inside the conversation, not a help article link. They run on fixed rules, not a language model, so there's nothing to hallucinate.
+
+Anything outside their scope goes straight to your team, with full context.
 
 Send us 5 real tickets from last week.
 We will show you exactly how each one resolves.
