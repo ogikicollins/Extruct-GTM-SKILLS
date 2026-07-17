@@ -14,17 +14,17 @@
 
 30 days from 2026-06-29 = **2026-07-29.** This is not a soft internal goal, it is a contractual right the client can exercise. It is the reason the Canvas flagged "5 qualified meetings by 7/29" with a fire emoji, and it is why the internal deadline is Wed 2026-07-22 — roughly a week of buffer to course-correct before the contractual date.
 
-**Status as of 2026-07-17: possibly 5 of 5 meetings booked, count urgently needs reconciling against the live calendar/tracker.** Real call transcripts (received 2026-07-17) surfaced 5 distinct booked meetings, 2 of which were not previously known to this account card:
+**Status as of 2026-07-17: 5 of 5 meetings booked (raw count), confirmed against real transcripts and a direct client correction.** 2 of the 5 (BMR Group, Mallory) were not previously tracked in this account card before today.
 
-| Meeting | Contact | Booked by | Date/time (per transcript) | ICP fit |
-|---|---|---|---|---|
-| Cafe Services Inc | Michael Lewis (VP Safety & Ops Support) | Jennifer Ruiz | "Tuesday, 8am Eastern" — **date conflict**: transcript implies 7/21 (same batch as Bobby/Teresa calls, which explicitly say "Tuesday, July 21st"), but the earlier Slack citation said 7/17 explicitly. Unresolved, needs calendar verification. | Flagged as "not a perfect ICP fit" per 7/16 sync |
-| Parspec | Sameer ("Samir") Kulkarni | David | Friday 7/17, 9am Pacific (re-engagement call, following up a prior email) | Flagged as "not a perfect ICP fit" per 7/16 sync |
-| Off the Hook Restaurants | Mark McDonald (Director of Admin/Operations) | Patrick A | Thursday 7/23, 3pm Central | **Disqualifying answers on record, see below** |
-| BMR Group *(new, not previously tracked)* | Bobby | Jennifer Ruiz | Tuesday 7/21, ~9-10am (mentioned an existing outsourced support team in Toronto) | Unknown — company not seen in either source list, needs a quick lookup |
-| Mallory *(new, not previously tracked)* | Teresa Crimi | Jennifer Ruiz | Tuesday 7/21, 7am Pacific | Unknown — company not seen in either source list, needs a quick lookup |
+| Date | Time | Contact | Company | Booked by | ICP fit | Status |
+|---|---|---|---|---|---|---|
+| Fri 7/17 (today) | 8:00 AM EST | Michael Lewis (VP Safety & Ops Support) | Cafe Services Inc | Jennifer Ruiz | Flagged as "not a perfect ICP fit" per 7/16 sync | ✅ **Confirmed 2026-07-17** — original date was correct; a duplicate Tue 7/21 8am EST booking was found and cancelled |
+| Fri 7/17 (today) | 9:00 AM Pacific | Sameer Kulkarni | Parspec | David | Flagged as "not a perfect ICP fit" per 7/16 sync; Parspec builds an AI platform for the construction supply chain, not an approved vertical | ✅ Confirmed |
+| Tue 7/21 | 7:00 AM Pacific | Teresa Crimi | Mallory *(new, not previously tracked)* | Jennifer Ruiz | Unknown — not in either source list, needs a lookup | ✅ Confirmed |
+| Tue 7/21 | 10:00 AM Pacific | Bobby | BMR Group *(new, not previously tracked)* | Jennifer Ruiz | Unknown — mentioned an existing outsourced support team in Toronto; not in either source list, needs a lookup | ✅ Confirmed |
+| Thu 7/23 | 4:00 PM EST | Mark McDonald (Director of Admin/Operations) | Off the Hook Restaurants | Patrick A | **Disqualifying answers on record, see below** | ✅ Confirmed |
 
-**URGENT — reconcile against the live tracker today.** If all 5 are still on the calendar, the account may already be at the 5-meeting raw count, which would be a major change to the urgency calculus. Confirm with whoever owns the official count (and confirm none have since been cancelled/no-showed).
+**Real count: 5 of 5 meetings booked, confirmed 2026-07-17.** This is the raw count. It does not resolve whether all 5 would survive a strict reading of "qualified" — see the Off the Hook evidence below and the still-open contract-definition question.
 
 **Concrete evidence for the "qualified" question — Off the Hook Restaurants:** Patrick asked the actual battle-card qualifying questions on this call and got clear disqualifying answers: "Are you hiring for customer support roles?" → "No." "How much of your support volume is repetitive?" → "We don't really have a lot of requests... maybe a handful a week." Mark himself, unprompted: "I just don't see it as like a big workload right now... maybe in the future." The meeting was booked anyway. This is the clearest concrete data point yet for whatever the contract's "qualified" definition turns out to require.
 
@@ -32,9 +32,9 @@
 
 **Still unanswered — why calls that don't book fail.** All 5 transcripts received are booking successes. There is currently zero visibility into non-converting calls. Need a sample of those specifically to answer this for Paul, not more wins.
 
-**URGENT open question 2 — do ANY of these 3 actually count as "qualified"?** All three now have an ICP-fit question mark. The contract requires 5 *qualified* meetings, and the handoff doc's ICP section is literally titled "Template Meeting Qualifications (ICP)" — meaning ICP fit may be the contractual definition of "qualified," not just an internal quality note. **Worst case: if none of these 3 hold up, the real gap is still 5 meetings, not 2-3, with the same ~12 days left.** Get an explicit answer from Paul or whoever owns contract interpretation on what "qualified" means, urgently — this is the single highest-priority open question on the account.
+**URGENT open question 2 — do ALL 5 actually count as "qualified"?** The contract requires 5 *qualified* meetings, and the handoff doc's ICP section is literally titled "Template Meeting Qualifications (ICP)" — meaning ICP fit may be the contractual definition of "qualified," not just an internal quality note. At minimum, Off the Hook Restaurants has explicit disqualifying answers on record from the prospect himself. Parspec builds construction supply-chain software, not an approved vertical. BMR Group and Mallory are unverified. **Raw count is 5 of 5, but the number that survives a strict "qualified" reading could be meaningfully lower.** Get an explicit answer from Paul or whoever owns contract interpretation on what "qualified" means — still the single highest-priority open item on the account, now more so with the raw count technically met.
 
-**Conversation-count discrepancy to reconcile:** client's earlier message cited 78 conversations -> 2 meetings (2.6%). The 7/16 sync cites 111 live conversations, same 2 meetings named. If 111 is the current cumulative total, the 33 conversations added since 78 produced zero new *named* meetings (though Off the Hook Restaurants may account for some of that gap) — confirm whether 111 is cumulative or a different measurement window before reading trend direction either way.
+**Conversation-count discrepancy to reconcile:** client's earlier message cited 78 conversations -> 2 meetings (2.6%). The 7/16 sync cites 111 live conversations, same 2 meetings named at the time. The transcript review found 3 more meetings the sync never mentioned (BMR Group, Mallory, Off the Hook), suggesting the sync's "2 meetings" summary was already stale/incomplete when written, not that conversion stalled. Worth a fresh, complete count against the current total conversation number before drawing any conclusion about trend direction.
 
 Everything else in this account (list audit, email launch, call volume) should be prioritized against this number first. A general conversion-rate improvement is good but secondary; the binary pass/fail on 5-by-7/29 is what determines whether Structural can walk away with a full refund.
 
@@ -210,11 +210,11 @@ The reported problems (wrong numbers, incorrect contacts, urgent need for new li
 
 | Field | Value |
 |-------|-------|
-| Stage | Active launch sprint — SDR calling live sequences; conversion below target; **contractual refund-trigger deadline 2026-07-29** |
-| Next Action | **Reconcile the real meeting count against the live tracker (may already be 5, not 2-3) and get an explicit contract answer on what "qualified" means.** Both now outrank the conversion-rate diagnostic and the list-audit work as the top priority. |
+| Stage | Active launch sprint — **raw count of 5/5 meetings confirmed 2026-07-17**; contractual refund-trigger deadline 2026-07-29 |
+| Next Action | **Get an explicit contract answer on what "qualified" means, now that the raw count is technically met.** This is the only thing standing between "the deadline is handled" and "the deadline is at real risk." |
 | Next Action Date | 2026-07-22 (internal checkpoint) / 2026-07-29 (contractual deadline) |
-| Days in Current Stage | ~7 (since Jul 9 launch); ~12-13 days remaining to the contractual deadline |
-| Risk Flag | **HIGH — full-refund termination right activates 2026-07-29.** Raw meeting count may already be at 5, but at least one (Off the Hook Restaurants) has explicit disqualifying answers on record from the prospect himself. The "qualified" definition question is now the single most load-bearing open item on this account. |
+| Days in Current Stage | ~8 (since Jul 9 launch); ~12 days remaining to the contractual deadline |
+| Risk Flag | **HIGH, despite the raw count being met.** Off the Hook Restaurants has explicit disqualifying answers on record from the prospect himself; Parspec is an off-vertical construction supply-chain company; BMR Group and Mallory are unverified. If "qualified" means ICP-fit under a strict reading, the real count could be well below 5 even though the calendar shows 5 booked meetings. |
 | Deal Value | Dollar amount unknown, but full-refund exposure is real and time-bound (see Contract Risk section above) |
 
 ---
