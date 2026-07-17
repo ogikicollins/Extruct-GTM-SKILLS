@@ -62,12 +62,21 @@ Run → reveal → export. Same fallback logic as Pass 1 — one OR'd list, Seam
 
 ---
 
-## Step 5 — Combine and QC
+## Step 5 — Combine, narrow to ONE contact per company, and QC
 
-1. Combine the 2-3 export files (Pass 1 + Pass 2 + Pass 3) into one sheet.
-2. **Spot-check every title against LinkedIn before this goes to a dialer** — with only ~25 companies in play, this is small enough to verify by hand, and Seamless data can be stale (a title that's since changed, or someone who's left).
+**Because the title filters in each pass are OR'd, a single company can return multiple matches** (e.g. a Chief Customer Officer, a COO, and a VP Client Experience all at once). To get to exactly one contact per company, apply a strict priority order and discard everything below the highest match at each company:
+
+- **Groups A/C priority:** 1) Chief Service/Client/Customer Officer (PEO) or VP/Head of Customer Experience/Success (EOR) → 2) VP/Head of Client Services or Client Experience (PEO fallback) → 3) COO, lowest priority, only if nothing above exists.
+- **Group B priority:** CEO over Co-Founder/Founder if the same person holds both; if two different people, keep the CEO.
+
+Two ways to apply this:
+1. **Fix it at the source:** run each tier as its own search, filtered each time to only the companies that got zero hits in the previous tier — this way no company ever collects more than one match.
+2. **Clean up after the fact:** sort the export by company name, keep only the row matching the highest-priority tier per company, delete the rest.
+
+1. Combine the pass exports into one sheet, then narrow per the rule above.
+2. **Spot-check every remaining title against LinkedIn before this goes to a dialer** — with only ~25 companies in play, this is small enough to verify by hand, and Seamless data can be stale.
 3. Confirm no domain overlap with `STRUCTURAL-SUPPRESSION-LIST.md` — already checked clean for all 29 companies on 2026-07-17, but re-check if your uploaded list has grown or changed since then.
-4. Cap total contacts at ~1-2 per company — this is a precision batch, not a volume batch, so don't let it balloon past what a 10-20 company test actually needs.
+4. Final target: exactly 1 contact per company — this is a precision batch, not a volume batch.
 
 ---
 
