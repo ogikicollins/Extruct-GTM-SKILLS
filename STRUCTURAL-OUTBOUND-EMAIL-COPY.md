@@ -35,7 +35,7 @@ The new workhorse. Leads with the repetition + cost stat, not a rhetorical quest
 - tickets that write themselves
 - the part of support that never changes
 
-**BODY** (~120 words) — **revised 2026-07-17 for email launch**, opening trigger upgraded from the generic repetitive-ticket stat to the Bot A/Bot B worst-case-behavior comparison from Paul's LinkedIn article ("The 3 Reasons Support Bot Rollouts Fail," 2026-07-14). Sharper because it's counterintuitive and argues reliability over raw coverage directly, which is Structural's actual differentiation, not just an industry stat. Source, not an invented claim.
+**BODY** (~123 words) — **revised 2026-07-17 for email launch.** Opening trigger upgraded from the generic repetitive-ticket stat to the Bot A/Bot B worst-case-behavior comparison from Paul's LinkedIn article ("The 3 Reasons Support Bot Rollouts Fail," 2026-07-14) — sharper because it's counterintuitive and argues reliability over raw coverage directly, which is Structural's actual differentiation, not just an industry stat. Restored the $8-$20 cost-per-ticket line so the repetitive-volume stat converts into a concrete dollar impact instead of stopping at a percentage; trimmed two redundant phrases elsewhere to hold the word count.
 
 Hi {{FIRST_NAME}},
 
@@ -43,13 +43,13 @@ Picture two support bots. One handles 60% of requests perfectly and escalates th
 
 The other handles 70%, but occasionally gets one wrong. The first one wins.
 
-One bad answer costs trust in everything else the bot could have handled flawlessly.
+One bad answer costs trust in everything else it could've handled.
 
-Most support teams spend 60 to 80 percent of their time on the same handful of requests: order status, billing, account changes.
+Most support teams spend 60 to 80 percent of their time on the same handful of requests: order status, billing, account changes. Each one still costs $8 to $20 to close.
 
 Structural bots finish those inside the conversation, not a help article link. They run on fixed rules, not a language model, so there's nothing to hallucinate.
 
-Anything outside their scope goes straight to your team, with full context.
+Anything outside their scope goes straight to your team.
 
 Send us 5 real tickets from last week.
 We will show you exactly how each one resolves.
