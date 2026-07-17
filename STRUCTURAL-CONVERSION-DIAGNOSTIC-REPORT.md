@@ -20,7 +20,7 @@ Of 112 logged dials this period, 105 were genuine Structural Chat attempts (7 we
 
 **The single biggest lever isn't objection handling — it's reachability.** 55% of dials (58/105) never became a conversation at all: wrong numbers, busy signals, DNC. That's a list/data-quality problem, not a messaging problem, and it's the ceiling on everything downstream.
 
-**Of the calls that did connect, the real conversion rate is 9.3%** (4 meetings / 43 conversations, counting both "Connected" and "Meeting Booked" as reaching a live conversation) — not the 2.6% figure previously in circulation, which was calculated against a denominator that included wrong numbers and busy signals. Once someone actually answers and talks, roughly 1 in 11 books.
+**Of the calls that did connect, the real conversion rate is 9.3%** (4 meetings / 43 conversations, counting both "Connected" and "Meeting Booked" as reaching a live conversation) — not the 2.6% figure previously in circulation. We traced that number precisely: it was 78 total dial attempts through 7/14, of every kind — 23 wrong numbers and 14 busy signals were counted as "conversations" alongside the 32 real ones. Once you count only calls where someone actually answered and talked, roughly 1 in 11 books, not 1 in 38.
 
 ---
 
