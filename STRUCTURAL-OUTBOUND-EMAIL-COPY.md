@@ -207,8 +207,35 @@ Here are a few times that work on our end:
 
 Let me know if any of these fit your schedule.
 
+P.S. Paul wrote a short piece on why most support bots fail, worth a quick read before we talk again: {additional_info_link}
+
 If I don't hear back, I'll follow up with a call in a few days.
 
 Best,
 {sig}
+```
+
+---
+
+## Additional Information Resource
+Attach or link this from the post-call follow-up above (the `{additional_info_link}` placeholder) whenever a prospect asks for more detail. Built from Paul's own LinkedIn article, "The 3 Reasons Support Bot Rollouts Fail" (published 2026-07-14): https://www.linkedin.com/pulse/3-reasons-support-bot-rollouts-fail-structural-chat-ict6c/. Real, sourced, Paul's own argument and language, not an invented Structural Chat claim.
+
+**BODY**
+
+```
+Why Most Support Bot Rollouts Fail (and what we do differently)
+
+1. They can only answer, not act.
+Most support bots read from a static knowledge base. They can tell a customer what to do, but they can't do it for them. Most support requests need both: understanding what someone's asking, and taking the action that resolves it. When a bot only gives instructions, people go around it, straight to a search engine or a person.
+
+2. One bad answer costs more than it looks like.
+Picture two bots. Bot A handles 60% of requests perfectly and escalates the rest cleanly. Bot B handles 70%, a higher number, but occasionally gives a wrong answer. Bot A wins. Once a bot fails someone, that person stops trusting it, even for requests it could have handled flawlessly. A single mistake doesn't cost one ticket, it costs future trust.
+
+3. Bad experiences don't stay contained.
+A bad interaction with a support bot is memorable, and people talk about it. It gets shared with friends, posted online. The damage isn't limited to the one customer who had it.
+
+The fix isn't a smarter bot. It's a different kind of bot.
+Judge a support bot by its worst answer, not its average one. Structural builds bots that never make mistakes, deterministic code instead of a language model, so there's nothing to hallucinate. Anything the bot can do, it does with 100% reliability. Anything outside its vocabulary hands off cleanly to a person, with full context, before trust ever breaks.
+
+Full article: https://www.linkedin.com/pulse/3-reasons-support-bot-rollouts-fail-structural-chat-ict6c/
 ```
