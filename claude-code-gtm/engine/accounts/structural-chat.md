@@ -16,13 +16,15 @@
 
 **Status as of 2026-07-17: 5 of 5 meetings booked (raw count), confirmed against real transcripts and a direct client correction.** 2 of the 5 (BMR Group, Mallory) were not previously tracked in this account card before today.
 
-| Date | Time | Contact | Company | Booked by | ICP fit | Status |
+**All times below normalized to ET, matching the calendar sent to Paul (source times noted where originally given in Pacific).**
+
+| Date | Time (ET) | Contact | Company | Booked by | ICP fit | Status |
 |---|---|---|---|---|---|---|
-| Fri 7/17 (today) | 8:00 AM EST | Michael Lewis (VP Safety & Ops Support) | Cafe Services Inc | Jennifer Ruiz | Flagged as "not a perfect ICP fit" per 7/16 sync | ✅ **Confirmed 2026-07-17** — original date was correct; a duplicate Tue 7/21 8am EST booking was found and cancelled |
-| Fri 7/17 (today) | 9:00 AM Pacific | Sameer Kulkarni | Parspec | David | Flagged as "not a perfect ICP fit" per 7/16 sync; Parspec builds an AI platform for the construction supply chain, not an approved vertical | ✅ Confirmed |
-| Tue 7/21 | 7:00 AM Pacific | Teresa Crimi | Mallory *(new, not previously tracked)* | Jennifer Ruiz | Unknown — not in either source list, needs a lookup | ✅ Confirmed |
-| Tue 7/21 | 10:00 AM Pacific | Bobby | BMR Group *(new, not previously tracked)* | Jennifer Ruiz | Unknown — mentioned an existing outsourced support team in Toronto; not in either source list, needs a lookup | ✅ Confirmed |
-| Thu 7/23 | 4:00 PM EST | Mark McDonald (Director of Admin/Operations) | Off the Hook Restaurants | Patrick A | **Disqualifying answers on record, see below** | ✅ Confirmed |
+| Fri 7/17 (today) | 8:00 AM | Michael Lewis (VP Safety & Ops Support) | Cafe Services Inc | Jennifer Ruiz | Flagged as "not a perfect ICP fit" per 7/16 sync | ✅ **Confirmed 2026-07-17** — original date was correct; a duplicate Tue 7/21 8am ET booking was found and cancelled |
+| Fri 7/17 (today) | 12:00 PM (9:00 AM Pacific) | Sameer Kulkarni | Parspec | David | Flagged as "not a perfect ICP fit" per 7/16 sync; Parspec builds an AI platform for the construction supply chain, not an approved vertical | ✅ Confirmed |
+| Tue 7/21 | 10:00 AM (7:00 AM Pacific) | Teresa Crimi | Mallory *(new, not previously tracked)* | Jennifer Ruiz | Unknown — not in either source list, needs a lookup | ✅ Confirmed |
+| Tue 7/21 | 1:00 PM (10:00 AM Pacific) | Bobby | BMR Group *(new, not previously tracked)* | Jennifer Ruiz | Unknown — mentioned an existing outsourced support team in Toronto; not in either source list, needs a lookup | ✅ Confirmed |
+| Thu 7/23 | 4:00 PM | Mark McDonald (Director of Admin/Operations) | Off the Hook Restaurants | Patrick A | **Disqualifying answers on record, see below** | ✅ Confirmed |
 
 **Real count: 5 of 5 meetings booked, confirmed 2026-07-17.** This is the raw count. It does not resolve whether all 5 would survive a strict reading of "qualified" — see the Off the Hook evidence below and the still-open contract-definition question.
 
@@ -76,6 +78,7 @@ Contract structure otherwise: initial 60-day term from 2026-06-29 (ends ~2026-08
 - **Meeting-booked handoff email:** routes to Paul, CC's the CSM (Collins) and Kyle, BCC's an internal ops alias. Subject format: `***MEETING BOOKED - {Company Name}`. Body includes lead details (name, position, company, phone, email, LinkedIn) and meeting date/time, plus a link to the live lead handoff sheet (pending Book of Business dashboard setup for this account).
 - **Meeting logistics:** booked via Paul's Calendly (on file). Confirmation reminders come from a dedicated confirmation-sender address. Paul is based in Boston through July 2026 (normally New Orleans) — Eastern time throughout, so no timezone-conversion errors on booking.
 - **Template note:** if a prospect requests a time the calendar can't fit exactly, flag the discrepancy explicitly in the handoff note (e.g. "prospect asked for 4:00pm ET, calendar open at 4:15pm ET — bump if possible") rather than silently booking the mismatch.
+- **Updated 2026-07-18 per Kyle:** meeting handoffs should now also be posted in the shared Slack channel (`structure-chat-osp-shared`), *in addition to* the existing email handoff — not a replacement. **Process note, logged here on purpose:** this update itself must live in internal documentation (this account card / the Book of Business), never posted as a note inside the shared channel, since that channel is client-facing and Paul is a member of it. Internal process changes don't belong where the client can see them.
 
 ---
 
