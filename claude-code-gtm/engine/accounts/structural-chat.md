@@ -14,13 +14,15 @@
 
 30 days from 2026-06-29 = **2026-07-29.** This is not a soft internal goal, it is a contractual right the client can exercise. It is the reason the Canvas flagged "5 qualified meetings by 7/29" with a fire emoji, and it is why the internal deadline is Wed 2026-07-22 — roughly a week of buffer to course-correct before the contractual date.
 
-**Status as of 2026-07-17: 5 of 5 meetings booked (raw count), confirmed against real transcripts and a direct client correction.** 2 of the 5 (BMR Group, Mallory) were not previously tracked in this account card before today.
+**Status as of 2026-07-17: 5 of 5 meetings booked (raw/"Set" count) — but "Held" count just dropped to 4, unverified.** Michael Lewis (Cafe Services) no-showed the 8am ET call today. 2 of the 5 (BMR Group, Mallory) were not previously tracked in this account card before today.
+
+**New wrinkle on the qualification question:** the Slack Canvas has always tracked "Set" vs "Held" as separate numbers. A no-show is Set, not Held. If the contract's 5-meeting clause requires meetings to actually occur, not just get booked, the real count is now unverified across all 5, not just short by one. Get an explicit answer on Set-vs-Held from Kyle, same category of question as the ICP-fit one, now concrete instead of hypothetical. **Action taken:** reach out to Michael today for a same-day/next-day reschedule while it's still recoverable.
 
 **All times below normalized to ET, matching the calendar sent to Paul (source times noted where originally given in Pacific).**
 
 | Date | Time (ET) | Contact | Company | Booked by | ICP fit | Status |
 |---|---|---|---|---|---|---|
-| Fri 7/17 (today) | 8:00 AM | Michael Lewis (VP Safety & Ops Support) | Cafe Services Inc | Jennifer Ruiz | Flagged as "not a perfect ICP fit" per 7/16 sync | ✅ **Confirmed 2026-07-17** — original date was correct; a duplicate Tue 7/21 8am ET booking was found and cancelled |
+| Fri 7/17 (today) | 8:00 AM | Michael Lewis (VP Safety & Ops Support) | Cafe Services Inc | Jennifer Ruiz | Flagged as "not a perfect ICP fit" per 7/16 sync | ❌ **NO-SHOW 2026-07-17** — reschedule attempt needed today while recoverable |
 | Fri 7/17 (today) | 12:00 PM (9:00 AM Pacific) | Sameer Kulkarni | Parspec | David | Flagged as "not a perfect ICP fit" per 7/16 sync; Parspec builds an AI platform for the construction supply chain, not an approved vertical | ✅ Confirmed |
 | Tue 7/21 | 10:00 AM (7:00 AM Pacific) | Teresa Crimi | Mallory *(new, not previously tracked)* | Jennifer Ruiz | Unknown — not in either source list, needs a lookup | ✅ Confirmed |
 | Tue 7/21 | 1:00 PM (10:00 AM Pacific) | Bobby | BMR Group *(new, not previously tracked)* | Jennifer Ruiz | Unknown — mentioned an existing outsourced support team in Toronto; not in either source list, needs a lookup | ✅ Confirmed |
