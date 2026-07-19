@@ -390,9 +390,9 @@ a Free Assessment before any contract is signed. What we
 quote is what you pay. If the project runs long,
 that's our cost, not yours.
 
-Honda's North American IT team hired us on this model:
-1,400 users, 312 Jira projects, 11 days, on budget.
-Zero change orders.
+The reason we can offer this: we've built our own
+migration toolset. We know the scope because we've done
+this enough times that surprises are our problem, not yours.
 
 See what the Assessment looks like? → [Cal.com link]
 
@@ -538,11 +538,11 @@ each team had wired in.
 Atlassian's migration tools handle vanilla environments.
 They don't handle that.
 
-We consolidated two instances for Honda's IT division
-last year — 800 combined users, all integrations
-maintained through the merge, 6 weeks, zero data loss.
-Done in a test environment so production wasn't
-touched until go-live.
+We've consolidated instances ranging from small teams
+to 1,000+ combined users — every integration maintained
+through the process, done in a test environment so
+production isn't touched until go-live. Fixed price.
+No surprises on the other side.
 
 Free Assessment to scope {{company}}'s merge — one
 week, no cost, fixed price at the end.
@@ -715,7 +715,7 @@ Reply same session:
 
 1. **PB1 subject:** `Atlassian is training AI on {{company}}'s data` vs `the 2029 deadline — {{company}}`
 2. **PB3 subject:** `how the last Atlassian project went` vs `fixed price vs. T&M — {{company}}`
-3. **Email 1 opener:** Lead with the case study (Honda) vs. lead with the trigger
+3. **Email 1 opener:** Lead with the proof statement vs. lead with the trigger
 4. **CTA format:** Question (`Worth a conversation? →`) vs. direct link only
 5. **PB2 vs PB3 open rates:** Tells you whether the instance cleanup pain or the T&M pain resonates more at your ICP level
 

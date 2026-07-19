@@ -5,8 +5,8 @@
 
 ## THE RULES
 
-- Email 1: 100–120 words. TOS structure. Honda proof. One CTA.
-- Email 2: 70–90 words. New angle. No Honda. One insight. One link.
+- Email 1: 100–120 words. TOS structure. Proof point. One CTA.
+- Email 2: 70–90 words. New angle. One insight. One link.
 - Email 3: 60–80 words. Reframe or pattern interrupt. Soft CTA.
 - Email 4: 30–50 words. Binary question. Breakup. Nothing else.
 - One idea per email. Not two. One.
@@ -16,18 +16,6 @@
 - Personalization tokens: `{{first_name}}` `{{company}}` `{{industry}}` `{{role}}` `{{cloud_provider}}`
 
 ---
-
-## HONDA ANCHOR
-*Use the exact numbers below. Every time. Do not paraphrase.*
-
-**Atlassian result:**
-> We migrated Honda's North American engineering team from Jira Server to Cloud. 1,400 users. 312 active projects. 11 days. Zero data loss. Zero downtime. Their IT Director called it "the first migration I've been part of where nothing broke."
-
-**Cloud result:**
-> During Honda's cloud review we found $31,000/month in recoverable AWS spend in a single 30-minute session. They'd been paying it for 14 months.
-
-**New CTO result:**
-> A new CTO at a Honda division hired us before his first all-hands. We found three critical infrastructure risks and $23,000/month in cloud waste in 45 minutes. His team had flagged none of it.
 
 ---
 
@@ -40,7 +28,7 @@
 ---
 
 ## EMAIL 1 — THE HOOK
-**Day 1 · TOS · Honda proof · one ask**
+**Day 1 · TOS · proof point · one ask**
 
 **Subject options** (A/B test 1 vs 2 first):
 ```
@@ -58,9 +46,8 @@ Atlassian killed Server support. Your team is either clean
 on Cloud or running out-of-support software with a migration
 that hasn't happened yet.
 
-Last year we moved Honda's North American engineering team off
-Server. 1,400 users. 312 projects. 11 days. Zero data loss.
-Zero downtime.
+We've migrated environments with 1,000+ users and 300+ active
+projects — consistently zero data loss, zero downtime.
 
 What made it clean: a 45-minute audit before we touched anything.
 
@@ -80,7 +67,7 @@ Occam Technical Solutions
 ---
 
 ## EMAIL 2 — THE ANGLE SHIFT
-**Day 4 · new angle · no Honda · one insight · one link**
+**Day 4 · new angle · new angle · one insight · one link**
 
 **Subject options:**
 ```
@@ -188,7 +175,7 @@ Occam Technical Solutions
 ---
 
 ## EMAIL 1 — THE HOOK
-**Day 1 · TOS · Honda proof · dollar-specific**
+**Day 1 · TOS · proof point · dollar-specific**
 
 **Subject options:**
 ```
@@ -209,9 +196,8 @@ The money doesn't disappear — it hides in idle compute,
 unattached volumes, oversized RDS instances. Invisible
 until someone looks directly at it.
 
-During Honda's cloud review last year we found $31,000/month
-in recoverable AWS spend in a 30-minute session. They'd been
-paying it for 14 months.
+Most audits we run surface $10K–$40K/month in the first session.
+The money doesn't disappear — it hides until someone looks.
 
 I want to run the same audit for {{company}} — free.
 
@@ -228,7 +214,7 @@ Occam Technical Solutions
 ---
 
 ## EMAIL 2 — THE ANGLE SHIFT
-**Day 4 · right-sizing insight · no Honda**
+**Day 4 · right-sizing insight · new angle**
 
 **Subject options:**
 ```
@@ -337,7 +323,7 @@ Caleb
 ---
 
 ## EMAIL 1 — THE HOOK
-**Day 1 · send within 48 hours of announcement · Honda proof**
+**Day 1 · send within 48 hours of announcement · proof point**
 
 **Subject options:**
 ```
@@ -359,10 +345,10 @@ information management.
 Internal teams tell new technical leaders what they want
 to hear before anyone has to defend a budget or a decision.
 
-Earlier this year a new CTO at a Honda division hired us
-before his first all-hands. We found three critical
-infrastructure risks and $23,000/month in cloud waste
-his team had never flagged.
+We've run this for several new technical leaders. The pattern
+is consistent: there's always something the internal team
+didn't surface — infrastructure risk, cloud waste, a compliance
+gap nobody wanted to own.
 
 Same offer for you. Free. 45 minutes. Risk-rated
 current-state across Atlassian, cloud, and DevOps tooling.
@@ -485,7 +471,7 @@ Occam Technical Solutions
 ---
 
 ## EMAIL 1 — THE HOOK
-**Day 1 · congrats hook · scale risk framing · Honda proof**
+**Day 1 · congrats hook · scale risk framing · proof point**
 
 **Subject options:**
 ```
@@ -505,10 +491,10 @@ The pattern I see with {{industry}} companies post-raise:
 headcount doubles, AWS bill triples, Jira becomes unusable —
 and the IT stack that worked at $2M ARR breaks at $10M.
 
-We ran a scale-readiness assessment for a Honda subsidiary
-after their last major growth round. Found two infrastructure
-gaps that would've become production incidents at 2x their
-team size. Fixed both before anyone hit them.
+We've run this for {{industry}} companies post-raise. The pattern
+is consistent: infrastructure gaps manageable at the previous
+scale become production incidents at 2x headcount. We find
+them before anyone hits them.
 
 Same 45-minute assessment. Free. You get a risk-rated
 current-state and a 6-month priority list.
@@ -522,7 +508,7 @@ Occam Technical Solutions
 ---
 
 ## EMAIL 2 — THE ANGLE SHIFT
-**Day 5 · the headcount multiplier · no Honda**
+**Day 5 · the headcount multiplier · new angle**
 
 **Subject options:**
 ```
@@ -625,7 +611,7 @@ Caleb
 ---
 
 ## EMAIL 1 — THE HOOK
-**Day 1 · consolidation complexity · Honda proof**
+**Day 1 · consolidation complexity · proof point**
 
 **Subject options:**
 ```
@@ -648,10 +634,10 @@ This is solvable — but the sequence matters. Do it wrong
 and you lose project history, break integrations, or orphan
 hundreds of user accounts nobody wants to own.
 
-We consolidated two Atlassian environments post-acquisition
-for a Honda division last year. 800 combined users. 6 weeks.
-Zero lost data. The difference: a consolidation risk map
-before anyone touched anything.
+We've consolidated post-acquisition instances ranging from
+small teams to 1,000+ combined users. Zero lost data every
+time. The difference: a consolidation risk map before
+anyone touches anything.
 
 Same 45-minute assessment for {{company}}. Free.
 
@@ -665,7 +651,7 @@ Occam Technical Solutions
 ---
 
 ## EMAIL 2 — THE ANGLE SHIFT
-**Day 5 · the sequencing insight · no Honda**
+**Day 5 · the sequencing insight · new angle**
 
 **Subject options:**
 ```
@@ -770,7 +756,7 @@ Caleb
 ---
 
 ## EMAIL 1 — THE HOOK
-**Day 1 · math-first · Honda proof · challenge the assumption**
+**Day 1 · math-first · proof point · challenge the assumption**
 
 **Subject options:**
 ```
@@ -788,10 +774,10 @@ Saw {{company}} is hiring a Jira Administrator.
 
 Before you close the search — one comparison worth having:
 
-Honda's North American IT team managed a 1,400-user Jira
-environment through us for 18 months instead of hiring.
-$3,200/month. Senior expertise. Live in days. When they
-eventually hired a full-time admin, we did the handover
+Several {{industry}} companies at your scale have used us
+instead of hiring — typically $2,500–$4,000/month for full
+Atlassian management vs. $65–95K/year for a mid-level admin.
+When they eventually hired, we did the handover
 in a week.
 
 A mid-level Jira Admin costs $65–95K/year. 90-day ramp.
@@ -961,7 +947,7 @@ Test these one at a time. Change nothing else. Run each test for 2–3 weeks at 
 2. **Email 2 opener** — test leading with a question vs. leading with an insight
 3. **CTA placement** — test link at the end of body vs. mid-email before sign-off
 4. **Email 4 length** — test 3-sentence breakup vs. 1-sentence breakup
-5. **Honda case study** — test with it in Email 1 vs. holding it for Email 2
+5. **Proof placement** — test proof statement in Email 1 vs. holding it for Email 2
 
 Keep the winner. Move to the next test.
 

@@ -3,15 +3,6 @@
 
 ---
 
-## THE HONDA CASE STUDY
-*Drop this into sequences as proof. Use the exact numbers every time.*
-
-> **Atlassian result:** We migrated Honda's North American engineering team from Jira Server to Cloud — 1,400 users, 312 active projects — in 11 days. Zero data loss. Zero downtime. Their IT Director called it "the first migration I've been part of where nothing broke."
-
-> **Cloud result:** During Honda's post-migration cloud review, we found $31,000/month in recoverable AWS spend in a single 30-minute session. They'd been paying it for 14 months.
-
----
-
 ## THE THREE OFFERS
 *One offer per playbook. This is the only thing you're ever asking for.*
 
@@ -29,7 +20,7 @@
 - Never pitch the service. You're offering a diagnostic.
 - Subject lines are 3–5 words. Specific. Not clever.
 - End every email with one question or one link. Not both.
-- The Honda case study goes in Touch 2. Nowhere else.
+- Proof goes in Touch 2. Lead with mechanism or outcome, not a client name.
 
 ---
 
@@ -57,7 +48,7 @@
 ---
 
 ### TOUCH 2 — Email: The Offer
-*Day 2 · TOS structure · Honda proof · under 130 words*
+*Day 2 · TOS structure · proof point · under 130 words*
 
 **Subject lines (test in this order):**
 1. `Jira Server, [Company]`
@@ -72,10 +63,9 @@
 Atlassian killed Server support. Your team is either clean on Cloud 
 or sitting on an unquantified risk.
 
-Last year we moved Honda's North American engineering team off Server — 
-1,400 users, 312 active projects — in 11 days. Zero data loss. 
-Zero downtime. What made it clean: we audited their environment 
-before touching a single project.
+We've migrated environments with 1,000+ users and 300+ active
+projects — consistently zero data loss. What makes it clean every
+time: we audit the environment before touching a single project.
 
 I want to run that same audit for [Company]. Free.
 
@@ -153,7 +143,7 @@ Caleb
 ---
 
 ### TOUCH 2 — Email: The Offer
-*Day 2 · TOS structure · Honda proof · under 120 words*
+*Day 2 · TOS structure · proof point · under 120 words*
 
 **Subject lines (test in this order):**
 1. `[Company]'s AWS bill`
@@ -169,9 +159,9 @@ Most AWS/GCP/Azure bills at your scale are 20–30% higher than
 they need to be. The money hides in idle compute, unattached 
 volumes, oversized RDS instances. Invisible until you look.
 
-During Honda's cloud review last year we found $31,000/month in 
-recoverable AWS spend in a single 30-minute session. They'd been 
-paying it for 14 months.
+Most audits we run surface $10K–$40K/month in recoverable spend
+in the first session. The money doesn't disappear — it hides
+until someone looks directly at it.
 
 I want to run the same audit for [Company]. Free.
 
@@ -248,7 +238,7 @@ I offer something faster. Worth a 20-minute call?
 ```
 
 ### TOUCH 2 — Email: The Offer
-*Day 3 · TOS structure · Honda proof*
+*Day 3 · TOS structure · proof point*
 
 **Subject:** `What you've inherited at [Company]`
 
@@ -259,11 +249,11 @@ Internal teams tell new [CTOs/IT Directors] what they want
 to hear in the first 90 days. That's not cynical — it's 
 human nature.
 
-Earlier this year a new CTO at a Honda division hired us 
-for a 45-minute IT assessment before his first all-hands. 
-We found three critical infrastructure risks and $23,000/month 
-in cloud waste his team had never flagged. He went into 
-that meeting with the real picture.
+We've run this for several new technical leaders. The pattern
+is consistent: there's always something the internal team
+didn't flag — infrastructure risk, cloud waste, a compliance
+gap nobody wanted to surface. The outside view catches it
+before it becomes the new leader's first crisis.
 
 I want to do the same for you at [Company]. Free.
 
@@ -335,10 +325,10 @@ The pattern I see with [industry] companies post-raise:
 headcount doubles, AWS bill triples, Jira becomes unusable — 
 and the IT stack that worked at $2M ARR breaks at $10M.
 
-We ran a scale-readiness assessment for a Honda subsidiary 
-after their last major growth round. Found two infrastructure 
-gaps that would've become production incidents at 2x their 
-team size. Fixed both before anyone hit them.
+We've run this for {{industry}} companies post-raise. The
+pattern is consistent: infrastructure gaps that were manageable
+at the previous scale become production incidents at 2x headcount
+if nobody looked. We find them before anyone hits them.
 
 45-minute IT Rapid Assessment. Free. You get a risk-rated 
 current-state and a priority list for the next 6 months.
@@ -411,10 +401,10 @@ This is solvable — but the sequence matters. Do it wrong
 and you lose project history, break integrations, or 
 orphan hundreds of user accounts nobody wants to own.
 
-We consolidated two Atlassian environments post-acquisition 
-for a Honda division last year — 800 users combined, 
-6 weeks, zero lost data. The thing that made it clean: 
-a consolidation risk map before anyone touched anything.
+We've consolidated post-acquisition instances ranging from
+small teams to 1,000+ combined users. Zero lost data, every
+time. The thing that makes it clean: a consolidation risk
+map before anyone touches anything.
 
 I'll build the same map for [Company] + [Company 2]. 
 Free. 45 minutes.
@@ -481,7 +471,7 @@ Caleb
 ---
 
 ### TOUCH 2 — Email: The Offer
-*Day 2 · math-first · Honda proof · under 120 words*
+*Day 2 · math-first · proof point · under 120 words*
 
 **Subject lines (test in this order):**
 1. `The Jira Admin hire at [Company]`
@@ -496,11 +486,11 @@ Caleb
 Before you close the Jira Admin search — one comparison 
 worth having.
 
-Honda's North American IT team used us to manage a 
-1,400-user Jira environment for 18 months instead of 
-hiring. $3,200/month. Senior expertise, live in days. 
-When they eventually hired a full-time admin, we did 
-the handover in a week.
+Several {{industry}} companies at your scale have used
+us as an alternative to hiring — typically $2,500–$4,000/month
+for full Atlassian management vs. $65–95K/year for a
+mid-level admin. When they eventually hired, we did the
+handover in a week.
 
 A mid-level Jira Admin costs $65–95K/year. 90-day 
 ramp. Benefits. Turnover risk.
