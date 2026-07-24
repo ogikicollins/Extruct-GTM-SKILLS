@@ -45,16 +45,21 @@ The onboarding doc gives a wide vertical list. Don't run them evenly — sequenc
 |---|---|
 | Concrete coating | Newer category, less saturated with marketing vendors — test cautiously |
 
-**Firmographic filter (apply to every tier) — UPDATED per onboarding call:**
+**Firmographic filter (apply to every tier) — UPDATED per onboarding call + consolidated ICP resource:**
 - **Primary sizing metric: 3–5+ service techs**, not revenue. Confirmed on the call as a more reliable indicator of real operational scale than self-reported revenue — contractors routinely under/over-state revenue, but tech count tracks actual job capacity. Use revenue ($1.5M floor, $2.5M–$5M sweet spot) as a secondary/backstop filter only, since it's easier to source at scale (tech count isn't a standard Seamless/Apollo field — approximate it via LinkedIn employee headcount + job titles like "technician"/"installer," and confirm on the call itself).
-- Years in business: 3+ (exclude anything reading as brand-new/startup)
+- **Revenue — two distinct lines, don't conflate them:** target/sourcing range is $1.5M–$5M (sweet spot $2.5M–$5M), but the **hard disqualifier floor is $1M** — meaning $1M–$1.5M is a gray zone (not actively sourced, but not an automatic kill if it surfaces via referral or reactivation), while sub-$1M is an automatic no.
+- Years in business: established 2–3+ years (loosened slightly from the original "3+" — treat as a soft ~2-year minimum, confirm exact cutoff with TopServ if it matters for a given prospect)
+- Independently owned / privately held only
+- Already spending on marketing/ads but has not invested in brand — the core "spending but not branded" qualifying profile, sharpened by the call's $894 average HVAC CPA stat (Section 3)
 - Geography: US only, no state exclusions
-- Signal to *favor*: currently running paid ads (Google/Meta) but no visible brand/video presence — this is the exact "spending but not branded" profile, now sharpened by the call's $894 average HVAC CPA stat (Section 3)
 - Signal to *deprioritize*: obviously price-led positioning in their own marketing ("lowest price," "cheapest," coupon-heavy homepage) — these prospects will fight the brand pitch
-- **New exclusion (confirmed on call): Water restoration companies** — insurance-based, emergency-only demand model doesn't fit the brand-equity/recognition thesis, since customers don't shop water restoration the way they shop HVAC/roofing/plumbing
-- **New exclusion (confirmed on call): Franchisees** — lack the operational and marketing control a Brandformance program requires (decisions often sit with the franchisor), regardless of revenue or tech count
+- **Water restoration companies excluded** — insurance-based, emergency-only demand model doesn't fit the brand-equity/recognition thesis
+- **Franchisees excluded** — lack the operational and marketing control a Brandformance program requires (decisions often sit with the franchisor), regardless of revenue or tech count
+- **"Broken operations" excluded** — not filterable pre-call; this is a discovery-call judgment (marketing can't fix a bad operation), flag it explicitly in SDR training so a rep can recognize and deprioritize it live rather than expecting a list filter to catch it
 
-**Persona filter:** Owner/President/Founder with budget authority only. Do not target Marketing Manager/Coordinator, Ops Manager, GM, or franchisee titles — the pitch dies immediately with anyone who can't unilaterally commit to a long-horizon brand investment (and, per the call, a mandatory 2-day on-site video shoot — see Section 3).
+**Hard disqualifiers (consolidated):** outside the US · startup/brand-new · under $1M revenue · water restoration · franchisees · price-led/cheapest-in-market operators · broken operations.
+
+**Persona filter — updated:** Owner, President, Founder, **COO**, or any officer with budget authority — whoever actually owns growth/marketing decisions. (COO added per the consolidated ICP resource — notably, this is Ryan's own title at TopServ, so it's a confirmed valid persona, not just an inference.) Exclude Marketing Manager/Coordinator and franchisees. GM's inclusion is still unconfirmed either way — see the tagged sub-sample test in the Seamless filter spec.
 
 ---
 

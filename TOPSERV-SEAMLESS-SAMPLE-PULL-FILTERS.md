@@ -1,5 +1,5 @@
 # TopServ Digital — Seamless.ai Sample Pull Filter Spec
-Built 2026-07-23 from the confirmed ICP in `TOPSERV-GTM-STRATEGY.md` (onboarding doc + OSP/TopServ onboarding call). This is a **validation sample**, not the launch list — pull small, QA hard, then scale once the pattern holds.
+Built 2026-07-23 from the confirmed ICP in `TOPSERV-GTM-STRATEGY.md` (onboarding doc + OSP/TopServ onboarding call + consolidated ICP resource). This is a **validation sample**, not the launch list — pull small, QA hard, then scale once the pattern holds.
 
 ---
 
@@ -21,9 +21,9 @@ Don't pull Tier 2/3 (windows, garage doors, concrete coating) yet — validate T
 ## Filter recipe (apply to every vertical search)
 
 **Job Titles**
-- Include: `CEO`, `Owner`, `President`, `Founder`
+- Include: `CEO`, `Owner`, `President`, `Founder`, **`COO`** (confirmed via the consolidated ICP resource — notably Ryan's own title at TopServ, so this is a validated persona, not a guess)
 - Management Level: `CXO` / Owner-level
-- Run **General Manager as a separate, tagged sub-sample** (10–15 rows, not blended into the main 35–40) — this title wasn't confirmed as included or excluded by TopServ, so treat it as a hypothesis to test rather than assume. Compare contact-quality/response on this sub-sample before deciding whether to fold it into the main filter going forward.
+- Run **General Manager as a separate, tagged sub-sample** (10–15 rows, not blended into the main 35–40) — this title is still unconfirmed either way, so treat it as a hypothesis to test rather than assume. Compare contact-quality/response on this sub-sample before deciding whether to fold it into the main filter going forward.
 
 **Location**
 - Person Locations: United States
@@ -40,19 +40,22 @@ Don't pull Tier 2/3 (windows, garage doors, concrete coating) yet — validate T
 - **Exclude keywords (all searches):** `Water Restoration`, `Water Damage`, `Restoration`, `Franchise` (franchise won't catch everything — confirmed exclusion, but flag for manual review too since keyword matching is unreliable for business-structure)
 
 **Revenue**
-- $1.5M – $5M (confirmed floor is $1.5M, not $1M — this is the one place the earlier draft dashboard needs correcting)
+- Sourcing range: **$1.5M – $5M** (sweet spot $2.5M–$5M — if the platform supports weighting/sorting, bias toward this band). Note this is the *target* range, not the hard line: the actual disqualifier floor confirmed in the consolidated ICP resource is **$1M**, so $1M–$1.5M is a gray zone (don't actively source it, but don't treat a referral/reactivation lead in that band as an automatic kill either).
 
 **Company Type**
-- Private (not public — see prior flag, this was wrong in the initial dashboard config)
+- Private (not public — see prior flag, this was wrong in the initial dashboard config). Independently owned — this is also where the franchisee exclusion partly lives, since Seamless won't reliably flag franchise status on its own (see QA check #4).
 
 **# Employees**
 - 10–50, as a proxy for "3–5+ service techs" (not a directly filterable Seamless field). Flag this explicitly in the sample review: **check whether the 10–50 band actually correlates with 3–5+ techs**, or whether it needs tightening/widening once you can eyeball a few company websites/LinkedIn pages in the sample.
 
 **Founded Year**
-- Before 2023 (3+ years in business as of 2026)
+- Before 2024 (established ~2–3+ years as of 2026 — loosened slightly from the earlier "before 2023" cutoff per the consolidated ICP resource's "2–3+ years" language; confirm the exact cutoff with TopServ if a borderline company comes up).
 
 **Retail Locations**
 - Leave unfiltered — doesn't apply to dispatch-based home service businesses.
+
+**Not filterable — flag for SDR discovery instead:**
+- **"Broken operations"** (marketing can't fix a bad operation) and **price-led/cheapest-in-market positioning** are both qualitative disqualifiers from the consolidated ICP resource that no Seamless filter will catch. Don't try to force these into the search — instead make sure they're called out in SDR training so a rep can recognize and deprioritize them live during discovery.
 
 ---
 
