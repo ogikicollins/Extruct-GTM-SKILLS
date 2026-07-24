@@ -25,6 +25,7 @@ Don't pull Tier 2/3 (windows, garage doors, concrete coating) yet — validate T
 - **Seniority: C-Level only.** Skip VP, Director, Manager, Senior, Mid-level entirely — this ICP has no management hierarchy to navigate; only the owner/founder/C-suite can commit to a Brandformance program.
 - **Management Level: check both `CXO` and `Owner`** if Seamless exposes them as separate buckets — CXO catches actual C-suite titles (CEO/COO/CFO/CMO/etc.), but a lot of small home-service owners get platform-classified as "Owner" level instead, so relying on CXO alone risks quietly dropping real owner-operators.
 - Run **General Manager as a separate, tagged sub-sample** (10–15 rows, not blended into the main 35–40) — this title is still unconfirmed either way, so treat it as a hypothesis to test rather than assume. Compare contact-quality/response on this sub-sample before deciding whether to fold it into the main filter going forward.
+- **Department: Executive / C-Suite / Ownership only.** Skip Marketing, Sales, Operations, Finance, HR, IT, Engineering, Product, Customer Service, Legal entirely. Even though the target person owns marketing decisions, they sit in Ownership/Executive, not a "Marketing" department tag — filtering on Marketing department would likely surface the coordinators/managers this ICP explicitly excludes. If an Executive-only filter returns a thin sample, don't widen to other departments — lean on Job Title + Seniority instead, since small-business owners are inconsistently department-tagged.
 
 **Location**
 - Person Locations: United States
