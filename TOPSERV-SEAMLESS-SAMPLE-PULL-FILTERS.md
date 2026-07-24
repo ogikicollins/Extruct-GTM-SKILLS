@@ -22,7 +22,8 @@ Don't pull Tier 2/3 (windows, garage doors, concrete coating) yet — validate T
 
 **Job Titles**
 - Include: `CEO`, `Owner`, `President`, `Founder`, **`COO`** (confirmed via the consolidated ICP resource — notably Ryan's own title at TopServ, so this is a validated persona, not a guess)
-- Management Level: `CXO` / Owner-level
+- **Seniority: C-Level only.** Skip VP, Director, Manager, Senior, Mid-level entirely — this ICP has no management hierarchy to navigate; only the owner/founder/C-suite can commit to a Brandformance program.
+- **Management Level: check both `CXO` and `Owner`** if Seamless exposes them as separate buckets — CXO catches actual C-suite titles (CEO/COO/CFO/CMO/etc.), but a lot of small home-service owners get platform-classified as "Owner" level instead, so relying on CXO alone risks quietly dropping real owner-operators.
 - Run **General Manager as a separate, tagged sub-sample** (10–15 rows, not blended into the main 35–40) — this title is still unconfirmed either way, so treat it as a hypothesis to test rather than assume. Compare contact-quality/response on this sub-sample before deciding whether to fold it into the main filter going forward.
 
 **Location**
@@ -31,7 +32,7 @@ Don't pull Tier 2/3 (windows, garage doors, concrete coating) yet — validate T
 - **Do not trust Seamless's Country field at face value** — spot-check the top 10 largest companies in each vertical sample by hand (a lesson from the Structural pulls, where 6.7% of "United States" rows were actually international).
 
 **Industry & Keywords**
-- Industry: Home Services / Construction & Contracting (whichever Seamless bucket the NAICS code maps to)
+- **Industry: `Home Services` + `Construction`** — select both, not just Home Services. Small trade businesses self-tag inconsistently; plenty of real HVAC/plumbing/electrical/roofing contractors are mis-tagged under Construction. Don't add beyond these two (skip Facilities Services, Building Materials, Real Estate, Renewables) — they'd pull in the wrong kind of company without adding real coverage. Industry is coarse pre-filtering; Company Keywords below is what does the real narrowing.
 - Company Keywords Contain ANY Of (per vertical):
   - HVAC search: `HVAC`, `Heating and Air Conditioning`, `Heating and Cooling`
   - Plumbing search: `Plumbing`, `Plumber`
