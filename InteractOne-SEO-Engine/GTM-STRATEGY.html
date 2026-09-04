@@ -176,7 +176,8 @@
   .layer .lnum { font-family: "IBM Plex Mono", monospace; font-size: var(--step-1); color: var(--accent-bright); font-weight: 500; }
   .layer h3 { font-size: var(--step-1); color: #F1F5F1; margin-bottom: 0.2rem; }
   .layer p { margin: 0; font-size: var(--step--1); color: #B7C3BD; max-width: 68ch; }
-  .layer .file { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--accent-bright); opacity: 0.75; }
+  .engine-link { font-family: "IBM Plex Mono", monospace; font-size: var(--step--1); letter-spacing: 0.04em; color: var(--accent-bright); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent-bright) 45%, transparent); padding-bottom: 2px; }
+  .engine-link:hover { border-color: var(--accent-bright); }
 
   /* ---- hypotheses ---- */
   .hyp { border: 1px solid var(--rule); border-radius: 2px; margin-bottom: 1rem; background: var(--surface); }
@@ -460,13 +461,14 @@
     <div class="sec-head"><span class="num">06</span><h2>The engine</h2></div>
     <p>A six-layer machine that runs the same at 3 AM as 3 PM. Signal-triggered, not schedule-triggered. Every email and proposal is drafted by the engine and sent by a person. After the 90-day build, InteractOne owns every list, template, and workflow.</p>
     <div class="layers" style="margin-top:2rem">
-      <div class="layer"><span class="lnum">1</span><div><h3>Intelligence</h3><p>ICP, three personas, six hypotheses, competitor displacement map, DNC list. The frozen reference for every downstream layer. <span class="file">01-INTELLIGENCE.md</span></p></div></div>
-      <div class="layer"><span class="lnum">2</span><div><h3>Activation</h3><p>List queries per hypothesis, 17 enrichment columns, a dollar-value traffic-gap figure on every row, a 100-point tiering rubric, contact discovery and email verification under 2 percent bounce. <span class="file">02-ACTIVATION.md</span></p></div></div>
-      <div class="layer"><span class="lnum">3</span><div><h3>Outreach</h3><p>Three five-email sequences, LinkedIn touches co-signed by Brian Dwyer, the teardown Loom script, dedicated cold domains, a pre-send simulation gate. <span class="file">03-OUTREACH.md</span></p></div></div>
-      <div class="layer"><span class="lnum">4</span><div><h3>Pipeline</h3><p>Reply classification and routing, a seven-input lead-scoring model, a two-hour speed-to-lead SLA, an auto-generated pre-call dossier before every meeting. <span class="file">04-PIPELINE.md</span></p></div></div>
-      <div class="layer"><span class="lnum">5</span><div><h3>Close</h3><p>The audit-first close, seven deal stages, post-call nurture from a personal inbox, a three-tier retainer proposal, a seven-objection bank, Day 0 to 90 onboarding, five expansion paths, a referral engine. <span class="file">05-CLOSE.md</span></p></div></div>
-      <div class="layer"><span class="lnum">6</span><div><h3>Optimize</h3><p>Weekly report, eight feedback loops, hypothesis graduate-or-retire rules, a Thursday signal monitor that feeds new accounts back into Layer 2. <span class="file">06-OPTIMIZE.md</span></p></div></div>
+      <div class="layer"><span class="lnum">1</span><div><h3>Intelligence</h3><p>ICP, three personas, six hypotheses, competitor displacement map, DNC list. The frozen reference for every downstream layer.</p></div></div>
+      <div class="layer"><span class="lnum">2</span><div><h3>Activation</h3><p>List queries per hypothesis, 17 enrichment columns, a dollar-value traffic-gap figure on every row, a 100-point tiering rubric, contact discovery and email verification under 2 percent bounce.</p></div></div>
+      <div class="layer"><span class="lnum">3</span><div><h3>Outreach</h3><p>Three five-email sequences, LinkedIn touches co-signed by Brian Dwyer, the teardown Loom script, dedicated cold domains, a pre-send simulation gate.</p></div></div>
+      <div class="layer"><span class="lnum">4</span><div><h3>Pipeline</h3><p>Reply classification and routing, a seven-input lead-scoring model, a two-hour speed-to-lead SLA, an auto-generated pre-call dossier before every meeting.</p></div></div>
+      <div class="layer"><span class="lnum">5</span><div><h3>Close</h3><p>The audit-first close, seven deal stages, post-call nurture from a personal inbox, a three-tier retainer proposal, a seven-objection bank, Day 0 to 90 onboarding, five expansion paths, a referral engine.</p></div></div>
+      <div class="layer"><span class="lnum">6</span><div><h3>Optimize</h3><p>Weekly report, eight feedback loops, hypothesis graduate-or-retire rules, a Thursday signal monitor that feeds new accounts back into Layer 2.</p></div></div>
     </div>
+    <p style="margin-top:1.25rem"><a class="engine-link" href="https://github.com/ogikicollins/Extruct-GTM-SKILLS/tree/main/InteractOne-SEO-Engine">InteractOne GTM Strategy &rarr;</a></p>
     <h3 style="margin-top:2.4rem;font-size:var(--step-1)">The teardown is the whole motion</h3>
     <p>Every sequence leads to the same call to action: a free 3 to 5 minute Loom walking through three real issues on the prospect's live site with a rough dollar figure for the traffic gap, and the line "yours to share internally" so it gets forwarded to the economic buyer. Booking a call is step two, never the ask.</p>
     <div class="tablewrap" style="margin-top:1.5rem">
