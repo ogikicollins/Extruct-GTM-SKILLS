@@ -7,6 +7,10 @@ call + multichannel), scale SDR count over time.
 
 No em-dashes. Plain, peer to peer.
 
+Strategy doc: https://claude.ai/code/artifact/551abd68-7285-445e-8398-0fc515a4cbb0
+BEFORE SENDING: open the artifact and use the share menu to make it link-accessible,
+otherwise Amanda cannot open it. Then paste that shareable URL into the email.
+
 ---
 
 **Subject:** Following up on yesterday, plus a proposal
@@ -28,7 +32,11 @@ Investment: $6,500 per month, covering the two SDRs plus the engine build and on
 
 The practical effect for you: you stop being the engine. Outbound becomes a predictable source of meetings instead of something you squeeze in between account work, and you get back to managing and growing the relationships you already have.
 
-If this direction makes sense, I will put together a one page scope and a 30 day ramp plan for you to review. Would early next week work for a short call to walk through it?
+I put the full strategy together so you have something concrete to look at before we talk. It covers the target market, the six angles the SDRs would work, how the engine sits inside your Salesforce and dotdigital, the commercials, and a 90 day plan:
+
+[InteractOne GTM Strategy] {artifact link}
+
+Would early next week work for a short call to walk through it?
 
 Best,
 [Your name]
