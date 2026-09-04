@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<style>img{max-width:100%;height:auto}[hidden]{display:none!important}</style>
+<title>InteractOne GTM Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #ECEFEA;
+    --surface: #F7F8F5;
+    --band: #E2E7DE;
+    --band-deep: #1E2B27;
+    --ink: #1A2623;
+    --ink-soft: #4C5A55;
+    --ink-faint: #7A867F;
+    --rule: #CDD4CB;
+    --accent: #2C6B57;
+    --accent-deep: #1F5544;
+    --accent-bright: #3E9C7E;
+    --decline: #A65E36;
+    --on-accent: #F4F7F2;
+
+    --measure: 63ch;
+    --wrap: 928px;
+    --step--1: 0.82rem;
+    --step-0: 1.0rem;
+    --step-1: 1.22rem;
+    --step-2: 1.52rem;
+    --step-3: 2.0rem;
+    --step-4: 2.7rem;
+    --step-5: 3.6rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #121B19;
+      --surface: #1A2422;
+      --band: #0D1514;
+      --band-deep: #0A1211;
+      --ink: #E7EBE4;
+      --ink-soft: #A3AEA7;
+      --ink-faint: #77837C;
+      --rule: #2C3835;
+      --accent: #5FB89A;
+      --accent-deep: #4C9C81;
+      --accent-bright: #74C9AB;
+      --decline: #C98A5F;
+      --on-accent: #0E1614;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #121B19;
+    --surface: #1A2422;
+    --band: #0D1514;
+    --band-deep: #0A1211;
+    --ink: #E7EBE4;
+    --ink-soft: #A3AEA7;
+    --ink-faint: #77837C;
+    --rule: #2C3835;
+    --accent: #5FB89A;
+    --accent-deep: #4C9C81;
+    --accent-bright: #74C9AB;
+    --decline: #C98A5F;
+    --on-accent: #0E1614;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: var(--step-0);
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+  .measure { max-width: var(--measure); }
+
+  h1, h2, h3 { font-family: "Spectral", Georgia, serif; font-weight: 600; text-wrap: balance; line-height: 1.16; margin: 0; }
+  p { margin: 0 0 1.1em; max-width: var(--measure); }
+  a { color: var(--accent-deep); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  strong { font-weight: 600; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step--1);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin: 0 0 1rem;
+  }
+  .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  /* ---- top nav ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 54px; }
+  .brand { font-family: "IBM Plex Mono", monospace; font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+  .brand b { color: var(--ink); font-weight: 500; }
+  .navlinks { display: flex; gap: 1.4rem; overflow-x: auto; scrollbar-width: none; }
+  .navlinks::-webkit-scrollbar { display: none; }
+  .navlinks a {
+    font-family: "IBM Plex Mono", monospace; font-size: var(--step--1);
+    color: var(--ink-soft); text-decoration: none; white-space: nowrap; padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+  .navlinks a:hover { color: var(--ink); border-color: var(--accent); }
+  @media (max-width: 760px) { .navlinks { display: none; } }
+
+  /* ---- hero ---- */
+  .hero { padding: clamp(3.5rem, 9vw, 6.5rem) 0 clamp(2.5rem, 6vw, 4rem); border-bottom: 1px solid var(--rule); }
+  .hero h1 { font-size: clamp(var(--step-4), 7vw, var(--step-5)); font-weight: 600; letter-spacing: -0.015em; }
+  .hero .lede {
+    font-family: "Spectral", Georgia, serif;
+    font-size: clamp(var(--step-1), 2.6vw, var(--step-2));
+    font-weight: 400; font-style: italic;
+    color: var(--ink-soft);
+    margin: 1.4rem 0 0; max-width: 40ch;
+  }
+  .thesis {
+    margin-top: 2.4rem; padding: 1.5rem 1.75rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    background: var(--surface); border-radius: 2px;
+    max-width: 60ch;
+  }
+  .thesis p { margin: 0; font-size: var(--step-1); font-family: "Spectral", Georgia, serif; line-height: 1.4; }
+
+  .herometa { margin-top: 2.6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .herometa div { background: var(--ground); padding: 1rem 1.1rem; }
+  .herometa dt { font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  .herometa dd { margin: 0; font-family: "Spectral", Georgia, serif; font-size: var(--step-1); font-weight: 500; }
+
+  .spark { margin-top: 2.6rem; }
+  .spark figcaption { font-family: "IBM Plex Mono", monospace; font-size: var(--step--1); color: var(--ink-faint); margin-top: 0.5rem; }
+
+  /* ---- sections ---- */
+  section { padding: clamp(3rem, 7vw, 5rem) 0; border-bottom: 1px solid var(--rule); }
+  .sec-head { display: flex; gap: 1rem; align-items: baseline; margin-bottom: 2rem; }
+  .sec-head .num { font-family: "IBM Plex Mono", monospace; font-size: var(--step-0); color: var(--accent-deep); font-weight: 500; }
+  .sec-head h2 { font-size: clamp(var(--step-2), 4vw, var(--step-3)); }
+
+  .band { background: var(--band); border-bottom: 1px solid var(--rule); }
+  .band.ink { background: var(--band-deep); color: #DCE4DF; border: none; }
+  .band.ink h2, .band.ink h3 { color: #F1F5F1; }
+  .band.ink .sec-head .num { color: var(--accent-bright); }
+  .band.ink .eyebrow { color: var(--accent-bright); }
+  .band.ink p { color: #C3CEC8; }
+
+  /* ---- generic bits ---- */
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem 2.5rem; }
+  ul.clean { margin: 0 0 1.1em; padding: 0; list-style: none; max-width: var(--measure); }
+  ul.clean li { padding-left: 1.4rem; position: relative; margin-bottom: 0.6rem; }
+  ul.clean li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-family: "IBM Plex Mono", monospace; }
+
+  .tablewrap { overflow-x: auto; margin: 1.5rem 0; border: 1px solid var(--rule); border-radius: 2px; }
+  table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
+  th, td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); background: var(--surface); position: sticky; top: 0; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.mono, th.mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .band td, .band th { border-color: color-mix(in srgb, var(--rule) 70%, transparent); }
+  .band.ink thead th { background: #16211E; color: #8C9A93; }
+  .band.ink td { color: #C3CEC8; }
+  .band.ink tfoot td { border-top: 1px solid #3E4B47; }
+
+  /* ---- engine layers ---- */
+  .layers { display: grid; gap: 2px; background: color-mix(in srgb, var(--accent-bright) 25%, transparent); border: 1px solid color-mix(in srgb, var(--accent-bright) 25%, transparent); border-radius: 2px; overflow: hidden; }
+  .layer { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1.2rem; background: var(--band-deep); padding: 1.1rem 1.3rem; align-items: start; }
+  .layer .lnum { font-family: "IBM Plex Mono", monospace; font-size: var(--step-1); color: var(--accent-bright); font-weight: 500; }
+  .layer h3 { font-size: var(--step-1); color: #F1F5F1; margin-bottom: 0.2rem; }
+  .layer p { margin: 0; font-size: var(--step--1); color: #B7C3BD; max-width: 68ch; }
+
+  /* ---- hypotheses ---- */
+  .hyp { border: 1px solid var(--rule); border-radius: 2px; margin-bottom: 1rem; background: var(--surface); }
+  .hyp summary { cursor: pointer; padding: 1rem 1.2rem; display: flex; gap: 0.9rem; align-items: baseline; list-style: none; }
+  .hyp summary::-webkit-details-marker { display: none; }
+  .hyp summary .code { font-family: "IBM Plex Mono", monospace; color: var(--accent-deep); font-weight: 500; }
+  .hyp summary .t { font-family: "Spectral", Georgia, serif; font-size: var(--step-1); font-weight: 500; flex: 1; }
+  .hyp summary .plus { font-family: "IBM Plex Mono", monospace; color: var(--ink-faint); }
+  .hyp[open] summary .plus { transform: rotate(45deg); }
+  .hyp .body { padding: 0 1.2rem 1.2rem 3.1rem; }
+  .hyp .body dl { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.35rem 1rem; margin: 0; font-size: var(--step--1); }
+  .hyp .body dt { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); padding-top: 0.15rem; }
+  .hyp .body dd { margin: 0; }
+  .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; padding: 1px 7px; border: 1px solid var(--accent); border-radius: 100px; color: var(--accent-deep); }
+  .tag.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+  /* ---- offer ladder ---- */
+  .ladder { display: grid; gap: 0.5rem; margin: 1.5rem 0; }
+  .rung { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: baseline; padding: 0.9rem 1.1rem; border: 1px solid var(--rule); border-radius: 2px; background: var(--surface); }
+  .rung:nth-child(1) { margin-right: 0; }
+  .rung:nth-child(2) { margin-right: 4%; }
+  .rung:nth-child(3) { margin-right: 8%; border-left: 3px solid var(--accent); }
+  .rung:nth-child(4) { margin-right: 12%; }
+  .rung:nth-child(5) { margin-right: 16%; border-style: dashed; }
+  .rung .rname { font-family: "Spectral", Georgia, serif; font-size: var(--step-1); font-weight: 500; }
+  .rung .rsub { font-size: var(--step--1); color: var(--ink-soft); display: block; font-family: "IBM Plex Sans", sans-serif; }
+  .rung .rprice { font-family: "IBM Plex Mono", monospace; font-size: var(--step--1); white-space: nowrap; color: var(--accent-deep); }
+
+  /* ---- chart ---- */
+  .chart-card { background: var(--band-deep); color: #DCE4DF; border-radius: 2px; padding: 1.75rem clamp(1rem, 3vw, 2rem); }
+  .chart-card svg { width: 100%; height: auto; display: block; }
+  .chart-legend { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 1rem; font-family: "IBM Plex Mono", monospace; font-size: var(--step--1); color: #A9B6AF; }
+  .chart-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: baseline; border-radius: 2px; }
+  .chart-legend .l1::before { background: var(--accent-bright); }
+  .chart-legend .l2::before { background: #C98A5F; }
+
+  /* ---- roadmap ---- */
+  .phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .phase { background: var(--ground); padding: 1.2rem 1.2rem 1.4rem; }
+  .phase .pw { font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-deep); }
+  .phase h3 { font-size: var(--step-1); margin: 0.3rem 0 0.6rem; }
+  .phase ul { margin: 0; padding-left: 1.1rem; font-size: var(--step--1); color: var(--ink-soft); }
+  .phase li { margin-bottom: 0.35rem; }
+
+  /* ---- ask list ---- */
+  .asks { counter-reset: ask; display: grid; gap: 0.75rem; margin-top: 1.5rem; }
+  .ask { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; align-items: start; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+  .ask::before { counter-increment: ask; content: counter(ask, decimal-leading-zero); font-family: "IBM Plex Mono", monospace; color: var(--accent-deep); font-size: var(--step--1); padding-top: 0.2rem; }
+  .ask p { margin: 0; font-size: var(--step-0); }
+  .ask .who { font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); }
+
+  footer { padding: 3rem 0 4rem; }
+  footer p { font-size: var(--step--1); color: var(--ink-faint); }
+  footer a { color: var(--ink-soft); }
+
+  .callout { border-left: 3px solid var(--decline); padding: 0.4rem 0 0.4rem 1.2rem; margin: 1.5rem 0; color: var(--ink-soft); font-size: var(--step--1); max-width: var(--measure); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+</style>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand"><b>InteractOne</b> &nbsp;GTM Strategy</span>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#situation">Situation</a>
+      <a href="#offer">Offer</a>
+      <a href="#icp">ICP</a>
+      <a href="#hypotheses">Hypotheses</a>
+      <a href="#engine">Engine</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#model">Model</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#ask">The ask</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Go-to-market strategy &middot; InteractOne &middot; 2026</p>
+    <h1>Selling the organic recovery, not the SEO retainer.</h1>
+    <p class="lede">A high-intent, SDR-led outbound motion built inside InteractOne's own Salesforce and dotdigital, so the engine and every record in it stays yours.</p>
+
+    <div class="thesis">
+      <p>Sell one sharp thing: <strong>organic traffic recovery and large-catalog programmatic SEO for B2B and industrial eCommerce on Adobe Commerce and BigCommerce, run by an onshore senior team that also writes the code.</strong></p>
+    </div>
+
+    <figure class="spark">
+      <svg viewBox="0 0 460 76" role="img" aria-label="Line showing organic traffic falling after a replatform, then recovering on a projected path.">
+        <polyline points="4,26 60,22 116,28 150,24 168,58 176,62 200,60"
+          fill="none" stroke="var(--decline)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="200,60 250,50 310,38 380,22 452,10"
+          fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 5"/>
+        <circle cx="452" cy="10" r="3.5" fill="var(--accent)"/>
+        <line x1="172" y1="4" x2="172" y2="72" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="2 3"/>
+        <text x="172" y="76" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--ink-faint)" text-anchor="middle">replatform</text>
+      </svg>
+      <figcaption>The pattern the whole motion is built on: a migration drops organic 20 to 40 percent, nobody owns the fix, and it compounds every month it is ignored.</figcaption>
+    </figure>
+
+    <dl class="herometa">
+      <div><dt>Reachable market</dt><dd>3,000&ndash;6,000 US firms</dd></div>
+      <div><dt>Motion</dt><dd>2 SDRs, cold call + multichannel</dd></div>
+      <div><dt>Environment</dt><dd>Your Salesforce + dotdigital</dd></div>
+      <div><dt>90-day target</dt><dd>3&ndash;5 retainers, $20&ndash;45K MRR</dd></div>
+    </dl>
+  </div>
+</header>
+
+<section id="situation">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>The situation</h2></div>
+    <div class="grid2">
+      <div class="measure">
+        <p>InteractOne is a 27-year, roughly 18-person, 100 percent onshore Cincinnati eCommerce agency founded and run by Brian Dwyer. It has quietly served 250-plus brands with an average client tenure above five years.</p>
+        <p>It has just repositioned from a generalist Magento and Shopify shop to <strong>"B2B commerce built to perform"</strong> for manufacturers and distributors with complex catalogs. The positioning is right. The demand generation to match it does not exist yet.</p>
+      </div>
+      <div class="measure">
+        <p>The SEO service is genuinely differentiated on a four-way intersection few competitors hold: developers and SEOs under one roof, programmatic SEO for large catalogs, B2B and industrial catalog fluency, and senior-only onshore delivery.</p>
+        <p>It is also under-marketed and capacity-constrained. Today the entire outbound function is Amanda, sending emails between account-management work. There is no SDR team, and no one owns pipeline as a job.</p>
+        <p class="mono" style="font-size:var(--step--1);color:var(--ink-soft)">GTM sellability score &mdash; 74 / 100</p>
+      </div>
+    </div>
+    <div class="callout">Two constraints shape every decision below. The delivery team is small, so the engine is throttled to 3 to 5 qualified opportunities per month, not 50. And the engine is built inside your Salesforce and dotdigital from day one, so nothing has to be migrated back to you later. You own it because it never leaves.</div>
+  </div>
+</section>
+
+<section id="offer" class="band">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>What we actually sell</h2></div>
+    <p class="measure">Do not sell "SEO." The word is a commodity and the category is crowded with bigger names. Sell a specific, urgent outcome to a specific buyer, entered through a specific first step.</p>
+
+    <div class="grid2" style="margin-top:1.5rem">
+      <div class="measure">
+        <p class="eyebrow">Sub-offer A &middot; Recovery</p>
+        <p>"Your replatform cost you 20 to 40 percent of organic traffic and nobody owns the fix." Proof: Aladdin Temp-Rite recovered 25 percent organic growth and 66 percent total traffic after a Magento to Adobe Commerce move.</p>
+      </div>
+      <div class="measure">
+        <p class="eyebrow">Sub-offer B &middot; Scale</p>
+        <p>"You have 8,000 product and category pages and 400 of them rank." Programmatic SEO is the capability content agencies cannot cheaply copy, because fixing it is a development job.</p>
+      </div>
+    </div>
+
+    <p class="measure" style="margin-top:1.5rem;font-family:'Spectral',Georgia,serif;font-size:var(--step-1);font-style:italic;color:var(--ink-soft)">Positioning line: "The SEO team that reads your Magento logs, not just your blog."</p>
+
+    <h3 style="margin-top:2.2rem;font-size:var(--step-1)">Three gaps to close before launch</h3>
+    <ul class="clean" style="margin-top:0.8rem">
+      <li><strong>Productize the entry.</strong> Free Programmatic SEO Teardown, then a fixed-fee Technical &amp; Migration Audit at $3,500 to $7,500, then the retainer.</li>
+      <li><strong>Add a light AEO line.</strong> Schema, entity optimization, answer-formatted content for AI search at plus $900 to $2,500 per month. It is a 2026 buyer question and a competitor wedge.</li>
+      <li><strong>Refresh the proof.</strong> Only three quantified SEO case studies exist. Pull fresh 90-day numbers from three long-tenured clients and instrument every new engagement for a results story.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="icp">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2>ICP and beachhead</h2></div>
+    <p class="measure">One tight segment, filterable by public data. Roughly 3,000 to 6,000 US manufacturers and distributors doing eCommerce on Adobe Commerce or BigCommerce with 5,000-plus SKUs. Reachable, ownable, and matched to where InteractOne holds partner status and dev depth.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Dimension</th><th>Target</th><th>Why it qualifies</th></tr></thead>
+        <tbody>
+          <tr><td>Business type</td><td>B2B, industrial, MRO, manufacturer, distributor, wholesale eComm</td><td>Matches the repositioning and the differentiation</td></tr>
+          <tr><td>Revenue</td><td class="mono">$10M&ndash;$250M</td><td>Budget for $5&ndash;15K/mo, too small for an in-house SEO team</td></tr>
+          <tr><td>Catalog</td><td class="mono">5,000+ SKUs</td><td>Programmatic SEO only matters at scale &mdash; this is the real qualifier</td></tr>
+          <tr><td>Platform</td><td>Adobe Commerce / Magento, BigCommerce; Shopify Plus secondary</td><td>Partner status plus developer credibility</td></tr>
+          <tr><td>Geography</td><td>United States</td><td>The onshore pitch only lands with US buyers</td></tr>
+          <tr><td>In-house SEO</td><td>Zero, or one overloaded marketer</td><td>"Senior crew, no juniors" resonates with lean teams</td></tr>
+          <tr><td>Health signal</td><td>Organic flat or declining, or replatformed in last 12 months</td><td>Intent</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure"><strong>Disqualify:</strong> DTC fashion and beauty with small catalogs, sub-$5M revenue, agencies, teams with 3-plus in-house SEO people, non-US.</p>
+
+    <h3 style="margin-top:2.4rem;font-size:var(--step-1)">Trigger events, in list-build priority order</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="mono">#</th><th>Trigger</th><th>How we detect it</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">1</td><td>Replatform / migration in last 6&ndash;12 months</td><td>BuiltWith platform-change history &times; Ahrefs organic drop since that date</td></tr>
+          <tr><td class="mono">2</td><td>Organic visibility down &gt;20% YoY with flat or rising paid spend</td><td>Ahrefs / Semrush trend</td></tr>
+          <tr><td class="mono">3</td><td>New Head of eCommerce / Digital / Marketing, last 90 days</td><td>LinkedIn job-change filter</td></tr>
+          <tr><td class="mono">4</td><td>Google core-update loser</td><td>Traffic step-down aligned to a published core-update date</td></tr>
+          <tr><td class="mono">5</td><td>Site redesign or relaunch announced</td><td>Press, changelog, "we've moved" banners</td></tr>
+          <tr><td class="mono">6</td><td>Aging Magento 1 or early Magento 2</td><td>BuiltWith version &mdash; SEO now, migration expansion later</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="personas" class="band">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2>Personas</h2></div>
+    <p class="measure">Three buyers. The tone across all of them is <em>overwhelm, not inadequacy</em> &mdash; the buyer is competent and under-resourced. "You cannot hand-optimize 8,000 pages and should not have to" beats "your SEO is bad."</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Persona</th><th>Pain</th><th>Hook</th><th>Proof to cite</th></tr></thead>
+        <tbody>
+          <tr><td>eCommerce Manager</td><td>Migration tanked traffic, taking the blame</td><td>Post-migration recovery playbook</td><td class="mono">Aladdin Temp-Rite +25% organic</td></tr>
+          <tr><td>Marketing Director / Head of Digital</td><td>1&ndash;3 person team cannot touch thousands of pages</td><td>Programmatic SEO does it at scale</td><td class="mono">"8,000 pages, 400 ranking"</td></tr>
+          <tr><td>VP / Director eCommerce</td><td>Organic revenue flat while paid CAC climbs</td><td>Reduce dependence on Google Ads</td><td class="mono">BASCO +73% revenue</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure mono" style="font-size:var(--step--1)">Copy rules: no em-dashes in outbound. Plain text. One ask per email. The ask is almost always "want me to send the teardown video?"</p>
+  </div>
+</section>
+
+<section id="hypotheses">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">05</span><h2>Pain hypotheses</h2></div>
+    <p class="measure">Six testable angles. Each is a detectable signal plus a list query plus an email angle plus the proof to cite. Layer 6 tracks them by audit-close rate, graduates winners above 4 percent reply, and retires anything below 2 percent over 50 sends.</p>
+
+    <details class="hyp" open>
+      <summary><span class="code">H1</span><span class="t">Post-migration organic collapse</span><span class="tag primary">primary</span><span class="plus">+</span></summary>
+      <div class="body">
+        <dl>
+          <dt>Belief</dt><dd>Companies that replatformed in the last 6 to 12 months lost 20 to 40 percent of organic traffic to migration errors nobody owns.</dd>
+          <dt>Signal</dt><dd>BuiltWith shows a platform switch in the last year and Ahrefs organic traffic is down 15 percent-plus since that date.</dd>
+          <dt>Angle</dt><dd>"The drop is almost always a handful of technical misses in the migration, not a content problem."</dd>
+          <dt>Proof</dt><dd>Aladdin Temp-Rite, plus 25 percent organic after Magento to Adobe Commerce.</dd>
+        </dl>
+      </div>
+    </details>
+
+    <details class="hyp">
+      <summary><span class="code">H2</span><span class="t">Large catalog, tiny SEO footprint</span><span class="plus">+</span></summary>
+      <div class="body"><dl>
+        <dt>Belief</dt><dd>Distributors with 5,000-plus SKUs have thousands of category and attribute pages that were never optimized and do not rank.</dd>
+        <dt>Signal</dt><dd>5,000-plus products indexed but fewer than 10 percent of category URLs rank on page 1&ndash;2.</dd>
+        <dt>Angle</dt><dd>"Programmatic SEO closes that gap without hiring. It is the part content agencies cannot do because it is a development job."</dd>
+        <dt>Proof</dt><dd>World Wide Art crawl cleanup; InteractOne's scalable-catalog SEO.</dd>
+      </dl></div>
+    </details>
+
+    <details class="hyp">
+      <summary><span class="code">H3</span><span class="t">Paying to rent traffic they should own</span><span class="plus">+</span></summary>
+      <div class="body"><dl>
+        <dt>Belief</dt><dd>Companies with heavy Google Ads spend and flat organic are one core update from a CAC crisis.</dd>
+        <dt>Signal</dt><dd>Estimated paid traffic at or above organic, 300-plus paid keywords, organic flat to down.</dd>
+        <dt>Angle</dt><dd>"Every dollar of that Ads spend is rent. Here is what the organic version of your top five paid terms would cost to win once."</dd>
+        <dt>Proof</dt><dd>BASCO, plus 73 percent revenue (paid was part of the mix).</dd>
+      </dl></div>
+    </details>
+
+    <details class="hyp">
+      <summary><span class="code">H4</span><span class="t">Core-update loser</span><span class="plus">+</span></summary>
+      <div class="body"><dl>
+        <dt>Belief</dt><dd>Sites that dropped on a recent core update have fixable content-quality and technical-trust issues.</dd>
+        <dt>Signal</dt><dd>Traffic step-down within 14 days of a published core-update start date.</dd>
+        <dt>Angle</dt><dd>"Your traffic stepped down right when the update rolled out. We can tell you in 5 minutes whether it is content or technical."</dd>
+        <dt>Proof</dt><dd>World Wide Art technical cleanup.</dd>
+      </dl></div>
+    </details>
+
+    <details class="hyp">
+      <summary><span class="code">H5</span><span class="t">Aging Magento &mdash; SEO as the wedge to a migration</span><span class="plus">+</span></summary>
+      <div class="body"><dl>
+        <dt>Belief</dt><dd>Companies on Magento 1 or early Magento 2 have compounding technical SEO debt; the SEO conversation opens the replatform conversation.</dd>
+        <dt>Signal</dt><dd>BuiltWith shows Magento 1.x or 2.0 to 2.3.</dd>
+        <dt>Angle</dt><dd>"Half the SEO problems trace back to the Magento version. We fix the quick wins now and scope the platform question separately."</dd>
+        <dt>Proof</dt><dd>Aladdin Temp-Rite migration; Adobe Bronze partner. Route replies to the migration pipeline too.</dd>
+      </dl></div>
+    </details>
+
+    <details class="hyp">
+      <summary><span class="code">H6</span><span class="t">New marketing leader, first 90 days</span><span class="plus">+</span></summary>
+      <div class="body"><dl>
+        <dt>Belief</dt><dd>A marketing or eCommerce leader hired in the last 90 days needs a visible early win and has fresh budget.</dd>
+        <dt>Signal</dt><dd>LinkedIn job change, Director-plus, started under 90 days ago, at an ICP-fit company.</dd>
+        <dt>Angle</dt><dd>"A teardown gives you a ranked list of what to fix first, which is a useful thing to have in month one."</dd>
+        <dt>Proof</dt><dd>27 years, 250-plus brands &mdash; de-risks the vendor choice for a new leader.</dd>
+      </dl></div>
+    </details>
+  </div>
+</section>
+
+<section id="engine" class="band ink">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">06</span><h2>The engine</h2></div>
+    <p>A six-layer machine that runs the same at 3 AM as 3 PM. Signal-triggered, not schedule-triggered. It lives inside your Salesforce and dotdigital: every account, sequence, call log, task and reply is a native record your team can already see. Two dedicated SDRs run the daily activity. Nothing is drafted or sent without a person.</p>
+    <div class="layers" style="margin-top:2rem">
+      <div class="layer"><span class="lnum">1</span><div><h3>Intelligence</h3><p>ICP, three personas, six hypotheses, competitor displacement map, do-not-contact list. The frozen reference for every downstream layer.</p></div></div>
+      <div class="layer"><span class="lnum">2</span><div><h3>Activation</h3><p>List queries per hypothesis, enrichment columns, a dollar-value traffic-gap figure on every account, a 100-point tiering rubric, contact discovery and verification. Loaded into Salesforce as campaign members.</p></div></div>
+      <div class="layer"><span class="lnum">3</span><div><h3>Outreach</h3><p>SDR-led multichannel: cold calls first, email through dotdigital, LinkedIn touches, and the teardown hook. Three sequences by persona, call scripts and objection handling, a pre-send review gate. Brian Dwyer co-signs the top accounts.</p></div></div>
+      <div class="layer"><span class="lnum">4</span><div><h3>Pipeline</h3><p>Reply and call-outcome routing, a seven-input lead-scoring model in Salesforce, a two-hour speed-to-lead SLA, an auto-generated pre-call dossier before every meeting.</p></div></div>
+      <div class="layer"><span class="lnum">5</span><div><h3>Close</h3><p>The audit-first close, seven deal stages, post-call nurture, a three-tier retainer proposal, a seven-objection bank, Day 0 to 90 onboarding, five expansion paths, a referral engine.</p></div></div>
+      <div class="layer"><span class="lnum">6</span><div><h3>Optimize</h3><p>Weekly report from Salesforce, eight feedback loops, hypothesis graduate-or-retire rules, a weekly signal monitor that feeds new accounts back into Layer 2.</p></div></div>
+    </div>
+    <h3 style="margin-top:2.4rem;font-size:var(--step-1)">The teardown is the hook the SDRs lead to</h3>
+    <p>Cold calls and multichannel touches all point at one low-friction offer: a free 3 to 5 minute Loom walking through three real issues on the prospect's live site with a rough dollar figure for the traffic gap, and the line "yours to share internally" so it gets forwarded to the economic buyer. Booking a call is step two, never the opening ask.</p>
+    <div class="tablewrap" style="margin-top:1.5rem">
+      <table>
+        <thead><tr><th>Layer</th><th>System</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>System of record</td><td>Salesforce</td><td>Accounts, contacts, sequences, tasks, call logging, scoring, reporting &mdash; yours</td></tr>
+          <tr><td>Email execution</td><td>dotdigital</td><td>Sending, deliverability, engagement tracking synced to Salesforce</td></tr>
+          <tr><td>Target data</td><td>Store Leads, Apollo, Ahrefs</td><td>Platform, catalog size, organic-trend and migration signals for list building</td></tr>
+          <tr><td>Social + intent</td><td>LinkedIn Sales Navigator</td><td>People search, job-change triggers, frustration-post alerts</td></tr>
+          <tr><td>Teardown</td><td>Loom</td><td>The video hook, with view notifications feeding lead scoring</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure mono" style="font-size:var(--step--1);color:var(--ink-faint);margin-top:0.8rem">Data-tool subscriptions run roughly $450 to $650 per month and are billed at cost or held on your accounts. The engagement fee below is separate.</p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">07</span><h2>Commercials</h2></div>
+
+    <h3 style="font-size:var(--step-1)">The engagement</h3>
+    <p class="measure">One monthly fee. No build fee, no per-meeting charge, no long lock-in.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>What is included</th><th class="mono">Fee</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              Two dedicated SDRs running cold calls and multichannel outreach against your target list<br>
+              Engine build and management inside your Salesforce and dotdigital<br>
+              Sequences, call scripts, teardown workflow, lead scoring, weekly reporting<br>
+              List building and enrichment against the six hypotheses
+            </td>
+            <td class="mono">$6,500 / month</td>
+          </tr>
+          <tr>
+            <td><strong>Scaling.</strong> Once the motion is proven, add SDRs to the account so pipeline grows with your capacity to work it. Priced per additional SDR at agreement. You are never carrying headcount you have outgrown or cannot yet use.</td>
+            <td class="mono">per SDR added</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure">The point of the model: Amanda stops being the outbound function. Two people own pipeline as their job, working inside the system InteractOne already runs, and the account manager goes back to managing and growing accounts.</p>
+
+    <h3 style="font-size:var(--step-1);margin-top:2.6rem">The offer ladder InteractOne sells into</h3>
+    <p class="measure">What the SDRs move prospects through. Each step is a smaller yes than the one after it. The paid audit is the near-term revenue and the qualifier; 40 to 60 percent of delivered audits should convert to a retainer within 60 days.</p>
+    <div class="ladder">
+      <div class="rung"><span><span class="rname">Teardown</span><span class="rsub">5-min Loom, 3 issues, traffic-gap dollar figure</span></span><span class="rprice">Free</span></div>
+      <div class="rung"><span><span class="rname">Technical &amp; Migration Audit</span><span class="rsub">Crawl, architecture, migration diff, prioritized 90-day roadmap</span></span><span class="rprice">$3.5K&ndash;$7.5K</span></div>
+      <div class="rung"><span><span class="rname">SEO Retainer</span><span class="rsub">Programmatic + technical + content + links + reporting</span></span><span class="rprice">$5K&ndash;$15K / mo</span></div>
+      <div class="rung"><span><span class="rname">AEO add-on</span><span class="rsub">Schema, entity optimization, answer-formatted content for AI search</span></span><span class="rprice">+$900&ndash;$2.5K / mo</span></div>
+      <div class="rung"><span><span class="rname">Expansion</span><span class="rsub">Migration, CRO, PPC, PIM / ERP integration &mdash; InteractOne's core business</span></span><span class="rprice">Project</span></div>
+    </div>
+    <p class="measure">Market context: 2026 B2B SEO retainers cluster at $1.5&ndash;5K for small teams, $5&ndash;10K mid-market, and $10&ndash;50K-plus at enterprise. Large-catalog eCommerce and AEO scope push the top of that range.</p>
+
+    <h3 style="margin-top:2.4rem;font-size:var(--step-1)">Competitive framing</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Prospect compares us to</th><th>Our counter</th></tr></thead>
+        <tbody>
+          <tr><td>Offshore / freelance SEO</td><td>Onshore senior team that touches the platform code, not just a content calendar</td></tr>
+          <tr><td>Enterprise agencies (Wpromote, NP Digital)</td><td>Senior people on your account, no junior hand-off, B2B specialization, faster</td></tr>
+          <tr><td>DTC eComm SEO shops (Inflow, Victorious)</td><td>We speak wholesale, MOQ, fitment, punchout, custom pricing, B2B buyer intent</td></tr>
+          <tr><td>Industrial demand-gen shops (Gorilla 76)</td><td>They do HubSpot content; we do technical and programmatic SEO on your commerce platform</td></tr>
+          <tr><td>Hiring in-house</td><td>One hire cannot optimize 8,000 pages or fix a migration; we do both now</td></tr>
+          <tr><td>Doing nothing</td><td>Every month post-migration, lost rankings get harder to win back</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="band">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">08</span><h2>The compounding model</h2></div>
+    <p class="measure">Month 3 outperforms Month 1 by design. Retired hypotheses tighten the list, the teardown CTA sharpens, referrals begin to stack, and the re-engagement queue fills. The curve below is the planning case, not a promise.</p>
+    <div class="chart-card">
+      <svg viewBox="0 0 720 340" role="img" aria-label="Positive reply rate rising from 3.0 percent in month 1 to 6.5 percent in month 6, with cumulative new retainer revenue annotated at each month.">
+        <!-- y gridlines at 0,2,4,6,8 -->
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#8C9A93">
+          <line x1="60" y1="40"  x2="690" y2="40"  stroke="#2C3835" stroke-width="1"/>
+          <line x1="60" y1="110" x2="690" y2="110" stroke="#2C3835" stroke-width="1"/>
+          <line x1="60" y1="180" x2="690" y2="180" stroke="#2C3835" stroke-width="1"/>
+          <line x1="60" y1="250" x2="690" y2="250" stroke="#2C3835" stroke-width="1"/>
+          <line x1="60" y1="285" x2="690" y2="285" stroke="#3E4B47" stroke-width="1"/>
+          <text x="52" y="44"  text-anchor="end">8%</text>
+          <text x="52" y="114" text-anchor="end">6%</text>
+          <text x="52" y="184" text-anchor="end">4%</text>
+          <text x="52" y="254" text-anchor="end">2%</text>
+          <text x="52" y="289" text-anchor="end">0%</text>
+        </g>
+        <!-- area + line: months 1..6 at x = 110,226,342,458,574,650 ; reply 3.0,4.0,5.0,5.5,6.0,6.5 -->
+        <!-- y = 285 - rate*35 -->
+        <polygon points="110,180 226,145 342,110 458,92.5 574,75 650,57.5 650,285 110,285"
+          fill="var(--accent-bright)" fill-opacity="0.14"/>
+        <polyline points="110,180 226,145 342,110 458,92.5 574,75 650,57.5"
+          fill="none" stroke="var(--accent-bright)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="var(--accent-bright)">
+          <circle cx="110" cy="180" r="3"/><circle cx="226" cy="145" r="3"/><circle cx="342" cy="110" r="3"/>
+          <circle cx="458" cy="92.5" r="3"/><circle cx="574" cy="75" r="3"/><circle cx="650" cy="57.5" r="4.5"/>
+        </g>
+        <!-- reply-rate value labels -->
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#DCE4DF" text-anchor="middle">
+          <text x="110" y="170">3.0</text><text x="226" y="135">4.0</text><text x="342" y="100">5.0</text>
+          <text x="458" y="82">5.5</text><text x="574" y="65">6.0</text><text x="650" y="47" fill="var(--accent-bright)">6.5%</text>
+        </g>
+        <!-- MRR annotations (cumulative, midpoint of range) in clay -->
+        <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#C98A5F" text-anchor="middle">
+          <text x="110" y="305">$4K</text><text x="226" y="305">$18K</text><text x="342" y="305">$33K</text>
+          <text x="458" y="305">$50K</text><text x="574" y="305">$70K</text><text x="650" y="305">$85K</text>
+        </g>
+        <!-- x labels -->
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#8C9A93" text-anchor="middle">
+          <text x="110" y="328">M1</text><text x="226" y="328">M2</text><text x="342" y="328">M3</text>
+          <text x="458" y="328">M4</text><text x="574" y="328">M5</text><text x="650" y="328">M6</text>
+        </g>
+      </svg>
+      <div class="chart-legend">
+        <span class="l1">positive reply rate (% of sent)</span>
+        <span class="l2">cumulative new retainer MRR</span>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.4rem;font-size:var(--step-1)">90-day funnel targets</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Metric</th><th class="mono">Target</th><th class="mono">Industry avg</th></tr></thead>
+        <tbody>
+          <tr><td>Contacts in campaign</td><td class="mono">600&ndash;900</td><td class="mono">&ndash;</td></tr>
+          <tr><td>Positive reply rate</td><td class="mono">4&ndash;7%</td><td class="mono">0.5&ndash;1%</td></tr>
+          <tr><td>Teardowns delivered</td><td class="mono">40&ndash;60</td><td class="mono">&ndash;</td></tr>
+          <tr><td>Audit calls held</td><td class="mono">15&ndash;25</td><td class="mono">&ndash;</td></tr>
+          <tr><td>Paid audits sold</td><td class="mono">6&ndash;10 &nbsp;($25&ndash;70K)</td><td class="mono">&ndash;</td></tr>
+          <tr><td>Retainers signed</td><td class="mono">3&ndash;5</td><td class="mono">&ndash;</td></tr>
+          <tr><td>New retainer MRR</td><td class="mono">$20&ndash;45K</td><td class="mono">&ndash;</td></tr>
+          <tr><td>Speed, reply to booked call</td><td class="mono">&lt; 2 hours</td><td class="mono">24&ndash;48 hrs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">09</span><h2>90-day roadmap</h2></div>
+    <p class="measure">We build and staff the engine; your team gives access, approves the ICP, and joins the closing calls. Because the build is inside Salesforce and dotdigital, there is no external tooling to warm up. The critical-path item is Salesforce and dotdigital access in week one.</p>
+    <div class="phases">
+      <div class="phase">
+        <span class="pw">Weeks 1&ndash;2</span>
+        <h3>Foundation</h3>
+        <ul>
+          <li>Salesforce + dotdigital access, objects and fields mapped</li>
+          <li>Sign off ICP, personas, positioning, do-not-contact list</li>
+          <li>Build the target universe and six segments</li>
+          <li>Enrich, tier, verify contacts, load as campaign members</li>
+          <li>Two SDRs onboarded to the account and the offer</li>
+          <li>Call scripts, sequences, teardown workflow built in-platform</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="pw">Weeks 3&ndash;4</span>
+        <h3>Launch</h3>
+        <ul>
+          <li>Record teardown Looms for the first 20 accounts</li>
+          <li>Review-gate pass, InteractOne approves go</li>
+          <li>Launch H1 only: SDR calls + dotdigital email + LinkedIn</li>
+          <li>SDRs on the 2-hour speed-to-lead SLA</li>
+          <li>Dwyer starts one LinkedIn teardown post a week</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="pw">Weeks 5&ndash;8</span>
+        <h3>Scale + operate</h3>
+        <ul>
+          <li>Add H4, H2, H6 to the rotation</li>
+          <li>Multi-thread the top accounts</li>
+          <li>First weekly reports and hypothesis verdicts</li>
+          <li>First paid audits sold and delivered</li>
+          <li>Capture before-state on any signed retainer</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="pw">Weeks 9&ndash;13</span>
+        <h3>Optimize + expand</h3>
+        <ul>
+          <li>Retire the weakest hypothesis, reallocate SDR time</li>
+          <li>Add H3 and H5</li>
+          <li>First retainers converting from audits</li>
+          <li>Referral asks on Day-60 green-health clients</li>
+          <li>Decide whether to add a third SDR</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="risks" class="band">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">10</span><h2>Risks and guardrails</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Risk</th><th>Guardrail</th></tr></thead>
+        <tbody>
+          <tr><td>Delivery capacity &mdash; a small senior team cannot absorb a flood of opportunities</td><td>The engine is throttled to 3 to 5 qualified opportunities a month; SDR activity is paced to that, hard qualification before any teardown call</td></tr>
+          <tr><td>Single point of failure &mdash; Amanda is the only account manager today</td><td>The SDRs own top-of-funnel so Amanda is freed for account work; Dwyer takes closing calls; the engine and every record sit in Salesforce, not in one person's inbox</td></tr>
+          <tr><td>Category noise &mdash; "eCommerce SEO agency" is crowded</td><td>Never use that phrase; SDRs lead with B2B, migration recovery, and programmatic scale</td></tr>
+          <tr><td>Long sales cycle &mdash; B2B distributors move slowly</td><td>The paid audit is the near-term revenue; the retainer is the compounding win that follows it</td></tr>
+          <tr><td>Thin proof library &mdash; only three SEO case studies</td><td>Instrument every engagement Day 0; every Day-90 review produces a new sourced story</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="ask">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">11</span><h2>What we need from InteractOne</h2></div>
+    <p class="measure">In order. Items 1 and 2 gate the build; item 4 is the go/no-go.</p>
+    <div class="asks">
+      <div class="ask"><div><p>Salesforce and dotdigital access for the SDRs and the build, plus a walkthrough of how your objects and fields are set up.</p><span class="who">Week 1 &middot; Amanda</span></div></div>
+      <div class="ask"><div><p>Sign-off on the ICP, personas, positioning, and the do-not-contact list (current clients, partners, active deals).</p><span class="who">Week 1 &middot; Amanda + Brian Dwyer</span></div></div>
+      <div class="ask"><div><p>Three refreshed case-study numbers from long-tenured clients, and a calendar link for booked calls.</p><span class="who">Week 2 &middot; InteractOne</span></div></div>
+      <div class="ask"><div><p>Review-gate approval on scripts, sequences, and the first teardowns. This is the launch decision.</p><span class="who">Week 3 &middot; Amanda + Brian Dwyer</span></div></div>
+      <div class="ask"><div><p>Ongoing: Dwyer posts one LinkedIn teardown a week and joins closing calls; Amanda takes the qualified handoffs.</p><span class="who">Continuous</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>InteractOne eCommerce SEO &mdash; GTM Strategy.</strong> A discussion document. The motion is built and run inside InteractOne's Salesforce and dotdigital; everything in it belongs to InteractOne.</p>
+    <p>Sources: InteractOne (<a href="https://interactone.com/services/search-engine-optimization/">SEO service</a>, <a href="https://interactone.com/about-us/">About</a>), <a href="https://www.linkedin.com/in/bfdwyer/">Brian Dwyer / LinkedIn</a>. Retainer pricing context: <a href="https://www.rzlt.io/blog/what-an-seo-retainer-costs-in-2026">RZLT</a>, <a href="https://thedigitalelevator.com/blog/seo-pricing-guide/">Digital Elevator</a>, <a href="https://www.goodfirms.co/resources/seo-pricing-plans">GoodFirms</a>. Case-study figures are InteractOne's own published numbers; the compounding curve is a planning projection.</p>
+  </div>
+</footer>
+</body>
+</html>
